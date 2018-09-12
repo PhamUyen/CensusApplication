@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CensusApplication</string>
+    <string name="splash_text">ĐIỀU TRA TỔNG DUYỆT\n TỔNG ĐIỀU TRA DÂN SỐ VÀ NHÀ Ở \nNĂM 2019</string>
+    <string name="txt_login">LOGIN</string>
 </resources>
