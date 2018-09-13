@@ -2,4 +2,16 @@
     <string name="app_name">CensusApplication</string>
     <string name="splash_text">ĐIỀU TRA TỔNG DUYỆT\n TỔNG ĐIỀU TRA DÂN SỐ VÀ NHÀ Ở \nNĂM 2019</string>
     <string name="txt_login">LOGIN</string>
+    <string name="txt_family_interview">Phỏng vấn hộ</string>
+    <string name="txt_sync_data">Đồng bộ dữ liệu</string>
+    <string name="txt_update">Cập nhật chương trình</string>
+    <string name="txt_search_data">Tra cứu tài liệu</string>
+    <string name="txt_logout">Đăng xuất</string>
+    <string name="txt_exit">Thoát</string>
+    <string name="enter_text">Enter text</string>
+    <string name="question_required">*Required</string>
+    <string name="survey_no_title">Survey With No Title</string>
+    <string name="questions">Questions</string>
+    <string name="completed">Completed</string>
+    <string name="submitted">Submitted</string>
 </resources>
