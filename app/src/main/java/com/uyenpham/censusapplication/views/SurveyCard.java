@@ -4,8 +4,8 @@ import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
-import org.worldbank.armm.app.R;
-import org.worldbank.armm.app.models.Survey;
+import com.uyenpham.censusapplication.R;
+import com.uyenpham.censusapplication.models.Survey;
 
 import ca.dalezak.androidbase.annotations.Control;
 import ca.dalezak.androidbase.views.BaseCard;

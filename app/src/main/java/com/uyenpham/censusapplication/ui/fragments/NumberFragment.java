@@ -6,11 +6,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import org.worldbank.armm.app.R;
-import org.worldbank.armm.app.models.Answer;
-import org.worldbank.armm.app.models.Question;
-import org.worldbank.armm.app.models.Submission;
-import org.worldbank.armm.app.models.Survey;
+import com.uyenpham.censusapplication.R;
+import com.uyenpham.censusapplication.models.Answer;
+import com.uyenpham.censusapplication.models.Question;
+import com.uyenpham.censusapplication.models.Submission;
+import com.uyenpham.censusapplication.models.Survey;
 
 import ca.dalezak.androidbase.annotations.Control;
 import ca.dalezak.androidbase.annotations.Type;
@@ -33,21 +33,9 @@ public class NumberFragment extends WidgetFragment {
     public TextView labelSuffix;
 
     public NumberFragment() {
-        super(R.layout.fragment_number, R.menu.menu_number);
+        super(R.layout.fragment_number, 0);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menu_keyboard_number) {
-            editText.setInputType(InputType.TYPE_CLASS_NUMBER);
-            return true;
-        }
-        if (item.getItemId() == R.id.menu_keyboard_decimal) {
-            editText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public boolean load(Survey survey, Question question, Submission submission, Answer answer) {
@@ -80,7 +68,7 @@ public class NumberFragment extends WidgetFragment {
     public boolean save(Survey survey, Question question, Submission submission, Answer answer) {
         Log.i(this, "save %d %s %s", question.cid, question.name, answer.value);
         answer.value = editText.getText().toString();
-        answer.save();
+//        answer.save();
         if (question.required && Strings.isNullOrEmpty(answer.value)) {
             editText.requestFocus();
             Toast.showShort(getActivity(), R.string.number_required);

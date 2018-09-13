@@ -5,13 +5,12 @@ import android.content.Intent;
 import android.view.MenuItem;
 import android.widget.PopupMenu;
 
-import org.worldbank.armm.app.R;
-import org.worldbank.armm.app.activities.AnswerListActivity;
-import org.worldbank.armm.app.activities.QuestionTabActivity;
-import org.worldbank.armm.app.adapters.IncompleteCardAdapter;
-import org.worldbank.armm.app.models.Submission;
-import org.worldbank.armm.app.models.Survey;
-import org.worldbank.armm.app.views.SubmissionCard;
+import com.uyenpham.censusapplication.MainActivity;
+import com.uyenpham.censusapplication.R;
+import com.uyenpham.censusapplication.models.Submission;
+import com.uyenpham.censusapplication.models.Survey;
+import com.uyenpham.censusapplication.ui.adapters.IncompleteCardAdapter;
+import com.uyenpham.censusapplication.views.SubmissionCard;
 
 import ca.dalezak.androidbase.fragments.BaseCardsFragment;
 import ca.dalezak.androidbase.tasks.CardTask;
@@ -73,7 +72,7 @@ public class IncompleteCardsFragment
 
         @Override
         protected Intent doInBackground(Void... voids) {
-            Intent intent = new Intent(getActivity(), AnswerListActivity.class);
+            Intent intent = new Intent(getActivity(), MainActivity.class);
             intent.putExtra(Submission.class.getName(), getModel().uuid);
             return intent;
         }
@@ -87,7 +86,8 @@ public class IncompleteCardsFragment
 
         @Override
         protected Intent doInBackground(Void... voids) {
-            Intent intent = new Intent(getActivity(), QuestionTabActivity.class);
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            //question
             intent.putExtra(Survey.class.getName(), getModel().survey.nid);
             intent.putExtra(Submission.class.getName(), getModel().uuid);
             return intent;

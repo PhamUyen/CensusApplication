@@ -11,11 +11,11 @@ import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.worldbank.armm.app.R;
-import org.worldbank.armm.app.models.Answer;
-import org.worldbank.armm.app.models.Question;
-import org.worldbank.armm.app.models.Submission;
-import org.worldbank.armm.app.models.Survey;
+import com.uyenpham.censusapplication.R;
+import com.uyenpham.censusapplication.models.Answer;
+import com.uyenpham.censusapplication.models.Question;
+import com.uyenpham.censusapplication.models.Submission;
+import com.uyenpham.censusapplication.models.Survey;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -63,7 +63,7 @@ public class QuestionTabFragment
             submission.changed = new Date();
             submission.survey = survey;
             submission.title = survey.title;
-            submission.save();
+//            submission.save();
             Log.i(this, "Submission New %s", submission.title);
         }
         else {
@@ -140,7 +140,7 @@ public class QuestionTabFragment
             }
             else {
                 submission.deleteAnswers();
-                submission.delete();
+//                submission.delete();
                 Log.i(this, "Submission Deleted");
                 getActivity().setResult(Activity.RESULT_OK);
             }
@@ -195,7 +195,7 @@ public class QuestionTabFragment
                 Log.i(this, "Value NULL");
                 answer.value = null;
             }
-            answer.save();
+//            answer.save();
         }
     }
 
@@ -248,7 +248,7 @@ public class QuestionTabFragment
         Answer answer = submission.answerForQuestion(question);
         boolean saved = fragment.save(survey, question, submission, answer);
         submission.changed = new Date();
-        submission.save();
+//        submission.save();
         return saved;
     }
 

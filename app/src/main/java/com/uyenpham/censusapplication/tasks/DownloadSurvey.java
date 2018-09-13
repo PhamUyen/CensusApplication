@@ -2,13 +2,14 @@ package com.uyenpham.censusapplication.tasks;
 
 import android.content.Context;
 
+import com.uyenpham.censusapplication.R;
+import com.uyenpham.censusapplication.models.Question;
+import com.uyenpham.censusapplication.models.Survey;
+import com.uyenpham.censusapplication.utils.Prefs;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.worldbank.armm.app.R;
-import org.worldbank.armm.app.models.Question;
-import org.worldbank.armm.app.models.Survey;
-import org.worldbank.armm.app.utils.Prefs;
 
 import java.net.URI;
 import java.util.Arrays;

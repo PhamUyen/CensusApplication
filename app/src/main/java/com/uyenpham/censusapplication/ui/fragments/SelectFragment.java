@@ -9,11 +9,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.ScrollView;
 
-import org.worldbank.armm.app.R;
-import org.worldbank.armm.app.models.Answer;
-import org.worldbank.armm.app.models.Question;
-import org.worldbank.armm.app.models.Submission;
-import org.worldbank.armm.app.models.Survey;
+import com.uyenpham.censusapplication.R;
+import com.uyenpham.censusapplication.models.Answer;
+import com.uyenpham.censusapplication.models.Question;
+import com.uyenpham.censusapplication.models.Submission;
+import com.uyenpham.censusapplication.models.Survey;
 
 import java.util.Map;
 
@@ -108,7 +108,7 @@ public class SelectFragment extends WidgetFragment {
         else {
             answer.value = null;
         }
-        answer.save();
+//        answer.save();
         if (question.required && Strings.isNullOrEmpty(answer.value)) {
             radioGroup.requestFocus();
             Toast.showShort(getActivity(), R.string.selection_required);

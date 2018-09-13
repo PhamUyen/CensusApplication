@@ -1,23 +1,22 @@
 package com.uyenpham.censusapplication.ui.fragments;
 
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 
-import org.worldbank.armm.app.R;
-import org.worldbank.armm.app.adapters.BarangayArrayAdapter;
-import org.worldbank.armm.app.adapters.MunicipalityArrayAdapter;
-import org.worldbank.armm.app.adapters.ProvinceArrayAdapter;
-import org.worldbank.armm.app.adapters.RegionArrayAdapter;
-import org.worldbank.armm.app.models.Answer;
-import org.worldbank.armm.app.models.Barangay;
-import org.worldbank.armm.app.models.Municipality;
-import org.worldbank.armm.app.models.Province;
-import org.worldbank.armm.app.models.Question;
-import org.worldbank.armm.app.models.Region;
-import org.worldbank.armm.app.models.Submission;
-import org.worldbank.armm.app.models.Survey;
+import com.uyenpham.censusapplication.R;
+import com.uyenpham.censusapplication.models.Answer;
+import com.uyenpham.censusapplication.models.Barangay;
+import com.uyenpham.censusapplication.models.Municipality;
+import com.uyenpham.censusapplication.models.Province;
+import com.uyenpham.censusapplication.models.Question;
+import com.uyenpham.censusapplication.models.Region;
+import com.uyenpham.censusapplication.models.Submission;
+import com.uyenpham.censusapplication.models.Survey;
+import com.uyenpham.censusapplication.ui.adapters.BarangayArrayAdapter;
+import com.uyenpham.censusapplication.ui.adapters.MunicipalityArrayAdapter;
+import com.uyenpham.censusapplication.ui.adapters.ProvinceArrayAdapter;
+import com.uyenpham.censusapplication.ui.adapters.RegionArrayAdapter;
 
 import ca.dalezak.androidbase.annotations.Control;
 import ca.dalezak.androidbase.annotations.Type;
@@ -47,21 +46,9 @@ public class PsgcFragment extends WidgetFragment {
     private BarangayArrayAdapter barangayArrayAdapter;
 
     public PsgcFragment() {
-        super(R.layout.fragment_psgc, R.menu.menu_psgc);
+        super(R.layout.fragment_psgc, 0);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menu_clear) {
-            municipalityArrayAdapter.setProvince(null);
-            barangayArrayAdapter.setMunicipality(null);
-            spinnerProvinces.setSelection(0);
-            spinnerMunicipalities.setSelection(0);
-            spinnerBarangays.setSelection(0);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public boolean load(Survey survey, Question question, Submission submission, Answer answer) {
@@ -207,7 +194,7 @@ public class PsgcFragment extends WidgetFragment {
             answer.value = null;
         }
         Log.i(this, "Answer %s", answer.value);
-        answer.save();
+//        answer.save();
         if (question.required && Strings.isNullOrEmpty(answer.value)) {
             Toast.showShort(getActivity(), R.string.psgc_required);
             return false;

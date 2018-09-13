@@ -2,8 +2,8 @@ package com.uyenpham.censusapplication.ui.fragments;
 
 import android.content.Intent;
 
-import org.worldbank.armm.app.R;
-import org.worldbank.armm.app.models.Submission;
+import com.uyenpham.censusapplication.R;
+import com.uyenpham.censusapplication.models.Submission;
 
 import ca.dalezak.androidbase.fragments.BaseFragment;
 import ca.dalezak.androidbase.fragments.BaseTabFragment;

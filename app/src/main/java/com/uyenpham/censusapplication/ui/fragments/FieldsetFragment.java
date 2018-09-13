@@ -5,11 +5,11 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.widget.LinearLayout;
 
-import org.worldbank.armm.app.R;
-import org.worldbank.armm.app.models.Answer;
-import org.worldbank.armm.app.models.Question;
-import org.worldbank.armm.app.models.Submission;
-import org.worldbank.armm.app.models.Survey;
+import com.uyenpham.censusapplication.R;
+import com.uyenpham.censusapplication.models.Answer;
+import com.uyenpham.censusapplication.models.Question;
+import com.uyenpham.censusapplication.models.Submission;
+import com.uyenpham.censusapplication.models.Survey;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,7 +35,7 @@ public class FieldsetFragment
     private Submission submission;
 
     public FieldsetFragment() {
-        super(R.layout.fragment_fieldset, R.menu.menu_fieldset);
+        super(R.layout.fragment_fieldset, 0);
     }
 
     @Override

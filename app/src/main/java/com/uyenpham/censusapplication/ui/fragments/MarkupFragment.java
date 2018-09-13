@@ -23,7 +23,7 @@ public class MarkupFragment extends WidgetFragment {
     public TextView labelMarkup;
 
     public MarkupFragment() {
-        super(R.layout.fragment_markup, R.menu.menu_markup);
+        super(R.layout.fragment_markup,0);
     }
 
     @Override

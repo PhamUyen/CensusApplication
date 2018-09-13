@@ -23,15 +23,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="@dimen/padding_normal_x">
+        android:padding="@dimen/padding_large_x">
 
         <ImageView
-            android:layout_marginTop="@dimen/margin_normal_x"
+            android:layout_marginTop="@dimen/margin_40"
             android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/logo_app"
+            android:layout_height="@dimen/logo_app"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/ic_launcher_background"/>
+            android:src="@drawable/logo_app"/>
 
         <LinearLayout
             android:layout_margin="@dimen/margin_normal"
@@ -42,25 +42,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
-                android:id="@+id/edUserName"
+                android:id="@+id/ed_userName"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/height_button"
+                android:layout_height="@dimen/height_edittext"
                 android:layout_marginTop="@dimen/margin_normal_x"
                 android:background="@drawable/bg_edit_text"/>
             <EditText
-                android:id="@+id/edPass"
+                android:id="@+id/ed_pass"
                 android:inputType="textPassword"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/height_button"
+                android:layout_height="@dimen/height_edittext"
                 android:layout_marginTop="@dimen/margin_normal_x"
                 android:background="@drawable/bg_edit_text"/>
             <Button
-                android:id="@+id/btnLogin"
+                android:id="@+id/btn_login"
                 android:textStyle="bold"
                 android:textColor="@color/white"
                 android:text="@string/txt_login"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/height_button"
+                android:layout_height="@dimen/height_edittext"
                 android:layout_marginTop="@dimen/margin_normal_x"
                 android:background="@color/orange"/>
         </LinearLayout>

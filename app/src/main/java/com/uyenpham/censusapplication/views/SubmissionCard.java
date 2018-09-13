@@ -6,11 +6,12 @@ import android.widget.ProgressBar;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import org.worldbank.armm.app.R;
-import org.worldbank.armm.app.models.Submission;
+import com.uyenpham.censusapplication.R;
+import com.uyenpham.censusapplication.models.Submission;
 
 import ca.dalezak.androidbase.annotations.Control;
 import ca.dalezak.androidbase.views.BaseCard;
+
 
 public class SubmissionCard extends BaseCard<Submission> {
 

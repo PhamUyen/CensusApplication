@@ -3,11 +3,11 @@ package com.uyenpham.censusapplication.ui.fragments;
 import android.view.MenuItem;
 import android.widget.TimePicker;
 
-import org.worldbank.armm.app.R;
-import org.worldbank.armm.app.models.Answer;
-import org.worldbank.armm.app.models.Question;
-import org.worldbank.armm.app.models.Submission;
-import org.worldbank.armm.app.models.Survey;
+import com.uyenpham.censusapplication.R;
+import com.uyenpham.censusapplication.models.Answer;
+import com.uyenpham.censusapplication.models.Question;
+import com.uyenpham.censusapplication.models.Submission;
+import com.uyenpham.censusapplication.models.Survey;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -92,7 +92,7 @@ public class TimeFragment extends WidgetFragment {
         else {
             answer.value = null;
         }
-        answer.save();
+//        answer.save();
         if (question.required && Strings.isNullOrEmpty(answer.value)) {
             timePicker.requestFocus();
             Toast.showShort(getActivity(), R.string.time_required);

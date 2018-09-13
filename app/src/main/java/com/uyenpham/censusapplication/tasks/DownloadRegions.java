@@ -2,15 +2,16 @@ package com.uyenpham.censusapplication.tasks;
 
 import android.content.Context;
 
+import com.uyenpham.censusapplication.R;
+import com.uyenpham.censusapplication.models.Barangay;
+import com.uyenpham.censusapplication.models.Municipality;
+import com.uyenpham.censusapplication.models.Province;
+import com.uyenpham.censusapplication.models.Region;
+import com.uyenpham.censusapplication.utils.Prefs;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.worldbank.armm.app.R;
-import org.worldbank.armm.app.models.Barangay;
-import org.worldbank.armm.app.models.Municipality;
-import org.worldbank.armm.app.models.Province;
-import org.worldbank.armm.app.models.Region;
-import org.worldbank.armm.app.utils.Prefs;
 
 import java.net.URI;
 import java.util.Date;

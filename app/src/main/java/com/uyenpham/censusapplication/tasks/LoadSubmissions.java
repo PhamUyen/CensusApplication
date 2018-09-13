@@ -2,7 +2,7 @@ package com.uyenpham.censusapplication.tasks;
 
 import android.content.Context;
 
-import org.worldbank.armm.app.models.Submission;
+import com.uyenpham.censusapplication.models.Submission;
 
 import ca.dalezak.androidbase.tasks.LoadTask;
 

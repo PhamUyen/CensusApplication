@@ -3,10 +3,11 @@ package com.uyenpham.censusapplication.views;
 import android.content.Context;
 import android.widget.TextView;
 
-import org.worldbank.armm.app.R;
+import com.uyenpham.censusapplication.R;
 
 import ca.dalezak.androidbase.annotations.Control;
 import ca.dalezak.androidbase.views.BaseView;
+
 
 public class AnswerRow extends BaseView {
 

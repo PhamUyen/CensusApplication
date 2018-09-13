@@ -1,7 +1,6 @@
 package com.uyenpham.censusapplication.tasks;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.uyenpham.censusapplication.R;
 import com.uyenpham.censusapplication.models.Survey;
@@ -12,6 +11,9 @@ import org.json.JSONObject;
 
 import java.net.URI;
 import java.util.Date;
+
+import ca.dalezak.androidbase.tasks.HttpGetTask;
+import ca.dalezak.androidbase.utils.Dates;
 
 
 public class DownloadSurveys extends HttpGetTask<Survey> {
@@ -42,7 +44,6 @@ public class DownloadSurveys extends HttpGetTask<Survey> {
 
     @Override
     protected Survey onHandleResponse(JSONObject json) throws JSONException {
-        Log.i(this, "JSON %s", json);
         Integer nid = json.getInt(Survey.Columns.NID);
         Survey survey = Survey.find(nid);
         if (survey == null) {

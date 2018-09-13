@@ -4,19 +4,17 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.MenuItem;
 
-import org.worldbank.armm.app.R;
-import org.worldbank.armm.app.activities.QuestionTabActivity;
-import org.worldbank.armm.app.adapters.SurveyCardAdapter;
-import org.worldbank.armm.app.models.Barangay;
-import org.worldbank.armm.app.models.Municipality;
-import org.worldbank.armm.app.models.Province;
-import org.worldbank.armm.app.models.Region;
-import org.worldbank.armm.app.models.Submission;
-import org.worldbank.armm.app.models.Survey;
-import org.worldbank.armm.app.tasks.DownloadRegions;
-import org.worldbank.armm.app.tasks.DownloadSurvey;
-import org.worldbank.armm.app.tasks.DownloadSurveys;
-import org.worldbank.armm.app.views.SurveyCard;
+import com.uyenpham.censusapplication.MainActivity;
+import com.uyenpham.censusapplication.R;
+import com.uyenpham.censusapplication.models.Barangay;
+import com.uyenpham.censusapplication.models.Municipality;
+import com.uyenpham.censusapplication.models.Province;
+import com.uyenpham.censusapplication.models.Region;
+import com.uyenpham.censusapplication.models.Submission;
+import com.uyenpham.censusapplication.models.Survey;
+import com.uyenpham.censusapplication.tasks.DownloadRegions;
+import com.uyenpham.censusapplication.ui.adapters.SurveyCardAdapter;
+import com.uyenpham.censusapplication.views.SurveyCard;
 
 import java.util.Date;
 
@@ -52,9 +50,9 @@ public class SurveyCardsFragment
             if (!HttpQueue.getInstance().contains(DownloadRegions.class)) {
                 HttpQueue.getInstance().add(new DownloadRegions(getActivity()));
             }
-            if (!HttpQueue.getInstance().contains(DownloadSurveys.class)) {
-                HttpQueue.getInstance().add(new DownloadSurveys(getActivity()));
-            }
+//            if (!HttpQueue.getInstance().contains(DownloadSurveys.class)) {
+//                HttpQueue.getInstance().add(new DownloadSurveys(getActivity()));
+//            }
             if (HttpQueue.getInstance().size() > 0) {
                 HttpQueue.getInstance().start();
                 showRefreshing(R.string.refreshing_);
@@ -83,7 +81,7 @@ public class SurveyCardsFragment
             showLoading(R.string.downloading_psgc_);
         }
         if (Survey.count() == 0) {
-            HttpQueue.getInstance().add(new DownloadSurveys(getActivity(), true));
+//            HttpQueue.getInstance().add(new DownloadSurveys(getActivity(), true));
         }
         if (HttpQueue.getInstance().size() > 0) {
             if (Internet.isAvailable(getActivity())) {
@@ -189,10 +187,10 @@ public class SurveyCardsFragment
         else {
             showRefreshing(task.getMessage());
         }
-        if (task instanceof DownloadSurveys && model instanceof Survey) {
-            Survey survey = (Survey)model;
-            HttpQueue.getInstance().add(new DownloadSurvey(getActivity(), survey));
-        }
+//        if (task instanceof DownloadSurveys && model instanceof Survey) {
+//            Survey survey = (Survey)model;
+//            HttpQueue.getInstance().add(new DownloadSurvey(getActivity(), survey));
+//        }
     }
 
     @Override
@@ -220,8 +218,8 @@ public class SurveyCardsFragment
             submission.changed = new Date();
             submission.survey = getModel();
             submission.title = getModel().title;
-            submission.save();
-            Intent intent = new Intent(getActivity(), QuestionTabActivity.class);
+//            submission.save();
+            Intent intent = new Intent(getActivity(), MainActivity.class);
             intent.putExtra(Survey.class.getName(), getModel().nid);
             intent.putExtra(Submission.class.getName(), submission.uuid);
             return intent;
