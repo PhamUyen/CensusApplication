@@ -23,6 +23,7 @@
     //=====view=====//
     <dimen name="height_edittext">45dp</dimen>
     <dimen name="height_button">40dp</dimen>
+    <dimen name="height_toolbar">48dp</dimen>
 
     //=====icon=====//
     <dimen name="logo_app">120dp</dimen>

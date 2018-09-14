@@ -7,6 +7,7 @@
     <color name="red">#f50303</color>
     <color name="black">#000000</color>
     <color name="orange">#f56416</color>
+    <color name="color_gray_light">#e7e7e7</color>
 
         <color name="swipe_first">#34651b</color>
         <color name="swipe_second">#5c8845</color>

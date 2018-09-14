@@ -2,7 +2,6 @@ package com.uyenpham.censusapplication.ui.fragments;
 
 import android.widget.TextView;
 
-import com.uyenpham.censusapplication.R;
 import com.uyenpham.censusapplication.models.Answer;
 import com.uyenpham.censusapplication.models.Question;
 import com.uyenpham.censusapplication.models.Submission;
