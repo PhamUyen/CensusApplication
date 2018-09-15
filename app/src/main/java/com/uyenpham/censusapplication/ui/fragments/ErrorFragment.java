@@ -1,7 +1,9 @@
 package com.uyenpham.censusapplication.ui.fragments;
 
+import android.view.View;
 import android.widget.TextView;
 
+import com.uyenpham.censusapplication.R;
 import com.uyenpham.censusapplication.models.Answer;
 import com.uyenpham.censusapplication.models.Question;
 import com.uyenpham.censusapplication.models.Submission;
@@ -14,9 +16,6 @@ public class ErrorFragment extends WidgetFragment {
     @Control("label_error")
     public TextView labelError;
 
-    public ErrorFragment() {
-        super(R.layout.fragment_error, R.menu.menu_error);
-    }
 
     @Override
     public boolean load(Survey survey, Question question, Submission submission, Answer answer) {
@@ -32,5 +31,15 @@ public class ErrorFragment extends WidgetFragment {
     @Override
     public boolean save(Survey survey, Question question, Submission submission, Answer answer) {
         return true;
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_error;
+    }
+
+    @Override
+    protected void createView(View view) {
+
     }
 }

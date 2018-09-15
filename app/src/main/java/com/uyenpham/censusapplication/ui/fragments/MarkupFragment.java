@@ -1,6 +1,7 @@
 package com.uyenpham.censusapplication.ui.fragments;
 
 import android.text.Html;
+import android.view.View;
 import android.widget.TextView;
 
 import com.uyenpham.censusapplication.R;
@@ -22,9 +23,6 @@ public class MarkupFragment extends WidgetFragment {
     @Control("label_markup")
     public TextView labelMarkup;
 
-    public MarkupFragment() {
-        super(R.layout.fragment_markup,0);
-    }
 
     @Override
     public boolean load(Survey survey, Question question, Submission submission, Answer answer) {
@@ -43,5 +41,15 @@ public class MarkupFragment extends WidgetFragment {
     public boolean save(Survey survey, Question question, Submission submission, Answer answer) {
         Log.i(this, "save %d %s %s", question.cid, question.name, answer.value);
         return true;
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_markup;
+    }
+
+    @Override
+    protected void createView(View view) {
+
     }
 }

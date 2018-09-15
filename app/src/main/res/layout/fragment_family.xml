@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+ <Button
+     android:layout_alignParentTop="true"
+     android:textAllCaps="false"
+     android:textStyle="bold"
+     android:textColor="@color/black"
+     android:textSize="@dimen/ts_17"
+     android:text="@string/txt_add_family"
+     android:id="@+id/btn_add_family"
+     android:layout_width="match_parent"
+     android:layout_height="@dimen/height_button"
+     android:background="@drawable/bg_edit_text"
+     android:layout_margin="@dimen/margin_small_x"/>
+ <android.support.v7.widget.RecyclerView
+     android:layout_below="@+id/btn_add_family"
+     android:id="@+id/rcvFamily"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content">
+
+ </android.support.v7.widget.RecyclerView>
+</RelativeLayout>

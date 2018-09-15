@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/item_family"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:padding="@dimen/padding_small_x"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_marginRight="@dimen/margin_small_x"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="2.5"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_family"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="sdfdsfds"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_small"
+                android:textStyle="bold"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:gravity="end"
+            android:layout_gravity="end"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_interview_family"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/height_button_list"
+                android:background="@drawable/bg_edit_text"
+                android:text="@string/txt_interview"
+                android:textAllCaps="false"
+                android:textSize="@dimen/ts_13"/>
+
+            <Button
+                android:id="@+id/btn_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/height_button_list"
+                android:layout_marginTop="@dimen/margin_small"
+                android:background="@drawable/bg_edit_text"
+                android:text="@string/txt_delete"
+                android:textAllCaps="false"
+                android:textSize="@dimen/ts_13"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_marginRight="@dimen/margin_small_x"
+        android:layout_marginLeft="@dimen/margin_small_x"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/margin_small"
+        android:background="@color/color_gray_light"/>
+</LinearLayout>

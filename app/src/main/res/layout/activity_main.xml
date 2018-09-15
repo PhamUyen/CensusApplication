@@ -5,13 +5,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.activities.SurveyActivity">
 
-    <com.uyenpham.censusapplication.views.CustomToolbar
-        android:id="@+id/to"
+    <com.uyenpham.censusapplication.views.CustomNavigationBar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_toolbar"
         android:layout_alignParentTop="true"
         />
-
+    <FrameLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"/>
 </RelativeLayout>

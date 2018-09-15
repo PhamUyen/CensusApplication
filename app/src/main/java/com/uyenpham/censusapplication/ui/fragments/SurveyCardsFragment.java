@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.MenuItem;
 
-import com.uyenpham.censusapplication.MainActivity;
 import com.uyenpham.censusapplication.R;
 import com.uyenpham.censusapplication.models.Barangay;
 import com.uyenpham.censusapplication.models.Municipality;
@@ -13,6 +12,7 @@ import com.uyenpham.censusapplication.models.Region;
 import com.uyenpham.censusapplication.models.Submission;
 import com.uyenpham.censusapplication.models.Survey;
 import com.uyenpham.censusapplication.tasks.DownloadRegions;
+import com.uyenpham.censusapplication.ui.activities.SurveyActivity;
 import com.uyenpham.censusapplication.ui.adapters.SurveyCardAdapter;
 import com.uyenpham.censusapplication.views.SurveyCard;
 
@@ -219,7 +219,7 @@ public class SurveyCardsFragment
             submission.survey = getModel();
             submission.title = getModel().title;
 //            submission.save();
-            Intent intent = new Intent(getActivity(), MainActivity.class);
+            Intent intent = new Intent(getActivity(), SurveyActivity.class);
             intent.putExtra(Survey.class.getName(), getModel().nid);
             intent.putExtra(Submission.class.getName(), submission.uuid);
             return intent;

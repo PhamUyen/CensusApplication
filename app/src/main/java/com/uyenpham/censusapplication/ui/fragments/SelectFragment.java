@@ -34,9 +34,6 @@ public class SelectFragment extends WidgetFragment {
     @Control("radio_group")
     public RadioGroup radioGroup;
 
-    public SelectFragment() {
-        super(R.layout.fragment_select, R.menu.menu_select);
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -115,5 +112,15 @@ public class SelectFragment extends WidgetFragment {
             return false;
         }
         return true;
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_select;
+    }
+
+    @Override
+    protected void createView(View view) {
+
     }
 }

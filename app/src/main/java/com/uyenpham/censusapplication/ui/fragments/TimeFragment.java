@@ -1,6 +1,7 @@
 package com.uyenpham.censusapplication.ui.fragments;
 
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TimePicker;
 
 import com.uyenpham.censusapplication.R;
@@ -30,9 +31,6 @@ public class TimeFragment extends WidgetFragment {
     @Control("time_picker")
     public TimePicker timePicker;
 
-    public TimeFragment() {
-        super(R.layout.fragment_time, R.menu.menu_time);
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -99,5 +97,15 @@ public class TimeFragment extends WidgetFragment {
             return false;
         }
         return true;
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_time;
+    }
+
+    @Override
+    protected void createView(View view) {
+
     }
 }

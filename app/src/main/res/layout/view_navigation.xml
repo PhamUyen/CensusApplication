@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/rlt_nav"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_toolbar"
+                android:background="@color/color_gray_light"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/padding_small"
+                android:paddingTop="@dimen/padding_small">
+
+    <ImageView
+        android:id="@+id/imvLeft"
+        android:layout_width="@dimen/icon_50"
+        android:padding="@dimen/padding_small_x"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ic_back"/>
+
+    <TextView
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:id="@+id/tvTitleScreen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/ts_17"/>
+
+    <ImageView
+        android:id="@+id/imvRight"
+        android:layout_width="@dimen/icon_50"
+        android:padding="@dimen/padding_small_x"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ic_right_menu"
+        />
+
+</RelativeLayout>

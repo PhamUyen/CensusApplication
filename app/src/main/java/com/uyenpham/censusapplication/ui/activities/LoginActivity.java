@@ -8,8 +8,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.uyenpham.censusapplication.MainActivity;
+import com.uyenpham.censusapplication.BuildConfig;
 import com.uyenpham.censusapplication.R;
+import com.uyenpham.censusapplication.models.user.LoginDTO;
+import com.uyenpham.censusapplication.models.user.ResponseLoginDTO;
+import com.uyenpham.censusapplication.service.BaseCallback;
+import com.uyenpham.censusapplication.service.ServiceBuilder;
+import com.uyenpham.censusapplication.utils.Constants;
+import com.uyenpham.censusapplication.utils.DialogUtils;
+import com.uyenpham.censusapplication.utils.SharedPrefsUtils;
 import com.uyenpham.censusapplication.utils.ValidateUtils;
 
 import butterknife.Bind;
@@ -35,11 +42,14 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void initLayout() {
-        super.initLayout();
         switchToLoginView();
+        if (BuildConfig.DEBUG) {
+            edPass.setText("123456");
+            edUserName.setText("D992001");
+        }
     }
 
-    private void switchToLoginView(){
+    private void switchToLoginView() {
         new Handler().postDelayed(
                 new Runnable() {
                     @Override
@@ -47,21 +57,39 @@ public class LoginActivity extends BaseActivity {
                         viewSplash.setVisibility(View.GONE);
                         viewLogin.setVisibility(View.VISIBLE);
                     }
-                },2000
+                }, 2000
         );
     }
 
     @OnClick(R.id.btn_login)
-    void onLogin(){
+    void onLogin() {
         String userName = edUserName.getText().toString();
         String pass = edPass.getText().toString();
-        if(ValidateUtils.validateLogin(userName.trim(), pass.trim())){
+        if (ValidateUtils.validateLogin(userName.trim(), pass.trim())) {
             Toast.makeText(this, R.string.txt_message_invalid_login, Toast.LENGTH_SHORT).show();
-        }else {
-            //TODO: call login API
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-            finish();
+        } else {
+            DialogUtils.showProgressDialog(LoginActivity.this);
+            login(new LoginDTO(userName, pass));
         }
+    }
+
+    private void login(LoginDTO loginDTO) {
+        ServiceBuilder.getApiServiceAuthen().login(loginDTO)
+                .enqueue(new BaseCallback<ResponseLoginDTO>() {
+                    @Override
+                    protected void onSuccess(ResponseLoginDTO data) {
+                        DialogUtils.dismissProgressDialog();
+                        SharedPrefsUtils.setStringPreference(LoginActivity.this, Constants.KEY_TOKEN,data.getToken());
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
+                    @Override
+                    protected void onError(String errorCode, String errorMessage) {
+                        DialogUtils.dismissProgressDialog();
+                        Toast.makeText(LoginActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

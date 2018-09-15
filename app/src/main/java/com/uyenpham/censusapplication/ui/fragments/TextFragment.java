@@ -1,7 +1,6 @@
 package com.uyenpham.censusapplication.ui.fragments;
 
-import android.text.InputType;
-import android.view.MenuItem;
+import android.content.Context;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -11,6 +10,9 @@ import com.uyenpham.censusapplication.models.Answer;
 import com.uyenpham.censusapplication.models.Question;
 import com.uyenpham.censusapplication.models.Submission;
 import com.uyenpham.censusapplication.models.Survey;
+import com.uyenpham.censusapplication.ui.activities.SurveyActivity;
+import com.uyenpham.censusapplication.ui.interfaces.IExitClick;
+import com.uyenpham.censusapplication.utils.FragmentHelper;
 
 import ca.dalezak.androidbase.annotations.Control;
 import ca.dalezak.androidbase.annotations.Type;
@@ -19,7 +21,8 @@ import ca.dalezak.androidbase.utils.Strings;
 import ca.dalezak.androidbase.utils.Toast;
 
 @Type(TextFragment.TYPE)
-public class TextFragment extends WidgetFragment {
+public class TextFragment extends WidgetFragment implements IExitClick{
+    private SurveyActivity main;
 
     public static final String TYPE = "textfield";
 
@@ -32,41 +35,10 @@ public class TextFragment extends WidgetFragment {
     @Control("label_suffix")
     public TextView labelSuffix;
 
-    public TextFragment() {
-        super(R.layout.fragment_text, R.menu.menu_text);
-    }
-
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menu_keyboard_title) {
-            editText.setInputType(InputType.TYPE_CLASS_TEXT| InputType.TYPE_TEXT_FLAG_CAP_WORDS);
-            return true;
-        }
-        if (item.getItemId() == R.id.menu_keyboard_sentence) {
-            editText.setInputType(InputType.TYPE_CLASS_TEXT| InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
-            return true;
-        }
-        if (item.getItemId() == R.id.menu_keyboard_lowercase) {
-            editText.setInputType(InputType.TYPE_CLASS_TEXT);
-            return true;
-        }
-        if (item.getItemId() == R.id.menu_keyboard_uppercase) {
-            editText.setInputType(InputType.TYPE_CLASS_TEXT| InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS);
-            return true;
-        }
-        if (item.getItemId() == R.id.menu_keyboard_name) {
-            editText.setInputType(InputType.TYPE_TEXT_VARIATION_PERSON_NAME| InputType.TYPE_TEXT_FLAG_CAP_WORDS);
-            return true;
-        }
-        if (item.getItemId() == R.id.menu_keyboard_email) {
-            editText.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
-            return true;
-        }
-        if (item.getItemId() == R.id.menu_keyboard_phone) {
-            editText.setInputType(InputType.TYPE_CLASS_PHONE);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        main = (SurveyActivity)context;
     }
 
     @Override
@@ -100,7 +72,7 @@ public class TextFragment extends WidgetFragment {
     public boolean save(Survey survey, Question question, Submission submission, Answer answer) {
         Log.i(this, "save %d %s %s", question.cid, question.name, answer.value);
         answer.value = editText.getText().toString();
-//        answer.save();
+        answer.save();
         if (question.required && Strings.isNullOrEmpty(answer.value)) {
             editText.requestFocus();
             Toast.showShort(getActivity(), R.string.text_required);
@@ -109,4 +81,21 @@ public class TextFragment extends WidgetFragment {
         return true;
     }
 
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_text;
+    }
+
+    @Override
+    protected void createView(View view) {
+        main.setiExitClick(this);
+    }
+
+    @Override
+    public void onExitClick() {
+        main.getSupportFragmentManager().popBackStackImmediate();
+        FragmentHelper.removeFragment(this,main.mFragmentManager);
+        main.toggleDrawer();
+
+    }
 }

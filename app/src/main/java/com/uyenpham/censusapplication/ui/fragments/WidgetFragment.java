@@ -21,7 +21,6 @@ import java.util.Map;
 
 import ca.dalezak.androidbase.annotations.Control;
 import ca.dalezak.androidbase.annotations.Type;
-import ca.dalezak.androidbase.fragments.BaseFragment;
 import ca.dalezak.androidbase.utils.Log;
 import ca.dalezak.androidbase.utils.Strings;
 
@@ -38,13 +37,6 @@ public abstract class WidgetFragment extends BaseFragment {
     @Control("label_required")
     public TextView labelRequired;
 
-    public WidgetFragment(int layout) {
-        super(layout);
-    }
-
-    public WidgetFragment(int layout, int menu) {
-        super(layout, menu);
-    }
 
     public boolean init(Survey survey, Question question, Submission submission, Answer answer) {
         if (question != null) {

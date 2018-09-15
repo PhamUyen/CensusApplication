@@ -42,12 +42,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
+                android:padding="@dimen/padding_small"
                 android:id="@+id/ed_userName"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/height_edittext"
                 android:layout_marginTop="@dimen/margin_normal_x"
                 android:background="@drawable/bg_edit_text"/>
             <EditText
+                android:padding="@dimen/padding_small"
                 android:id="@+id/ed_pass"
                 android:inputType="textPassword"
                 android:layout_width="match_parent"

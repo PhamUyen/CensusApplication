@@ -1,5 +1,6 @@
 package com.uyenpham.censusapplication.ui.fragments;
 
+import android.view.View;
 import android.widget.EditText;
 
 import com.uyenpham.censusapplication.R;
@@ -22,9 +23,6 @@ public class MultilineFragment extends WidgetFragment {
     @Control("edit_text")
     public EditText editText;
 
-    public MultilineFragment() {
-        super(R.layout.fragment_multiline, 0);
-    }
 
     @Override
     public boolean load(Survey survey, Question question, Submission submission, Answer answer) {
@@ -50,5 +48,15 @@ public class MultilineFragment extends WidgetFragment {
             return false;
         }
         return true;
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_multiline;
+    }
+
+    @Override
+    protected void createView(View view) {
+
     }
 }

@@ -1,7 +1,5 @@
 package com.uyenpham.censusapplication.ui.fragments;
 
-import android.text.InputType;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -32,9 +30,6 @@ public class NumberFragment extends WidgetFragment {
     @Control("label_suffix")
     public TextView labelSuffix;
 
-    public NumberFragment() {
-        super(R.layout.fragment_number, 0);
-    }
 
 
     @Override
@@ -77,4 +72,13 @@ public class NumberFragment extends WidgetFragment {
         return true;
     }
 
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_number;
+    }
+
+    @Override
+    protected void createView(View view) {
+
+    }
 }

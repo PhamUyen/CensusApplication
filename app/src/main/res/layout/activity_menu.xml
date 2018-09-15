@@ -8,7 +8,7 @@
     <Button
         android:id="@+id/btn_interview"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/height_button"
         android:background="@drawable/bg_border_button"
         android:text="@string/txt_family_interview"
         android:textAllCaps="false"
@@ -19,7 +19,7 @@
     <Button
         android:id="@+id/btn_sync"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/height_button"
         android:layout_marginTop="20dp"
         android:background="@drawable/bg_border_button"
         android:text="@string/txt_sync_data"
@@ -31,7 +31,7 @@
     <Button
         android:id="@+id/btn_update"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/height_button"
         android:layout_marginTop="20dp"
         android:background="@drawable/bg_border_button"
         android:text="@string/txt_update"
@@ -43,7 +43,7 @@
     <Button
         android:id="@+id/btn_search"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/height_button"
         android:layout_marginTop="20dp"
         android:background="@drawable/bg_border_button"
         android:text="@string/txt_search_data"
@@ -55,7 +55,7 @@
     <Button
         android:id="@+id/btn_logout"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/height_button"
         android:layout_marginTop="20dp"
         android:background="@drawable/bg_border_button"
         android:text="@string/txt_logout"
@@ -67,7 +67,7 @@
     <Button
         android:id="@+id/btn_exit"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/height_button"
         android:layout_marginTop="20dp"
         android:background="@drawable/bg_border_button"
         android:text="@string/txt_exit"

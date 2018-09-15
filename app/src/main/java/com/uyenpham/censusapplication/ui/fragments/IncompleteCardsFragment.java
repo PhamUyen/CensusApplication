@@ -5,10 +5,10 @@ import android.content.Intent;
 import android.view.MenuItem;
 import android.widget.PopupMenu;
 
-import com.uyenpham.censusapplication.MainActivity;
 import com.uyenpham.censusapplication.R;
 import com.uyenpham.censusapplication.models.Submission;
 import com.uyenpham.censusapplication.models.Survey;
+import com.uyenpham.censusapplication.ui.activities.SurveyActivity;
 import com.uyenpham.censusapplication.ui.adapters.IncompleteCardAdapter;
 import com.uyenpham.censusapplication.views.SubmissionCard;
 
@@ -72,7 +72,7 @@ public class IncompleteCardsFragment
 
         @Override
         protected Intent doInBackground(Void... voids) {
-            Intent intent = new Intent(getActivity(), MainActivity.class);
+            Intent intent = new Intent(getActivity(), SurveyActivity.class);
             intent.putExtra(Submission.class.getName(), getModel().uuid);
             return intent;
         }
@@ -86,7 +86,7 @@ public class IncompleteCardsFragment
 
         @Override
         protected Intent doInBackground(Void... voids) {
-            Intent intent = new Intent(getActivity(), MainActivity.class);
+            Intent intent = new Intent(getActivity(), SurveyActivity.class);
             //question
             intent.putExtra(Survey.class.getName(), getModel().survey.nid);
             intent.putExtra(Submission.class.getName(), getModel().uuid);

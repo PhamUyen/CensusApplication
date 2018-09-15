@@ -9,7 +9,25 @@
     <string name="txt_logout">Đăng xuất</string>
     <string name="txt_exit">Thoát</string>
     <string name="txt_message_invalid_login">Thông tin đăng nhập không được phép bỏ trống</string>
-
+    <string name="txt_ok">ok</string>
+    <string name="txt_loading">Hệ thống đang xử lí...</string>
+    <string name="title_alert">Thông báo</string>
+    <string name="title_error">Lỗi!</string>
+    <string name="msg_network_lost">Vui lòng kiểm tra kết nối mạng</string>
+    <string name="txt_locality_list">Danh sách địa bàn</string>
+    <string name="txt_menu_interview">Menu phỏng vấn</string>
+    <string name="txt_interview">Phỏng vấn</string>
+    <string name="txt_delete">Xóa</string>
+    <string name="txt_interview_list">Danh sách phỏng vấn</string>
+    <string name="txt_add_family">Thêm hộ mới</string>
+    <string name="txt_del_family">Hộ %1$s - %2$s có còn tại địa bàn không?</string>
+    <string name="txt_info">Thông tin hộ</string>
+    <string name="txt_member">Thành viên</string>
+    <string name="txt_people">Nhân khẩu thực tế</string>
+    <string name="txt_woman">Thông tin phụ nữ</string>
+    <string name="txt_die">Thông tin người chết</string>
+    <string name="txt_house">Thông tin nhà ở</string>
+    <string name="txt_interview_detail">Chi tiết phỏng vấn</string>
 
 
     //====question and answer====//
@@ -180,5 +198,233 @@
     <string name="pending">Pending</string>
     <string name="exit">Exit</string>
     <string name="answered">Answered</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
 
+
+    <string-array name="yesNo">
+        <item>Có</item>
+        <item>Không</item>
+    </string-array>
+
+    <string-array name="relation">
+        <item>VỢ/CHỒNG</item>
+        <item>CON ĐẺ</item>
+        <item>CHÁU NỘI/NGOẠI</item>
+        <item>BỐ/MẸ</item>
+        <item>QUAN HỆ GIA ĐÌNH KHÁC</item>
+        <item>KHÔNG QUAN HỆ GIA ĐÌNH</item>
+    </string-array>
+    <string-array name="date_of_birth">
+        <item>THÁNG</item>
+        <item>NĂM </item>
+        <item>KHÔNG XĐ NĂM</item>
+    </string-array>
+    <string-array name="folk">
+        <item>KINH</item>
+        <item>DÂN TỘC KHÁC </item>
+    </string-array>
+
+    <string-array name="birht_register">
+        <item>ĐÃ ĐĂNG KÝ</item>
+        <item>CHƯA ĐĂNG KÝ </item>
+    </string-array>
+    <string-array name="school">
+        <item>ĐANG ĐI HỌC</item>
+        <item>ĐÃ THÔI HỌC</item>
+        <item>CHƯA BAO GIỜ ĐI HỌC </item>
+    </string-array>
+    <string-array name="education">
+        <item>MẦM NON DƯỚI 5 TUỔI</item>
+        <item>MẦM NON 5 TUỔI</item>
+        <item>TIỂU HỌC </item>
+        <item>TRUNG HỌC CƠ SỞ</item>
+        <item>TRUNG HỌC PHỔ THÔNG</item>
+        <item>SƠ CẤP </item>
+        <item>TRUNG CẤP</item>
+        <item>CAO ĐẲNG</item>
+        <item>ĐẠI HỌC</item>
+        <item>THẠC SỸ</item>
+        <item>TIẾN SỸ</item>
+    </string-array>
+
+    <string-array name="certificate">
+        <item>CNKT KHÔNG CÓ BẰNG/CC</item>
+        <item>CHỨNG CHỈ NGHỀ</item>
+        <item>SƠ CẤP NGHỀ</item>
+        <item>TRUNG CẤP NGHỀ</item>
+        <item>CAO ĐẲNG NGHỀ</item>
+    </string-array>
+
+    <string-array name="maried">
+        <item>CHƯA VỢ/CHỒNG</item>
+        <item>CÓ VỢ/CHỒNG</item>
+        <item>GOÁ VỢ/CHỒNG</item>
+        <item>LY HÔN</item>
+        <item>LY THÂN </item>
+    </string-array>
+
+    <string-array name="house">
+        <item>CÓ</item>
+        <item>KHÔNG, ĐANG XÂY DỰNG VÀ Ở LÁN TẠM </item>
+        <item>KHÔNG</item>
+    </string-array>
+    <string-array name="house_type">
+        <item>NHÀ CHUNG CƯ</item>
+        <item>NHÀ RIÊNG LẺ </item>
+    </string-array>
+
+    <string-array name="pillar_materials">
+        <item>VẬT LIỆU BỀN CHẮC (BÊ TÔNG CỐT THÉP, XÂY GẠCH/ĐÁ SẮT/THÉP/GỖ BỀN CHẮC)</item>
+        <item>VẬT LIỆU TẠM (GỖ TẠP/TRE, ĐẤT, VẬT LIỆU KHÁC) </item>
+    </string-array>
+
+    <string-array name="roof_materials">
+        <item>VẬT LIỆU BỀN CHẮC (BÊ TÔNG CỐT THÉP, NGÓI)</item>
+        <item>VẬT LIỆU TẠM (TẤM LỢP, LÁ/RƠM RẠ/GIẤY DẦU, VẬT LIỆU KHÁC) </item>
+    </string-array>
+
+    <string-array name="wall_materials">
+        <item>VẬT LIỆU BỀN CHẮC (BÊ TÔNG CỐT THÉP, XÂY GẠCH/ĐÁ,GỖ/KIM LOẠI)</item>
+        <item>VẬT LIỆU TẠM (ĐẤT VÔI/RƠM, PHIÊN/LIẾP/VÁN ÉP,VẬT LIỆU KHÁC</item>
+    </string-array>
+
+    <string-array name="from_year">
+        <item>TRƯỚC 1975</item>
+        <item>TỪ 1975 ĐẾN 1999</item>
+        <item>TỪ 2000 ĐẾN 2009</item>
+        <item>TỪ 2010 ĐẾN NAY</item>
+        <item>KHÔNG XÁC ĐỊNH</item>
+    </string-array>
+
+    <string-array name="real_live_5_years">
+        <item>Ở NƯỚC NGOÀI</item>
+        <item>CÙNG XÃ/PHƯỜNG</item>
+        <item>XÃ/PHƯỜNG KHÁC CÙNG QUẬN/HUYỆN</item>
+        <item>QUẬN/HUYỆN KHÁC </item>
+    </string-array>
+
+    <string-array name="reason_move_house">
+        <item>TÌM VIỆC/ BẮT ĐẦU CÔNG VIỆC MỚI  </item>
+        <item>VỀ QUÊ DO MẤT/HẾT VIỆC,KHÔNG TÌM ĐƯỢC VIỆC></item>
+        <item>THEO GIA ĐÌNH </item>
+        <item>KẾT HÔN </item>
+        <item>ĐI HỌC  </item>
+        <item>KHÁC </item>
+    </string-array>
+    <string-array name="difficult">
+        <item>KHÔNG KHÓ KHĂN</item>
+        <item>KHÓ KHĂN MỘT CHÚT</item>
+        <item>RẤT KHÓ KHĂN </item>
+        <item>KHÔNG THỂ </item>
+    </string-array>
+    <string-array name="work_place">
+        <item>CÓ</item>
+        <item>KHÔNG</item>
+        <item>Ở NƯỚC NGOÀI</item>
+    </string-array>
+    <string-array name="work">
+        <item>Chủ cơ sở (CÓ THUÊ LAO ĐỘNG THƯỜNG XUYÊN)</item>
+        <item>Tự làm</item>
+        <item>Lao động gia đình</item>
+        <item>Xã viên hợp tác xã</item>
+        <item>Làm công hưởng lương</item>
+    </string-array>
+    <string-array name="reason_dont_work">
+        <item>QUÁ GIÀ/QUÁ TRẺ/ MẤT KHẢ NĂNG LAO ĐỘNG</item>
+        <item>HỌC SINH/SINH VIÊN/NỘI TRỢ</item>
+        <item>TIN LÀ KHÔNG CÓ VIỆC/KHÔNG CÓ VIỆC THÍCH HỢP.</item>
+        <item>KHÔNG BIẾT TÌM Ở ĐÂU/BẰNG CÁCH NÀO</item>
+        <item>TẠM NGHỈ DO THU HẸP/NGỪNG SẢN XUẤT</item>
+        <item>ĐỢI VIỆC/ĐỢI KHAI TRƯƠNG HĐKD</item>
+        <item>NGHỈ THỜI VỤ</item>
+        <item>THỜI TIẾT XẤU</item>
+        <item>ỐM ĐAU TẠM THỜI/BẬN VIỆC</item>
+        <item>KHÁC</item>
+    </string-array>
+    <string-array name="born">
+        <item>ĐÃ SINH CON</item>
+        <item>CHƯA SINH CON</item>
+    </string-array>
+    <string-array name="number_child">
+        <item>SỐ CON TRAI </item>
+        <item>SỐ CON GÁI</item>
+    </string-array>
+    <string-array name="deliver">
+        <item>CÁN BỘ Y TẾ</item>
+        <item>Y TẾ THÔN BẢN/ CÔ ĐỠ THÔN/BẢN</item>
+        <item>KHÁC</item>
+        <item>KHÔNG CÓ AI</item>
+    </string-array>
+    <string-array name="sex">
+        <item>NAM</item>
+        <item>NỮ</item>
+    </string-array>
+    <string-array name="die_reason">
+        <item>BỆNH TẬT</item>
+        <item>TAI NẠN LAO ĐỘNG</item>
+        <item>TAI NẠN GIAO THÔNG</item>
+        <item>TAI NẠN KHÁC</item>
+        <item>TỰ TỬ</item>
+        <item>KHÁC </item>
+    </string-array>
+    <string-array name="die_case">
+        <item>KHI ĐANG MANG THAI</item>
+        <item>KHI SINH CON</item>
+        <item>TRONG VÒNG 42 NGÀY SAU KHI ĐẺ</item>
+        <item>TRONG VÒNG 42 NGÀY SAU SẨY/NẠO/HÚT THAI,THAI LƯU/THAI HỎNG</item>
+        <item>KHÁC</item>
+    </string-array>
+    <string-array name="power_light">
+        <item>ĐIỆN LƯỚI</item>
+        <item>ĐIỆN MÁY PHÁT</item>
+        <item>DẦU LỬA</item>
+        <item>KHÍ GA</item>
+        <item>KHÁC</item>
+    </string-array>
+    <string-array name="power_cook">
+        <item>ĐIỆN</item>
+        <item>GAS/BIOGA</item>
+        <item>THAN</item>
+        <item>CỦI</item>
+        <item>KHÁC</item>
+        <item>KHÔNG DÙNG GÌ</item>
+    </string-array>
+
+    <string-array name="water">
+        <item>NƯỚC MÁY</item>
+        <item>NƯỚC MUA (XITÉC, BÌNH…)</item>
+        <item>NƯỚC GIẾNG KHOAN</item>
+        <item>NƯỚC GIẾNG ĐÀO ĐƯỢC BẢO VỆ</item>
+        <item>NƯỚC GIẾNG ĐÀO KHÔNG ĐƯỢC BẢO VỆ</item>
+        <item>NƯỚC KHE/MÓ ĐƯỢC BẢO VỆ</item>
+        <item>NƯỚC KHE/MÓ KHÔNG ĐƯỢC BẢO VỆ</item>
+        <item>NƯỚC MƯA</item>
+        <item>NƯỚC KHÁC</item>
+    </string-array>
+    <string-array name="toilet">
+        <item>HỐ XÍ TỰ HOẠI/BÁN TỰ HOẠI TRONG NHÀ</item>
+        <item>HỐ XÍ TỰ HOẠI/BÁN TỰ HOẠI NGOÀI NHÀ</item>
+        <item>HỐ XÍ KHÁC</item>
+        <item>KHÔNG CÓ HỐ XÍ</item>
+    </string-array>
+    <string-array name="machine">
+        <item>Tivi</item>
+        <item>Đài (Radio/Radio Casetts)</item>
+        <item>Máy vi tính (máy bàn, laptop)</item>
+        <item>Điện thoại cố định/di động/máy tính bảng</item>
+        <item>Tủ lạnh</item>
+        <item>Máy giặt</item>
+        <item>Bình tắm nóng lạnh</item>
+        <item>Điều hòa nhiệt độ</item>
+        <item>Mô tô/xe gắn máy/xe đạp điện/Xe máy điện</item>
+        <item>Xe đạp</item>
+        <item>Xuồng/ghe</item>
+        <item>Ô tô</item>
+    </string-array>
 </resources>

@@ -45,10 +45,6 @@ public class PsgcFragment extends WidgetFragment {
     private MunicipalityArrayAdapter municipalityArrayAdapter;
     private BarangayArrayAdapter barangayArrayAdapter;
 
-    public PsgcFragment() {
-        super(R.layout.fragment_psgc, 0);
-    }
-
 
     @Override
     public boolean load(Survey survey, Question question, Submission submission, Answer answer) {
@@ -200,5 +196,15 @@ public class PsgcFragment extends WidgetFragment {
             return false;
         }
         return true;
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_psgc;
+    }
+
+    @Override
+    protected void createView(View view) {
+
     }
 }
