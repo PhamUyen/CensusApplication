@@ -38,6 +38,10 @@ public abstract class WidgetFragment extends BaseFragment {
     public TextView labelRequired;
 
 
+    @Override
+    protected void createView(View view) {
+    }
+
     public boolean init(Survey survey, Question question, Submission submission, Answer answer) {
         if (question != null) {
             Log.i(this, "init %d %s %s", question.cid, question.name, answer.value);

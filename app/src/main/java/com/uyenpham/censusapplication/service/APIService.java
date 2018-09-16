@@ -1,7 +1,6 @@
 package com.uyenpham.censusapplication.service;
 
 import com.uyenpham.censusapplication.models.family.FamilyResponse;
-import com.uyenpham.censusapplication.models.family.SingleFamilyResponse;
 import com.uyenpham.censusapplication.models.locality.LocalityResponse;
 import com.uyenpham.censusapplication.models.user.LoginDTO;
 import com.uyenpham.censusapplication.models.user.ResponseLoginDTO;
@@ -31,9 +30,9 @@ public interface APIService {
       @Query("IDDB") String idLocality
     );
 
-    //get info family
-    @GET("/bangkeho")
-    Call<SingleFamilyResponse> getOneFamily(
-        @Query("")String id
-    );
+//    //get info family
+//    @GET("/bangkeho")
+//    Call<SingleFamilyResponse> getOneFamily(
+//        @Query("")String id
+//    );
 }

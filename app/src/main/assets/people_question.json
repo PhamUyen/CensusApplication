@@ -1,0 +1,116 @@
+{
+  "questions":[
+    {
+      "id": "Q1",
+      "name": "Q1",
+      "question": "Xin Ông/Bà cho biết họ và tên những người Việt Nam hiện đang ăn, ở tại hộ, bao gồm cả trẻ em mới sinh.",
+      "type": 8,
+      "options": "",
+      "placeHolders": ""
+    },
+    {
+      "id": "Q2",
+      "name": "Q2",
+      "question": "Trong những người này có ai là: - Học sinh phổ thông đang trọ học? - Người thuộc biên chế ngành công an, quân đội (không bao gồm những người làm hợp đồng)?- Việt kiều về thăm gia đình?",
+      "type": 9,
+      "options": "CÓ,KHÔNG",
+      "placeHolders": ""
+    },
+    {
+      "id": "Q3",
+      "name": "Q3",
+      "question": "Trong những người này có ai là:- Trẻ mới sinh từ ngày 01/8/2018?- Người mới chuyển đến từ ngày 01/8/2018?",
+      "type": 2,
+      "options": "CÓ,KHÔNG",
+      "placeHolders": ""
+    },
+    {
+      "id": "Q4",
+      "name": "Q4",
+      "question": "Trong những người này có ai mới đến chưa được 6 tháng (từ ngày 01/02/2018) và không có ý định ăn, ở lâu dài tại hộ (trừ người không có nơi ăn, ở ổn định nào khác)?",
+      "type": 9,
+      "options": "CÓ,KHÔNG",
+      "placeHolders": ""
+    },
+    {
+      "id": "Q5",
+      "name": "Q5",
+      "question": "Trong những người này có ai mới chuyển đến từ ngày 01/8/2017 vì những lý do: đến thăm, chơi, nghỉ hè/nghỉ lễ, du lịch, đến công tác, đào tạo ngắn hạn dưới 1 năm?",
+      "type": 9,
+      "options": "CÓ,KHÔNG",
+      "placeHolders": ""
+    },
+    {
+      "id": "Q61",
+      "name": "Q61",
+      "question": "Ngoài những người kể trên, còn có ai tạm vắng do: đi làm ăn xa dưới 6 tháng?",
+      "type": 10,
+      "options": "CÓ,KHÔNG",
+      "placeHolders": ""
+    },
+    {
+      "id": "Q62",
+      "name": "Q62",
+      "question": "Ngoài những người kể trên, còn có ai tạm vắng do: Điều trị nội trú tại cơ sở y tế?",
+      "type": 10,
+      "options": "CÓ,KHÔNG",
+      "placeHolders": ""
+    },
+    {
+      "id": "Q63",
+      "name": "Q63",
+      "question": "Ngoài những người kể trên, còn có ai tạm vắng do: Đi chơi/thăm, nghỉ hè/nghỉ lễ, du lịch, công tác, đào tạo ngắn hạn dưới 1 năm?",
+      "type": 10,
+      "options": "CÓ,KHÔNG",
+      "placeHolders": ""
+    },
+    {
+      "id": "Q64",
+      "name": "Q64",
+      "question": "Ngoài những người kể trên, còn có ai tạm vắng do: Đi trọ học phổ thông, đi buôn chuyến, đi tầu viễn dương, đánh bắt hải sản?",
+      "type": 10,
+      "options": "CÓ,KHÔNG",
+      "placeHolders": ""
+    },
+    {
+      "id": "Q65",
+      "name": "Q65",
+      "question": "Ngoài những người kể trên, còn có ai tạm vắng do: Đi công tác, học tập, làm việc, chữa bệnh, du lịch tại nước ngoài trong thời hạn cho phép?",
+      "type": 10,
+      "options": "CÓ,KHÔNG",
+      "placeHolders": ""
+    },
+    {
+      "id": "Q66",
+      "name": "Q66",
+      "question": "Ngoài những người kể trên, còn có ai tạm vắng do: Bị quân đội, công an tạm giữ?",
+      "type": 10,
+      "options": "CÓ,KHÔNG",
+      "placeHolders": ""
+    },
+    {
+      "id": "Q7",
+      "name": "Q7",
+      "question": "Xin lỗi nếu như việc này nhắc đến chuyện đau buồn của hộ, xin Ông/Bà cho biết có ai lâu nay vẫn thường xuyên ăn, ở tại hộ nhưng đã mất từ ngày 01/8/2018 không?",
+      "type": 10,
+      "options": "CÓ,KHÔNG",
+      "placeHolders": ""
+    },
+    {
+      "id": "Q8",
+      "name": "Q8",
+      "question": "XÁC ĐỊNH NHỮNG NGƯỜI ĐƯỢC GHI TÊN VÀO  CÂU 1 PHẦN 1",
+      "type": 11,
+      "options": "",
+      "placeHolders": ""
+    },
+    {
+      "id": "Q9",
+      "name": "Q9",
+      "question": "Trong số những người này, có ai có hộ khẩu thường trú tại xã/phường/thị trấn này không?",
+      "type": 11,
+      "options": "",
+      "placeHolders": ""
+    }
+  ]
+}
