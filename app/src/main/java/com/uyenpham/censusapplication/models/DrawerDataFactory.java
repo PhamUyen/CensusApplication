@@ -86,7 +86,7 @@ public class DrawerDataFactory {
     }
 
     public static GroupDrawer makeMemberGroup() {
-        return new GroupDrawer(App.getInstance().getString(R.string.txt_member), makeListWoman());
+        return new GroupDrawer(App.getInstance().getString(R.string.txt_member), makeListMember());
     }
     //
 //

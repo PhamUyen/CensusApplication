@@ -1,6 +1,5 @@
 package com.uyenpham.censusapplication.ui.fragments;
 
-import android.graphics.Color;
 import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
@@ -58,14 +57,12 @@ public class NumberInputFragment extends BaseFragment {
         TextView textView = new TextView(mActivity);
         textView.setLayoutParams(getLayoutParams(0, 0, margin, 0));
         textView.setText(text);
-        textView.setTextSize(textSize);
-        textView.setTextColor(Color.BLACK);
+        textView.setTextAppearance(getActivity(), R.style.TextView_Option);
         linearLayout.addView(textView);
 
         EditText editText = new EditText(mActivity);
         editText.setLayoutParams(getLayoutParams(margin, 0, 0, 0));
-        editText.setTextSize(textSize);
-        editText.setTextColor(Color.BLACK);
+        textView.setTextAppearance(getActivity(), R.style.TextView_Option);
         editText.setInputType(InputType.TYPE_CLASS_NUMBER);
         editText.setBackgroundResource(R.drawable.bg_edit_text);
         editText.setTag(text);
