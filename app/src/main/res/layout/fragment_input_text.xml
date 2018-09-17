@@ -15,6 +15,7 @@
      android:textColor="@color/black"
      />
     <EditText
+        android:maxLines="1"
         android:id="@+id/ed_answer"
         android:layout_marginLeft="@dimen/margin_normal_x"
         android:textSize="@dimen/ts_15"

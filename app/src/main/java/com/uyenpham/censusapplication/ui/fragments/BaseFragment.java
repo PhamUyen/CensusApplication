@@ -86,4 +86,14 @@ public abstract class BaseFragment extends Fragment {
         layoutParams.setMargins(left, top, right, bottom);
         return layoutParams;
     }
+    protected LinearLayout.LayoutParams getLayoutParamsWrapConent(int left, int top, int right, int bottom) {
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams.setMargins(left, top, right, bottom);
+        return layoutParams;
+    }
+    protected LinearLayout.LayoutParams getLayoutParamsWeghtWidth(int left, int top, int right, int bottom, float weight) {
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, weight);
+        layoutParams.setMargins(left, top, right, bottom);
+        return layoutParams;
+    }
 }

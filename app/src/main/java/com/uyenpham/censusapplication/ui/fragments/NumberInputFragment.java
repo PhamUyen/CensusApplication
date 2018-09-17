@@ -55,13 +55,13 @@ public class NumberInputFragment extends BaseFragment {
         linearLayout.setLayoutParams(getLayoutParams(0, margin, 0, margin / 2));
 
         TextView textView = new TextView(mActivity);
-        textView.setLayoutParams(getLayoutParams(0, 0, margin, 0));
+        textView.setLayoutParams(getLayoutParamsWeghtWidth(0, 0, margin, 0,1.5f));
         textView.setText(text);
         textView.setTextAppearance(getActivity(), R.style.TextView_Option);
         linearLayout.addView(textView);
 
         EditText editText = new EditText(mActivity);
-        editText.setLayoutParams(getLayoutParams(margin, 0, 0, 0));
+        editText.setLayoutParams(getLayoutParamsWeghtWidth(margin, 0, 0, 0,2f));
         textView.setTextAppearance(getActivity(), R.style.TextView_Option);
         editText.setInputType(InputType.TYPE_CLASS_NUMBER);
         editText.setBackgroundResource(R.drawable.bg_edit_text);

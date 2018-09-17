@@ -48,7 +48,7 @@ public class SurveyFragment extends BaseFragment implements CustomNavigationBar.
         navigationBar.reSetAll();
         navigationBar.setShowRight();
         navigationBar.setShowLeft();
-        navigationBar.setIconLeft(R.drawable.ic_menu);
+        navigationBar.setIconLeft(R.drawable.ic_menu_gallery);
         navigationBar.setINavigationOnClick(this);
         navigationBar.setTitle(getString(R.string.txt_interview_list));
     }
