@@ -3,7 +3,6 @@ package com.uyenpham.censusapplication.ui.fragments;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.uyenpham.censusapplication.R;
@@ -26,7 +25,7 @@ public class MultiSelectionFragment extends BaseFragment{
     private AnswerDTO answerDTO;
     @Override
     protected int getLayoutId() {
-        return R.id.fragment_multi_selection;
+        return R.layout.fragment_multi_selection;
     }
 
     @Override
@@ -54,6 +53,7 @@ public class MultiSelectionFragment extends BaseFragment{
         int margin = mActivity.getResources().getDimensionPixelOffset(R.dimen.margin_small_x);
         checkBox.setLayoutParams(getLayoutParams(margin,margin, margin, margin));
         checkBox.setButtonDrawable(R.drawable.bg_radio_button);
+        checkBox.setPadding(margin,0,0,0);
         if (value != null && value.equals(tag)) {
             checkBox.setChecked(true);
         }

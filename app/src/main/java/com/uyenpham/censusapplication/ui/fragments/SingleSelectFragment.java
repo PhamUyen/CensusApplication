@@ -1,6 +1,7 @@
 package com.uyenpham.censusapplication.ui.fragments;
 
 import android.view.View;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.ScrollView;
@@ -25,6 +26,9 @@ public class SingleSelectFragment extends BaseFragment{
     @Bind(R.id.tv_question)
     TextView tvQuestion;
 
+    @Bind(R.id.ed_other)
+    EditText edOther;
+
     private QuestionDTO questionDTO;
     private AnswerDTO answerDTO;
     @Override
@@ -45,6 +49,12 @@ public class SingleSelectFragment extends BaseFragment{
             RadioButton radioButton = getRadioButton(listOption.indexOf(option),option,String.valueOf(listOption.indexOf(option)+1),"0");
             radioGroup.addView(radioButton);
         }
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                RadioButton rb= radioGroup.findViewById(i);
+            }
+        });
     }
     protected RadioButton getRadioButton(Integer id, String text, String tag, String value) {
         RadioButton radioButton = new RadioButton(getActivity());
@@ -55,6 +65,7 @@ public class SingleSelectFragment extends BaseFragment{
         int margin = mActivity.getResources().getDimensionPixelOffset(R.dimen.margin_small_x);
         radioButton.setLayoutParams(getLayoutParams(margin,margin, margin, margin));
         radioButton.setButtonDrawable(R.drawable.bg_radio_button);
+        radioButton.setPadding(margin,0,0,0);
         if (value != null && value.equals(tag)) {
             radioButton.setChecked(true);
         }

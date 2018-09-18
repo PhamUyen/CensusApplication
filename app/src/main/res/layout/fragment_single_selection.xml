@@ -18,9 +18,24 @@
         android:layout_marginTop="@dimen/margin_small_x"
         android:id="@+id/scroll_view"
         style="@style/ScrollView.Vertical.Full">
-        <RadioGroup
-            android:layout_margin="@dimen/margin_40"
-            android:id="@+id/radio_group"
-            style="@style/RadioGroup.Vertical.Wrap"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RadioGroup
+                android:layout_margin="@dimen/margin_40"
+                android:id="@+id/radio_group"
+                style="@style/RadioGroup.Vertical.Wrap"/>
+            <EditText
+                android:maxLines="1"
+                android:id="@+id/ed_other"
+                android:layout_marginLeft="@dimen/margin_normal_x"
+                android:textSize="@dimen/ts_15"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/margin_small_x"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_edittext"
+                android:background="@drawable/bg_edit_text"/>
+        </LinearLayout>
     </ScrollView>
 </LinearLayout>
