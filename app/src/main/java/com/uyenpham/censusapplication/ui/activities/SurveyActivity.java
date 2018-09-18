@@ -17,6 +17,7 @@ import com.uyenpham.censusapplication.models.drawer.GroupDrawer;
 import com.uyenpham.censusapplication.models.family.FamilyDTO;
 import com.uyenpham.censusapplication.models.survey.QuestionDTO;
 import com.uyenpham.censusapplication.ui.adapters.DrawerAdapter;
+import com.uyenpham.censusapplication.ui.fragments.MultiSelectionFragment;
 import com.uyenpham.censusapplication.ui.fragments.NumberInputFragment;
 import com.uyenpham.censusapplication.ui.fragments.SingleSelectFragment;
 import com.uyenpham.censusapplication.ui.fragments.TypeTextInputFragment;
@@ -86,14 +87,15 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick {
         //set default quest
         replcaeFragmentByType(listQuestion.get(currentIndex), true);
     }
-    private void makeListQuestion(){
+
+    private void makeListQuestion() {
         listQuestion = DrawerDataFactory.makeListInfo(familyDTO);
         listQuestion.addAll(DrawerDataFactory.makeListPeople());
         listQuestion.addAll(DrawerDataFactory.makeListMember());
         listQuestion.addAll(DrawerDataFactory.makeListWoman());
     }
 
-    private void setListDrawer(){
+    private void setListDrawer() {
         list.add(DrawerDataFactory.makeInfoGroup(familyDTO));
         list.add(DrawerDataFactory.makePeopleGroup());
         list.add(DrawerDataFactory.makeMemberGroup());
@@ -211,6 +213,9 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick {
                 replaceAnimation(fragment, isNext);
                 break;
             case Constants.TYPE_SINGLE_SELECT:
+            case Constants.TYPE_SELECT_INPUT:
+            case Constants.TYPE_SINGLE_SELECT_LIST:
+            case Constants.TYPE_SINGLE_SELECT_AUTO:
                 SingleSelectFragment singleSelectFragment = new SingleSelectFragment();
                 singleSelectFragment.setQuestionDTO(questionDTO);
                 singleSelectFragment.setAnswerDTO(null);
@@ -221,6 +226,13 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick {
                 numberInputFragment.setQuestionDTO(questionDTO);
                 numberInputFragment.setAnswerDTO(null);
                 replaceAnimation(numberInputFragment, isNext);
+                break;
+            case Constants.TYPE_MULTI_SELECT:
+            case Constants.TYPE_MULTI_SELECT_INPUT:
+                MultiSelectionFragment multiSelectionFragment = new MultiSelectionFragment();
+                multiSelectionFragment.setQuestionDTO(questionDTO);
+                multiSelectionFragment.setAnswerDTO(null);
+                replaceAnimation(multiSelectionFragment, isNext);
                 break;
             default:
                 break;
