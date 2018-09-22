@@ -53,7 +53,9 @@ public class DrawerAdapter extends ExpandableRecyclerViewAdapter<GroupDrawerView
                                       ExpandableGroup group) {
 
         holder.setGenreTitle(group);
-        listQuest.addAll(group.getItems());
+        if(group.getItems()!= null && group.getItems().size() >0){
+                listQuest.addAll(group.getItems());
+        };
     }
 
     public void setListener(IChildDrawerClick listener) {

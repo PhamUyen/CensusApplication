@@ -108,7 +108,7 @@
       "id": "Q9",
       "name": "Q9",
       "question": "Trong số những người này, có ai có hộ khẩu thường trú tại xã/phường/thị trấn này không?",
-      "type": 11,
+      "type": 1,
       "options": "",
       "placeHolders": ""
     }

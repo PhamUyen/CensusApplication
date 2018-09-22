@@ -23,6 +23,8 @@ import com.uyenpham.censusapplication.ui.fragments.SingleSelectFragment;
 import com.uyenpham.censusapplication.ui.fragments.TypeTextInputFragment;
 import com.uyenpham.censusapplication.ui.interfaces.IChildDrawerClick;
 import com.uyenpham.censusapplication.ui.interfaces.IExitClick;
+import com.uyenpham.censusapplication.ui.interfaces.INextQuestion;
+import com.uyenpham.censusapplication.ui.interfaces.IPreviousQuestion;
 import com.uyenpham.censusapplication.ui.interfaces.OnBackPressed;
 import com.uyenpham.censusapplication.utils.Constants;
 import com.uyenpham.censusapplication.utils.FragmentHelper;
@@ -41,6 +43,8 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick {
     private CustomNavigationBar navigationBar;
     private OnBackPressed onBackPressed;
     private IExitClick iExitClick;
+    private INextQuestion iNext;
+    private IPreviousQuestion iPrevious;
     private DrawerAdapter adapter;
     @Bind(R.id.left_drawer)
     RecyclerView drawerList;
@@ -53,7 +57,7 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick {
 
     private List<GroupDrawer> list;
     private FamilyDTO familyDTO;
-    private int currentIndex = 8;
+    public static int currentIndex = 8;
     private ArrayList<QuestionDTO> listQuestion;
 
     @Override
@@ -158,7 +162,8 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick {
     public void setNavigationBar() {
         navigationBar = findViewById(R.id.toolbar);
         navigationBar.reSetAll();
-        navigationBar.setIconLeft(R.drawable.ic_menu_gallery);
+        navigationBar.setIconLeft(R.drawable.ic_menu);
+
         navigationBar.setTitle(getString(R.string.txt_interview_detail));
     }
 
@@ -185,16 +190,22 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick {
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.imv_next:
-                if (currentIndex < listQuestion.size() - 1) {
-                    currentIndex++;
-                    replcaeFragmentByType(listQuestion.get(currentIndex), true);
+//                if (currentIndex < listQuestion.size() - 1) {
+//                    currentIndex++;
+//                    replcaeFragmentByType(listQuestion.get(currentIndex), true);
+//                }
+                if(iNext != null){
+                    iNext.next();
                 }
                 break;
             case R.id.imv_previous:
-                if (currentIndex > 0) {
-                    currentIndex--;
-                    replcaeFragmentByType(listQuestion.get(currentIndex), false);
+                if(iPrevious != null){
+                    iPrevious.previuos();
                 }
+//                if (currentIndex > 0) {
+//                    currentIndex--;
+//                    replcaeFragmentByType(listQuestion.get(currentIndex), false);
+//                }
                 break;
             default:
                 break;
@@ -210,6 +221,7 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick {
                 TypeTextInputFragment fragment = new TypeTextInputFragment();
                 fragment.setQuestionDTO(questionDTO);
                 fragment.setAnswerDTO(null);
+                fragment.setListQuestion(listQuestion);
                 replaceAnimation(fragment, isNext);
                 break;
             case Constants.TYPE_SINGLE_SELECT:
@@ -266,4 +278,24 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick {
         }
         return -1;
     }
+    private QuestionDTO getQuestionByIndex(int index){
+        if( index!= -1 && index< listQuestion.size()){
+            return listQuestion.get(index);
+        }
+        return null;
+    }
+
+    public void setiNext(INextQuestion iNext) {
+        this.iNext = iNext;
+    }
+
+    public void setiPrevious(IPreviousQuestion iPrevious) {
+        this.iPrevious = iPrevious;
+    }
+
+    //    private void validateQuestion(QuestionDTO question, int index){
+//        switch (question.getId()){
+//            case
+//        }
+//    }
 }

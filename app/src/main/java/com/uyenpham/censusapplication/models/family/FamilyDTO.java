@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class FamilyDTO implements Serializable{
+    public static final String ID_FAMILY = "IDHO";
 
     @SerializedName("DIACHI")
     private String mDIACHI;

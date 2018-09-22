@@ -4,7 +4,7 @@ package com.uyenpham.censusapplication.models.family;
 import com.google.gson.annotations.SerializedName;
 
 public class PeopleDTO {
-
+    public static final String ID_HO = "ID";
     @SerializedName("HOSO")
     private String mHOSO;
     @SerializedName("ID")

@@ -26,4 +26,7 @@ public class Constants {
     public static final int TYPE_MIX = 10;
     public static final int TYPE_SINGLE_SELECT_AUTO = 11;
 
+    //ID question
+    public static final String QUESTION_Q9 = "Q9";
+
 }
