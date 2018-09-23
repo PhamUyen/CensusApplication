@@ -8,10 +8,10 @@ import android.widget.TextView;
 
 import com.uyenpham.censusapplication.R;
 import com.uyenpham.censusapplication.models.survey.AnswerDTO;
+import com.uyenpham.censusapplication.models.survey.OptionDTO;
 import com.uyenpham.censusapplication.models.survey.QuestionDTO;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import butterknife.Bind;
 
@@ -37,10 +37,10 @@ public class NumberInputFragment extends BaseFragment {
 
     private void loadQuestion(QuestionDTO question, AnswerDTO answer) {
         tvQuestion.setText(question.getQuestion());
-        String options = question.getOptions();
-        ArrayList<String> listOption = new ArrayList<>(Arrays.asList(options.split(",")));
-        for (String option : listOption) {
-            LinearLayout linearLayout = genlayoutInputNumber(option);
+//        String options = question.getOptions();
+        ArrayList<OptionDTO> listOption =question.getOptions();
+        for (OptionDTO option : listOption) {
+            LinearLayout linearLayout = genlayoutInputNumber(option.getOption());
             lnContent.addView(linearLayout);
         }
     }

@@ -26,7 +26,18 @@ public class Constants {
     public static final int TYPE_MIX = 10;
     public static final int TYPE_SINGLE_SELECT_AUTO = 11;
 
+    //static object
+    public static final StaticObject mStaticObject = new StaticObject();
+
     //ID question
     public static final String QUESTION_Q9 = "Q9";
+
+    //survey name
+    public static final String SURVEY_WOMAN = "woman";
+    public static final String SURVEY_PEOPLE = "people";
+    public static final String SURVEY_MEMBER = "member";
+    public static final String SURVEY_HOUSE = "house";
+    public static final String SURVEY_DEAD = "dead";
+    public static final String SURVEY_FAMILY = "family";
 
 }

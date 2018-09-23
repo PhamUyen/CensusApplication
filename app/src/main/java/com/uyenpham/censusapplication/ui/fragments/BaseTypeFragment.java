@@ -13,17 +13,20 @@ import java.util.ArrayList;
 
 import static com.uyenpham.censusapplication.ui.activities.SurveyActivity.ID_SURVEY_CONTENT;
 
-public abstract class BaseTypeFragment extends BaseFragment{
+public abstract class BaseTypeFragment extends BaseFragment {
     private ArrayList<QuestionDTO> listQuestion;
     public SurveyActivity activity;
+
     public abstract boolean loadQuestion(QuestionDTO questionDTO, AnswerDTO answerDTO);
-    public abstract boolean save(QuestionDTO questionDTO, AnswerDTO answerDTO);
+
+    public abstract boolean save(QuestionDTO questionDTO, AnswerDTO answerDTO, Object answer);
+
     public abstract boolean validateQuaetion(QuestionDTO question, AnswerDTO answer);
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        activity = (SurveyActivity)context;
+        activity = (SurveyActivity) context;
     }
 
     protected void replcaeFragmentByType(QuestionDTO questionDTO, boolean isNext) {
@@ -63,6 +66,7 @@ public abstract class BaseTypeFragment extends BaseFragment{
                 break;
         }
     }
+
     protected void replaceAnimation(Fragment fragment, boolean isNext) {
         if (isNext) {
             FragmentHelper.replaceFagmentFromRight(fragment, activity.mFragmentManager,
@@ -80,6 +84,7 @@ public abstract class BaseTypeFragment extends BaseFragment{
     public ArrayList<QuestionDTO> getListQuestion() {
         return listQuestion;
     }
+
     protected int getIndexOfQuestion(QuestionDTO question) {
         for (QuestionDTO quest : listQuestion) {
             if (quest.getId().equals(question.getId())) {
@@ -88,10 +93,31 @@ public abstract class BaseTypeFragment extends BaseFragment{
         }
         return -1;
     }
-    protected QuestionDTO getQuestionByIndex(int index){
-        if( index!= -1 && index< listQuestion.size()){
+
+    protected QuestionDTO getQuestionByIndex(int index) {
+        if (index != -1 && index < listQuestion.size()) {
             return listQuestion.get(index);
         }
         return null;
+    }
+
+    protected void saveAnswerToSurvey(QuestionDTO question, AnswerDTO answer) {
+        switch (question.getSurvey()) {
+            case Constants.SURVEY_WOMAN:
+                Constants.mStaticObject.getWomanDTO().set(question.getName(), answer.getAnswer());
+                break;
+            case Constants.SURVEY_DEAD:
+                break;
+            case Constants.SURVEY_PEOPLE:
+                break;
+            case Constants.SURVEY_HOUSE:
+                break;
+            case Constants.SURVEY_MEMBER:
+                break;
+            case Constants.SURVEY_FAMILY:
+                break;
+            default:
+                break;
+        }
     }
 }

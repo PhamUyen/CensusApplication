@@ -46,6 +46,7 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick {
     private INextQuestion iNext;
     private IPreviousQuestion iPrevious;
     private DrawerAdapter adapter;
+    private boolean isMember;
     @Bind(R.id.left_drawer)
     RecyclerView drawerList;
     @Bind(R.id.drawer_layout)

@@ -5,13 +5,16 @@ public class AnswerDTO {
     public final static String COLUMN_ANSWER = "answer";
     public final static String COLUMN_QUESTION_ID = "questionID";
     private String id;
-    private String answer;
+    private Object answer;
     private String questionID;
 
-    public AnswerDTO(String id, String answer, String questionID) {
+    public AnswerDTO(String id, Object answer, String questionID) {
         this.id = id;
         this.answer = answer;
         this.questionID = questionID;
+    }
+
+    public AnswerDTO() {
     }
 
     public String getId() {
@@ -22,11 +25,11 @@ public class AnswerDTO {
         this.id = id;
     }
 
-    public String getAnswer() {
+    public Object getAnswer() {
         return answer;
     }
 
-    public void setAnswer(String answer) {
+    public void setAnswer(Object answer) {
         this.answer = answer;
     }
 

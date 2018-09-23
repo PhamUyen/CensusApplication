@@ -51,6 +51,9 @@ public class FamilyDTO implements Serializable{
     @SerializedName("TINHTRANGHO")
     private Long mTINHTRANGHO;
 
+    public FamilyDTO() {
+    }
+
     public FamilyDTO(String mDIACHI, String mIDDB, String mTENCHUHO, long
             mTINHTRANGHO) {
         this.mDIACHI = mDIACHI;

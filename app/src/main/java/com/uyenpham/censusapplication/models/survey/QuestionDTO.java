@@ -3,6 +3,8 @@ package com.uyenpham.censusapplication.models.survey;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+
 public class QuestionDTO implements Parcelable {
     public final static String ID_CACHE = "id";
     public final static String COLUMN_NAME = "name";
@@ -12,40 +14,33 @@ public class QuestionDTO implements Parcelable {
     private String name;
     private String question;
     private int type;
-    private String options;
+    private ArrayList<OptionDTO> options;
     private String placeHolder;
-    private String answer;
+    private String survey;
 
-    public QuestionDTO(String id, String name, String question, int type, String options,
-                       String placeHolder, String answer) {
+    public QuestionDTO(String id, String name, String question, int type, ArrayList<OptionDTO>  options,
+                       String placeHolder, String survey) {
         this.id = id;
         this.name = name;
         this.question = question;
         this.type = type;
         this.options = options;
         this.placeHolder = placeHolder;
-        this.answer = answer;
+        this.survey = survey;
     }
 
 
     public QuestionDTO() {
     }
 
+
     protected QuestionDTO(Parcel in) {
         id = in.readString();
         name = in.readString();
         question = in.readString();
         type = in.readInt();
-        options = in.readString();
         placeHolder = in.readString();
-    }
-
-    public String getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(String answer) {
-        this.answer = answer;
+        survey = in.readString();
     }
 
     public static final Creator<QuestionDTO> CREATOR = new Creator<QuestionDTO>() {
@@ -59,6 +54,15 @@ public class QuestionDTO implements Parcelable {
             return new QuestionDTO[size];
         }
     };
+
+    public String getSurvey() {
+        return survey;
+    }
+
+    public void setAnswer(String survey) {
+        this.survey = survey;
+    }
+
 
     public String getId() {
         return id;
@@ -92,11 +96,11 @@ public class QuestionDTO implements Parcelable {
         this.type = type;
     }
 
-    public String getOptions() {
+    public ArrayList<OptionDTO>  getOptions() {
         return options;
     }
 
-    public void setOptions(String options) {
+    public void setOptions(ArrayList<OptionDTO>  options) {
         this.options = options;
     }
 
@@ -115,11 +119,13 @@ public class QuestionDTO implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+
         parcel.writeString(id);
         parcel.writeString(name);
         parcel.writeString(question);
         parcel.writeInt(type);
-        parcel.writeString(options);
         parcel.writeString(placeHolder);
+        parcel.writeString(survey);
     }
+
 }

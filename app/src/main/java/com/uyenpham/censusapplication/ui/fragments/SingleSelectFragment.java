@@ -9,10 +9,10 @@ import android.widget.TextView;
 
 import com.uyenpham.censusapplication.R;
 import com.uyenpham.censusapplication.models.survey.AnswerDTO;
+import com.uyenpham.censusapplication.models.survey.OptionDTO;
 import com.uyenpham.censusapplication.models.survey.QuestionDTO;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import butterknife.Bind;
 
@@ -43,10 +43,10 @@ public class SingleSelectFragment extends BaseFragment{
     }
     private void loadQuestion(QuestionDTO question, AnswerDTO answer){
         tvQuestion.setText(question.getQuestion());
-        String options = question.getOptions();
-        ArrayList<String> listOption = new ArrayList<>(Arrays.asList(options.split(",")));
-        for(String option :listOption){
-            RadioButton radioButton = getRadioButton(listOption.indexOf(option),option,String.valueOf(listOption.indexOf(option)+1),"0");
+//        String options = question.getOptions();
+        ArrayList<OptionDTO> listOption = question.getOptions();
+        for(OptionDTO option :listOption){
+            RadioButton radioButton = getRadioButton(listOption.indexOf(option),option.getOption(),String.valueOf(listOption.indexOf(option)+1),"0");
             radioGroup.addView(radioButton);
         }
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {

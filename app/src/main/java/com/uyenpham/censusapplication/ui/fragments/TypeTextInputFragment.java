@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.uyenpham.censusapplication.R;
+import com.uyenpham.censusapplication.db.AnswerDAO;
 import com.uyenpham.censusapplication.models.drawer.GroupDrawer;
 import com.uyenpham.censusapplication.models.survey.AnswerDTO;
 import com.uyenpham.censusapplication.models.survey.QuestionDTO;
@@ -53,7 +54,8 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
         loadQuestion(questionDTO, answerDTO);
         if (questionDTO.getType() == Constants.TYPE_TEXT_INPUT_LIST) {
             rcvText.setVisibility(View.VISIBLE);
-
+            setRcvText();
+            edAnswer.setSingleLine();
             edAnswer.setImeOptions(EditorInfo.IME_ACTION_DONE);
             edAnswer.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                 @Override
@@ -65,6 +67,7 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
                         //add answer to list
                         listText.add(edAnswer.getText().toString());
                         adapter.notifyDataSetChanged();
+                        edAnswer.setText(null);
                         return true;
                     }
                     return false;
@@ -78,17 +81,24 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
     public boolean loadQuestion(QuestionDTO question, AnswerDTO answer) {
         if (question == null) return false;
         tvQuestion.setText(question.getQuestion());
-        if (answer != null && !StringUtils.isEmpty(answer.getAnswer())) {
-            edAnswer.setText(answer.getAnswer());
+        if (answer != null && !StringUtils.isEmpty((String)answer.getAnswer())) {
+            edAnswer.setText((String)answer.getAnswer());
         } else {
-            edAnswer.setHint(question.getAnswer() == null ? question.getPlaceHolder() : question
-                    .getAnswer());
+            edAnswer.setHint(question.getSurvey() == null ? question.getPlaceHolder() : question
+                    .getSurvey());
         }
         return true;
     }
 
     @Override
-    public boolean save(QuestionDTO questionDTO, AnswerDTO answerDTO) {
+    public boolean save(QuestionDTO questionDTO, AnswerDTO answerDTO, Object answer) {
+        if(answerDTO == null){
+            answerDTO = new AnswerDTO();
+        }
+        answerDTO.setQuestionID(questionDTO.getId());
+        answerDTO.setAnswer(answer);
+        AnswerDAO.getInstance().insert(answerDTO);
+        saveAnswerToSurvey(questionDTO,answerDTO);
         return false;
     }
 
@@ -102,7 +112,7 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
                 activity.setList(list);
                 return true;
             default:
-                return false;
+                return true;
         }
     }
 
