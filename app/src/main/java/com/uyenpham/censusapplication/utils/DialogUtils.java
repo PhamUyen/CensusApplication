@@ -175,6 +175,25 @@ public class DialogUtils {
         builder.setCancelable(false);
         builder.create().show();
     }
+    public static void showErrorAlert2Option(Context context, String message, int nagativeButton, int  positiveButton, DialogInterface.OnClickListener onClickListener) {
+        if (null == message || message.trim().isEmpty()) return;
+
+        dismissProgressDialog();
+        if (!isValidContext(context)) {
+            return;
+        }
+        if (context instanceof Activity && ((Activity) context).isFinishing()) {
+            return;
+        }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage(message);
+        builder.setTitle(R.string.title_error);
+        builder.setPositiveButton(positiveButton, onClickListener);
+        builder.setNegativeButton(nagativeButton, onClickListener);
+        builder.setCancelable(false);
+        builder.create().show();
+    }
 
     /**
      * Show dialog progress.

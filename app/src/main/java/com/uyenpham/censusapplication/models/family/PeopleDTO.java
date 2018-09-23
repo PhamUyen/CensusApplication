@@ -3,6 +3,8 @@ package com.uyenpham.censusapplication.models.family;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.lang.reflect.Field;
+
 public class PeopleDTO {
     public static final String ID_HO = "ID";
     @SerializedName("HOSO")
@@ -190,4 +192,20 @@ public class PeopleDTO {
         mQ9 = q9;
     }
 
+    public  boolean set(String fieldName, Object fieldValue) {
+        Class<?> clazz = this.getClass();
+        while (clazz != null) {
+            try {
+                Field field = clazz.getDeclaredField(fieldName);
+                field.setAccessible(true);
+                field.set(this, fieldValue);
+                return true;
+            } catch (NoSuchFieldException e) {
+                clazz = clazz.getSuperclass();
+            } catch (Exception e) {
+                throw new IllegalStateException(e);
+            }
+        }
+        return false;
+    }
 }

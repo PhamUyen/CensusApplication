@@ -27,6 +27,7 @@
                 android:id="@+id/radio_group"
                 style="@style/RadioGroup.Vertical.Wrap"/>
             <EditText
+                android:visibility="gone"
                 android:maxLines="1"
                 android:id="@+id/ed_other"
                 android:layout_marginLeft="@dimen/margin_normal_x"
@@ -36,6 +37,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/height_edittext"
                 android:background="@drawable/bg_edit_text"/>
+            <android.support.v7.widget.RecyclerView
+                android:visibility="gone"
+                android:id="@+id/rcv_select"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

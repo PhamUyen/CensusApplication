@@ -6,7 +6,10 @@ import com.uyenpham.censusapplication.models.family.FamilyDetailDTO;
 import com.uyenpham.censusapplication.models.family.HouseDTO;
 import com.uyenpham.censusapplication.models.family.MemberDTO;
 import com.uyenpham.censusapplication.models.family.PeopleDTO;
+import com.uyenpham.censusapplication.models.family.PeopleDetailDTO;
 import com.uyenpham.censusapplication.models.family.WomanDTO;
+
+import java.util.ArrayList;
 
 public class StaticObject {
     private FamilyDTO familyDTO;
@@ -16,6 +19,21 @@ public class StaticObject {
     private PeopleDTO peopleDTO;
     private HouseDTO houseDTO;
     private DeadDTO deadDTO;
+    private ArrayList<PeopleDetailDTO> peopleDetailDTOs;
+    private String idHo;
+
+    private static StaticObject instance;
+
+    public static StaticObject getInstance(){
+        if(instance==null)
+            instance=new StaticObject();
+
+        return instance;
+    }
+
+    private void reset(){
+        instance = new StaticObject() ;
+    }
 
     public StaticObject() {
         familyDetailDTO = new FamilyDetailDTO();
@@ -25,6 +43,23 @@ public class StaticObject {
         peopleDTO = new PeopleDTO();
         houseDTO = new HouseDTO();
         deadDTO = new DeadDTO();
+        peopleDetailDTOs = new ArrayList<>();
+    }
+
+    public String getIdHo() {
+        return idHo;
+    }
+
+    public void setIdHo(String idHo) {
+        this.idHo = idHo;
+    }
+
+    public ArrayList<PeopleDetailDTO>  getPeopleDetailDTO() {
+        return peopleDetailDTOs;
+    }
+
+    public void setPeopleDetailDTO(ArrayList<PeopleDetailDTO>  peopleDetailDTO) {
+        this.peopleDetailDTOs = peopleDetailDTO;
     }
 
     public FamilyDTO getFamilyDTO() {

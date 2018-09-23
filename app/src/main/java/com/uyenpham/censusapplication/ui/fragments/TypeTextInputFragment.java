@@ -1,6 +1,7 @@
 package com.uyenpham.censusapplication.ui.fragments;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
@@ -14,12 +15,14 @@ import android.widget.Toast;
 import com.uyenpham.censusapplication.R;
 import com.uyenpham.censusapplication.db.AnswerDAO;
 import com.uyenpham.censusapplication.models.drawer.GroupDrawer;
+import com.uyenpham.censusapplication.models.family.PeopleDetailDTO;
 import com.uyenpham.censusapplication.models.survey.AnswerDTO;
 import com.uyenpham.censusapplication.models.survey.QuestionDTO;
 import com.uyenpham.censusapplication.ui.adapters.TextAdapter;
 import com.uyenpham.censusapplication.ui.interfaces.INextQuestion;
 import com.uyenpham.censusapplication.ui.interfaces.IPreviousQuestion;
 import com.uyenpham.censusapplication.utils.Constants;
+import com.uyenpham.censusapplication.utils.DialogUtils;
 import com.uyenpham.censusapplication.utils.StringUtils;
 
 import java.util.ArrayList;
@@ -66,6 +69,10 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
                         imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                         //add answer to list
                         listText.add(edAnswer.getText().toString());
+                        if (questionDTO.getSurvey().equals(Constants.SURVEY_PEOPLE)) {
+                            setMember(edAnswer.getText().toString(), listText.indexOf(edAnswer
+                                    .getText().toString()));
+                        }
                         adapter.notifyDataSetChanged();
                         edAnswer.setText(null);
                         return true;
@@ -78,11 +85,32 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
         }
     }
 
+    private void setMember(String name, int index) {
+        switch (questionDTO.getId()) {
+            case Constants.QUESTION_Q1:
+                PeopleDetailDTO peopleDetailDTO = new PeopleDetailDTO();
+                peopleDetailDTO.setIDHO(Constants.mStaticObject.getIdHo());
+                peopleDetailDTO.setHOSO(Constants.mStaticObject.getPeopleDTO().getHOSO());
+                peopleDetailDTO.setQ1(name);
+                peopleDetailDTO.setSTT(index);
+                peopleDetailDTO.setChuho(index == 0 ? 2 : 1);
+                peopleDetailDTO.setID(Constants.mStaticObject.getIdHo() + index);
+
+                Constants.mStaticObject.getPeopleDetailDTO().add(peopleDetailDTO);
+                break;
+
+            default:
+                break;
+        }
+    }
+
+
+
     public boolean loadQuestion(QuestionDTO question, AnswerDTO answer) {
         if (question == null) return false;
         tvQuestion.setText(question.getQuestion());
-        if (answer != null && !StringUtils.isEmpty((String)answer.getAnswer())) {
-            edAnswer.setText((String)answer.getAnswer());
+        if (answer != null && !StringUtils.isEmpty((String) answer.getAnswer())) {
+            edAnswer.setText((String) answer.getAnswer());
         } else {
             edAnswer.setHint(question.getSurvey() == null ? question.getPlaceHolder() : question
                     .getSurvey());
@@ -92,13 +120,13 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
 
     @Override
     public boolean save(QuestionDTO questionDTO, AnswerDTO answerDTO, Object answer) {
-        if(answerDTO == null){
+        if (answerDTO == null) {
             answerDTO = new AnswerDTO();
         }
         answerDTO.setQuestionID(questionDTO.getId());
         answerDTO.setAnswer(answer);
         AnswerDAO.getInstance().insert(answerDTO);
-        saveAnswerToSurvey(questionDTO,answerDTO);
+        saveAnswerToSurvey(questionDTO, answerDTO);
         return false;
     }
 
@@ -111,6 +139,16 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
                 list.add(new GroupDrawer("nguyen van b", null));
                 activity.setList(list);
                 return true;
+            case Constants.QUESTION_Q1:
+                final boolean[] isValidate = {true};
+                DialogUtils.showAlert(activity, R.string.txt_another_else, new
+                        DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                isValidate[0] = false;
+                            }
+                        });
+                return isValidate[0];
             default:
                 return true;
         }
@@ -134,12 +172,12 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
 
     @Override
     public void next() {
-        if(validateQuaetion(questionDTO,answerDTO)){
+        if (validateQuaetion(questionDTO, answerDTO)) {
             if (currentIndex < getListQuestion().size() - 1) {
                 currentIndex++;
                 replcaeFragmentByType(getListQuestion().get(currentIndex), true);
             }
-        }else {
+        } else {
             Toast.makeText(activity, "Error!", Toast.LENGTH_SHORT).show();
         }
     }

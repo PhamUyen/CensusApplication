@@ -4,6 +4,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class PeopleDetailDTO extends PeopleDTO {
     public static final String ID_HO = "ID";
+
+    @SerializedName("STT")
+    private int STT;
     @SerializedName("Q1")
     private String Q1;
     @SerializedName("Chuho")
@@ -12,9 +15,18 @@ public class PeopleDetailDTO extends PeopleDTO {
     public PeopleDetailDTO() {
     }
 
-    public PeopleDetailDTO(String q1, Integer chuho) {
+    public PeopleDetailDTO(String q1, Integer chuho,int STT) {
         Q1 = q1;
         Chuho = chuho;
+        STT = STT;
+    }
+
+    public int getSTT() {
+        return STT;
+    }
+
+    public void setSTT(int STT) {
+        this.STT = STT;
     }
 
     public PeopleDetailDTO(String mHOSO, String mID, String mIDHO, Integer mQ2, Integer mQ3,

@@ -86,6 +86,8 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick {
         Bundle bundle = getIntent().getBundleExtra(Constants.KEY_EXTRA_DATA);
         familyDTO = (FamilyDTO) bundle.getSerializable(Constants.KEY_FAMILY);
 
+        setInfoFamily(familyDTO);
+
         setListDrawer();
         makeListQuestion();
 
@@ -93,6 +95,16 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick {
         replcaeFragmentByType(listQuestion.get(currentIndex), true);
     }
 
+    private void setInfoFamily(FamilyDTO family){
+        Constants.mStaticObject.setIdHo(family.getIDHO());
+        Constants.mStaticObject.getPeopleDTO().setHOSO(family.getHOSO());
+        Constants.mStaticObject.getPeopleDTO().setIDHO(family.getIDHO());
+        Constants.mStaticObject.getWomanDTO().setID(family.getIDHO());
+        Constants.mStaticObject.getDeadDTO().setmID(family.getIDHO());
+        Constants.mStaticObject.getMemberDTO().setmID(family.getIDHO());
+        Constants.mStaticObject.getFamilyDetailDTO().setmIDHO(family.getIDHO());
+//        Constants.mStaticObject.getFamilyDetailDTO().setmIDHO();
+    }
     private void makeListQuestion() {
         listQuestion = DrawerDataFactory.makeListInfo(familyDTO);
         listQuestion.addAll(DrawerDataFactory.makeListPeople());
