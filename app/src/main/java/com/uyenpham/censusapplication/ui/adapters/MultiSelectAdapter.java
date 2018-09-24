@@ -36,10 +36,13 @@ public class MultiSelectAdapter extends RecyclerView.Adapter<MultiSelectAdapter.
     @Override
     public void onBindViewHolder(@NonNull final MultiSelectAdapter.LocalityViewHolder holder, final int position) {
         holder.tvText.setText(listText.get(position).getQ1());
+        holder.checkBox.setChecked(listText.get(position).isSelected());
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                holder.checkBox.setChecked(!holder.checkBox.isChecked());
+               if(listener != null){
+                   listener.onClickItem(view, position);
+               }
             }
         });
     }

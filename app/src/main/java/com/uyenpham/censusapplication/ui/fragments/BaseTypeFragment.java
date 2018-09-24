@@ -38,6 +38,7 @@ public abstract class BaseTypeFragment extends BaseFragment {
                 TypeTextInputFragment fragment = new TypeTextInputFragment();
                 fragment.setQuestionDTO(questionDTO);
                 fragment.setAnswerDTO(null);
+                fragment.setListQuestion(listQuestion);
                 replaceAnimation(fragment, isNext);
                 break;
             case Constants.TYPE_SINGLE_SELECT:
@@ -47,6 +48,7 @@ public abstract class BaseTypeFragment extends BaseFragment {
                 SingleSelectFragment singleSelectFragment = new SingleSelectFragment();
                 singleSelectFragment.setQuestionDTO(questionDTO);
                 singleSelectFragment.setAnswerDTO(null);
+                singleSelectFragment.setListQuestion(listQuestion);
                 replaceAnimation(singleSelectFragment, isNext);
                 break;
             case Constants.TYPE_NUMBER_INPUT:

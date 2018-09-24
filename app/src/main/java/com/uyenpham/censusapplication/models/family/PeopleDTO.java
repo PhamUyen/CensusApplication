@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.lang.reflect.Field;
 
 public class PeopleDTO {
-    public static final String ID_HO = "ID";
+    public static final String ID_HO = "IDHO";
     @SerializedName("HOSO")
     private String mHOSO;
     @SerializedName("ID")
@@ -207,5 +207,22 @@ public class PeopleDTO {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object v) {
+        boolean retVal = false;
+
+        if (v instanceof PeopleDTO){
+            PeopleDTO ptr = (PeopleDTO) v;
+            retVal = ptr.mID == this.mID;
+        }
+
+        return retVal;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 }

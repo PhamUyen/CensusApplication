@@ -1,13 +1,11 @@
 package com.uyenpham.censusapplication.ui.fragments;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +42,7 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
     private AnswerDTO answerDTO;
     private ArrayList<String> listText;
     private TextAdapter adapter;
+    private boolean isValidate;
 
     @Override
     protected int getLayoutId() {
@@ -64,9 +63,6 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
                 @Override
                 public boolean onEditorAction(TextView v, int actionId, KeyEvent keyEvent) {
                     if (actionId == EditorInfo.IME_ACTION_DONE) {
-                        InputMethodManager imm = (InputMethodManager) v.getContext()
-                                .getSystemService(Context.INPUT_METHOD_SERVICE);
-                        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                         //add answer to list
                         listText.add(edAnswer.getText().toString());
                         if (questionDTO.getSurvey().equals(Constants.SURVEY_PEOPLE)) {
@@ -112,8 +108,7 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
         if (answer != null && !StringUtils.isEmpty((String) answer.getAnswer())) {
             edAnswer.setText((String) answer.getAnswer());
         } else {
-            edAnswer.setHint(question.getSurvey() == null ? question.getPlaceHolder() : question
-                    .getSurvey());
+            edAnswer.setHint(question.getPlaceHolder());
         }
         return true;
     }
@@ -139,16 +134,6 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
                 list.add(new GroupDrawer("nguyen van b", null));
                 activity.setList(list);
                 return true;
-            case Constants.QUESTION_Q1:
-                final boolean[] isValidate = {true};
-                DialogUtils.showAlert(activity, R.string.txt_another_else, new
-                        DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                isValidate[0] = false;
-                            }
-                        });
-                return isValidate[0];
             default:
                 return true;
         }
@@ -172,13 +157,30 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
 
     @Override
     public void next() {
-        if (validateQuaetion(questionDTO, answerDTO)) {
-            if (currentIndex < getListQuestion().size() - 1) {
-                currentIndex++;
-                replcaeFragmentByType(getListQuestion().get(currentIndex), true);
+        if(questionDTO.getId().equals(Constants.QUESTION_Q1)){
+            DialogUtils.showErrorAlert2Option(activity, R.string.txt_another_else, R.string.txt_yes, R.string.txt_no,
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            isValidate = false;                      }
+                    }, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            nextFragment();
+                        }
+                    });
+        }else {
+            if (validateQuaetion(questionDTO, answerDTO)) {
+
+            } else {
+                Toast.makeText(activity, "Error!", Toast.LENGTH_SHORT).show();
             }
-        } else {
-            Toast.makeText(activity, "Error!", Toast.LENGTH_SHORT).show();
+        }
+    }
+    private void nextFragment(){
+        if (currentIndex < getListQuestion().size() - 1) {
+            currentIndex++;
+            replcaeFragmentByType(getListQuestion().get(currentIndex), true);
         }
     }
 

@@ -11,6 +11,7 @@ public class PeopleDetailDTO extends PeopleDTO {
     private String Q1;
     @SerializedName("Chuho")
     private Integer Chuho;
+    private boolean isSelected;
 
     public PeopleDetailDTO() {
     }
@@ -19,6 +20,14 @@ public class PeopleDetailDTO extends PeopleDTO {
         Q1 = q1;
         Chuho = chuho;
         STT = STT;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 
     public int getSTT() {

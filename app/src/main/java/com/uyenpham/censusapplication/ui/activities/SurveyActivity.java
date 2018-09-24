@@ -244,6 +244,7 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick {
                 SingleSelectFragment singleSelectFragment = new SingleSelectFragment();
                 singleSelectFragment.setQuestionDTO(questionDTO);
                 singleSelectFragment.setAnswerDTO(null);
+                singleSelectFragment.setListQuestion(listQuestion);
                 replaceAnimation(singleSelectFragment, isNext);
                 break;
             case Constants.TYPE_NUMBER_INPUT:

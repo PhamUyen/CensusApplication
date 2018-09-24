@@ -6,7 +6,8 @@
       "question": "Xin Ông/Bà cho biết họ và tên những người Việt Nam hiện đang ăn, ở tại hộ, bao gồm cả trẻ em mới sinh.",
       "type": 8,
       "options": [],
-      "placeHolders": ""
+      "placeHolders": "",
+      "survey":"people"
     },
     {
       "id": "Q2",
@@ -23,7 +24,8 @@
           "type" : "NORMAL"
         }
       ],
-      "placeHolders": ""
+      "placeHolders": "",
+      "survey":"people"
     },
     {
       "id": "Q3",
@@ -40,7 +42,8 @@
           "type" : "NORMAL"
         }
       ],
-      "placeHolders": ""
+      "placeHolders": "",
+      "survey":"people"
     },
     {
       "id": "Q4",
@@ -57,7 +60,8 @@
           "type" : "NORMAL"
         }
       ],
-      "placeHolders": ""
+      "placeHolders": "",
+      "survey":"people"
     },
     {
       "id": "Q5",
@@ -74,7 +78,8 @@
           "type" : "NORMAL"
         }
       ],
-      "placeHolders": ""
+      "placeHolders": "",
+      "survey":"people"
     },
     {
       "id": "Q61",
@@ -91,7 +96,8 @@
           "type" : "NORMAL"
         }
       ],
-      "placeHolders": ""
+      "placeHolders": "",
+      "survey":"people"
     },
     {
       "id": "Q62",
@@ -108,7 +114,8 @@
           "type" : "NORMAL"
         }
       ],
-      "placeHolders": ""
+      "placeHolders": "",
+      "survey":"people"
     },
     {
       "id": "Q63",
@@ -125,7 +132,8 @@
           "type" : "NORMAL"
         }
       ],
-      "placeHolders": ""
+      "placeHolders": "",
+      "survey":"people"
     },
     {
       "id": "Q64",
@@ -142,7 +150,8 @@
           "type" : "NORMAL"
         }
       ],
-      "placeHolders": ""
+      "placeHolders": "",
+      "survey":"people"
     },
     {
       "id": "Q65",
@@ -159,7 +168,8 @@
           "type" : "NORMAL"
         }
       ],
-      "placeHolders": ""
+      "placeHolders": "",
+      "survey":"people"
     },
     {
       "id": "Q66",
@@ -176,7 +186,8 @@
           "type" : "NORMAL"
         }
       ],
-      "placeHolders": ""
+      "placeHolders": "",
+      "survey":"people"
     },
     {
       "id": "Q7",
@@ -193,7 +204,8 @@
           "type" : "NORMAL"
         }
       ],
-      "placeHolders": ""
+      "placeHolders": "",
+      "survey":"people"
     },
     {
       "id": "Q8",
@@ -209,7 +221,8 @@
       "question": "Trong số những người này, có ai có hộ khẩu thường trú tại xã/phường/thị trấn này không?",
       "type": 11,
       "options": [],
-      "placeHolders": ""
+      "placeHolders": "",
+      "survey":"people"
     }
   ]
 }
