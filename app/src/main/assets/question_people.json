@@ -1,0 +1,103 @@
+{
+  "questions":[
+    {
+      "id": "mMATINH",
+      "name": "",
+      "question": "Tỉnh/Thành phố",
+      "type": 1,
+      "options": [],
+      "placeHolders": "Tỉnh/Thành phố",
+      "survey":"family"
+    },
+    {
+      "id": "mMAHUYEN",
+      "name": "",
+      "question": "Huyện/quận/thị xã/thành phố thuộc tỉnh",
+      "type": 1,
+      "options": [],
+      "placeHolders": "huyện/quận/thị xã/thành",
+      "survey":"family"
+    },
+    {
+      "id": "mMAXA",
+      "name": "",
+      "question": "Xã/phường/thị trấn",
+      "type": 1,
+      "options":[],
+      "placeHolders": "Xã/phường/thị trấn",
+      "survey":"family"
+    },
+    {
+      "id": "mMATHON",
+      "name": "",
+      "question": "Thôn/xóm/ấp/bản/tổ dân phố",
+      "type": 1,
+      "options": [],
+      "placeHolders": "thôn/xóm/ấp/bản/tổ dân phố",
+      "survey":"family"
+    },
+    {
+      "id": "mIDDB",
+      "name": "",
+      "question": "Địa bàn đIều tra số",
+      "type": 1,
+      "options": [],
+      "placeHolders": "Địa bàn",
+      "survey":"family"
+    },
+    {
+      "id": "mMADIABAN",
+      "name": "",
+      "question": "Tên địa bàn đIều tra",
+      "type": 1,
+      "options": [],
+      "placeHolders": "Tên địa bàn đIều tra",
+      "survey":"family"
+    },
+    {
+      "id": "mTTNT",
+      "name": "",
+      "question": "THÀNH THỊ/NÔNG THÔN",
+      "type": 1,
+      "options": [],
+      "placeHolders": "THÀNH THỊ/NÔNG THÔN",
+      "survey":"family"
+    },
+    {
+      "id": "mHOSO",
+      "name": "",
+      "question": "Hộ số",
+      "type": 1,
+      "options": [],
+      "placeHolders": "Hộ số",
+      "survey":"family"
+    },
+    {
+      "id": "mTENCHUHO",
+      "name": "",
+      "question": "Họ và tên chủ hộ",
+      "type": 1,
+      "options":[],
+      "placeHolders": "chủ hộ",
+      "survey":"family"
+    },
+    {
+      "id": "mDIACHI",
+      "name": "",
+      "question": "Địa chỉ của hộ",
+      "type": 1,
+      "options": [],
+      "placeHolders": "Địa chỉ",
+      "survey":"family"
+    },
+    {
+      "id": "mDIENTHOAI",
+      "name": "",
+      "question": "Điện thoại",
+      "type": 1,
+      "options": [],
+      "placeHolders": "Điện thoại",
+      "survey":"family"
+    }
+  ]
+}

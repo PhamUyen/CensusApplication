@@ -31,7 +31,7 @@
       "id": "Q3",
       "name": "Q3",
       "question": "Trong những người này có ai là:- Trẻ mới sinh từ ngày 01/8/2018?- Người mới chuyển đến từ ngày 01/8/2018?",
-      "type": 2,
+      "type": 9,
       "options":[
         {
           "option" : "CÓ",
@@ -211,7 +211,7 @@
       "id": "Q8",
       "name": "Q8",
       "question": "XÁC ĐỊNH NHỮNG NGƯỜI ĐƯỢC GHI TÊN VÀO  CÂU 1 PHẦN 1",
-      "type": 11,
+      "type": 3,
       "options": [],
       "placeHolders": ""
     },
@@ -219,7 +219,7 @@
       "id": "Q9",
       "name": "Q9",
       "question": "Trong số những người này, có ai có hộ khẩu thường trú tại xã/phường/thị trấn này không?",
-      "type": 11,
+      "type": 3,
       "options": [],
       "placeHolders": "",
       "survey":"people"

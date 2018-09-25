@@ -3,6 +3,7 @@ package com.uyenpham.censusapplication.models.survey;
 public class OptionDTO {
     private String option;
     private  String type;
+    private boolean isSelected;
 
     public OptionDTO() {
     }
@@ -26,5 +27,13 @@ public class OptionDTO {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 }

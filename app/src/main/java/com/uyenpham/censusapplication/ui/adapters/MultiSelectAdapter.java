@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -19,9 +20,11 @@ public class MultiSelectAdapter extends RecyclerView.Adapter<MultiSelectAdapter.
 
     private ArrayList<PeopleDetailDTO> listText;
     private IRecyclerViewListener listener;
+    private boolean isSelect;
 
-    public MultiSelectAdapter(ArrayList<PeopleDetailDTO> listLocality) {
+    public MultiSelectAdapter(ArrayList<PeopleDetailDTO> listLocality, boolean isSelect) {
         this.listText = listLocality;
+        this.isSelect = isSelect;
     }
 
     @NonNull
@@ -36,7 +39,14 @@ public class MultiSelectAdapter extends RecyclerView.Adapter<MultiSelectAdapter.
     @Override
     public void onBindViewHolder(@NonNull final MultiSelectAdapter.LocalityViewHolder holder, final int position) {
         holder.tvText.setText(listText.get(position).getQ1());
-        holder.checkBox.setChecked(listText.get(position).isSelected());
+        if(isSelect){
+            holder.checkBox.setVisibility(View.VISIBLE);
+            holder.imvClose.setVisibility(View.GONE);
+            holder.checkBox.setChecked(listText.get(position).isSelected());
+        }else {
+            holder.checkBox.setVisibility(View.GONE);
+            holder.imvClose.setVisibility(View.VISIBLE);
+        }
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,11 +66,13 @@ public class MultiSelectAdapter extends RecyclerView.Adapter<MultiSelectAdapter.
         private TextView tvText;
         private CheckBox checkBox;
         private RelativeLayout item;
+        private ImageView imvClose;
         public LocalityViewHolder(View itemView) {
             super(itemView);
             tvText = itemView.findViewById(R.id.text);
             checkBox = itemView.findViewById(R.id.checkbox);
             item = itemView.findViewById(R.id.item_view);
+            imvClose = itemView.findViewById(R.id.imvClose);
         }
     }
     public void setListener(IRecyclerViewListener listener) {

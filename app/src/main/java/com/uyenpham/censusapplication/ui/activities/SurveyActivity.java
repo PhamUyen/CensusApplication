@@ -95,25 +95,26 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick {
         replcaeFragmentByType(listQuestion.get(currentIndex), true);
     }
 
-    private void setInfoFamily(FamilyDTO family){
+    private void setInfoFamily(FamilyDTO family) {
         Constants.mStaticObject.setIdHo(family.getIDHO());
         Constants.mStaticObject.getPeopleDTO().setHOSO(family.getHOSO());
         Constants.mStaticObject.getPeopleDTO().setIDHO(family.getIDHO());
         Constants.mStaticObject.getWomanDTO().setID(family.getIDHO());
         Constants.mStaticObject.getDeadDTO().setmID(family.getIDHO());
         Constants.mStaticObject.getMemberDTO().setmID(family.getIDHO());
-        Constants.mStaticObject.getFamilyDetailDTO().setmIDHO(family.getIDHO());
+        Constants.mStaticObject.getFamilyDetailDTO().setIDHO(family.getIDHO());
 //        Constants.mStaticObject.getFamilyDetailDTO().setmIDHO();
     }
+
     private void makeListQuestion() {
-        listQuestion = DrawerDataFactory.makeListInfo(familyDTO);
+        listQuestion = DrawerDataFactory.makeListInfo();
         listQuestion.addAll(DrawerDataFactory.makeListPeople());
         listQuestion.addAll(DrawerDataFactory.makeListMember());
         listQuestion.addAll(DrawerDataFactory.makeListWoman());
     }
 
     private void setListDrawer() {
-        list.add(DrawerDataFactory.makeInfoGroup(familyDTO));
+        list.add(DrawerDataFactory.makeInfoGroup());
         list.add(DrawerDataFactory.makePeopleGroup());
         list.add(DrawerDataFactory.makeMemberGroup());
         list.add(DrawerDataFactory.makeWomanGroup());
@@ -207,12 +208,12 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick {
 //                    currentIndex++;
 //                    replcaeFragmentByType(listQuestion.get(currentIndex), true);
 //                }
-                if(iNext != null){
+                if (iNext != null) {
                     iNext.next();
                 }
                 break;
             case R.id.imv_previous:
-                if(iPrevious != null){
+                if (iPrevious != null) {
                     iPrevious.previuos();
                 }
 //                if (currentIndex > 0) {
@@ -241,6 +242,7 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick {
             case Constants.TYPE_SELECT_INPUT:
             case Constants.TYPE_SINGLE_SELECT_LIST:
             case Constants.TYPE_SINGLE_SELECT_AUTO:
+            case Constants.TYPE_MIX:
                 SingleSelectFragment singleSelectFragment = new SingleSelectFragment();
                 singleSelectFragment.setQuestionDTO(questionDTO);
                 singleSelectFragment.setAnswerDTO(null);
@@ -292,8 +294,9 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick {
         }
         return -1;
     }
-    private QuestionDTO getQuestionByIndex(int index){
-        if( index!= -1 && index< listQuestion.size()){
+
+    private QuestionDTO getQuestionByIndex(int index) {
+        if (index != -1 && index < listQuestion.size()) {
             return listQuestion.get(index);
         }
         return null;

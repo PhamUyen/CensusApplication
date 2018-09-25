@@ -171,7 +171,7 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
                     });
         }else {
             if (validateQuaetion(questionDTO, answerDTO)) {
-
+                nextFragment();
             } else {
                 Toast.makeText(activity, "Error!", Toast.LENGTH_SHORT).show();
             }

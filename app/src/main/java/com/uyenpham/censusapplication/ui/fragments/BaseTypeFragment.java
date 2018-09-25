@@ -45,6 +45,7 @@ public abstract class BaseTypeFragment extends BaseFragment {
             case Constants.TYPE_SELECT_INPUT:
             case Constants.TYPE_SINGLE_SELECT_LIST:
             case Constants.TYPE_SINGLE_SELECT_AUTO:
+            case Constants.TYPE_MIX:
                 SingleSelectFragment singleSelectFragment = new SingleSelectFragment();
                 singleSelectFragment.setQuestionDTO(questionDTO);
                 singleSelectFragment.setAnswerDTO(null);
@@ -117,6 +118,8 @@ public abstract class BaseTypeFragment extends BaseFragment {
             case Constants.SURVEY_MEMBER:
                 break;
             case Constants.SURVEY_FAMILY:
+                Constants.mStaticObject.getFamilyDTO().set(question.getName(), answer.getAnswer());
+                Constants.mStaticObject.getFamilyDetailDTO().set(question.getName(), answer.getAnswer());
                 break;
             default:
                 break;

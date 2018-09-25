@@ -193,6 +193,7 @@ public class PeopleDTO {
     }
 
     public  boolean set(String fieldName, Object fieldValue) {
+        fieldName = "m"+fieldName;
         Class<?> clazz = this.getClass();
         while (clazz != null) {
             try {
@@ -208,7 +209,22 @@ public class PeopleDTO {
         }
         return false;
     }
-
+    public  Object get(String fieldName) {
+        fieldName = "m"+fieldName;
+        Class<?> clazz = this.getClass();
+        while (clazz != null) {
+            try {
+                Field field = clazz.getDeclaredField(fieldName);
+                field.setAccessible(true);
+                return field.get(fieldName);
+            } catch (NoSuchFieldException e) {
+                clazz = clazz.getSuperclass();
+            } catch (Exception e) {
+                throw new IllegalStateException(e);
+            }
+        }
+        return null;
+    }
     @Override
     public boolean equals(Object v) {
         boolean retVal = false;

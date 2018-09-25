@@ -5,63 +5,150 @@
       "name": "C01",
       "question": "HỌ VÀ TÊN",
       "type": "1",
-      "options": "",
-      "placeHolders": ""
+      "options": [],
+      "placeHolders": "",
+      "survey":"member"
     },
     {
       "id": "C02",
       "name": "C02",
       "question": "Quan hệ thế nào với chủ hộ?",
-      "type": 3,
-      "options": "VỢ/CHỒNG,CON ĐẺ,CHÁU NỘI/NGOẠI,BỐ/MẸ,QUAN HỆ GIA ĐÌNH KHÁC,KHÔNG QUAN HỆ GIA ĐÌNH",
-      "placeHolders": ""
+      "type": 4,
+      "options": [
+        {
+          "option" : "VỢ/CHỒNG",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "CON ĐẺ",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "CHÁU NỘI/NGOẠI",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "BỐ/MẸ",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "QUAN HỆ GIA ĐÌNH KHÁC",
+          "type" : "SHOW"
+        },
+        {
+          "option" : "KHÔNG QUAN HỆ GIA ĐÌNH",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"member"
     },
     {
       "id": "C03",
       "name": "C03",
       "question": "Giới tính",
       "type": 2,
-      "options": "NAM,NỮ",
-      "placeHolders": ""
+      "options": [
+        {
+          "option" : "NAM",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "NỮ",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"member"
     },
     {
       "id": "C04",
       "name": "C04",
       "question": "Tháng, năm dương lịch",
       "type": 7,
-      "options": "THÁNG ,NĂM ,KHÔNG XĐ NĂM",
-      "placeHolders": ""
+      "options": [
+        {
+          "option" : "THÁNG",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "NĂM",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "KHÔNG XĐ NĂM",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"member"
     },
     {
       "id": "C05",
       "name": "C05",
       "question": "Tuổi",
       "type": 6,
-      "options": "TUỔI TRÒN",
-      "placeHolders": ""
+      "options": [
+        {
+          "option" : "TUỔI TRÒN",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"member"
     },
     {
       "id": "C06",
       "name": "C06",
       "question": "Dân tộc",
       "type": 9,
-      "options": "KINH,DÂN TỘC KHÁC",
-      "placeHolders": ""
+      "options": [
+        {
+          "option" : "KINH",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "DÂN TỘC KHÁC",
+          "type" : "SHOW"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"member"
     },
     {
       "id": "C07",
       "name": "C07",
       "question": "Tôn giáo",
       "type": 4,
-      "options": "CÓ,KHÔNG",
-      "placeHolders": ""
+      "options": [
+        {
+          "option" : "CÓ",
+          "type" : "SHOW"
+        },
+        {
+          "option" : "KHÔNG",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"member"
     },
     {
       "id": "C08",
       "name": "C08",
       "question": "Dăng ký khai sinh",
       "type": 2,
-      "options": "ĐÃ ĐĂNG KÝ,CHƯA ĐĂNG KÝ",
+      "options": [
+        {
+          "option" : "ĐÃ ĐĂNG KÝ",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "CHƯA ĐĂNG KÝ",
+          "type" : "NORMAL"
+        }
+      ],
+      "survey":"member",
       "placeHolders": ""
     },
     {
@@ -69,15 +156,47 @@
       "name": "C09",
       "question": "Cách đây 5 năm (vào ngày 01/8/2013),thực tế thường trú ở đâu?",
       "type": 2,
-      "options": "Ở NƯỚC NGOÀI,CÙNG XÃ/PHƯỜNG,XÃ/PHƯỜNG KHÁC CÙNG QUẬN/HUYỆN,QUẬN/HUYỆN KHÁC",
-      "placeHolders": ""
+      "options": [
+        {
+          "option" : "Ở NƯỚC NGOÀI",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "CÙNG XÃ/PHƯỜNG",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "XÃ/PHƯỜNG KHÁC",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "CÙNG QUẬN/HUYỆN",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "QUẬN/HUYỆN KHÁC",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"member"
     },
     {
       "id": "C10",
       "name": "Q10",
       "question": "Chuyển đến từ tỉnh/thành phố, quận/huyện nào?",
       "type": 1,
-      "options": "TÊN TỈNH/THÀNH PHỒ,TÊN QUẬN/HUYỆN",
+      "options": [
+        {
+          "option" : "TÊN TỈNH/THÀNH PHỒ",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "TÊN QUẬN/HUYỆN",
+          "type" : "NORMAL"
+        }
+      ],
+      "survey":"member",
       "placeHolders": ""
     },
     {
@@ -85,7 +204,17 @@
       "name": "C11",
       "question": "Cách đây 5 năm, nơi thực tế thường trú nói trên là phường/thị trấn hay xã?",
       "type": 2,
-      "options": "PHƯỜNG/THỊ TRẤN,XÃ",
+      "options": [
+        {
+          "option" : "PHƯỜNG/THỊ TRẤN",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "XÃ",
+          "type" : "NORMAL"
+        }
+      ],
+      "survey":"member",
       "placeHolders": ""
     },
     {
@@ -93,72 +222,270 @@
       "name": "C12",
       "question": "Lý do chính chuyển đến hộ là gì?",
       "type": 4,
-      "options": "TÌM VIỆC/ BẮT ĐẦU CÔNG VIỆC MỚI,VỀ QUÊ DO MẤT/HẾT VIỆC,KHÔNG TÌM ĐƯỢC VIỆC ,THEO GIA ĐÌNH ,KẾT HÔN,ĐI HỌC ,KHÁC",
-      "placeHolders": ""
+      "options": [
+        {
+          "option" : "TÌM VIỆC/ BẮT ĐẦU CÔNG VIỆC MỚI",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "VỀ QUÊ DO MẤT/HẾT VIỆC",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "KHÔNG TÌM ĐƯỢC VIỆC",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "THEO GIA ĐÌNH",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "KẾT HÔN",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "ĐI HỌC",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "KHÁC",
+          "type" : "SHOW"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"member"
     },
     {
       "id": "C13a",
       "name": "C13a",
       "question": "khó khăn khi nhìn, ngay cả khi đeo kính?",
       "type": 2,
-      "options": "KHÔNG KHÓ KHĂN, KHÓ KHĂN MỘT CHÚT,RẤT KHÓ KHĂN, KHÔNG THỂ",
-      "placeHolders": ""
+      "options": [
+        {
+          "option" : "KHÔNG KHÓ KHĂN",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : " KHÓ KHĂN MỘT CHÚT",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "RẤT KHÓ KHĂN",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "KHÔNG THỂ",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"member"
     },
     {
       "id": "C13b",
       "name": "C13b",
       "question": "khó khăn khi Nghe, ngay cả khi dùng thiết bị trợ thính?",
       "type": 2,
-      "options": "KHÔNG KHÓ KHĂN, KHÓ KHĂN MỘT CHÚT,RẤT KHÓ KHĂN, KHÔNG THỂ",
-      "placeHolders": ""
+      "options": [
+        {
+          "option" : "KHÔNG KHÓ KHĂN",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : " KHÓ KHĂN MỘT CHÚT",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "RẤT KHÓ KHĂN",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "KHÔNG THỂ",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"member"
     },
     {
       "id": "C13c",
       "name": "C13c",
       "question": "khó khăn khi Đi bộ hay bước lên bậc cầu thang?",
       "type": 2,
-      "options": "KHÔNG KHÓ KHĂN, KHÓ KHĂN MỘT CHÚT,RẤT KHÓ KHĂN, KHÔNG THỂ",
-      "placeHolders": ""
+      "options": [
+        {
+          "option" : "KHÔNG KHÓ KHĂN",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : " KHÓ KHĂN MỘT CHÚT",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "RẤT KHÓ KHĂN",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "KHÔNG THỂ",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"member"
     },
     {
       "id": "C13d",
       "name": "C13d",
       "question": "khó khăn khi Ghi nhớ, hay tập trung chú ý?",
       "type": 2,
-      "options": "KHÔNG KHÓ KHĂN, KHÓ KHĂN MỘT CHÚT,RẤT KHÓ KHĂN, KHÔNG THỂ",
-      "placeHolders": ""
+      "options": [
+        {
+          "option" : "KHÔNG KHÓ KHĂN",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : " KHÓ KHĂN MỘT CHÚT",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "RẤT KHÓ KHĂN",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "KHÔNG THỂ",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"member"
     },
     {
       "id": "C13e",
       "name": "C13e",
       "question": "khó khăn khi Tự chăm sóc bản thân (tự tắm gội hay tự mặc quần áo)?",
       "type": 2,
-      "options": "KHÔNG KHÓ KHĂN, KHÓ KHĂN MỘT CHÚT,RẤT KHÓ KHĂN, KHÔNG THỂ",
-      "placeHolders": ""
+      "options": [
+        {
+          "option" : "KHÔNG KHÓ KHĂN",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : " KHÓ KHĂN MỘT CHÚT",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "RẤT KHÓ KHĂN",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "KHÔNG THỂ",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"member"
     },
     {
       "id": "C13f",
       "name": "C13f",
       "question": "khó khăn khi Giao tiếp  khi sử dụng ngôn ngữ thông thường (hiểu ý người khác hoặc diễn đạt để người khác hiểu ý mình)?",
       "type": 2,
-      "options": "KHÔNG KHÓ KHĂN, KHÓ KHĂN MỘT CHÚT,RẤT KHÓ KHĂN, KHÔNG THỂ",
-      "placeHolders": ""
+      "options": [
+        {
+          "option" : "KHÔNG KHÓ KHĂN",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : " KHÓ KHĂN MỘT CHÚT",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "RẤT KHÓ KHĂN",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "KHÔNG THỂ",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"member"
     },
     {
       "id": "C14",
       "name": "C14",
       "question": "Hiện nay đang đi học, đã thôi học hay chưa bao giờ đi học?",
       "type": 2,
-      "options": "ĐANG ĐI HỌC,ĐÃ THÔI HỌC,CHƯA BAO GIỜ ĐI HỌC",
-      "placeHolders": ""
+      "options": [
+        {
+          "option" : "ĐANG ĐI HỌ",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "ĐÃ THÔI HỌC",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "CHƯA BAO GIỜ ĐI HỌC",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"member"
     },
     {
       "id": "C15",
       "name": "C15",
       "question": "Cấp học đang học là gì?",
       "type": 2,
-      "options": "MẦM NON DƯỚI 5 TUỔI,MẦM NON 5 TUỔI,TIỂU HỌC,TRUNG HỌC CƠ SỞ,TRUNG HỌC PHỔ THÔNG,SƠ CẤP,TRUNG CẤP,CAO ĐẲNG,ĐẠI HỌC,THẠC SỸ,TIẾN SỸ",
-      "placeHolders": ""
+      "options": [
+        {
+          "option" : "MẦM NON DƯỚI 5 TUỔI",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "MẦM NON 5 TUỔI",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "TIỂU HỌC",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "TRUNG HỌC CƠ SỞ",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "TRUNG HỌC PHỔ THÔNG",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "SƠ CẤP",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "TRUNG CẤP",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "CAO ĐẲNG",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "ĐẠI HỌC",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "THẠC SỸ",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "TIẾN SỸ",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"member"
     },
     {
       "id": "C16",

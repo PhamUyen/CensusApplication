@@ -4,7 +4,7 @@ package com.uyenpham.censusapplication.models.family;
 import com.google.gson.annotations.SerializedName;
 
 @SuppressWarnings("unused")
-public class FamilyDetailDTO {
+public class FamilyDetailDTO extends FamilyDTO{
 
     @SerializedName("C42")
     private Integer mC42;
@@ -80,36 +80,16 @@ public class FamilyDetailDTO {
     private Integer mC65L;
     @SerializedName("DIACHICHUHO")
     private String mDIACHICHUHO;
-    @SerializedName("DIENTHOAI")
-    private String mDIENTHOAI;
-    @SerializedName("HOSO")
-    private String mHOSO;
     @SerializedName("ID")
     private String mID;
-    @SerializedName("IDHO")
-    private String mIDHO;
     @SerializedName("KT6")
     private Integer mKT6;
-    @SerializedName("Loaiphieu")
-    private Long mLoaiphieu;
-    @SerializedName("MADIABAN")
-    private String mMADIABAN;
-    @SerializedName("MAHUYEN")
-    private String mMAHUYEN;
-    @SerializedName("MATHON")
-    private String mMATHON;
-    @SerializedName("MATINH")
-    private String mMATINH;
-    @SerializedName("MAXA")
-    private String mMAXA;
     @SerializedName("NgayCapnhat")
     private String mNgayCapnhat;
     @SerializedName("NguoiCapnhat")
     private String mNguoiCapnhat;
     @SerializedName("PHUONGPHAPDIEUTRA")
     private Long mPHUONGPHAPDIEUTRA;
-    @SerializedName("TENCHUHO")
-    private String mTENCHUHO;
     @SerializedName("THOIGIANBD")
     private String mTHOIGIANBD;
     @SerializedName("THOIGIANKT")
@@ -180,21 +160,11 @@ public class FamilyDetailDTO {
         this.mC65K = mC65K;
         this.mC65L = mC65L;
         this.mDIACHICHUHO = mDIACHICHUHO;
-        this.mDIENTHOAI = mDIENTHOAI;
-        this.mHOSO = mHOSO;
         this.mID = mID;
-        this.mIDHO = mIDHO;
         this.mKT6 = mKT6;
-        this.mLoaiphieu = mLoaiphieu;
-        this.mMADIABAN = mMADIABAN;
-        this.mMAHUYEN = mMAHUYEN;
-        this.mMATHON = mMATHON;
-        this.mMATINH = mMATINH;
-        this.mMAXA = mMAXA;
         this.mNgayCapnhat = mNgayCapnhat;
         this.mNguoiCapnhat = mNguoiCapnhat;
         this.mPHUONGPHAPDIEUTRA = mPHUONGPHAPDIEUTRA;
-        this.mTENCHUHO = mTENCHUHO;
         this.mTHOIGIANBD = mTHOIGIANBD;
         this.mTHOIGIANKT = mTHOIGIANKT;
         this.mTSKHAU = mTSKHAU;
@@ -500,22 +470,6 @@ public class FamilyDetailDTO {
         this.mDIACHICHUHO = mDIACHICHUHO;
     }
 
-    public String getmDIENTHOAI() {
-        return mDIENTHOAI;
-    }
-
-    public void setmDIENTHOAI(String mDIENTHOAI) {
-        this.mDIENTHOAI = mDIENTHOAI;
-    }
-
-    public String getmHOSO() {
-        return mHOSO;
-    }
-
-    public void setmHOSO(String mHOSO) {
-        this.mHOSO = mHOSO;
-    }
-
     public String getmID() {
         return mID;
     }
@@ -524,68 +478,9 @@ public class FamilyDetailDTO {
         this.mID = mID;
     }
 
-    public String getmIDHO() {
-        return mIDHO;
-    }
-
-    public void setmIDHO(String mIDHO) {
-        this.mIDHO = mIDHO;
-    }
-
-    public Integer getmKT6() {
-        return mKT6;
-    }
 
     public void setmKT6(Integer mKT6) {
         this.mKT6 = mKT6;
-    }
-
-    public Long getmLoaiphieu() {
-        return mLoaiphieu;
-    }
-
-    public void setmLoaiphieu(Long mLoaiphieu) {
-        this.mLoaiphieu = mLoaiphieu;
-    }
-
-    public String getmMADIABAN() {
-        return mMADIABAN;
-    }
-
-    public void setmMADIABAN(String mMADIABAN) {
-        this.mMADIABAN = mMADIABAN;
-    }
-
-    public String getmMAHUYEN() {
-        return mMAHUYEN;
-    }
-
-    public void setmMAHUYEN(String mMAHUYEN) {
-        this.mMAHUYEN = mMAHUYEN;
-    }
-
-    public String getmMATHON() {
-        return mMATHON;
-    }
-
-    public void setmMATHON(String mMATHON) {
-        this.mMATHON = mMATHON;
-    }
-
-    public String getmMATINH() {
-        return mMATINH;
-    }
-
-    public void setmMATINH(String mMATINH) {
-        this.mMATINH = mMATINH;
-    }
-
-    public String getmMAXA() {
-        return mMAXA;
-    }
-
-    public void setmMAXA(String mMAXA) {
-        this.mMAXA = mMAXA;
     }
 
     public String getmNgayCapnhat() {
@@ -610,14 +505,6 @@ public class FamilyDetailDTO {
 
     public void setmPHUONGPHAPDIEUTRA(Long mPHUONGPHAPDIEUTRA) {
         this.mPHUONGPHAPDIEUTRA = mPHUONGPHAPDIEUTRA;
-    }
-
-    public String getmTENCHUHO() {
-        return mTENCHUHO;
-    }
-
-    public void setmTENCHUHO(String mTENCHUHO) {
-        this.mTENCHUHO = mTENCHUHO;
     }
 
     public String getmTHOIGIANBD() {
