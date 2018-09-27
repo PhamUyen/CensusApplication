@@ -70,7 +70,8 @@ public class AnswerDAO {
     }
 
 
-    public AnswerDTO findById(String id) {
+    public AnswerDTO findById(String idQuest, String idHo) {
+        String id = idHo+idQuest;
         try {
             return mLiteOrm.query(
                     new QueryBuilder<>(AnswerDTO.class)
@@ -78,7 +79,7 @@ public class AnswerDAO {
             ).get(0);
         } catch (Exception e) {
             Logger.e(TAG, e.getMessage(), e);
-            return null;
+            return new AnswerDTO(idHo, idQuest, id);
         }
     }
     public AnswerDTO findByIdQuestion(String id) {
@@ -89,7 +90,7 @@ public class AnswerDAO {
             ).get(0);
         } catch (Exception e) {
             Logger.e(TAG, e.getMessage(), e);
-            return null;
+            return new AnswerDTO(id);
         }
     }
 
