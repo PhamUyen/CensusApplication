@@ -12,9 +12,11 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.uyenpham.censusapplication.R;
+import com.uyenpham.censusapplication.db.AnswerDAO;
 import com.uyenpham.censusapplication.models.DrawerDataFactory;
 import com.uyenpham.censusapplication.models.drawer.GroupDrawer;
 import com.uyenpham.censusapplication.models.family.FamilyDTO;
+import com.uyenpham.censusapplication.models.survey.AnswerDTO;
 import com.uyenpham.censusapplication.models.survey.QuestionDTO;
 import com.uyenpham.censusapplication.ui.adapters.DrawerAdapter;
 import com.uyenpham.censusapplication.ui.fragments.MultiSelectionFragment;
@@ -30,6 +32,7 @@ import com.uyenpham.censusapplication.utils.Constants;
 import com.uyenpham.censusapplication.utils.FragmentHelper;
 import com.uyenpham.censusapplication.views.CustomNavigationBar;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,6 +88,7 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick {
 
         Bundle bundle = getIntent().getBundleExtra(Constants.KEY_EXTRA_DATA);
         familyDTO = (FamilyDTO) bundle.getSerializable(Constants.KEY_FAMILY);
+        genListAnser();
 
         setInfoFamily(familyDTO);
 
@@ -93,6 +97,24 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick {
 
         //set default quest
         replcaeFragmentByType(listQuestion.get(currentIndex), true);
+    }
+    private void genListAnser(){
+        for (Field field : familyDTO.getClass().getDeclaredFields()) {
+            field.setAccessible(true);
+            AnswerDTO answerDTO;
+            if(familyDTO.get(field.getName()) instanceof  String){
+                 answerDTO = new AnswerDTO(familyDTO.getIDHO()+field.getName(), (String)familyDTO.get(field.getName()),field.getName(), familyDTO.getIDHO(),null);
+            }else {
+                 answerDTO = new AnswerDTO(familyDTO.getIDHO()+field.getName(), null,field.getName(), familyDTO.getIDHO(),(Integer)familyDTO.get(field.getName()));
+            }
+
+            if(AnswerDAO.getInstance().checkIsExistDB(answerDTO.getId())){
+                AnswerDAO.getInstance().update(answerDTO);
+            }else {
+                AnswerDAO.getInstance().insert(answerDTO);
+            }
+
+        }
     }
 
     private void setInfoFamily(FamilyDTO family) {

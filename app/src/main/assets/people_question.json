@@ -208,14 +208,6 @@
       "survey":"people"
     },
     {
-      "id": "Q8",
-      "name": "Q8",
-      "question": "XÁC ĐỊNH NHỮNG NGƯỜI ĐƯỢC GHI TÊN VÀO  CÂU 1 PHẦN 1",
-      "type": 3,
-      "options": [],
-      "placeHolders": ""
-    },
-    {
       "id": "Q9",
       "name": "Q9",
       "question": "Trong số những người này, có ai có hộ khẩu thường trú tại xã/phường/thị trấn này không?",

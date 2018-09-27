@@ -74,11 +74,15 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
         }else if(questionDTO.getType() == Constants.TYPE_MIX){
             adapter = new MultiSelectAdapter(listMember, false);
         }
-        loadQuestion(questionDTO, answerDTO);
+        loadQuestion(questionDTO);
     }
-    public boolean loadQuestion(final QuestionDTO question, AnswerDTO answer){
-        tvQuestion.setText(question.getName()+":"+question.getQuestion());
+    public boolean loadQuestion(final QuestionDTO question){
+        answerDTO = AnswerDAO.getInstance().findById(question.getId(),Constants.mStaticObject.getIdHo());
+        tvQuestion.setText(question.getName()+"."+question.getQuestion());
         listOption = question.getOptions();
+        if(answerDTO.getAnswerString() != null){
+            listOption.get(answerDTO.getAnswerInt()-1).setSelected(true);
+        }
         radioButtonAdapter = new RadioButtonAdapter(listOption);
         if(listOption.size() >2){
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -103,29 +107,16 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
     private void setupListAdded(){
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rcvSelect.setLayoutManager(linearLayoutManager);
-//        listMember = Constants.mStaticObject.getPeopleDetailDTO();
         adapter = new MultiSelectAdapter(listMember, false);
         adapter.setListener(this);
         rcvSelect.setAdapter(adapter);
     }
 
     @Override
-    public boolean save(QuestionDTO questionDTO, AnswerDTO answerDTO, Object answer) {
-        if (answerDTO == null) {
-            answerDTO = new AnswerDTO();
-        }
-        answerDTO.setQuestionID(questionDTO.getId());
-        answerDTO.setAnswer(answer);
-        AnswerDAO.getInstance().insert(answerDTO);
-        saveAnswerToSurvey(questionDTO, answerDTO);
-        return false;
-    }
-
-    @Override
     public boolean validateQuaetion(QuestionDTO question, AnswerDTO answer) {
         switch (question.getSurvey()){
             case Constants.SURVEY_PEOPLE:
-                if(isYes && listSelected.size() == 0|| (Constants.mStaticObject.getPeopleDTO().get(questionDTO.getName()) == null)){
+                if((isYes && listSelected.size() == 0)|| (Constants.mStaticObject.getPeopleDTO().get(questionDTO.getName()) == null || (isYes && listMember.size() == 0))){
                     return false;
                 }else {
                     return true;
@@ -196,16 +187,29 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
     public void next() {
         if(questionDTO.getSurvey().equals(Constants.SURVEY_PEOPLE)){
             if(validateQuaetion(questionDTO,answerDTO)){
-                for(PeopleDetailDTO peopleDetailDTO :listSelected){
-                    Constants.mStaticObject.getPeopleDetailDTO().remove(peopleDetailDTO);
+                if(questionDTO.getType() == Constants.TYPE_SINGLE_SELECT_LIST){
+                    for(PeopleDetailDTO peopleDetailDTO :listSelected){
+                        Constants.mStaticObject.getPeopleDetailDTO().remove(peopleDetailDTO);
+                    }
+                }else if(questionDTO.getType() == Constants.TYPE_MIX){
+                    Constants.mStaticObject.getPeopleDetailDTO().addAll(listMember);
                 }
                 nextFragment();
             }else {
-                DialogUtils.showErrorAlert(activity,activity.getString(R.string.txt_select_require));
+                String message =activity.getString(R.string.txt_select_require);
+                if(questionDTO.getType() == Constants.TYPE_MIX){
+                    message = activity.getString(R.string.txt_input_require);
+                }
+                DialogUtils.showErrorAlert(activity,message);
             }
         }
-    }
+}
     private void nextFragment(){
+        if(AnswerDAO.getInstance().checkIsExistDB(answerDTO.getId())){
+            AnswerDAO.getInstance().update(answerDTO);
+        }else {
+            AnswerDAO.getInstance().insert(answerDTO);
+        }
         if (currentIndex < getListQuestion().size() - 1) {
             currentIndex++;
             replcaeFragmentByType(getListQuestion().get(currentIndex), true);
@@ -235,7 +239,8 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
             {
                 isYes = true;
                 if(questionDTO.getSurvey().equals(Constants.SURVEY_PEOPLE)){
-                    Constants.mStaticObject.getPeopleDTO().set(questionDTO.getId(),1);
+                    Constants.mStaticObject.getPeopleDTO().set(questionDTO.getId(),pos+1);
+                    answerDTO.setAnswerInt(1);
                 }
                 if(questionDTO.getType() == Constants.TYPE_MIX){
                     edOther.setVisibility(View.VISIBLE);
@@ -288,7 +293,8 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                 listSelected.clear();
             }
             if(questionDTO.getSurvey().equals(Constants.SURVEY_PEOPLE)){
-                Constants.mStaticObject.getPeopleDTO().set(questionDTO.getId(),2);
+                Constants.mStaticObject.getPeopleDTO().set(questionDTO.getId(),pos+1);
+                answerDTO.setAnswerInt(2);
             }
         }
     }

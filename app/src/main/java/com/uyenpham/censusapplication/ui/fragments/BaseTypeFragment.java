@@ -3,6 +3,11 @@ package com.uyenpham.censusapplication.ui.fragments;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 
+import com.uyenpham.censusapplication.db.AnswerDAO;
+import com.uyenpham.censusapplication.db.DeadDAO;
+import com.uyenpham.censusapplication.db.FamilyDAO;
+import com.uyenpham.censusapplication.db.PeopleDAO;
+import com.uyenpham.censusapplication.db.WomanDAO;
 import com.uyenpham.censusapplication.models.survey.AnswerDTO;
 import com.uyenpham.censusapplication.models.survey.QuestionDTO;
 import com.uyenpham.censusapplication.ui.activities.SurveyActivity;
@@ -17,9 +22,16 @@ public abstract class BaseTypeFragment extends BaseFragment {
     private ArrayList<QuestionDTO> listQuestion;
     public SurveyActivity activity;
 
-    public abstract boolean loadQuestion(QuestionDTO questionDTO, AnswerDTO answerDTO);
+    public abstract boolean loadQuestion(QuestionDTO questionDTO);
 
-    public abstract boolean save(QuestionDTO questionDTO, AnswerDTO answerDTO, Object answer);
+    public  void save(AnswerDTO answerDTO, QuestionDTO questionDTO){
+        if(AnswerDAO.getInstance().checkIsExistDB(answerDTO.getId())){
+            AnswerDAO.getInstance().update(answerDTO);
+        }else {
+            AnswerDAO.getInstance().insert(answerDTO);
+        }
+        saveAnswerToSurvey(questionDTO, answerDTO);
+    }
 
     public abstract boolean validateQuaetion(QuestionDTO question, AnswerDTO answer);
 
@@ -107,19 +119,25 @@ public abstract class BaseTypeFragment extends BaseFragment {
     protected void saveAnswerToSurvey(QuestionDTO question, AnswerDTO answer) {
         switch (question.getSurvey()) {
             case Constants.SURVEY_WOMAN:
-                Constants.mStaticObject.getWomanDTO().set(question.getName(), answer.getAnswer());
+                Constants.mStaticObject.getWomanDTO().set(question.getName(), answer.getAnswerString());
+                WomanDAO.getInstance().insert(Constants.mStaticObject.getWomanDTO());
                 break;
             case Constants.SURVEY_DEAD:
+                DeadDAO.getInstance().insert(Constants.mStaticObject.getDeadDTO());
                 break;
             case Constants.SURVEY_PEOPLE:
+                Constants.mStaticObject.getPeopleDTO().set(question.getName(), answer.getAnswerString());
+//                Constants.mStaticObject.getPeopleDetailDTO().set(question.getName(), answer.getAnswerString());
+                PeopleDAO.getInstance().insert(Constants.mStaticObject.getPeopleDTO());
                 break;
             case Constants.SURVEY_HOUSE:
                 break;
             case Constants.SURVEY_MEMBER:
                 break;
             case Constants.SURVEY_FAMILY:
-                Constants.mStaticObject.getFamilyDTO().set(question.getName(), answer.getAnswer());
-                Constants.mStaticObject.getFamilyDetailDTO().set(question.getName(), answer.getAnswer());
+                Constants.mStaticObject.getFamilyDTO().set(question.getName(), answer.getAnswerString());
+                Constants.mStaticObject.getFamilyDetailDTO().set(question.getName(), answer.getAnswerString());
+                FamilyDAO.getInstance().insert(Constants.mStaticObject.getFamilyDTO());
                 break;
             default:
                 break;

@@ -29,7 +29,7 @@ public class Constants {
     //static object
     public static final StaticObject mStaticObject = StaticObject.getInstance();
 
-    //ID question
+    //ID question people
     public static final String QUESTION_Q9 = "Q9";
     public static final String QUESTION_Q1 = "Q1";
     public static final String QUESTION_Q2 = "Q2";
@@ -44,6 +44,28 @@ public class Constants {
     public static final String QUESTION_Q66 = "Q66";
     public static final String QUESTION_Q7 = "Q7";
     public static final String QUESTION_Q8 = "Q8";
+    //ID family
+    public static final String mDIACHI = "mDIACHI";
+    public static final String mDIENTHOAI = "mDIENTHOAI";
+    public static final String mEMAIL = "mEMAIL";
+    public static final String mGHICHU = "mGHICHU";
+    public static final String mHOSO = "mHOSO";
+    public static final String mIDDB = "mIDDB";
+    public static final String mIDHO = "mIDHO";
+    public static final String mLoaiphieu = "mLoaiphieu";
+    public static final String mMADIABAN = "mMADIABAN";
+    public static final String mMAHUYEN = "mMAHUYEN";
+    public static final String mMATHON = "mMATHON";
+    public static final String mMATINH = "mMATINH";
+    public static final String mMAXA = "mMAXA";
+    public static final String mSONHANKHAUDIEUTRA = "mSONHANKHAUDIEUTRA";
+    public static final String mSONHANKHAUHIEUCHINH = "mSONHANKHAUHIEUCHINH";
+    public static final String mSONHANKHAULAPBK = "mSONHANKHAULAPBK";
+    public static final String mSONUDIEUTRA = "mSONUDIEUTRA";
+    public static final String mSONUHIEUCHINH = "mSONUHIEUCHINH";
+    public static final String mSONULAPBK = "mSONULAPBK";
+    public static final String mTENCHUHO = "mTENCHUHO";
+    public static final String mTINHTRANGHO = "mTINHTRANGHO";
 
 
     //survey name

@@ -30,7 +30,7 @@
     <string name="txt_interview_detail">Chi tiết phỏng vấn</string>
 
 
-    //====question and answer====//
+    //====question and answerString====//
     <string name="enter_text">Enter text</string>
     <string name="question_required">*Required</string>
     <string name="questions">Questions</string>
@@ -429,6 +429,8 @@
     </string-array>
     <string name="txt_another_else">Hộ còn thành viên nào nữa không?</string>
     <string name="txt_select_require">Yêu cầu chọn thành viên</string>
+    <string name="txt_input_require">Yêu cầu nhập thành viên</string>
+    <string name="txt_empty">Thông tin không được để trống</string>
     <string name="txt_yes">Có</string>
     <string name="txt_no">Không</string>
 </resources>

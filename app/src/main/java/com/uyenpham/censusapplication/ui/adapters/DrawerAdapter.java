@@ -7,11 +7,14 @@ import android.view.ViewGroup;
 import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 import com.uyenpham.censusapplication.R;
+import com.uyenpham.censusapplication.db.AnswerDAO;
 import com.uyenpham.censusapplication.models.drawer.GroupDrawer;
+import com.uyenpham.censusapplication.models.survey.AnswerDTO;
 import com.uyenpham.censusapplication.models.survey.QuestionDTO;
 import com.uyenpham.censusapplication.ui.interfaces.IChildDrawerClick;
 import com.uyenpham.censusapplication.ui.viewholder.ChildDrawerViewHolder;
 import com.uyenpham.censusapplication.ui.viewholder.GroupDrawerViewHolder;
+import com.uyenpham.censusapplication.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +46,8 @@ public class DrawerAdapter extends ExpandableRecyclerViewAdapter<GroupDrawerView
                                       ExpandableGroup group, int childIndex) {
 
         final QuestionDTO question = ((GroupDrawer) group).getItems().get(childIndex);
-        holder.setChildInfo(question.getQuestion(), question.getSurvey()== null ? "Chưa xác định" : question.getSurvey());
+        AnswerDTO answerDTO = AnswerDAO.getInstance().findById(question.getId(),Constants.mStaticObject.getIdHo());
+        holder.setChildInfo(question.getQuestion(), (answerDTO== null || answerDTO.getAnswerString() == null) ? "Chưa xác định" : (String)answerDTO.getAnswerString());
         holder.setListener(listener);
         holder.setEvenClickItem(question);
     }

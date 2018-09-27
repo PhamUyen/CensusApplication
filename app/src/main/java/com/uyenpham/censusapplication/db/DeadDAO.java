@@ -42,9 +42,12 @@ public class DeadDAO {
         return result;
     }
 
-    public long insert(DeadDTO cacheEntity) {
-        long result = mLiteOrm.insert(cacheEntity);
-        return result;
+    public long insert(DeadDTO deadDTO) {
+        if(checkIsExistDB(deadDTO.getmID())){
+            return update(deadDTO);
+        }else {
+            return mLiteOrm.insert(deadDTO);
+        }
     }
 
     public int update(DeadDTO cacheEntity) {

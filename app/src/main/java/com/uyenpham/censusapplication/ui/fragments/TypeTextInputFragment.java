@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.uyenpham.censusapplication.R;
 import com.uyenpham.censusapplication.db.AnswerDAO;
@@ -53,37 +52,39 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
     protected void createView(View view) {
         activity.setiNext(this);
         activity.setiPrevious(this);
-        loadQuestion(questionDTO, answerDTO);
+        loadQuestion(questionDTO);
+        edAnswer.setSingleLine();
         if (questionDTO.getType() == Constants.TYPE_TEXT_INPUT_LIST) {
             rcvText.setVisibility(View.VISIBLE);
             setRcvText();
-            edAnswer.setSingleLine();
+        } else {
+            rcvText.setVisibility(View.GONE);
+        }
             edAnswer.setImeOptions(EditorInfo.IME_ACTION_DONE);
             edAnswer.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                 @Override
                 public boolean onEditorAction(TextView v, int actionId, KeyEvent keyEvent) {
                     if (actionId == EditorInfo.IME_ACTION_DONE) {
                         //add answer to list
-                        listText.add(edAnswer.getText().toString());
                         if (questionDTO.getSurvey().equals(Constants.SURVEY_PEOPLE)) {
-                            setMember(edAnswer.getText().toString(), listText.indexOf(edAnswer
-                                    .getText().toString()));
+                            listText.add(edAnswer.getText().toString());
+                            adapter.notifyDataSetChanged();
+                            edAnswer.setText(null);
                         }
-                        adapter.notifyDataSetChanged();
-                        edAnswer.setText(null);
+
+                        setMember(edAnswer.getText().toString());
                         return true;
                     }
                     return false;
                 }
             });
-        } else {
-            rcvText.setVisibility(View.GONE);
-        }
     }
 
-    private void setMember(String name, int index) {
-        switch (questionDTO.getId()) {
-            case Constants.QUESTION_Q1:
+    private void setMember(String name) {
+        answerDTO.setAnswerString(name);
+        switch (questionDTO.getSurvey()) {
+            case Constants.SURVEY_PEOPLE:
+                int index = listText.indexOf(name);
                 PeopleDetailDTO peopleDetailDTO = new PeopleDetailDTO();
                 peopleDetailDTO.setIDHO(Constants.mStaticObject.getIdHo());
                 peopleDetailDTO.setHOSO(Constants.mStaticObject.getPeopleDTO().getHOSO());
@@ -95,6 +96,11 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
                 Constants.mStaticObject.getPeopleDetailDTO().add(peopleDetailDTO);
                 break;
 
+            case Constants.SURVEY_FAMILY:
+                answerDTO.setAnswerString(name);
+                Constants.mStaticObject.getFamilyDTO().set(questionDTO.getId(),name);
+                Constants.mStaticObject.getFamilyDetailDTO().set(questionDTO.getId(),name);
+                break;
             default:
                 break;
         }
@@ -102,28 +108,18 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
 
 
 
-    public boolean loadQuestion(QuestionDTO question, AnswerDTO answer) {
+    public boolean loadQuestion(QuestionDTO question) {
+        answerDTO = AnswerDAO.getInstance().findById(questionDTO.getId(),Constants.mStaticObject.getIdHo());
         if (question == null) return false;
         tvQuestion.setText(question.getQuestion());
-        if (answer != null && !StringUtils.isEmpty((String) answer.getAnswer())) {
-            edAnswer.setText((String) answer.getAnswer());
+        if (answerDTO != null && !StringUtils.isEmpty(answerDTO.getAnswerString())) {
+            edAnswer.setText( answerDTO.getAnswerString());
         } else {
             edAnswer.setHint(question.getPlaceHolder());
         }
         return true;
     }
 
-    @Override
-    public boolean save(QuestionDTO questionDTO, AnswerDTO answerDTO, Object answer) {
-        if (answerDTO == null) {
-            answerDTO = new AnswerDTO();
-        }
-        answerDTO.setQuestionID(questionDTO.getId());
-        answerDTO.setAnswer(answer);
-        AnswerDAO.getInstance().insert(answerDTO);
-        saveAnswerToSurvey(questionDTO, answerDTO);
-        return false;
-    }
 
     @Override
     public boolean validateQuaetion(QuestionDTO question, AnswerDTO answer) {
@@ -134,8 +130,17 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
                 list.add(new GroupDrawer("nguyen van b", null));
                 activity.setList(list);
                 return true;
+            case Constants.QUESTION_Q1:
+                return listText.size()>0;
+            case Constants.mDIENTHOAI:
+                String regexStr = "^[0-9]*$";
+               return  (answer.getAnswerString().matches(regexStr) && 9<answer.getAnswerString().length() && answer.getAnswerString().length()<12);
             default:
-                return true;
+                if(answer.getAnswerString() == null){
+                    return false;
+                }else {
+                    return true;
+                }
         }
     }
 
@@ -157,27 +162,10 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
 
     @Override
     public void next() {
-        if(questionDTO.getId().equals(Constants.QUESTION_Q1)){
-            DialogUtils.showErrorAlert2Option(activity, R.string.txt_another_else, R.string.txt_yes, R.string.txt_no,
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            isValidate = false;                      }
-                    }, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            nextFragment();
-                        }
-                    });
-        }else {
-            if (validateQuaetion(questionDTO, answerDTO)) {
-                nextFragment();
-            } else {
-                Toast.makeText(activity, "Error!", Toast.LENGTH_SHORT).show();
-            }
-        }
+        changeQuestion();
     }
     private void nextFragment(){
+        save(answerDTO, questionDTO);
         if (currentIndex < getListQuestion().size() - 1) {
             currentIndex++;
             replcaeFragmentByType(getListQuestion().get(currentIndex), true);
@@ -186,9 +174,36 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
 
     @Override
     public void previuos() {
+//        save();
         if (currentIndex > 0) {
             currentIndex--;
             replcaeFragmentByType(getListQuestion().get(currentIndex), false);
+        }
+    }
+
+    private void changeQuestion(){
+        if(questionDTO.getId().equals(Constants.QUESTION_Q1)){
+            if(validateQuaetion(questionDTO,answerDTO)){
+                DialogUtils.showErrorAlert2Option(activity, R.string.txt_another_else, R.string.txt_yes, R.string.txt_no,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                isValidate = false;                      }
+                        }, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                nextFragment();
+                            }
+                        });
+            }else {
+                DialogUtils.showAlert(activity,R.string.txt_empty);
+            }
+        }else {
+            if (validateQuaetion(questionDTO, answerDTO)) {
+                    nextFragment();
+            } else {
+                DialogUtils.showAlert(activity,R.string.txt_empty);
+            }
         }
     }
 }

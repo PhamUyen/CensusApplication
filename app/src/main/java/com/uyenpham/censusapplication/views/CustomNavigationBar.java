@@ -141,7 +141,7 @@ public class CustomNavigationBar extends RelativeLayout implements View.OnClickL
      * hide imageView right
      */
     public void hideImgLeft() {
-        imgLeft.setVisibility(View.GONE);
+        imgLeft.setVisibility(View.INVISIBLE);
     }
 
     /**

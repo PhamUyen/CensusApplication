@@ -2,6 +2,7 @@
 package com.uyenpham.censusapplication.models.family;
 
 import com.google.gson.annotations.SerializedName;
+import com.uyenpham.censusapplication.utils.Logger;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
@@ -16,7 +17,7 @@ public class FamilyDTO implements Serializable{
     @SerializedName("EMAIL")
     private String mEMAIL;
     @SerializedName("GHICHU")
-    private Object mGHICHU;
+    private String mGHICHU;
     @SerializedName("HOSO")
     private String mHOSO;
     @SerializedName("IDDB")
@@ -24,7 +25,7 @@ public class FamilyDTO implements Serializable{
     @SerializedName("IDHO")
     private String mIDHO;
     @SerializedName("Loaiphieu")
-    private Long mLoaiphieu;
+    private Integer mLoaiphieu;
     @SerializedName("MADIABAN")
     private String mMADIABAN;
     @SerializedName("MAHUYEN")
@@ -36,26 +37,26 @@ public class FamilyDTO implements Serializable{
     @SerializedName("MAXA")
     private String mMAXA;
     @SerializedName("SONHANKHAU_DIEUTRA")
-    private Object mSONHANKHAUDIEUTRA;
+    private Integer mSONHANKHAUDIEUTRA;
     @SerializedName("SONHANKHAU_HIEUCHINH")
-    private Object mSONHANKHAUHIEUCHINH;
+    private Integer mSONHANKHAUHIEUCHINH;
     @SerializedName("SONHANKHAU_LAPBK")
-    private Long mSONHANKHAULAPBK;
+    private Integer mSONHANKHAULAPBK;
     @SerializedName("SONU_DIEUTRA")
-    private Object mSONUDIEUTRA;
+    private Integer mSONUDIEUTRA;
     @SerializedName("SONU_HIEUCHINH")
-    private Object mSONUHIEUCHINH;
+    private Integer mSONUHIEUCHINH;
     @SerializedName("SONU_LAPBK")
-    private Long mSONULAPBK;
+    private Integer mSONULAPBK;
     @SerializedName("TENCHUHO")
     private String mTENCHUHO;
     @SerializedName("TINHTRANGHO")
-    private Long mTINHTRANGHO;
+    private Integer mTINHTRANGHO;
 
     public FamilyDTO() {
     }
 
-    public FamilyDTO(String mDIACHI, String mIDDB, String mTENCHUHO, long
+    public FamilyDTO(String mDIACHI, String mIDDB, String mTENCHUHO, Integer
             mTINHTRANGHO) {
         this.mDIACHI = mDIACHI;
         this.mIDDB = mIDDB;
@@ -91,7 +92,7 @@ public class FamilyDTO implements Serializable{
         return mGHICHU;
     }
 
-    public void setGHICHU(Object gHICHU) {
+    public void setGHICHU(String gHICHU) {
         mGHICHU = gHICHU;
     }
 
@@ -119,11 +120,11 @@ public class FamilyDTO implements Serializable{
         mIDHO = iDHO;
     }
 
-    public Long getLoaiphieu() {
+    public Integer getLoaiphieu() {
         return mLoaiphieu;
     }
 
-    public void setLoaiphieu(Long loaiphieu) {
+    public void setLoaiphieu(Integer loaiphieu) {
         mLoaiphieu = loaiphieu;
     }
 
@@ -167,51 +168,51 @@ public class FamilyDTO implements Serializable{
         mMAXA = mAXA;
     }
 
-    public Object getSONHANKHAUDIEUTRA() {
+    public Integer getSONHANKHAUDIEUTRA() {
         return mSONHANKHAUDIEUTRA;
     }
 
-    public void setSONHANKHAUDIEUTRA(Object sONHANKHAUDIEUTRA) {
+    public void setSONHANKHAUDIEUTRA(Integer sONHANKHAUDIEUTRA) {
         mSONHANKHAUDIEUTRA = sONHANKHAUDIEUTRA;
     }
 
-    public Object getSONHANKHAUHIEUCHINH() {
+    public Integer getSONHANKHAUHIEUCHINH() {
         return mSONHANKHAUHIEUCHINH;
     }
 
-    public void setSONHANKHAUHIEUCHINH(Object sONHANKHAUHIEUCHINH) {
+    public void setSONHANKHAUHIEUCHINH(Integer sONHANKHAUHIEUCHINH) {
         mSONHANKHAUHIEUCHINH = sONHANKHAUHIEUCHINH;
     }
 
-    public Long getSONHANKHAULAPBK() {
+    public Integer getSONHANKHAULAPBK() {
         return mSONHANKHAULAPBK;
     }
 
-    public void setSONHANKHAULAPBK(Long sONHANKHAULAPBK) {
+    public void setSONHANKHAULAPBK(Integer sONHANKHAULAPBK) {
         mSONHANKHAULAPBK = sONHANKHAULAPBK;
     }
 
-    public Object getSONUDIEUTRA() {
+    public Integer getSONUDIEUTRA() {
         return mSONUDIEUTRA;
     }
 
-    public void setSONUDIEUTRA(Object sONUDIEUTRA) {
+    public void setSONUDIEUTRA(Integer sONUDIEUTRA) {
         mSONUDIEUTRA = sONUDIEUTRA;
     }
 
-    public Object getSONUHIEUCHINH() {
+    public Integer getSONUHIEUCHINH() {
         return mSONUHIEUCHINH;
     }
 
-    public void setSONUHIEUCHINH(Object sONUHIEUCHINH) {
+    public void setSONUHIEUCHINH(Integer sONUHIEUCHINH) {
         mSONUHIEUCHINH = sONUHIEUCHINH;
     }
 
-    public Long getSONULAPBK() {
+    public Integer getSONULAPBK() {
         return mSONULAPBK;
     }
 
-    public void setSONULAPBK(Long sONULAPBK) {
+    public void setSONULAPBK(Integer sONULAPBK) {
         mSONULAPBK = sONULAPBK;
     }
 
@@ -223,15 +224,15 @@ public class FamilyDTO implements Serializable{
         mTENCHUHO = tENCHUHO;
     }
 
-    public Long getTINHTRANGHO() {
+    public Integer getTINHTRANGHO() {
         return mTINHTRANGHO;
     }
 
-    public void setTINHTRANGHO(Long tINHTRANGHO) {
+    public void setTINHTRANGHO(Integer tINHTRANGHO) {
         mTINHTRANGHO = tINHTRANGHO;
     }
     public  boolean set(String fieldName, Object fieldValue) {
-        fieldName = "m"+fieldName;
+        fieldName = fieldName.startsWith("m") ?fieldName : "m"+fieldName;
         Class<?> clazz = this.getClass();
         while (clazz != null) {
             try {
@@ -248,17 +249,17 @@ public class FamilyDTO implements Serializable{
         return false;
     }
     public  Object get(String fieldName) {
-        fieldName = "m"+fieldName;
+        fieldName = fieldName.startsWith("m") ?fieldName : "m"+fieldName;
         Class<?> clazz = this.getClass();
         while (clazz != null) {
             try {
                 Field field = clazz.getDeclaredField(fieldName);
                 field.setAccessible(true);
-                return field.get(fieldName);
+                return field.get(this);
             } catch (NoSuchFieldException e) {
                 clazz = clazz.getSuperclass();
-            } catch (Exception e) {
-                throw new IllegalStateException(e);
+            } catch (IllegalAccessException e) {
+                Logger.e(e);
             }
         }
         return null;

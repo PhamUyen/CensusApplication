@@ -7,7 +7,7 @@
       "type": "1",
       "options": [],
       "placeHolders": "",
-      "survey":"member"
+      "survey": "member"
     },
     {
       "id": "C02",
@@ -16,32 +16,32 @@
       "type": 4,
       "options": [
         {
-          "option" : "VỢ/CHỒNG",
-          "type" : "NORMAL"
+          "option": "VỢ/CHỒNG",
+          "type": "NORMAL"
         },
         {
-          "option" : "CON ĐẺ",
-          "type" : "NORMAL"
+          "option": "CON ĐẺ",
+          "type": "NORMAL"
         },
         {
-          "option" : "CHÁU NỘI/NGOẠI",
-          "type" : "NORMAL"
+          "option": "CHÁU NỘI/NGOẠI",
+          "type": "NORMAL"
         },
         {
-          "option" : "BỐ/MẸ",
-          "type" : "NORMAL"
+          "option": "BỐ/MẸ",
+          "type": "NORMAL"
         },
         {
-          "option" : "QUAN HỆ GIA ĐÌNH KHÁC",
-          "type" : "SHOW"
+          "option": "QUAN HỆ GIA ĐÌNH KHÁC",
+          "type": "SHOW"
         },
         {
-          "option" : "KHÔNG QUAN HỆ GIA ĐÌNH",
-          "type" : "NORMAL"
+          "option": "KHÔNG QUAN HỆ GIA ĐÌNH",
+          "type": "NORMAL"
         }
       ],
       "placeHolders": "",
-      "survey":"member"
+      "survey": "member"
     },
     {
       "id": "C03",
@@ -50,16 +50,16 @@
       "type": 2,
       "options": [
         {
-          "option" : "NAM",
-          "type" : "NORMAL"
+          "option": "NAM",
+          "type": "NORMAL"
         },
         {
-          "option" : "NỮ",
-          "type" : "NORMAL"
+          "option": "NỮ",
+          "type": "NORMAL"
         }
       ],
       "placeHolders": "",
-      "survey":"member"
+      "survey": "member"
     },
     {
       "id": "C04",
@@ -68,20 +68,20 @@
       "type": 7,
       "options": [
         {
-          "option" : "THÁNG",
-          "type" : "NORMAL"
+          "option": "THÁNG",
+          "type": "NORMAL"
         },
         {
-          "option" : "NĂM",
-          "type" : "NORMAL"
+          "option": "NĂM",
+          "type": "NORMAL"
         },
         {
-          "option" : "KHÔNG XĐ NĂM",
-          "type" : "NORMAL"
+          "option": "KHÔNG XĐ NĂM",
+          "type": "NORMAL"
         }
       ],
       "placeHolders": "",
-      "survey":"member"
+      "survey": "member"
     },
     {
       "id": "C05",
@@ -90,12 +90,12 @@
       "type": 6,
       "options": [
         {
-          "option" : "TUỔI TRÒN",
-          "type" : "NORMAL"
+          "option": "TUỔI TRÒN",
+          "type": "NORMAL"
         }
       ],
       "placeHolders": "",
-      "survey":"member"
+      "survey": "member"
     },
     {
       "id": "C06",
@@ -104,16 +104,16 @@
       "type": 9,
       "options": [
         {
-          "option" : "KINH",
-          "type" : "NORMAL"
+          "option": "KINH",
+          "type": "NORMAL"
         },
         {
-          "option" : "DÂN TỘC KHÁC",
-          "type" : "SHOW"
+          "option": "DÂN TỘC KHÁC",
+          "type": "SHOW"
         }
       ],
       "placeHolders": "",
-      "survey":"member"
+      "survey": "member"
     },
     {
       "id": "C07",
@@ -122,16 +122,16 @@
       "type": 4,
       "options": [
         {
-          "option" : "CÓ",
-          "type" : "SHOW"
+          "option": "CÓ",
+          "type": "SHOW"
         },
         {
-          "option" : "KHÔNG",
-          "type" : "NORMAL"
+          "option": "KHÔNG",
+          "type": "NORMAL"
         }
       ],
       "placeHolders": "",
-      "survey":"member"
+      "survey": "member"
     },
     {
       "id": "C08",
@@ -140,15 +140,15 @@
       "type": 2,
       "options": [
         {
-          "option" : "ĐÃ ĐĂNG KÝ",
-          "type" : "NORMAL"
+          "option": "ĐÃ ĐĂNG KÝ",
+          "type": "NORMAL"
         },
         {
-          "option" : "CHƯA ĐĂNG KÝ",
-          "type" : "NORMAL"
+          "option": "CHƯA ĐĂNG KÝ",
+          "type": "NORMAL"
         }
       ],
-      "survey":"member",
+      "survey": "member",
       "placeHolders": ""
     },
     {
@@ -158,28 +158,28 @@
       "type": 2,
       "options": [
         {
-          "option" : "Ở NƯỚC NGOÀI",
-          "type" : "NORMAL"
+          "option": "Ở NƯỚC NGOÀI",
+          "type": "NORMAL"
         },
         {
-          "option" : "CÙNG XÃ/PHƯỜNG",
-          "type" : "NORMAL"
+          "option": "CÙNG XÃ/PHƯỜNG",
+          "type": "NORMAL"
         },
         {
-          "option" : "XÃ/PHƯỜNG KHÁC",
-          "type" : "NORMAL"
+          "option": "XÃ/PHƯỜNG KHÁC",
+          "type": "NORMAL"
         },
         {
-          "option" : "CÙNG QUẬN/HUYỆN",
-          "type" : "NORMAL"
+          "option": "CÙNG QUẬN/HUYỆN",
+          "type": "NORMAL"
         },
         {
-          "option" : "QUẬN/HUYỆN KHÁC",
-          "type" : "NORMAL"
+          "option": "QUẬN/HUYỆN KHÁC",
+          "type": "NORMAL"
         }
       ],
       "placeHolders": "",
-      "survey":"member"
+      "survey": "member"
     },
     {
       "id": "C10",
@@ -188,15 +188,15 @@
       "type": 1,
       "options": [
         {
-          "option" : "TÊN TỈNH/THÀNH PHỒ",
-          "type" : "NORMAL"
+          "option": "TÊN TỈNH/THÀNH PHỒ",
+          "type": "NORMAL"
         },
         {
-          "option" : "TÊN QUẬN/HUYỆN",
-          "type" : "NORMAL"
+          "option": "TÊN QUẬN/HUYỆN",
+          "type": "NORMAL"
         }
       ],
-      "survey":"member",
+      "survey": "member",
       "placeHolders": ""
     },
     {
@@ -206,15 +206,15 @@
       "type": 2,
       "options": [
         {
-          "option" : "PHƯỜNG/THỊ TRẤN",
-          "type" : "NORMAL"
+          "option": "PHƯỜNG/THỊ TRẤN",
+          "type": "NORMAL"
         },
         {
-          "option" : "XÃ",
-          "type" : "NORMAL"
+          "option": "XÃ",
+          "type": "NORMAL"
         }
       ],
-      "survey":"member",
+      "survey": "member",
       "placeHolders": ""
     },
     {
@@ -224,36 +224,36 @@
       "type": 4,
       "options": [
         {
-          "option" : "TÌM VIỆC/ BẮT ĐẦU CÔNG VIỆC MỚI",
-          "type" : "NORMAL"
+          "option": "TÌM VIỆC/ BẮT ĐẦU CÔNG VIỆC MỚI",
+          "type": "NORMAL"
         },
         {
-          "option" : "VỀ QUÊ DO MẤT/HẾT VIỆC",
-          "type" : "NORMAL"
+          "option": "VỀ QUÊ DO MẤT/HẾT VIỆC",
+          "type": "NORMAL"
         },
         {
-          "option" : "KHÔNG TÌM ĐƯỢC VIỆC",
-          "type" : "NORMAL"
+          "option": "KHÔNG TÌM ĐƯỢC VIỆC",
+          "type": "NORMAL"
         },
         {
-          "option" : "THEO GIA ĐÌNH",
-          "type" : "NORMAL"
+          "option": "THEO GIA ĐÌNH",
+          "type": "NORMAL"
         },
         {
-          "option" : "KẾT HÔN",
-          "type" : "NORMAL"
+          "option": "KẾT HÔN",
+          "type": "NORMAL"
         },
         {
-          "option" : "ĐI HỌC",
-          "type" : "NORMAL"
+          "option": "ĐI HỌC",
+          "type": "NORMAL"
         },
         {
-          "option" : "KHÁC",
-          "type" : "SHOW"
+          "option": "KHÁC",
+          "type": "SHOW"
         }
       ],
       "placeHolders": "",
-      "survey":"member"
+      "survey": "member"
     },
     {
       "id": "C13a",
@@ -262,24 +262,24 @@
       "type": 2,
       "options": [
         {
-          "option" : "KHÔNG KHÓ KHĂN",
-          "type" : "NORMAL"
+          "option": "KHÔNG KHÓ KHĂN",
+          "type": "NORMAL"
         },
         {
-          "option" : " KHÓ KHĂN MỘT CHÚT",
-          "type" : "NORMAL"
+          "option": " KHÓ KHĂN MỘT CHÚT",
+          "type": "NORMAL"
         },
         {
-          "option" : "RẤT KHÓ KHĂN",
-          "type" : "NORMAL"
+          "option": "RẤT KHÓ KHĂN",
+          "type": "NORMAL"
         },
         {
-          "option" : "KHÔNG THỂ",
-          "type" : "NORMAL"
+          "option": "KHÔNG THỂ",
+          "type": "NORMAL"
         }
       ],
       "placeHolders": "",
-      "survey":"member"
+      "survey": "member"
     },
     {
       "id": "C13b",
@@ -288,24 +288,24 @@
       "type": 2,
       "options": [
         {
-          "option" : "KHÔNG KHÓ KHĂN",
-          "type" : "NORMAL"
+          "option": "KHÔNG KHÓ KHĂN",
+          "type": "NORMAL"
         },
         {
-          "option" : " KHÓ KHĂN MỘT CHÚT",
-          "type" : "NORMAL"
+          "option": " KHÓ KHĂN MỘT CHÚT",
+          "type": "NORMAL"
         },
         {
-          "option" : "RẤT KHÓ KHĂN",
-          "type" : "NORMAL"
+          "option": "RẤT KHÓ KHĂN",
+          "type": "NORMAL"
         },
         {
-          "option" : "KHÔNG THỂ",
-          "type" : "NORMAL"
+          "option": "KHÔNG THỂ",
+          "type": "NORMAL"
         }
       ],
       "placeHolders": "",
-      "survey":"member"
+      "survey": "member"
     },
     {
       "id": "C13c",
@@ -314,24 +314,24 @@
       "type": 2,
       "options": [
         {
-          "option" : "KHÔNG KHÓ KHĂN",
-          "type" : "NORMAL"
+          "option": "KHÔNG KHÓ KHĂN",
+          "type": "NORMAL"
         },
         {
-          "option" : " KHÓ KHĂN MỘT CHÚT",
-          "type" : "NORMAL"
+          "option": " KHÓ KHĂN MỘT CHÚT",
+          "type": "NORMAL"
         },
         {
-          "option" : "RẤT KHÓ KHĂN",
-          "type" : "NORMAL"
+          "option": "RẤT KHÓ KHĂN",
+          "type": "NORMAL"
         },
         {
-          "option" : "KHÔNG THỂ",
-          "type" : "NORMAL"
+          "option": "KHÔNG THỂ",
+          "type": "NORMAL"
         }
       ],
       "placeHolders": "",
-      "survey":"member"
+      "survey": "member"
     },
     {
       "id": "C13d",
@@ -340,24 +340,24 @@
       "type": 2,
       "options": [
         {
-          "option" : "KHÔNG KHÓ KHĂN",
-          "type" : "NORMAL"
+          "option": "KHÔNG KHÓ KHĂN",
+          "type": "NORMAL"
         },
         {
-          "option" : " KHÓ KHĂN MỘT CHÚT",
-          "type" : "NORMAL"
+          "option": " KHÓ KHĂN MỘT CHÚT",
+          "type": "NORMAL"
         },
         {
-          "option" : "RẤT KHÓ KHĂN",
-          "type" : "NORMAL"
+          "option": "RẤT KHÓ KHĂN",
+          "type": "NORMAL"
         },
         {
-          "option" : "KHÔNG THỂ",
-          "type" : "NORMAL"
+          "option": "KHÔNG THỂ",
+          "type": "NORMAL"
         }
       ],
       "placeHolders": "",
-      "survey":"member"
+      "survey": "member"
     },
     {
       "id": "C13e",
@@ -366,24 +366,24 @@
       "type": 2,
       "options": [
         {
-          "option" : "KHÔNG KHÓ KHĂN",
-          "type" : "NORMAL"
+          "option": "KHÔNG KHÓ KHĂN",
+          "type": "NORMAL"
         },
         {
-          "option" : " KHÓ KHĂN MỘT CHÚT",
-          "type" : "NORMAL"
+          "option": " KHÓ KHĂN MỘT CHÚT",
+          "type": "NORMAL"
         },
         {
-          "option" : "RẤT KHÓ KHĂN",
-          "type" : "NORMAL"
+          "option": "RẤT KHÓ KHĂN",
+          "type": "NORMAL"
         },
         {
-          "option" : "KHÔNG THỂ",
-          "type" : "NORMAL"
+          "option": "KHÔNG THỂ",
+          "type": "NORMAL"
         }
       ],
       "placeHolders": "",
-      "survey":"member"
+      "survey": "member"
     },
     {
       "id": "C13f",
@@ -392,24 +392,24 @@
       "type": 2,
       "options": [
         {
-          "option" : "KHÔNG KHÓ KHĂN",
-          "type" : "NORMAL"
+          "option": "KHÔNG KHÓ KHĂN",
+          "type": "NORMAL"
         },
         {
-          "option" : " KHÓ KHĂN MỘT CHÚT",
-          "type" : "NORMAL"
+          "option": " KHÓ KHĂN MỘT CHÚT",
+          "type": "NORMAL"
         },
         {
-          "option" : "RẤT KHÓ KHĂN",
-          "type" : "NORMAL"
+          "option": "RẤT KHÓ KHĂN",
+          "type": "NORMAL"
         },
         {
-          "option" : "KHÔNG THỂ",
-          "type" : "NORMAL"
+          "option": "KHÔNG THỂ",
+          "type": "NORMAL"
         }
       ],
       "placeHolders": "",
-      "survey":"member"
+      "survey": "member"
     },
     {
       "id": "C14",
@@ -418,20 +418,20 @@
       "type": 2,
       "options": [
         {
-          "option" : "ĐANG ĐI HỌ",
-          "type" : "NORMAL"
+          "option": "ĐANG ĐI HỌ",
+          "type": "NORMAL"
         },
         {
-          "option" : "ĐÃ THÔI HỌC",
-          "type" : "NORMAL"
+          "option": "ĐÃ THÔI HỌC",
+          "type": "NORMAL"
         },
         {
-          "option" : "CHƯA BAO GIỜ ĐI HỌC",
-          "type" : "NORMAL"
+          "option": "CHƯA BAO GIỜ ĐI HỌC",
+          "type": "NORMAL"
         }
       ],
       "placeHolders": "",
-      "survey":"member"
+      "survey": "member"
     },
     {
       "id": "C15",
@@ -440,67 +440,115 @@
       "type": 2,
       "options": [
         {
-          "option" : "MẦM NON DƯỚI 5 TUỔI",
-          "type" : "NORMAL"
+          "option": "MẦM NON DƯỚI 5 TUỔI",
+          "type": "NORMAL"
         },
         {
-          "option" : "MẦM NON 5 TUỔI",
-          "type" : "NORMAL"
+          "option": "MẦM NON 5 TUỔI",
+          "type": "NORMAL"
         },
         {
-          "option" : "TIỂU HỌC",
-          "type" : "NORMAL"
+          "option": "TIỂU HỌC",
+          "type": "NORMAL"
         },
         {
-          "option" : "TRUNG HỌC CƠ SỞ",
-          "type" : "NORMAL"
+          "option": "TRUNG HỌC CƠ SỞ",
+          "type": "NORMAL"
         },
         {
-          "option" : "TRUNG HỌC PHỔ THÔNG",
-          "type" : "NORMAL"
+          "option": "TRUNG HỌC PHỔ THÔNG",
+          "type": "NORMAL"
         },
         {
-          "option" : "SƠ CẤP",
-          "type" : "NORMAL"
+          "option": "SƠ CẤP",
+          "type": "NORMAL"
         },
         {
-          "option" : "TRUNG CẤP",
-          "type" : "NORMAL"
+          "option": "TRUNG CẤP",
+          "type": "NORMAL"
         },
         {
-          "option" : "CAO ĐẲNG",
-          "type" : "NORMAL"
+          "option": "CAO ĐẲNG",
+          "type": "NORMAL"
         },
         {
-          "option" : "ĐẠI HỌC",
-          "type" : "NORMAL"
+          "option": "ĐẠI HỌC",
+          "type": "NORMAL"
         },
         {
-          "option" : "THẠC SỸ",
-          "type" : "NORMAL"
+          "option": "THẠC SỸ",
+          "type": "NORMAL"
         },
         {
-          "option" : "TIẾN SỸ",
-          "type" : "NORMAL"
+          "option": "TIẾN SỸ",
+          "type": "NORMAL"
         }
       ],
       "placeHolders": "",
-      "survey":"member"
+      "survey": "member"
     },
     {
       "id": "C16",
       "name": "C16",
       "question": "Trình độ học vấn cao nhất tốt nghiệp/đạt được là gì?",
       "type": 2,
-      "options": "DƯỚI TIỂU HỌC,TIỂU HỌC,TRUNG HỌC CƠ SỞ,TRUNG HỌC PHỔ THÔNG,TRUNG CẤP CHUYÊN NGHIỆP,CAO ĐẲNG CHUYÊN NGHIỆP,ĐẠI HỌC,THẠC SỸ,TIẾN SỸ",
-      "placeHolders": ""
+      "options": [
+        {
+          "option": "DƯỚI TIỂU HỌC",
+          "type": "NORMAL"
+        },
+        {
+          "option": "TIỂU HỌC",
+          "type": "NORMAL"
+        },
+        {
+          "option": "TRUNG HỌC CƠ SỞ",
+          "type": "NORMAL"
+        },
+        {
+          "option": "TRUNG HỌC PHỔ THÔNG",
+          "type": "NORMAL"
+        },
+        {
+          "option": "TRUNG CẤP CHUYÊN NGHIỆP",
+          "type": "NORMAL"
+        },
+        {
+          "option": "CAO ĐẲNG CHUYÊN NGHIỆP",
+          "type": "NORMAL"
+        },
+        {
+          "option": "ĐẠI HỌC",
+          "type": "NORMAL"
+        },
+        {
+          "option": "THẠC SỸ",
+          "type": "NORMAL"
+        },
+        {
+          "option": "TIẾN SỸ",
+          "type": "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey": "member"
     },
     {
       "id": "C17",
       "name": "C17",
       "question": "kỹ năng nghề hoặc bằng/chứng chỉ nghề",
       "type": 2,
-      "options": "CÓ, KHÔNG",
+      "options": [
+        {
+          "option": "CÓ",
+          "type": "SHOW"
+        },
+        {
+          "option": "KHÔNG",
+          "type": "NORMAL"
+        }
+      ],
+      "survey": "member",
       "placeHolders": ""
     },
     {
@@ -508,7 +556,29 @@
       "name": "C18",
       "question": "Trình độ nghề/kỹ năng nghề cao nhất",
       "type": 2,
-      "options": "CNKT KHÔNG CÓ BẰNG/CC, CHỨNG CHỈ NGHỀ,SƠ CẤP NGHỀ,TRUNG CẤP NGHỀ,CAO ĐẲNG NGHỀ",
+      "options": [
+        {
+          "option": "CNKT KHÔNG CÓ BẰNG/CC",
+          "type": "NORMAL"
+        },
+        {
+          "option": "CHỨNG CHỈ NGHỀ",
+          "type": "NORMAL"
+        },
+        {
+          "option": "SƠ CẤP NGHỀ",
+          "type": "NORMAL"
+        },
+        {
+          "option": "TRUNG CẤP NGHỀ",
+          "type": "NORMAL"
+        },
+        {
+          "option": "CAO ĐẲNG NGHỀ",
+          "type": "NORMAL"
+        }
+      ],
+      "survey": "member",
       "placeHolders": ""
     },
     {
@@ -516,120 +586,304 @@
       "name": "C19",
       "question": "Lớp học phổ thông cao nhất đã học xong?",
       "type": 6,
-      "options": "LỚP PHỔ THÔNG",
-      "placeHolders": ""
+      "options": [
+        {
+          "option": "LỚP PHỔ THÔNG",
+          "type": "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey": "member"
     },
     {
       "id": "C20",
       "name": "C20",
       "question": "Tổng số năm đã học xong của tất cả các trình độ đào tạo nghề, chuyên nghiệp, đại học, thạc sỹ và tiến sỹ  đang học hoặc đã học xong (NẾU CÓ)?",
       "type": 6,
-      "options": "SỐ NĂM HỌC",
-      "placeHolders": ""
+      "options": [
+        {
+          "option": "SỐ NĂM HỌC",
+          "type": "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey": "member"
     },
     {
       "id": "C21",
       "name": "C21",
       "question": "Khả năng đọc và viết",
       "type": 2,
-      "options": "CÓ,KHÔNG",
-      "placeHolders": ""
+      "options": [
+        {
+          "option": "CÓ",
+          "type": "NORMAL"
+        },
+        {
+          "option": "KHÔNG",
+          "type": "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey": "member"
     },
     {
       "id": "C22",
       "name": "C22",
       "question": "Tình trạng hôn nhân hiện",
       "type": 2,
-      "options": "CHƯA VỢ/CHỒNG,CÓ VỢ/CHỒNG,GOÁ VỢ/CHỒNG,LY HÔN,LY THÂN",
-      "placeHolders": ""
+      "options": [
+        {
+          "option": "CHƯA VỢ/CHỒNG",
+          "type": "NORMAL"
+        },
+        {
+          "option": "CÓ VỢ/CHỒNG",
+          "type": "NORMAL"
+        },
+        {
+          "option": "GOÁ VỢ/CHỒNG",
+          "type": "NORMAL"
+        },
+        {
+          "option": "LY HÔN",
+          "type": "NORMAL"
+        },
+        {
+          "option": "LY THÂN",
+          "type": "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey": "member"
     },
     {
       "id": "C23",
       "name": "C23",
       "question": "Thời gian kết hôn lần đầu",
       "type": 7,
-      "options": "THÁNG, NĂM,KHÔNG XĐ NĂM",
-      "placeHolders": ""
+      "options": [
+        {
+          "option": "THÁNG",
+          "type": "NORMAL"
+        },
+        {
+          "option": "NĂM",
+          "type": "NORMAL"
+        },
+        {
+          "option": "KHÔNG XĐ NĂM",
+          "type": "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey": "member"
     },
     {
       "id": "C24",
       "name": "C24",
       "question": "Tuổi kết hôn lần đầu",
       "type": 6,
-      "options": "TUỔI TRÒN",
-      "placeHolders": ""
+      "options": [
+        {
+          "option": "TUỔI TRÒN",
+          "type": "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey": "member"
     },
     {
       "id": "C25",
       "name": "C25",
       "question": "Trong 7 ngày qua có làm công việc gì từ 1 giờ trở lên để tạo thu nhập cho bản thân hoặc gia đình không?",
       "type": 2,
-      "options": "CÓ, KHÔNG, Ở NƯỚC NGOÀI",
-      "placeHolders": ""
+      "options": [
+        {
+          "option": "CÓ",
+          "type": "NORMAL"
+        },
+        {
+          "option": "KHÔNG",
+          "type": "NORMAL"
+        },
+        {
+          "option": "Ở NƯỚC NGOÀI",
+          "type": "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey": "member"
     },
     {
       "id": "C26",
       "name": "C26",
       "question": "Tuy không làm việc nhưng có được trả lương/trả công hoặc hưởng lợi từ hoạt động sản xuất kinh doanh không ?",
       "type": 2,
-      "options": "CÓ, KHÔNG",
-      "placeHolders": ""
+      "options": [
+        {
+          "option": "CÓ",
+          "type": "NORMAL"
+        },
+        {
+          "option": "KHÔNG",
+          "type": "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey": "member"
     },
     {
       "id": "C27",
       "name": "C27",
       "question": "Có phải đã có một công việc và sẽ trở lại làm công việc đó trong 30 ngày tới không?",
       "type": 2,
-      "options": "CÓ, KHÔNG",
-      "placeHolders": ""
+      "options": [
+        {
+          "option": "CÓ",
+          "type": "NORMAL"
+        },
+        {
+          "option": "KHÔNG",
+          "type": "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey": "member"
     },
     {
       "id": "C28",
       "name": "C28",
       "question": "Công việc chính/nhiệm vụ chính, đã làm trong 7 ngày qua/trước khi tạm nghỉ là gì?",
       "type": 1,
-      "options": "",
-      "placeHolders": ""
+      "options": [],
+      "placeHolders": "",
+      "survey": "member"
     },
     {
       "id": "C29",
       "name": "C29",
       "question": "Hoạt động hoặc sản phẩm/dịch vụ chính của cơ sở nơi làm việc trong 7 ngày qua/trước khi tạm nghỉ là gì?",
       "type": 1,
-      "options": "",
-      "placeHolders": ""
+      "options": [],
+      "placeHolders": "",
+      "survey": "member"
     },
     {
       "id": "C30",
       "name": "C30",
       "question": "CHỨC VỤ",
       "type": 2,
-      "options": "Chủ cơ sở (CÓ THUÊ LAO ĐỘNG THƯỜNG XUYÊN),Tự làm,Lao động gia đình,Xã viên hợp tác xã,Làm công hưởng lương",
-      "placeHolders": ""
+      "options": [
+        {
+          "option": "Chủ cơ sở (CÓ THUÊ LAO ĐỘNG THƯỜNG XUYÊN)",
+          "type": "NORMAL"
+        },
+        {
+          "option": "Tự làm",
+          "type": "NORMAL"
+        },
+        {
+          "option": "Lao động gia đình",
+          "type": "NORMAL"
+        },
+        {
+          "option": "Xã viên hợp tác xã",
+          "type": "NORMAL"
+        },
+        {
+          "option": "Làm công hưởng lương",
+          "type": "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey": "member"
     },
     {
       "id": "C31",
       "name": "C31",
       "question": "Trong 30 ngày qua,  có chủ động tìm kiếm việc làm hoặc chuẩn bị để bắt đầu hoạt động sản xuất kinh doanh không?",
       "type": 2,
-      "options": "CÓ, KHÔNG",
-      "placeHolders": ""
+      "options": [
+        {
+          "option": "CÓ",
+          "type": "NORMAL"
+        },
+        {
+          "option": "KHÔNG",
+          "type": "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey": "member"
     },
     {
       "id": "C32",
       "name": "C32",
       "question": "Lý do không tìm việc là gì?",
       "type": 4,
-      "options": "QUÁ GIÀ/QUÁ TRẺ/ MẤT KHẢ NĂNG LAO ĐỘNG, HỌC SINH/SINH VIÊN/NỘI TRỢ,TIN LÀ KHÔNG CÓ VIỆC/KHÔNG CÓ VIỆC THÍCH HỢP,KHÔNG BIẾT TÌM Ở ĐÂU/BẰNG CÁCH NÀO,TẠM NGHỈ DO THU HẸP/NGỪNG SẢN XUẤT,ĐỢI VIỆC/ĐỢI KHAI TRƯƠNG HĐKD,NGHỈ THỜI VỤ,THỜI TIẾT XẤU,ỐM ĐAU TẠM THỜI/BẬN VIỆC,KHÁC",
-      "placeHolders": ""
+      "options": [
+        {
+          "option": "QUÁ GIÀ/QUÁ TRẺ/ MẤT KHẢ NĂNG LAO ĐỘNG",
+          "type": "NORMAL"
+        },
+        {
+          "option": "HỌC SINH/SINH VIÊN/NỘI TRỢ",
+          "type": "NORMAL"
+        },
+        {
+          "option": "TIN LÀ KHÔNG CÓ VIỆC/KHÔNG CÓ VIỆC THÍCH HỢP",
+          "type": "NORMAL"
+        },
+        {
+          "option": "KHÔNG BIẾT TÌM Ở ĐÂU/BẰNG CÁCH NÀO",
+          "type": "NORMAL"
+        },
+        {
+          "option": "TẠM NGHỈ DO THU HẸP/NGỪNG SẢN XUẤT",
+          "type": "NORMAL"
+        },
+        {
+          "option": "ĐỢI VIỆC/ĐỢI KHAI TRƯƠNG HĐKD",
+          "type": "NORMAL"
+        },
+        {
+          "option": "NGHỈ THỜI VỤ",
+          "type": "NORMAL"
+        },
+        {
+          "option": "THỜI TIẾT XẤU",
+          "type": "NORMAL"
+        },
+        {
+          "option": "ỐM ĐAU TẠM THỜI/BẬN VIỆC",
+          "type": "NORMAL"
+        },
+        {
+          "option": "KHÁC",
+          "type": "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey": "member"
     },
     {
       "id": "C33",
       "name": "C33",
       "question": "Trong 2 tuần tới, nếu có một công việc hoặc một hoạt động sản xuất kinh doanh,có sẵn sàng làm việc ngay không?",
       "type": 2,
-      "options": "CÓ, KHÔNG",
-      "placeHolders": ""
+      "options": [
+        {
+          "option": "CÓ",
+          "type": "NORMAL"
+        },
+        {
+          "option": "KHÔNG",
+          "type": "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey": "member"
     }
   ]
 }

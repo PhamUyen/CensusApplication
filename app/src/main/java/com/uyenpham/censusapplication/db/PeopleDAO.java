@@ -42,9 +42,12 @@ public class PeopleDAO {
         return result;
     }
 
-    public long insert(PeopleDTO cacheEntity) {
-        long result = mLiteOrm.insert(cacheEntity);
-        return result;
+    public long insert(PeopleDTO peopleDTO) {
+        if(checkIsExistDB(peopleDTO.getID())){
+            return update(peopleDTO);
+        }else {
+            return mLiteOrm.insert(peopleDTO);
+        }
     }
 
     public int update(PeopleDTO cacheEntity) {

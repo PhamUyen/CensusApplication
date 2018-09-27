@@ -42,9 +42,12 @@ public class WomanDAO {
         return result;
     }
 
-    public long insert(WomanDTO cacheEntity) {
-        long result = mLiteOrm.insert(cacheEntity);
-        return result;
+    public long insert(WomanDTO womanDTO) {
+        if(checkIsExistDB(womanDTO.getID())){
+            return update(womanDTO);
+        }else {
+            return mLiteOrm.insert(womanDTO);
+        }
     }
 
     public int update(WomanDTO cacheEntity) {

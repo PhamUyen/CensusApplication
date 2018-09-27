@@ -2,19 +2,41 @@ package com.uyenpham.censusapplication.models.survey;
 
 public class AnswerDTO {
     public final static String COLUMN_ID = "id";
-    public final static String COLUMN_ANSWER = "answer";
+    public final static String COLUMN_ANSWER = "answerString";
     public final static String COLUMN_QUESTION_ID = "questionID";
-    private String id;
-    private Object answer;
+    private String idHo;
+    private String answerString;
+    private Integer answerInt;
     private String questionID;
+    private String id;
 
-    public AnswerDTO(String id, Object answer, String questionID) {
+    public AnswerDTO(String id, String answer, String questionID, String idHo, Integer answerInt) {
         this.id = id;
-        this.answer = answer;
+        this.answerString = answer;
         this.questionID = questionID;
+        this.idHo = idHo;
+        this.answerInt = answerInt;
     }
 
     public AnswerDTO() {
+    }
+
+    public AnswerDTO(String questionID) {
+        this.questionID = questionID;
+    }
+
+    public AnswerDTO(String idHo, String questionID, String id) {
+        this.idHo = idHo;
+        this.questionID = questionID;
+        this.id = id;
+    }
+
+    public Integer getAnswerInt() {
+        return answerInt;
+    }
+
+    public void setAnswerInt(Integer answerInt) {
+        this.answerInt = answerInt;
     }
 
     public String getId() {
@@ -25,12 +47,20 @@ public class AnswerDTO {
         this.id = id;
     }
 
-    public Object getAnswer() {
-        return answer;
+    public String getIdHo() {
+        return idHo;
     }
 
-    public void setAnswer(Object answer) {
-        this.answer = answer;
+    public void setIdHo(String idHo) {
+        this.idHo = idHo;
+    }
+
+    public String getAnswerString() {
+        return answerString;
+    }
+
+    public void setAnswerString(String answerString) {
+        this.answerString = answerString;
     }
 
     public String getQuestionID() {

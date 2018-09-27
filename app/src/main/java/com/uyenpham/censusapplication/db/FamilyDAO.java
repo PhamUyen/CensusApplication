@@ -42,9 +42,12 @@ public class FamilyDAO {
         return result;
     }
 
-    public long insert(FamilyDTO cacheEntity) {
-        long result = mLiteOrm.insert(cacheEntity);
-        return result;
+    public long insert(FamilyDTO familyDTO) {
+        if(checkIsExistDB(familyDTO.getIDHO())){
+            return update(familyDTO);
+        }else {
+            return  mLiteOrm.insert(familyDTO);
+        }
     }
 
     public int update(FamilyDTO cacheEntity) {

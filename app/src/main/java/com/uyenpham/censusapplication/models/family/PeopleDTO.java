@@ -216,7 +216,7 @@ public class PeopleDTO {
             try {
                 Field field = clazz.getDeclaredField(fieldName);
                 field.setAccessible(true);
-                return field.get(fieldName);
+                return field.get(this);
             } catch (NoSuchFieldException e) {
                 clazz = clazz.getSuperclass();
             } catch (Exception e) {
