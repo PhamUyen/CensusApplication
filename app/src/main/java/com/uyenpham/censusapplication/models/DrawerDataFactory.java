@@ -5,8 +5,10 @@ import com.google.gson.JsonSyntaxException;
 import com.uyenpham.censusapplication.App;
 import com.uyenpham.censusapplication.R;
 import com.uyenpham.censusapplication.models.drawer.GroupDrawer;
+import com.uyenpham.censusapplication.models.family.PeopleDetailDTO;
 import com.uyenpham.censusapplication.models.survey.FakeQuestionsResponse;
 import com.uyenpham.censusapplication.models.survey.QuestionDTO;
+import com.uyenpham.censusapplication.utils.Constants;
 import com.uyenpham.censusapplication.utils.Logger;
 import com.uyenpham.censusapplication.utils.Utils;
 
@@ -55,7 +57,7 @@ public class DrawerDataFactory {
     }
 
     public static GroupDrawer makeWomanGroup() {
-        return new GroupDrawer(App.getInstance().getString(R.string.txt_woman), makeListWoman());
+        return new GroupDrawer(App.getInstance().getString(R.string.txt_woman), null);
     }
 
     public static ArrayList<QuestionDTO> makeListWoman() {
@@ -70,10 +72,18 @@ public class DrawerDataFactory {
     }
 
     public static GroupDrawer makeMemberGroup() {
-        return new GroupDrawer(App.getInstance().getString(R.string.txt_member), makeListMember());
+        return new GroupDrawer(App.getInstance().getString(R.string.txt_member),genListMember());
     }
     //
 //
+    public static ArrayList<QuestionDTO> genListMember(){
+        ArrayList<QuestionDTO> list = new ArrayList<>();
+        for(PeopleDetailDTO peopleDetailDTO : Constants.mStaticObject.getPeopleDetailDTO()){
+            QuestionDTO questionDTO = new QuestionDTO(peopleDetailDTO.getQ1());
+            list.add(questionDTO);
+        }
+        return list;
+    }
     public static ArrayList<QuestionDTO> makeListMember() {
         String json = Utils.readFromAsset(App.getInstance(), "member_question.json");
         FakeQuestionsResponse fakeQuestionsResponse = null;

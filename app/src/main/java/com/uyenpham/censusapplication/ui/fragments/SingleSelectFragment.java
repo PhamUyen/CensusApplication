@@ -1,5 +1,6 @@
 package com.uyenpham.censusapplication.ui.fragments;
 
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +18,7 @@ import com.uyenpham.censusapplication.models.family.PeopleDetailDTO;
 import com.uyenpham.censusapplication.models.survey.AnswerDTO;
 import com.uyenpham.censusapplication.models.survey.OptionDTO;
 import com.uyenpham.censusapplication.models.survey.QuestionDTO;
+import com.uyenpham.censusapplication.ui.activities.MemberActivity;
 import com.uyenpham.censusapplication.ui.adapters.MultiSelectAdapter;
 import com.uyenpham.censusapplication.ui.adapters.RadioButtonAdapter;
 import com.uyenpham.censusapplication.ui.interfaces.INextQuestion;
@@ -80,19 +82,26 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
         answerDTO = AnswerDAO.getInstance().findById(question.getId(),Constants.mStaticObject.getIdHo());
         tvQuestion.setText(question.getName()+"."+question.getQuestion());
         listOption = question.getOptions();
-        if(answerDTO.getAnswerString() != null){
-            listOption.get(answerDTO.getAnswerInt()-1).setSelected(true);
-        }
-        radioButtonAdapter = new RadioButtonAdapter(listOption);
-        if(listOption.size() >2){
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-            radioGroup.setLayoutManager(linearLayoutManager);
+        if(listOption.size()>0){
+            if(answerDTO.getAnswerString() != null){
+                listOption.get(answerDTO.getAnswerInt()-1).setSelected(true);
+            }
+            radioButtonAdapter = new RadioButtonAdapter(listOption);
+            if(listOption.size() >2){
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+                radioGroup.setLayoutManager(linearLayoutManager);
+            }else {
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2);
+                radioGroup.setLayoutManager(gridLayoutManager);
+            }
+            radioGroup.setAdapter(radioButtonAdapter);
+            radioButtonAdapter.setListener(this);
         }else {
-            GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2);
-            radioGroup.setLayoutManager(gridLayoutManager);
+            radioGroup.setVisibility(View.GONE);
+            rcvSelect.setVisibility(View.VISIBLE);
+            setupListSelected();
         }
-        radioGroup.setAdapter(radioButtonAdapter);
-        radioButtonAdapter.setListener(this);
+
         return true;
     }
 
@@ -186,22 +195,41 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
     @Override
     public void next() {
         if(questionDTO.getSurvey().equals(Constants.SURVEY_PEOPLE)){
-            if(validateQuaetion(questionDTO,answerDTO)){
-                if(questionDTO.getType() == Constants.TYPE_SINGLE_SELECT_LIST){
-                    for(PeopleDetailDTO peopleDetailDTO :listSelected){
-                        Constants.mStaticObject.getPeopleDetailDTO().remove(peopleDetailDTO);
-                    }
-                }else if(questionDTO.getType() == Constants.TYPE_MIX){
-                    Constants.mStaticObject.getPeopleDetailDTO().addAll(listMember);
+            if(questionDTO.getId().equals(Constants.QUESTION_Q9)){
+//                ArrayList<GroupDrawer> list = new ArrayList<>();
+//                for(PeopleDetailDTO peopleDetailDTO : Constants.mStaticObject.getPeopleDetailDTO()){
+//                    GroupDrawer drawer = new GroupDrawer(peopleDetailDTO.getQ1(), null);
+//                    list.add(drawer);
+//                }
+//                activity.setList(list);
+//                activity.getNavigationBar().setTitle(list.get(0).getName());
+//                nextFragment();
+                Intent intent = new Intent(activity, MemberActivity.class);
+                intent.putExtra("survey","member");
+                if(Constants.mStaticObject.getPeopleDetailDTO().size() >0){
+                    startActivity(intent);
+                }else {
+                    nextFragment();
                 }
-                nextFragment();
             }else {
-                String message =activity.getString(R.string.txt_select_require);
-                if(questionDTO.getType() == Constants.TYPE_MIX){
-                    message = activity.getString(R.string.txt_input_require);
+                if(validateQuaetion(questionDTO,answerDTO)){
+                    if(questionDTO.getType() == Constants.TYPE_SINGLE_SELECT_LIST){
+                        for(PeopleDetailDTO peopleDetailDTO :listSelected){
+                            Constants.mStaticObject.getPeopleDetailDTO().remove(peopleDetailDTO);
+                        }
+                    }else if(questionDTO.getType() == Constants.TYPE_MIX){
+                        Constants.mStaticObject.getPeopleDetailDTO().addAll(listMember);
+                    }
+                    nextFragment();
+                }else {
+                    String message =activity.getString(R.string.txt_select_require);
+                    if(questionDTO.getType() == Constants.TYPE_MIX){
+                        message = activity.getString(R.string.txt_input_require);
+                    }
+                    DialogUtils.showErrorAlert(activity,message);
                 }
-                DialogUtils.showErrorAlert(activity,message);
             }
+
         }
 }
     private void nextFragment(){

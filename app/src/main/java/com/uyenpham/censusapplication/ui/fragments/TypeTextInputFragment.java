@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.uyenpham.censusapplication.R;
 import com.uyenpham.censusapplication.db.AnswerDAO;
-import com.uyenpham.censusapplication.models.drawer.GroupDrawer;
 import com.uyenpham.censusapplication.models.family.PeopleDetailDTO;
 import com.uyenpham.censusapplication.models.survey.AnswerDTO;
 import com.uyenpham.censusapplication.models.survey.QuestionDTO;
@@ -124,12 +123,6 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
     @Override
     public boolean validateQuaetion(QuestionDTO question, AnswerDTO answer) {
         switch (question.getId()) {
-            case Constants.QUESTION_Q9:
-                ArrayList<GroupDrawer> list = new ArrayList<>();
-                list.add(new GroupDrawer("Nguyen van a", null));
-                list.add(new GroupDrawer("nguyen van b", null));
-                activity.setList(list);
-                return true;
             case Constants.QUESTION_Q1:
                 return listText.size()>0;
             case Constants.mDIENTHOAI:

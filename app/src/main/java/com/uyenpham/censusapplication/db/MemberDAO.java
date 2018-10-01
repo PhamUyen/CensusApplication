@@ -69,54 +69,34 @@ public class MemberDAO {
         return offlineEntities == null ? new ArrayList<MemberDTO>() : offlineEntities;
     }
 
-//    public List<MemberDTO> getAllCacheByType(String key) {
-//        List<MemberDTO> areaEntities = mLiteOrm.query(
-//                new QueryBuilder<>(MemberDTO.class)
-//                        .whereIn(MemberDTO.COLUMN_TYPE, key)
-//
-//        );
-//        return areaEntities == null ? new ArrayList<MemberDTO>() : areaEntities;
-//    }
-//    public List<MemberDTO> getAllCacheByDate(String date) {
-//        List<MemberDTO> areaEntities = mLiteOrm.query(
-//                new QueryBuilder<>(MemberDTO.class)
-//                        .whereIn(MemberDTO.DATE, date)
-//
-//        );
-//        return areaEntities == null ? new ArrayList<MemberDTO>() : areaEntities;
-//    }
-//    public MemberDTO getCacheById(String id, String key) {
-//        List<MemberDTO> areaEntities = mLiteOrm.query(
-//                new QueryBuilder<>(MemberDTO.class)
-//                        .whereIn(MemberDTO.ID_CACHE, id)
-//                        .whereAppendAnd()
-//                        .whereIn(MemberDTO.KEY_CAHCE, key)
-//        );
-//        return (areaEntities == null || areaEntities.size() <=0) ? null : areaEntities.get(0);
-//    }
-
-//    public MemberDTO getCacheByIdAndDate(String date, String id) {
-//        List<MemberDTO> areaEntities = mLiteOrm.query(
-//                new QueryBuilder<>(MemberDTO.class)
-//                        .whereIn(MemberDTO.ID_CACHE, id)
-//                        .whereAppendAnd()
-//                        .whereIn(MemberDTO.DATE, date)
-//        );
-//        return (areaEntities == null || areaEntities.size() <=0) ? null : areaEntities.get(0);
-//    }
 
     public MemberDTO findById(String id) {
+        try {
+            ArrayList<MemberDTO> list = mLiteOrm.query(
+                    new QueryBuilder<>(MemberDTO.class)
+                            .whereEquals(MemberDTO.ID_MEMBER, id)
+            );
+            if(list.size() > 0){
+                return list.get(0);
+            }else {
+                return new MemberDTO(id);
+            }
+        } catch (Exception e) {
+            Logger.e(TAG, e.getMessage(), e);
+            return new MemberDTO(id);
+        }
+    }
+    public ArrayList<MemberDTO> findByIdHo(String id) {
         try {
             return mLiteOrm.query(
                     new QueryBuilder<>(MemberDTO.class)
                             .whereEquals(MemberDTO.ID_HO, id)
-            ).get(0);
+            );
         } catch (Exception e) {
             Logger.e(TAG, e.getMessage(), e);
-            return null;
+            return new ArrayList<>();
         }
     }
-
     public int deleteByid(String key) {
         try {
             return mLiteOrm.delete(new WhereBuilder(MemberDTO.class)

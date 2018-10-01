@@ -1,8 +1,6 @@
 package com.uyenpham.censusapplication.ui.activities;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,23 +11,23 @@ import android.widget.ImageView;
 
 import com.uyenpham.censusapplication.R;
 import com.uyenpham.censusapplication.db.AnswerDAO;
+import com.uyenpham.censusapplication.db.DeadDAO;
+import com.uyenpham.censusapplication.db.MemberDAO;
+import com.uyenpham.censusapplication.db.PeopleDAO;
+import com.uyenpham.censusapplication.db.WomanDAO;
 import com.uyenpham.censusapplication.models.DrawerDataFactory;
 import com.uyenpham.censusapplication.models.drawer.GroupDrawer;
 import com.uyenpham.censusapplication.models.family.FamilyDTO;
 import com.uyenpham.censusapplication.models.survey.AnswerDTO;
 import com.uyenpham.censusapplication.models.survey.QuestionDTO;
 import com.uyenpham.censusapplication.ui.adapters.DrawerAdapter;
-import com.uyenpham.censusapplication.ui.fragments.MultiSelectionFragment;
-import com.uyenpham.censusapplication.ui.fragments.NumberInputFragment;
-import com.uyenpham.censusapplication.ui.fragments.SingleSelectFragment;
-import com.uyenpham.censusapplication.ui.fragments.TypeTextInputFragment;
 import com.uyenpham.censusapplication.ui.interfaces.IChildDrawerClick;
 import com.uyenpham.censusapplication.ui.interfaces.IExitClick;
 import com.uyenpham.censusapplication.ui.interfaces.INextQuestion;
 import com.uyenpham.censusapplication.ui.interfaces.IPreviousQuestion;
 import com.uyenpham.censusapplication.ui.interfaces.OnBackPressed;
 import com.uyenpham.censusapplication.utils.Constants;
-import com.uyenpham.censusapplication.utils.FragmentHelper;
+import com.uyenpham.censusapplication.utils.Utils;
 import com.uyenpham.censusapplication.views.CustomNavigationBar;
 
 import java.lang.reflect.Field;
@@ -42,14 +40,12 @@ import butterknife.OnClick;
 public class SurveyActivity extends BaseActivity implements IChildDrawerClick {
     public static final int ID_SURVEY_CONTENT = R.id.content;
 
-    public FragmentManager mFragmentManager;
     private CustomNavigationBar navigationBar;
     private OnBackPressed onBackPressed;
     private IExitClick iExitClick;
     private INextQuestion iNext;
     private IPreviousQuestion iPrevious;
     private DrawerAdapter adapter;
-    private boolean isMember;
     @Bind(R.id.left_drawer)
     RecyclerView drawerList;
     @Bind(R.id.drawer_layout)
@@ -63,6 +59,7 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick {
     private FamilyDTO familyDTO;
     public static int currentIndex = 8;
     private ArrayList<QuestionDTO> listQuestion;
+    public boolean isMember;
 
     @Override
     protected int getLayoutId() {
@@ -83,7 +80,6 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick {
         list = new ArrayList<>();
 
 
-        mFragmentManager = getSupportFragmentManager();
         setNavigationBar();
 
         Bundle bundle = getIntent().getBundleExtra(Constants.KEY_EXTRA_DATA);
@@ -91,13 +87,18 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick {
         genListAnser();
 
         setInfoFamily(familyDTO);
-
-        setListDrawer();
         makeListQuestion();
 
         //set default quest
-        replcaeFragmentByType(listQuestion.get(currentIndex), true);
+        Utils.replcaeFragmentByType(listQuestion.get(currentIndex), true, listQuestion,ID_SURVEY_CONTENT, mFragmentManager);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setListDrawer();
+    }
+
     private void genListAnser(){
         for (Field field : familyDTO.getClass().getDeclaredFields()) {
             field.setAccessible(true);
@@ -118,21 +119,16 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick {
     }
 
     private void setInfoFamily(FamilyDTO family) {
-        Constants.mStaticObject.setIdHo(family.getIDHO());
-        Constants.mStaticObject.getPeopleDTO().setHOSO(family.getHOSO());
-        Constants.mStaticObject.getPeopleDTO().setIDHO(family.getIDHO());
-        Constants.mStaticObject.getWomanDTO().setID(family.getIDHO());
-        Constants.mStaticObject.getDeadDTO().setmID(family.getIDHO());
-        Constants.mStaticObject.getMemberDTO().setmID(family.getIDHO());
+        Constants.mStaticObject.setPeopleDTO(PeopleDAO.getInstance().findById(familyDTO));
+        Constants.mStaticObject.setWomanDTO(WomanDAO.getInstance().findById(family.getIDHO()));
+        Constants.mStaticObject.setDeadDTO(DeadDAO.getInstance().findById(family.getIDHO()));
+        Constants.mStaticObject.setMemberDTO(MemberDAO.getInstance().findByIdHo(family.getIDHO()));
         Constants.mStaticObject.getFamilyDetailDTO().setIDHO(family.getIDHO());
-//        Constants.mStaticObject.getFamilyDetailDTO().setmIDHO();
     }
 
     private void makeListQuestion() {
         listQuestion = DrawerDataFactory.makeListInfo();
         listQuestion.addAll(DrawerDataFactory.makeListPeople());
-        listQuestion.addAll(DrawerDataFactory.makeListMember());
-        listQuestion.addAll(DrawerDataFactory.makeListWoman());
     }
 
     private void setListDrawer() {
@@ -219,6 +215,8 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick {
             iExitClick.onExitClick();
         } else {
             finish();
+            Constants.mStaticObject.updateDB();
+            Constants.mStaticObject.reset();
         }
     }
 
@@ -226,10 +224,6 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick {
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.imv_next:
-//                if (currentIndex < listQuestion.size() - 1) {
-//                    currentIndex++;
-//                    replcaeFragmentByType(listQuestion.get(currentIndex), true);
-//                }
                 if (iNext != null) {
                     iNext.next();
                 }
@@ -238,72 +232,19 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick {
                 if (iPrevious != null) {
                     iPrevious.previuos();
                 }
-//                if (currentIndex > 0) {
-//                    currentIndex--;
-//                    replcaeFragmentByType(listQuestion.get(currentIndex), false);
-//                }
                 break;
             default:
                 break;
         }
     }
 
-    private void replcaeFragmentByType(QuestionDTO questionDTO, boolean isNext) {
-        int type = questionDTO.getType();
 
-        switch (type) {
-            case Constants.TYPE_TEXT_INPUT:
-            case Constants.TYPE_TEXT_INPUT_LIST:
-                TypeTextInputFragment fragment = new TypeTextInputFragment();
-                fragment.setQuestionDTO(questionDTO);
-                fragment.setAnswerDTO(null);
-                fragment.setListQuestion(listQuestion);
-                replaceAnimation(fragment, isNext);
-                break;
-            case Constants.TYPE_SINGLE_SELECT:
-            case Constants.TYPE_SELECT_INPUT:
-            case Constants.TYPE_SINGLE_SELECT_LIST:
-            case Constants.TYPE_SINGLE_SELECT_AUTO:
-            case Constants.TYPE_MIX:
-                SingleSelectFragment singleSelectFragment = new SingleSelectFragment();
-                singleSelectFragment.setQuestionDTO(questionDTO);
-                singleSelectFragment.setAnswerDTO(null);
-                singleSelectFragment.setListQuestion(listQuestion);
-                replaceAnimation(singleSelectFragment, isNext);
-                break;
-            case Constants.TYPE_NUMBER_INPUT:
-                NumberInputFragment numberInputFragment = new NumberInputFragment();
-                numberInputFragment.setQuestionDTO(questionDTO);
-                numberInputFragment.setAnswerDTO(null);
-                replaceAnimation(numberInputFragment, isNext);
-                break;
-            case Constants.TYPE_MULTI_SELECT:
-            case Constants.TYPE_MULTI_SELECT_INPUT:
-                MultiSelectionFragment multiSelectionFragment = new MultiSelectionFragment();
-                multiSelectionFragment.setQuestionDTO(questionDTO);
-                multiSelectionFragment.setAnswerDTO(null);
-                replaceAnimation(multiSelectionFragment, isNext);
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void replaceAnimation(Fragment fragment, boolean isNext) {
-        if (isNext) {
-            FragmentHelper.replaceFagmentFromRight(fragment, mFragmentManager,
-                    ID_SURVEY_CONTENT);
-        } else {
-            FragmentHelper.replaceFagmentFromLeft(fragment, mFragmentManager,
-                    ID_SURVEY_CONTENT);
-        }
-    }
 
     @Override
     public void onClick(QuestionDTO quest) {
         toggleDrawer();
         if (currentIndex != getIndexOfQuestion(quest)) {
-            replcaeFragmentByType(quest, true);
+            Utils.replcaeFragmentByType(quest, true,listQuestion,ID_SURVEY_CONTENT,mFragmentManager);
             currentIndex = getIndexOfQuestion(quest);
         }
     }

@@ -211,7 +211,7 @@
       "id": "Q9",
       "name": "Q9",
       "question": "Trong số những người này, có ai có hộ khẩu thường trú tại xã/phường/thị trấn này không?",
-      "type": 3,
+      "type": 2,
       "options": [],
       "placeHolders": "",
       "survey":"people"

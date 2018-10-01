@@ -120,6 +120,10 @@ public class MemberDTO {
     public MemberDTO() {
     }
 
+    public MemberDTO(String mID) {
+        this.mID = mID;
+    }
+
     public MemberDTO(String mC01, Long mC02, Long mC03, Long mC05, Integer mC08, Long mC09,
                      String mC10A, String mC10B, Long mC11, Long mC12, String mC12K, Integer
                              mC13A, Integer mC13B, Integer mC13C, Integer mC13D, Integer mC13E,

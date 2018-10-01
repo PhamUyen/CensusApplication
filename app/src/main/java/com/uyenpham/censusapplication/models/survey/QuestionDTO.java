@@ -18,6 +18,10 @@ public class QuestionDTO implements Parcelable {
     private String placeHolder;
     private String survey;
 
+    public QuestionDTO(String name) {
+        this.name = name;
+    }
+
     public QuestionDTO(String id, String name, String question, int type, ArrayList<OptionDTO>  options,
                        String placeHolder, String survey) {
         this.id = id;

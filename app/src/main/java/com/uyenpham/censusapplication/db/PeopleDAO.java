@@ -6,6 +6,7 @@ import com.litesuits.orm.LiteOrm;
 import com.litesuits.orm.db.assit.QueryBuilder;
 import com.litesuits.orm.db.assit.WhereBuilder;
 import com.uyenpham.censusapplication.App;
+import com.uyenpham.censusapplication.models.family.FamilyDTO;
 import com.uyenpham.censusapplication.models.family.PeopleDTO;
 import com.uyenpham.censusapplication.utils.Logger;
 
@@ -108,15 +109,20 @@ public class PeopleDAO {
 //        return (areaEntities == null || areaEntities.size() <=0) ? null : areaEntities.get(0);
 //    }
 
-    public PeopleDTO findById(String id) {
+    public PeopleDTO findById(FamilyDTO familyDTO) {
         try {
-            return mLiteOrm.query(
+            ArrayList<PeopleDTO> list = mLiteOrm.query(
                     new QueryBuilder<>(PeopleDTO.class)
-                            .whereEquals(PeopleDTO.ID_HO, id)
-            ).get(0);
+                            .whereEquals(PeopleDTO.ID_HO, familyDTO.getIDHO())
+            );
+            if(list.size()>0){
+                return list.get(0);
+            }else {
+                return new PeopleDTO(familyDTO.getHOSO(), familyDTO.getIDHO());
+            }
         } catch (Exception e) {
             Logger.e(TAG, e.getMessage(), e);
-            return null;
+            return new PeopleDTO(familyDTO.getHOSO(), familyDTO.getIDHO());
         }
     }
 

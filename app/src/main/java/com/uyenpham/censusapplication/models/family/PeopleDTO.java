@@ -43,6 +43,11 @@ public class PeopleDTO {
     public PeopleDTO() {
     }
 
+    public PeopleDTO(String mHOSO, String mIDHO) {
+        this.mHOSO = mHOSO;
+        this.mIDHO = mIDHO;
+    }
+
     public PeopleDTO(String mHOSO, String mID, String mIDHO, Integer mQ2, Integer mQ3, Integer
             mQ4, Integer mQ5, Integer mQ61, Integer mQ62, Integer mQ63, Integer mQ64, Integer
             mQ65, Integer mQ66, Integer mQ7, Integer mQ8, Integer mQ9) {

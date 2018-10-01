@@ -1,5 +1,10 @@
 package com.uyenpham.censusapplication.utils;
 
+import com.uyenpham.censusapplication.db.DeadDAO;
+import com.uyenpham.censusapplication.db.MemberDAO;
+import com.uyenpham.censusapplication.db.PeopleDAO;
+import com.uyenpham.censusapplication.db.PeopleDetailDAO;
+import com.uyenpham.censusapplication.db.WomanDAO;
 import com.uyenpham.censusapplication.models.family.DeadDTO;
 import com.uyenpham.censusapplication.models.family.FamilyDTO;
 import com.uyenpham.censusapplication.models.family.FamilyDetailDTO;
@@ -15,7 +20,7 @@ public class StaticObject {
     private FamilyDTO familyDTO;
     private FamilyDetailDTO familyDetailDTO;
     private WomanDTO womanDTO;
-    private MemberDTO memberDTO;
+    private ArrayList<MemberDTO> memberDTOs;
     private PeopleDTO peopleDTO;
     private HouseDTO houseDTO;
     private DeadDTO deadDTO;
@@ -31,7 +36,7 @@ public class StaticObject {
         return instance;
     }
 
-    private void reset(){
+    public void reset(){
         instance = new StaticObject() ;
     }
 
@@ -39,7 +44,7 @@ public class StaticObject {
         familyDetailDTO = new FamilyDetailDTO();
         familyDTO = new FamilyDTO();
         womanDTO = new WomanDTO();
-        memberDTO = new MemberDTO();
+        memberDTOs = new ArrayList<>();
         peopleDTO = new PeopleDTO();
         houseDTO = new HouseDTO();
         deadDTO = new DeadDTO();
@@ -86,12 +91,12 @@ public class StaticObject {
         this.womanDTO = womanDTO;
     }
 
-    public MemberDTO getMemberDTO() {
-        return memberDTO;
+    public ArrayList<MemberDTO> getMemberDTO() {
+        return memberDTOs;
     }
 
-    public void setMemberDTO(MemberDTO memberDTO) {
-        this.memberDTO = memberDTO;
+    public void setMemberDTO(ArrayList<MemberDTO> memberDTO) {
+        this.memberDTOs = memberDTO;
     }
 
     public PeopleDTO getPeopleDTO() {
@@ -116,5 +121,16 @@ public class StaticObject {
 
     public void setDeadDTO(DeadDTO deadDTO) {
         this.deadDTO = deadDTO;
+    }
+    public void updateDB(){
+        PeopleDAO.getInstance().insert(peopleDTO);
+        WomanDAO.getInstance().insert(womanDTO);
+        for(PeopleDetailDTO peopleDetailDTO : peopleDetailDTOs){
+            PeopleDetailDAO.getInstance().insert(peopleDetailDTO);
+        }
+        for(MemberDTO memberDTO : memberDTOs){
+            MemberDAO.getInstance().insert(memberDTO);
+        }
+        DeadDAO.getInstance().insert(deadDTO);
     }
 }

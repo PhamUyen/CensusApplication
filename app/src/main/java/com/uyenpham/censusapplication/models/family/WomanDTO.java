@@ -50,6 +50,10 @@ public class WomanDTO {
     public WomanDTO() {
     }
 
+    public WomanDTO(String mID) {
+        this.mID = mID;
+    }
+
     public WomanDTO(Long mC34, Long mC35A, Long mC35B, Long mC36A, Long mC36B, Long mC37A, Long
             mC37B, String mC38N, String mC38T, Long mC39A, Long mC39B, Long mC40A, Long mC40B,
                     Long mC41, String mC41K, String mID, String mIDTV, String mTenTV) {

@@ -72,51 +72,21 @@ public class WomanDAO {
         return offlineEntities == null ? new ArrayList<WomanDTO>() : offlineEntities;
     }
 
-//    public List<WomanDTO> getAllCacheByType(String key) {
-//        List<WomanDTO> areaEntities = mLiteOrm.query(
-//                new QueryBuilder<>(WomanDTO.class)
-//                        .whereIn(WomanDTO.COLUMN_TYPE, key)
-//
-//        );
-//        return areaEntities == null ? new ArrayList<WomanDTO>() : areaEntities;
-//    }
-//    public List<WomanDTO> getAllCacheByDate(String date) {
-//        List<WomanDTO> areaEntities = mLiteOrm.query(
-//                new QueryBuilder<>(WomanDTO.class)
-//                        .whereIn(WomanDTO.DATE, date)
-//
-//        );
-//        return areaEntities == null ? new ArrayList<WomanDTO>() : areaEntities;
-//    }
-//    public WomanDTO getCacheById(String id, String key) {
-//        List<WomanDTO> areaEntities = mLiteOrm.query(
-//                new QueryBuilder<>(WomanDTO.class)
-//                        .whereIn(WomanDTO.ID_CACHE, id)
-//                        .whereAppendAnd()
-//                        .whereIn(WomanDTO.KEY_CAHCE, key)
-//        );
-//        return (areaEntities == null || areaEntities.size() <=0) ? null : areaEntities.get(0);
-//    }
-
-//    public WomanDTO getCacheByIdAndDate(String date, String id) {
-//        List<WomanDTO> areaEntities = mLiteOrm.query(
-//                new QueryBuilder<>(WomanDTO.class)
-//                        .whereIn(WomanDTO.ID_CACHE, id)
-//                        .whereAppendAnd()
-//                        .whereIn(WomanDTO.DATE, date)
-//        );
-//        return (areaEntities == null || areaEntities.size() <=0) ? null : areaEntities.get(0);
-//    }
 
     public WomanDTO findById(String id) {
         try {
-            return mLiteOrm.query(
+            ArrayList<WomanDTO> list = mLiteOrm.query(
                     new QueryBuilder<>(WomanDTO.class)
                             .whereEquals(WomanDTO.ID_HO, id)
-            ).get(0);
+            );
+            if(list.size()>0){
+                return list.get(0);
+            }else {
+                return new WomanDTO(id);
+            }
         } catch (Exception e) {
             Logger.e(TAG, e.getMessage(), e);
-            return null;
+            return new WomanDTO(id);
         }
     }
 

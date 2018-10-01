@@ -37,6 +37,10 @@ public class DeadDTO {
     public DeadDTO() {
     }
 
+    public DeadDTO(String mID) {
+        this.mID = mID;
+    }
+
     public DeadDTO(String mC43, Long mC44, String mC45N, String mC45T, String mC46N, String
             mC46T, Integer mC47, Long mC48, String mC48K, Integer mC49, String mC49K, String mID,
                    String mIDCHET) {

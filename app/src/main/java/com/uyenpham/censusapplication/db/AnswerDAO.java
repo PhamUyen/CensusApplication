@@ -73,10 +73,15 @@ public class AnswerDAO {
     public AnswerDTO findById(String idQuest, String idHo) {
         String id = idHo+idQuest;
         try {
-            return mLiteOrm.query(
+            ArrayList<AnswerDTO> list =  mLiteOrm.query(
                     new QueryBuilder<>(AnswerDTO.class)
                             .whereEquals(AnswerDTO.COLUMN_ID, id)
-            ).get(0);
+            );
+            if(list.size() >0){
+                return list.get(0);
+            }else {
+                return new AnswerDTO(idHo, idQuest, id);
+            }
         } catch (Exception e) {
             Logger.e(TAG, e.getMessage(), e);
             return new AnswerDTO(idHo, idQuest, id);

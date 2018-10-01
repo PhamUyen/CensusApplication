@@ -1,7 +1,6 @@
 package com.uyenpham.censusapplication.ui.fragments;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
 
 import com.uyenpham.censusapplication.db.AnswerDAO;
 import com.uyenpham.censusapplication.db.DeadDAO;
@@ -12,15 +11,14 @@ import com.uyenpham.censusapplication.models.survey.AnswerDTO;
 import com.uyenpham.censusapplication.models.survey.QuestionDTO;
 import com.uyenpham.censusapplication.ui.activities.SurveyActivity;
 import com.uyenpham.censusapplication.utils.Constants;
-import com.uyenpham.censusapplication.utils.FragmentHelper;
+import com.uyenpham.censusapplication.utils.Utils;
 
 import java.util.ArrayList;
-
-import static com.uyenpham.censusapplication.ui.activities.SurveyActivity.ID_SURVEY_CONTENT;
 
 public abstract class BaseTypeFragment extends BaseFragment {
     private ArrayList<QuestionDTO> listQuestion;
     public SurveyActivity activity;
+    private int contentID;
 
     public abstract boolean loadQuestion(QuestionDTO questionDTO);
 
@@ -51,7 +49,8 @@ public abstract class BaseTypeFragment extends BaseFragment {
                 fragment.setQuestionDTO(questionDTO);
                 fragment.setAnswerDTO(null);
                 fragment.setListQuestion(listQuestion);
-                replaceAnimation(fragment, isNext);
+                fragment.setContentID(contentID);
+                Utils.replaceAnimation(fragment, isNext,contentID,activity.mFragmentManager);
                 break;
             case Constants.TYPE_SINGLE_SELECT:
             case Constants.TYPE_SELECT_INPUT:
@@ -62,38 +61,35 @@ public abstract class BaseTypeFragment extends BaseFragment {
                 singleSelectFragment.setQuestionDTO(questionDTO);
                 singleSelectFragment.setAnswerDTO(null);
                 singleSelectFragment.setListQuestion(listQuestion);
-                replaceAnimation(singleSelectFragment, isNext);
+                singleSelectFragment.setContentID(contentID);
+                Utils.replaceAnimation(singleSelectFragment, isNext,contentID,activity.mFragmentManager);
                 break;
             case Constants.TYPE_NUMBER_INPUT:
                 NumberInputFragment numberInputFragment = new NumberInputFragment();
                 numberInputFragment.setQuestionDTO(questionDTO);
                 numberInputFragment.setAnswerDTO(null);
-                replaceAnimation(numberInputFragment, isNext);
+//                fragment.setContentID(contentID);
+                Utils.replaceAnimation(numberInputFragment, isNext,contentID,activity.mFragmentManager);
                 break;
             case Constants.TYPE_MULTI_SELECT:
             case Constants.TYPE_MULTI_SELECT_INPUT:
                 MultiSelectionFragment multiSelectionFragment = new MultiSelectionFragment();
                 multiSelectionFragment.setQuestionDTO(questionDTO);
                 multiSelectionFragment.setAnswerDTO(null);
-                replaceAnimation(multiSelectionFragment, isNext);
+                multiSelectionFragment.setContentID(contentID);
+                Utils.replaceAnimation(multiSelectionFragment, isNext,contentID,activity.mFragmentManager);
                 break;
             default:
                 break;
         }
     }
 
-    protected void replaceAnimation(Fragment fragment, boolean isNext) {
-        if (isNext) {
-            FragmentHelper.replaceFagmentFromRight(fragment, activity.mFragmentManager,
-                    ID_SURVEY_CONTENT);
-        } else {
-            FragmentHelper.replaceFagmentFromLeft(fragment, activity.mFragmentManager,
-                    ID_SURVEY_CONTENT);
-        }
-    }
-
     public void setListQuestion(ArrayList<QuestionDTO> listQuestion) {
         this.listQuestion = listQuestion;
+    }
+
+    public void setContentID(int contentID) {
+        this.contentID = contentID;
     }
 
     public ArrayList<QuestionDTO> getListQuestion() {
