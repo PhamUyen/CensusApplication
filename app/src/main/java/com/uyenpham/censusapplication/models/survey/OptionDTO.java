@@ -8,6 +8,12 @@ public class OptionDTO {
     public OptionDTO() {
     }
 
+    public OptionDTO(String option, String type, boolean isSelected) {
+        this.option = option;
+        this.type = type;
+        this.isSelected = isSelected;
+    }
+
     public OptionDTO(String option, String type) {
         this.option = option;
         this.type = type;

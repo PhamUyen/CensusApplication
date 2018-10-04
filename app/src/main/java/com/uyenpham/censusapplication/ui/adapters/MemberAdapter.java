@@ -34,7 +34,7 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.LocalityVi
 
     @Override
     public void onBindViewHolder(@NonNull MemberAdapter.LocalityViewHolder holder, final int position) {
-        holder.tvText.setText(listText.get(position).getQ1());
+        holder.tvText.setText((position+1) +" - " +listText.get(position).getQ1());
             holder.icon.setVisibility(View.GONE);
     }
 

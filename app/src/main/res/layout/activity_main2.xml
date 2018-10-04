@@ -57,17 +57,33 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/left_drawer"
-                android:layout_width="240dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:background="#FFFFFF"
-                android:choiceMode="singleChoice"
-                android:divider="@color/gray_light"
-                android:dividerHeight="1dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/left_drawer"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:background="#FFFFFF"
+                    android:choiceMode="singleChoice"
+                    android:divider="@color/gray_light"
+                    android:dividerHeight="1dp">
 
-            </android.support.v7.widget.RecyclerView>
+                </android.support.v7.widget.RecyclerView>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/left_drawer_member"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:background="#FFFFFF"
+                    android:choiceMode="singleChoice"
+                    android:divider="@color/gray_light"
+                    android:dividerHeight="1dp">
+
+                </android.support.v7.widget.RecyclerView>
+            </RelativeLayout>
+
             <Button
                 android:padding="@dimen/padding_small_x"
                 android:id="@+id/btn_exit"

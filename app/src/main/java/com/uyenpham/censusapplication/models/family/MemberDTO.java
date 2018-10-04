@@ -3,6 +3,8 @@ package com.uyenpham.censusapplication.models.family;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.lang.reflect.Field;
+
 @SuppressWarnings("unused")
 public class MemberDTO {
     public static final String ID_HO = "ID";
@@ -11,23 +13,23 @@ public class MemberDTO {
     @SerializedName("C01")
     private String mC01;
     @SerializedName("C02")
-    private Long mC02;
+    private Integer mC02;
     @SerializedName("C03")
-    private Long mC03;
+    private Integer mC03;
     @SerializedName("C05")
-    private Long mC05;
+    private Integer mC05;
     @SerializedName("C08")
     private Integer mC08;
     @SerializedName("C09")
-    private Long mC09;
+    private Integer mC09;
     @SerializedName("C10A")
     private String mC10A;
     @SerializedName("C10B")
     private String mC10B;
     @SerializedName("C11")
-    private Long mC11;
+    private Integer mC11;
     @SerializedName("C12")
-    private Long mC12;
+    private Integer mC12;
     @SerializedName("C12K")
     private String mC12K;
     @SerializedName("C13A")
@@ -57,9 +59,9 @@ public class MemberDTO {
     @SerializedName("C20")
     private String mC20;
     @SerializedName("C21")
-    private Long mC21;
+    private Integer mC21;
     @SerializedName("C22")
-    private Long mC22;
+    private Integer mC22;
     @SerializedName("C23N")
     private String mC23N;
     @SerializedName("C23T")
@@ -95,17 +97,17 @@ public class MemberDTO {
     @SerializedName("C33")
     private Integer mC33;
     @SerializedName("C4N")
-    private String mC4N;
+    private Integer mC4N;
     @SerializedName("C4T")
-    private String mC4T;
+    private Integer mC4T;
     @SerializedName("C6A")
-    private Long mC6A;
+    private Integer mC6A;
     @SerializedName("C6B")
     private String mC6B;
     @SerializedName("C6C")
     private String mC6C;
     @SerializedName("C7A")
-    private Long mC7A;
+    private Integer mC7A;
     @SerializedName("C7B")
     private String mC7B;
     @SerializedName("C7C")
@@ -124,16 +126,16 @@ public class MemberDTO {
         this.mID = mID;
     }
 
-    public MemberDTO(String mC01, Long mC02, Long mC03, Long mC05, Integer mC08, Long mC09,
-                     String mC10A, String mC10B, Long mC11, Long mC12, String mC12K, Integer
+    public MemberDTO(String mC01, Integer mC02, Integer mC03, Integer mC05, Integer mC08, Integer mC09,
+                     String mC10A, String mC10B, Integer mC11, Integer mC12, String mC12K, Integer
                              mC13A, Integer mC13B, Integer mC13C, Integer mC13D, Integer mC13E,
                      Integer mC13F, Integer mC14, Integer mC15, Integer mC16, Integer mC17,
-                     Integer mC18, String mC19, String mC20, Long mC21, Long mC22, String mC23N,
+                     Integer mC18, String mC19, String mC20, Integer mC21, Integer mC22, String mC23N,
                      String mC23T, Integer mC24, Integer mC25, Integer mC26, Integer mC27, String
                              mC28A, String mC28B, Integer mC28C, String mC29A, String mC29B,
                      Integer mC29C, Integer mC30, Integer mC31, Integer mC32A, String mC32B,
-                     Integer mC33, String mC4N, String mC4T, Long mC6A, String mC6B, String mC6C,
-                     Long mC7A, String mC7B, String mC7C, String mID, String mIDTV, Integer
+                     Integer mC33, Integer mC4N, Integer mC4T, Integer mC6A, String mC6B, String mC6C,
+                     Integer mC7A, String mC7B, String mC7C, String mID, String mIDTV, Integer
                              mSTTNKTT) {
         this.mC01 = mC01;
         this.mC02 = mC02;
@@ -199,27 +201,27 @@ public class MemberDTO {
         this.mC01 = mC01;
     }
 
-    public Long getmC02() {
+    public Integer getmC02() {
         return mC02;
     }
 
-    public void setmC02(Long mC02) {
+    public void setmC02(Integer mC02) {
         this.mC02 = mC02;
     }
 
-    public Long getmC03() {
+    public Integer getmC03() {
         return mC03;
     }
 
-    public void setmC03(Long mC03) {
+    public void setmC03(Integer mC03) {
         this.mC03 = mC03;
     }
 
-    public Long getmC05() {
+    public Integer getmC05() {
         return mC05;
     }
 
-    public void setmC05(Long mC05) {
+    public void setmC05(Integer mC05) {
         this.mC05 = mC05;
     }
 
@@ -231,11 +233,11 @@ public class MemberDTO {
         this.mC08 = mC08;
     }
 
-    public Long getmC09() {
+    public Integer getmC09() {
         return mC09;
     }
 
-    public void setmC09(Long mC09) {
+    public void setmC09(Integer mC09) {
         this.mC09 = mC09;
     }
 
@@ -255,19 +257,19 @@ public class MemberDTO {
         this.mC10B = mC10B;
     }
 
-    public Long getmC11() {
+    public Integer getmC11() {
         return mC11;
     }
 
-    public void setmC11(Long mC11) {
+    public void setmC11(Integer mC11) {
         this.mC11 = mC11;
     }
 
-    public Long getmC12() {
+    public Integer getmC12() {
         return mC12;
     }
 
-    public void setmC12(Long mC12) {
+    public void setmC12(Integer mC12) {
         this.mC12 = mC12;
     }
 
@@ -383,19 +385,19 @@ public class MemberDTO {
         this.mC20 = mC20;
     }
 
-    public Long getmC21() {
+    public Integer getmC21() {
         return mC21;
     }
 
-    public void setmC21(Long mC21) {
+    public void setmC21(Integer mC21) {
         this.mC21 = mC21;
     }
 
-    public Long getmC22() {
+    public Integer getmC22() {
         return mC22;
     }
 
-    public void setmC22(Long mC22) {
+    public void setmC22(Integer mC22) {
         this.mC22 = mC22;
     }
 
@@ -535,27 +537,27 @@ public class MemberDTO {
         this.mC33 = mC33;
     }
 
-    public String getmC4N() {
+    public Integer getmC4N() {
         return mC4N;
     }
 
-    public void setmC4N(String mC4N) {
+    public void setmC4N(Integer mC4N) {
         this.mC4N = mC4N;
     }
 
-    public String getmC4T() {
+    public Integer getmC4T() {
         return mC4T;
     }
 
-    public void setmC4T(String mC4T) {
+    public void setmC4T(Integer mC4T) {
         this.mC4T = mC4T;
     }
 
-    public Long getmC6A() {
+    public Integer getmC6A() {
         return mC6A;
     }
 
-    public void setmC6A(Long mC6A) {
+    public void setmC6A(Integer mC6A) {
         this.mC6A = mC6A;
     }
 
@@ -575,11 +577,11 @@ public class MemberDTO {
         this.mC6C = mC6C;
     }
 
-    public Long getmC7A() {
+    public Integer getmC7A() {
         return mC7A;
     }
 
-    public void setmC7A(Long mC7A) {
+    public void setmC7A(Integer mC7A) {
         this.mC7A = mC7A;
     }
 
@@ -621,5 +623,54 @@ public class MemberDTO {
 
     public void setmSTTNKTT(Integer mSTTNKTT) {
         this.mSTTNKTT = mSTTNKTT;
+    }
+    public  boolean set(String fieldName, Object fieldValue) {
+        fieldName = "m"+fieldName;
+        Class<?> clazz = this.getClass();
+        while (clazz != null) {
+            try {
+                Field field = clazz.getDeclaredField(fieldName);
+                field.setAccessible(true);
+                field.set(this, fieldValue);
+                return true;
+            } catch (NoSuchFieldException e) {
+                clazz = clazz.getSuperclass();
+            } catch (Exception e) {
+                throw new IllegalStateException(e);
+            }
+        }
+        return false;
+    }
+    public  Object get(String fieldName) {
+        fieldName = "m"+fieldName;
+        Class<?> clazz = this.getClass();
+        while (clazz != null) {
+            try {
+                Field field = clazz.getDeclaredField(fieldName);
+                field.setAccessible(true);
+                return field.get(this);
+            } catch (NoSuchFieldException e) {
+                clazz = clazz.getSuperclass();
+            } catch (Exception e) {
+                throw new IllegalStateException(e);
+            }
+        }
+        return null;
+    }
+    @Override
+    public boolean equals(Object v) {
+        boolean retVal = false;
+
+        if (v instanceof PeopleDTO){
+            PeopleDTO ptr = (PeopleDTO) v;
+            retVal = ptr.getID() == this.mID;
+        }
+
+        return retVal;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 }

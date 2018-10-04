@@ -47,7 +47,7 @@ public class Utils {
         }
         return returnString.toString();
     }
-    public static void replcaeFragmentByType(QuestionDTO questionDTO, boolean isNext, ArrayList<QuestionDTO>listQuestion, int content, FragmentManager fragmentManager) {
+    public static void replcaeFragmentByType(QuestionDTO questionDTO, boolean isNext, ArrayList<QuestionDTO>listQuestion, int content, FragmentManager fragmentManager, int posMember) {
         int type = questionDTO.getType();
 
         switch (type) {
@@ -58,6 +58,7 @@ public class Utils {
                 fragment.setAnswerDTO(null);
                 fragment.setListQuestion(listQuestion);
                 fragment.setContentID(content);
+                fragment.setPosMember(posMember);
                 replaceAnimation(fragment, isNext, content,fragmentManager);
                 break;
             case Constants.TYPE_SINGLE_SELECT:
@@ -70,6 +71,7 @@ public class Utils {
                 singleSelectFragment.setAnswerDTO(null);
                 singleSelectFragment.setListQuestion(listQuestion);
                 singleSelectFragment.setContentID(content);
+                singleSelectFragment.setPosMember(posMember);
                 replaceAnimation(singleSelectFragment, isNext, content,fragmentManager);
                 break;
             case Constants.TYPE_NUMBER_INPUT:

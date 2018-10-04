@@ -44,6 +44,63 @@ public class Constants {
     public static final String QUESTION_Q66 = "Q66";
     public static final String QUESTION_Q7 = "Q7";
     public static final String QUESTION_Q8 = "Q8";
+
+    //ID question member
+    public static final String QUESTION_C01 = "C01";
+    public static final String QUESTION_C02 = "C02";
+    public static final String QUESTION_C03 = "C03";
+    public static final String QUESTION_C05 = "C05";
+    public static final String QUESTION_C08= "C08";
+    public static final String QUESTION_C09 ="C09";
+    public static final String QUESTION_C10A ="C10A";
+    public static final String QUESTION_C10B ="C10B";
+    public static final String QUESTION_C11 ="C11";
+    public static final String QUESTION_C12 ="C12";
+    public static final String QUESTION_C12K ="C12K";
+    public static final String QUESTION_C13A= "C13A";
+    public static final String QUESTION_C13B ="C13B";
+    public static final String QUESTION_C13C="C13C";
+    public static final String QUESTION_C13D="C13D";
+    public static final String QUESTION_C13E= "C13E";
+    public static final String QUESTION_C13F= "C13F";
+    public static final String QUESTION_C14 = "C14";
+    public static final String QUESTION_C15 = "C15";
+    public static final String QUESTION_C16= "C16";
+    public static final String QUESTION_C17= "C17";
+    public static final String QUESTION_C18= "C18";
+    public static final String QUESTION_C19= "C19";
+    public static final String QUESTION_C20= "C20";
+    public static final String QUESTION_C21= "C21";
+    public static final String QUESTION_C22=  "C22";
+    public static final String QUESTION_C23N=  "C23N";
+    public static final String QUESTION_C23T=  "C23T";
+    public static final String QUESTION_C24=  "C24";
+    public static final String QUESTION_C25=  "C25";
+    public static final String QUESTION_C26=  "C26";
+    public static final String QUESTION_C27=  "C27";
+    public static final String QUESTION_C28A=  "C28A";
+    public static final String QUESTION_C28B=  "C28B";
+    public static final String QUESTION_C28C=  "C28C";
+    public static final String QUESTION_C29A=  "C29A";
+    public static final String QUESTION_C29B= "C29B";
+    public static final String QUESTION_C29C= "C29C";
+    public static final String QUESTION_C30=  "C30";
+    public static final String QUESTION_C31= "C31";
+    public static final String QUESTION_C32A= "C32A";
+    public static final String QUESTION_C32B= "C32B";
+    public static final String QUESTION_C33= "C33";
+    public static final String QUESTION_C4N= "C4N";
+    public static final String QUESTION_C4T="C4T";
+    public static final String QUESTION_C6A="C6A";
+    public static final String QUESTION_C6B="C6B";
+    public static final String QUESTION_C6C="C6C";
+    public static final String QUESTION_C7A="C7A";
+    public static final String QUESTION_C7B="C7B";
+    public static final String QUESTION_C7C="C7C";
+
+    //id woman
+    public static final String QUESTION_C34= "C34";
+
     //ID family
     public static final String mDIACHI = "mDIACHI";
     public static final String mDIENTHOAI = "mDIENTHOAI";

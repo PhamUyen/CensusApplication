@@ -19,7 +19,6 @@ import com.uyenpham.censusapplication.ui.interfaces.IPreviousQuestion;
 import com.uyenpham.censusapplication.ui.interfaces.IRecyclerViewListener;
 import com.uyenpham.censusapplication.ui.interfaces.OnBackPressed;
 import com.uyenpham.censusapplication.utils.Constants;
-import com.uyenpham.censusapplication.utils.Utils;
 import com.uyenpham.censusapplication.views.CustomNavigationBar;
 
 import java.util.ArrayList;
@@ -77,8 +76,6 @@ public class MemberActivity extends SurveyActivity implements IRecyclerViewListe
         makeListQuestion();
 
         //set default quest
-        Utils.replcaeFragmentByType(listQuestion.get(currentIndex), true, listQuestion,
-                ID_MEMBER_CONTENT, mFragmentManager);
     }
 
     public CustomNavigationBar getNavigationBar() {

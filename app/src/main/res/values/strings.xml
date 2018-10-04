@@ -433,4 +433,5 @@
     <string name="txt_empty">Thông tin không được để trống</string>
     <string name="txt_yes">Có</string>
     <string name="txt_no">Không</string>
+    <string name="txt_valid_name">Tên thành viên chỉ được phép bao gồm chữ cái và khoảng cách</string>
 </resources>

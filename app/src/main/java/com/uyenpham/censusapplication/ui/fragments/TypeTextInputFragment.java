@@ -1,11 +1,13 @@
 package com.uyenpham.censusapplication.ui.fragments;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -41,6 +43,7 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
     private ArrayList<String> listText;
     private TextAdapter adapter;
     private boolean isValidate;
+    private int posMember =-1;
 
     @Override
     protected int getLayoutId() {
@@ -68,7 +71,6 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
                         if (questionDTO.getSurvey().equals(Constants.SURVEY_PEOPLE)) {
                             listText.add(edAnswer.getText().toString());
                             adapter.notifyDataSetChanged();
-                            edAnswer.setText(null);
                         }
 
                         setMember(edAnswer.getText().toString());
@@ -93,12 +95,23 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
                 peopleDetailDTO.setID(Constants.mStaticObject.getIdHo() + index);
 
                 Constants.mStaticObject.getPeopleDetailDTO().add(peopleDetailDTO);
+                edAnswer.setText(null);
                 break;
 
             case Constants.SURVEY_FAMILY:
                 answerDTO.setAnswerString(name);
                 Constants.mStaticObject.getFamilyDTO().set(questionDTO.getId(),name);
                 Constants.mStaticObject.getFamilyDetailDTO().set(questionDTO.getId(),name);
+                break;
+            case Constants.SURVEY_MEMBER:
+                String regex = "[A-Za-z ]*";
+                if(name.matches(regex)){
+                    if(posMember != -1){
+                        Constants.mStaticObject.getPeopleDetailDTO().get(posMember).set(questionDTO.getId(),name);
+                    }
+                }else {
+                    DialogUtils.showAlert(activity,R.string.txt_valid_name);
+                }
                 break;
             default:
                 break;
@@ -159,6 +172,10 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
     }
     private void nextFragment(){
         save(answerDTO, questionDTO);
+        InputMethodManager imm = (InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        if(imm!= null){
+            imm.hideSoftInputFromWindow(edAnswer.getWindowToken(), 0);
+        }
         if (currentIndex < getListQuestion().size() - 1) {
             currentIndex++;
             replcaeFragmentByType(getListQuestion().get(currentIndex), true);
@@ -198,5 +215,9 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
                 DialogUtils.showAlert(activity,R.string.txt_empty);
             }
         }
+    }
+
+    public void setPosMember(int posMember) {
+        this.posMember = posMember;
     }
 }
