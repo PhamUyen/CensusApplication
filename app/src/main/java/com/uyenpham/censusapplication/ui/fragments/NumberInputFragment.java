@@ -64,7 +64,6 @@ public class NumberInputFragment extends BaseTypeFragment {
         TextView textView = new TextView(mActivity);
         textView.setLayoutParams(getLayoutParamsWeghtWidth(0, 0, margin, 0,1.5f));
         textView.setText(option);
-        textView.setTextSize(textSize);
         textView.setTextAppearance(getActivity(), R.style.TextView_Option);
         linearLayout.addView(textView);
 
@@ -75,7 +74,6 @@ public class NumberInputFragment extends BaseTypeFragment {
         editText.setBackgroundResource(R.drawable.bg_edit_text);
         editText.setTag(option);
         editText.setText(answer);
-        textView.setTextSize(textSize);
         editText.setPadding(padding, padding, padding, padding);
         linearLayout.addView(editText);
 

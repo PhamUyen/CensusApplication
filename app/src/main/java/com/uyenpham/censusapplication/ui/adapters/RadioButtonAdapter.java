@@ -42,7 +42,6 @@ public class RadioButtonAdapter extends RecyclerView.Adapter<RadioButtonAdapter.
             public void onClick(View view) {
                if(listener != null){
                    listener.onRadioClick(position,listOption.get(position).isSelected());
-                   notifyDataSetChanged();
                }
             }
         });
@@ -51,7 +50,6 @@ public class RadioButtonAdapter extends RecyclerView.Adapter<RadioButtonAdapter.
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(listener != null){
                     listener.onRadioClick(position,listOption.get(position).isSelected());
-                    notifyDataSetChanged();
                 }
             }
         });

@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.uyenpham.censusapplication.R;
 import com.uyenpham.censusapplication.db.AnswerDAO;
+import com.uyenpham.censusapplication.models.family.MemberDTO;
 import com.uyenpham.censusapplication.models.family.PeopleDetailDTO;
 import com.uyenpham.censusapplication.models.survey.AnswerDTO;
 import com.uyenpham.censusapplication.models.survey.QuestionDTO;
@@ -94,6 +95,12 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
                 peopleDetailDTO.setChuho(index == 0 ? 2 : 1);
                 peopleDetailDTO.setID(Constants.mStaticObject.getIdHo() + index);
 
+                MemberDTO memberDTO = new MemberDTO();
+                memberDTO.setmC01(name);
+                memberDTO.setmIDTV(Constants.mStaticObject.getIdHo()+index);
+                memberDTO.setmSTTNKTT(index+1);
+
+                Constants.mStaticObject.getMemberDTO().add(memberDTO);
                 Constants.mStaticObject.getPeopleDetailDTO().add(peopleDetailDTO);
                 edAnswer.setText(null);
                 break;
@@ -124,10 +131,14 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
         answerDTO = AnswerDAO.getInstance().findById(questionDTO.getId(),Constants.mStaticObject.getIdHo());
         if (question == null) return false;
         tvQuestion.setText(question.getQuestion());
-        if (answerDTO != null && !StringUtils.isEmpty(answerDTO.getAnswerString())) {
-            edAnswer.setText( answerDTO.getAnswerString());
-        } else {
-            edAnswer.setHint(question.getPlaceHolder());
+        if(Constants.SURVEY_PEOPLE.equals(question.getSurvey())){
+            if (answerDTO != null && !StringUtils.isEmpty(answerDTO.getAnswerString())) {
+                edAnswer.setText( answerDTO.getAnswerString());
+            } else {
+                edAnswer.setHint(question.getPlaceHolder());
+            }
+        }else if(Constants.SURVEY_MEMBER.equals(question.getSurvey())){
+            edAnswer.setText(Constants.mStaticObject.getMemberDTO().get(posMember).getmC01());
         }
         return true;
     }

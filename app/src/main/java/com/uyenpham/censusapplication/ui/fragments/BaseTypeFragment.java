@@ -65,6 +65,7 @@ public abstract class BaseTypeFragment extends BaseFragment {
                 Utils.replaceAnimation(singleSelectFragment, isNext,contentID,activity.mFragmentManager);
                 break;
             case Constants.TYPE_NUMBER_INPUT:
+            case Constants.TYPE_DATE_INPUT:
                 NumberInputFragment numberInputFragment = new NumberInputFragment();
                 numberInputFragment.setQuestionDTO(questionDTO);
                 numberInputFragment.setAnswerDTO(null);

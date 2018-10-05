@@ -80,19 +80,24 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
         } else if (questionDTO.getType() == Constants.TYPE_MIX) {
             adapter = new MultiSelectAdapter(listMember, false);
         }
-        String idMember = Constants.mStaticObject.getIdHo() + (posMember + 1);
-        memberDTO = MemberDAO.getInstance().findById(idMember);
         loadQuestion(questionDTO);
+        memberDTO = Constants.mStaticObject.getMemberDTO().get(posMember);
     }
 
     public boolean loadQuestion(final QuestionDTO question) {
+        listOption = new ArrayList<>();
         answerDTO = AnswerDAO.getInstance().findById(question.getId(), Constants.mStaticObject
                 .getIdHo());
         tvQuestion.setText(question.getName() + "." + question.getQuestion());
-        listOption = question.getOptions();
-        if (question.getId().equals(Constants.QUESTION_C01) && posMember == 0) {
+        if (question.getId().equals(Constants.QUESTION_C02) && posMember == 0) {
             listOption.add(new OptionDTO("CHỦ HỘ", "NORMAL", true));
+            radioButtonAdapter = new RadioButtonAdapter(listOption);
+            GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+            radioGroup.setLayoutManager(gridLayoutManager);
+            radioGroup.setAdapter(radioButtonAdapter);
+            radioButtonAdapter.setListener(this);
         } else {
+            listOption = question.getOptions();
             if (listOption.size() > 0) {
                 if (answerDTO.getAnswerString() != null) {
                     listOption.get(answerDTO.getAnswerInt() - 1).setSelected(true);
@@ -150,6 +155,8 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                     return true;
                 }
             case Constants.SURVEY_MEMBER:
+            case Constants.SURVEY_WOMAN:
+            case Constants.SURVEY_DEAD:
                 switch (question.getId()) {
                     case Constants.QUESTION_C03:
                         String idTV = Constants.mStaticObject.getIdHo() + Constants.mStaticObject
@@ -187,17 +194,19 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                             return true;
                         }
                     case Constants.QUESTION_C18:
-                        if (memberDTO.getmC14() == 3 && (answer.getAnswerInt() ==1 || answer.getAnswerInt() ==2)) {
+                        if (memberDTO.getmC14() == 3 && (answer.getAnswerInt() == 1 || answer
+                                .getAnswerInt() == 2)) {
                             return false;
                         } else {
                             return true;
                         }
                     case Constants.QUESTION_C22:
-                        if (memberDTO.getmSTTNKTT() !=1 && memberDTO.getmC02() ==2 && answer.getAnswerInt() != 2){
-                                return false;
-                        } else if(memberDTO.getmC12() ==4 && answer.getAnswerInt() ==1) {
+                        if (memberDTO.getmSTTNKTT() != 1 && memberDTO.getmC02() == 2 && answer
+                                .getAnswerInt() != 2) {
                             return false;
-                        }else {
+                        } else if (memberDTO.getmC12() == 4 && answer.getAnswerInt() == 1) {
+                            return false;
+                        } else {
                             return true;
                         }
 
@@ -308,18 +317,21 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
             AnswerDAO.getInstance().insert(answerDTO);
         }
         if (currentIndex < getListQuestion().size() - 1) {
-            if (Constants.SURVEY_MEMBER.equals(questionDTO.getSurvey()) || Constants.SURVEY_WOMAN.equals(questionDTO.getSurvey())) {
+            if (Constants.SURVEY_MEMBER.equals(questionDTO.getSurvey()) || Constants.SURVEY_WOMAN
+                    .equals(questionDTO.getSurvey())) {
                 currentIndex = getStep(questionDTO, answerDTO);
             } else {
                 currentIndex++;
             }
+            if (currentIndex == -1) {
 
-            replcaeFragmentByType(getListQuestion().get(currentIndex), true);
+            } else if (currentIndex < getListQuestion().size()) {
+                replcaeFragmentByType(getListQuestion().get(currentIndex), true);
+            }
         }
     }
 
     private int getStep(QuestionDTO question, AnswerDTO answerDTO) {
-        memberDTO = Constants.mStaticObject.getMemberDTO().get(posMember);
         int index = currentIndex;
         switch (question.getId()) {
             case Constants.QUESTION_C6A:
@@ -375,48 +387,63 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                 }
                 break;
             case Constants.QUESTION_C18:
-                    index += KT2(index);
+                index += KT2(index);
                 break;
             case Constants.QUESTION_C22:
-               if(answerDTO.getAnswerInt() ==1){
-                   index+=3;
-               }else {
-                   index++;
-               }
+                if (answerDTO.getAnswerInt() == 1) {
+                    index += 3;
+                } else {
+                    index++;
+                }
                 break;
             case Constants.QUESTION_C25:
-                if(answerDTO.getAnswerInt() ==1){
-                    index+=3;
-                }else if(answerDTO.getAnswerInt() ==3){
-                    index =-1;
-                }else {
+                if (answerDTO.getAnswerInt() == 1) {
+                    index += 3;
+                } else if (answerDTO.getAnswerInt() == 3) {
+                    index = -1;
+                } else {
                     index++;
                 }
                 break;
             case Constants.QUESTION_C26:
-                if(answerDTO.getAnswerInt() ==1){
+                if (answerDTO.getAnswerInt() == 1) {
                     index++;
-                }else {
+                } else {
                     index++;
                 }
                 break;
             case Constants.QUESTION_C30:
-               index =-1;
+                index = -1;
                 break;
             case Constants.QUESTION_C31:
-                if(answerDTO.getAnswerInt() ==1){
-                    index+=2;
-                }else {
+                if (answerDTO.getAnswerInt() == 1) {
+                    index += 2;
+                } else {
                     index++;
                 }
                 break;
             case Constants.QUESTION_C34:
-                if(answerDTO.getAnswerInt() ==2){
-                    index =-1;
-                }else {
+                if (answerDTO.getAnswerInt() == 2) {
+                    index = -1;
+                } else {
                     index++;
                 }
                 break;
+            case Constants.QUESTION_C50:
+                if (answerDTO.getAnswerInt() == 2 || answerDTO.getAnswerInt() == 3) {
+                    index += 10;
+                } else {
+                    index++;
+                }
+                break;
+            case Constants.QUESTION_C51:
+                if (answerDTO.getAnswerInt() == 2) {
+                    index += 4;
+                } else {
+                    index++;
+                }
+                break;
+
             default:
                 index++;
                 break;
@@ -427,7 +454,7 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
 
     private int KT3(int currentIndex) {
         if (memberDTO.getmC16() == 1) {
-            return currentIndex+= 4;
+            return currentIndex += 4;
         } else {
             return KT4(currentIndex);
         }
@@ -435,16 +462,17 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
 
     private int KT2(int index) {
         if (memberDTO.getmC14() == 3) {
-            return index+=3;
+            return index += 3;
         } else {
-            return index ++;
+            return index++;
         }
     }
+
     private int KT4(int index) {
         if (memberDTO.getmC05() >= 15) {
-            return index+=4;
+            return index += 4;
         } else {
-            return  -1;
+            return -1;
         }
     }
 
@@ -467,6 +495,13 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
         resetAllListOption();
         OptionDTO option = listOption.get(pos);
         option.setSelected(!isSelected);
+        radioGroup.post(new Runnable()
+        {
+            @Override
+            public void run() {
+                radioButtonAdapter.notifyDataSetChanged();
+            }
+        });
         if (option.isSelected() && option.getType().toLowerCase().equals(Constants.TYPE_SHOW)) {
             {
                 isYes = true;
@@ -476,6 +511,7 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                 } else if (Constants.SURVEY_MEMBER.equals(questionDTO.getSurvey())) {
                     Constants.mStaticObject.getMemberDTO().get(posMember).set(questionDTO.getId()
                             , pos + 1);
+                    memberDTO.set(questionDTO.getId(), pos + 1);
                     answerDTO.setAnswerInt(1);
                 }
                 if (questionDTO.getType() == Constants.TYPE_MIX) {
@@ -535,8 +571,9 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                 Constants.mStaticObject.getPeopleDTO().set(questionDTO.getId(), pos + 1);
                 answerDTO.setAnswerInt(2);
             } else if (Constants.SURVEY_MEMBER.equals(questionDTO.getSurvey())) {
-                Constants.mStaticObject.getPeopleDetailDTO().get(posMember).set(questionDTO.getId
+                Constants.mStaticObject.getMemberDTO().get(posMember).set(questionDTO.getId
                         (), pos + 1);
+                memberDTO.set(questionDTO.getId(), pos + 1);
                 answerDTO.setAnswerInt(2);
             }
         }

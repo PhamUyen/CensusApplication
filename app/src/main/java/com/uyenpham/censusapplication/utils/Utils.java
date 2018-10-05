@@ -75,6 +75,7 @@ public class Utils {
                 replaceAnimation(singleSelectFragment, isNext, content,fragmentManager);
                 break;
             case Constants.TYPE_NUMBER_INPUT:
+            case Constants.TYPE_DATE_INPUT:
                 NumberInputFragment numberInputFragment = new NumberInputFragment();
                 numberInputFragment.setQuestionDTO(questionDTO);
                 numberInputFragment.setAnswerDTO(null);
