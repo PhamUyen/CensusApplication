@@ -85,7 +85,7 @@ public class MemberActivity extends SurveyActivity implements IRecyclerViewListe
     public void setNavigationBar() {
         navigationBar = findViewById(R.id.toolbar);
         navigationBar.reSetAll();
-        navigationBar.setIconLeft(R.drawable.ic_menu);
+        navigationBar.setIconLeft(R.drawable.ic_menu_gallery);
 
         if(peopleDetailDTO == null){
             navigationBar.setTitle(list.get(0).getQ1());
@@ -112,7 +112,7 @@ public class MemberActivity extends SurveyActivity implements IRecyclerViewListe
     private void setListDrawer() {
         list.addAll(Constants.mStaticObject.getPeopleDetailDTO());
 
-        adapter = new MemberAdapter(list);
+//        adapter = new MemberAdapter(list);
         adapter.setListener(this);
         drawerList.setAdapter(adapter);
     }

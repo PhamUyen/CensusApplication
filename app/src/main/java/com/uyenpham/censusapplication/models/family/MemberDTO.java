@@ -63,9 +63,9 @@ public class MemberDTO {
     @SerializedName("C22")
     private Integer mC22;
     @SerializedName("C23N")
-    private String mC23N;
+    private Integer mC23N;
     @SerializedName("C23T")
-    private String mC23T;
+    private Integer mC23T;
     @SerializedName("C24")
     private Integer mC24;
     @SerializedName("C25")
@@ -130,8 +130,8 @@ public class MemberDTO {
                      String mC10A, String mC10B, Integer mC11, Integer mC12, String mC12K, Integer
                              mC13A, Integer mC13B, Integer mC13C, Integer mC13D, Integer mC13E,
                      Integer mC13F, Integer mC14, Integer mC15, Integer mC16, Integer mC17,
-                     Integer mC18, String mC19, String mC20, Integer mC21, Integer mC22, String mC23N,
-                     String mC23T, Integer mC24, Integer mC25, Integer mC26, Integer mC27, String
+                     Integer mC18, String mC19, String mC20, Integer mC21, Integer mC22, Integer mC23N,
+                     Integer mC23T, Integer mC24, Integer mC25, Integer mC26, Integer mC27, String
                              mC28A, String mC28B, Integer mC28C, String mC29A, String mC29B,
                      Integer mC29C, Integer mC30, Integer mC31, Integer mC32A, String mC32B,
                      Integer mC33, Integer mC4N, Integer mC4T, Integer mC6A, String mC6B, String mC6C,
@@ -401,19 +401,19 @@ public class MemberDTO {
         this.mC22 = mC22;
     }
 
-    public String getmC23N() {
+    public Integer getmC23N() {
         return mC23N;
     }
 
-    public void setmC23N(String mC23N) {
+    public void setmC23N(Integer mC23N) {
         this.mC23N = mC23N;
     }
 
-    public String getmC23T() {
+    public Integer getmC23T() {
         return mC23T;
     }
 
-    public void setmC23T(String mC23T) {
+    public void setmC23T(Integer mC23T) {
         this.mC23T = mC23T;
     }
 

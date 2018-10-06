@@ -6,7 +6,6 @@ import com.uyenpham.censusapplication.db.AnswerDAO;
 import com.uyenpham.censusapplication.db.DeadDAO;
 import com.uyenpham.censusapplication.db.FamilyDAO;
 import com.uyenpham.censusapplication.db.PeopleDAO;
-import com.uyenpham.censusapplication.db.WomanDAO;
 import com.uyenpham.censusapplication.models.survey.AnswerDTO;
 import com.uyenpham.censusapplication.models.survey.QuestionDTO;
 import com.uyenpham.censusapplication.ui.activities.SurveyActivity;
@@ -28,7 +27,7 @@ public abstract class BaseTypeFragment extends BaseFragment {
         }else {
             AnswerDAO.getInstance().insert(answerDTO);
         }
-        saveAnswerToSurvey(questionDTO, answerDTO);
+//        saveAnswerToSurvey(questionDTO, answerDTO);
     }
 
     public abstract boolean validateQuaetion(QuestionDTO question, AnswerDTO answer);
@@ -68,8 +67,9 @@ public abstract class BaseTypeFragment extends BaseFragment {
             case Constants.TYPE_DATE_INPUT:
                 NumberInputFragment numberInputFragment = new NumberInputFragment();
                 numberInputFragment.setQuestionDTO(questionDTO);
-                numberInputFragment.setAnswerDTO(null);
-//                fragment.setContentID(contentID);
+                numberInputFragment.setListQuestion(listQuestion);
+                numberInputFragment.setContentID(contentID);
+//                numberInputFragment.setPosMember();
                 Utils.replaceAnimation(numberInputFragment, isNext,contentID,activity.mFragmentManager);
                 break;
             case Constants.TYPE_MULTI_SELECT:
@@ -116,8 +116,8 @@ public abstract class BaseTypeFragment extends BaseFragment {
     protected void saveAnswerToSurvey(QuestionDTO question, AnswerDTO answer) {
         switch (question.getSurvey()) {
             case Constants.SURVEY_WOMAN:
-                Constants.mStaticObject.getWomanDTO().set(question.getName(), answer.getAnswerString());
-                WomanDAO.getInstance().insert(Constants.mStaticObject.getWomanDTO());
+//                Constants.mStaticObject.getWomanDTO().set(question.getName(), answer.getAnswerString());
+//                WomanDAO.getInstance().insert(Constants.mStaticObject.getWomanDTO());
                 break;
             case Constants.SURVEY_DEAD:
                 DeadDAO.getInstance().insert(Constants.mStaticObject.getDeadDTO());

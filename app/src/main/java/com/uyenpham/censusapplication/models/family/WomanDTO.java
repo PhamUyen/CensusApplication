@@ -11,33 +11,33 @@ public class WomanDTO {
     public static final String ID_WOMAN = "IDTV";
 
     @SerializedName("C34")
-    private Long mC34;
+    private Integer mC34;
     @SerializedName("C35A")
-    private Long mC35A;
+    private Integer mC35A;
     @SerializedName("C35B")
-    private Long mC35B;
+    private Integer mC35B;
     @SerializedName("C36A")
-    private Long mC36A;
+    private Integer mC36A;
     @SerializedName("C36B")
-    private Long mC36B;
+    private Integer mC36B;
     @SerializedName("C37A")
-    private Long mC37A;
+    private Integer mC37A;
     @SerializedName("C37B")
-    private Long mC37B;
+    private Integer mC37B;
     @SerializedName("C38N")
-    private String mC38N;
+    private Integer mC38N;
     @SerializedName("C38T")
-    private String mC38T;
+    private Integer mC38T;
     @SerializedName("C39A")
-    private Long mC39A;
+    private Integer mC39A;
     @SerializedName("C39B")
-    private Long mC39B;
+    private Integer mC39B;
     @SerializedName("C40A")
-    private Long mC40A;
+    private Integer mC40A;
     @SerializedName("C40B")
-    private Long mC40B;
+    private Integer mC40B;
     @SerializedName("C41")
-    private Long mC41;
+    private Integer mC41;
     @SerializedName("C41K")
     private String mC41K;
     @SerializedName("ID")
@@ -54,9 +54,14 @@ public class WomanDTO {
         this.mID = mID;
     }
 
-    public WomanDTO(Long mC34, Long mC35A, Long mC35B, Long mC36A, Long mC36B, Long mC37A, Long
-            mC37B, String mC38N, String mC38T, Long mC39A, Long mC39B, Long mC40A, Long mC40B,
-                    Long mC41, String mC41K, String mID, String mIDTV, String mTenTV) {
+    public WomanDTO(String mIDTV, String mTenTV) {
+        this.mIDTV = mIDTV;
+        this.mTenTV = mTenTV;
+    }
+
+    public WomanDTO(Integer mC34, Integer mC35A, Integer mC35B, Integer mC36A, Integer mC36B, Integer mC37A, Integer
+            mC37B, Integer mC38N, Integer mC38T, Integer mC39A, Integer mC39B, Integer mC40A, Integer mC40B,
+                    Integer mC41, String mC41K, String mID, String mIDTV, String mTenTV) {
         this.mC34 = mC34;
         this.mC35A = mC35A;
         this.mC35B = mC35B;
@@ -77,115 +82,115 @@ public class WomanDTO {
         this.mTenTV = mTenTV;
     }
 
-    public Long getC34() {
+    public Integer getC34() {
         return mC34;
     }
 
-    public void setC34(Long c34) {
+    public void setC34(Integer c34) {
         mC34 = c34;
     }
 
-    public Long getC35A() {
+    public Integer getC35A() {
         return mC35A;
     }
 
-    public void setC35A(Long c35A) {
+    public void setC35A(Integer c35A) {
         mC35A = c35A;
     }
 
-    public Long getC35B() {
+    public Integer getC35B() {
         return mC35B;
     }
 
-    public void setC35B(Long c35B) {
+    public void setC35B(Integer c35B) {
         mC35B = c35B;
     }
 
-    public Long getC36A() {
+    public Integer getC36A() {
         return mC36A;
     }
 
-    public void setC36A(Long c36A) {
+    public void setC36A(Integer c36A) {
         mC36A = c36A;
     }
 
-    public Long getC36B() {
+    public Integer getC36B() {
         return mC36B;
     }
 
-    public void setC36B(Long c36B) {
+    public void setC36B(Integer c36B) {
         mC36B = c36B;
     }
 
-    public Long getC37A() {
+    public Integer getC37A() {
         return mC37A;
     }
 
-    public void setC37A(Long c37A) {
+    public void setC37A(Integer c37A) {
         mC37A = c37A;
     }
 
-    public Long getC37B() {
+    public Integer getC37B() {
         return mC37B;
     }
 
-    public void setC37B(Long c37B) {
+    public void setC37B(Integer c37B) {
         mC37B = c37B;
     }
 
-    public String getC38N() {
+    public Integer getC38N() {
         return mC38N;
     }
 
-    public void setC38N(String c38N) {
+    public void setC38N(Integer c38N) {
         mC38N = c38N;
     }
 
-    public String getC38T() {
+    public Integer getC38T() {
         return mC38T;
     }
 
-    public void setC38T(String c38T) {
+    public void setC38T(Integer c38T) {
         mC38T = c38T;
     }
 
-    public Long getC39A() {
+    public Integer getC39A() {
         return mC39A;
     }
 
-    public void setC39A(Long c39A) {
+    public void setC39A(Integer c39A) {
         mC39A = c39A;
     }
 
-    public Long getC39B() {
+    public Integer getC39B() {
         return mC39B;
     }
 
-    public void setC39B(Long c39B) {
+    public void setC39B(Integer c39B) {
         mC39B = c39B;
     }
 
-    public Long getC40A() {
+    public Integer getC40A() {
         return mC40A;
     }
 
-    public void setC40A(Long c40A) {
+    public void setC40A(Integer c40A) {
         mC40A = c40A;
     }
 
-    public Long getC40B() {
+    public Integer getC40B() {
         return mC40B;
     }
 
-    public void setC40B(Long c40B) {
+    public void setC40B(Integer c40B) {
         mC40B = c40B;
     }
 
-    public Long getC41() {
+    public Integer getC41() {
         return mC41;
     }
 
-    public void setC41(Long c41) {
+    public void setC41(Integer c41) {
         mC41 = c41;
     }
 
@@ -235,5 +240,21 @@ public class WomanDTO {
             }
         }
         return false;
+    }
+    public  Object get(String fieldName) {
+        fieldName = "m"+fieldName;
+        Class<?> clazz = this.getClass();
+        while (clazz != null) {
+            try {
+                Field field = clazz.getDeclaredField(fieldName);
+                field.setAccessible(true);
+                return field.get(this);
+            } catch (NoSuchFieldException e) {
+                clazz = clazz.getSuperclass();
+            } catch (Exception e) {
+                throw new IllegalStateException(e);
+            }
+        }
+        return null;
     }
 }

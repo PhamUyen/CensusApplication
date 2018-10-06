@@ -1,0 +1,164 @@
+{
+  "questions": [
+    {
+      "id": "Q42",
+      "name": "Q42",
+      "question": "Từ ngày 28/01/2017 (tức ngày 01 Tết Âm lịch Đinh Dậu năm 2017) đến hết ngày 31/07/2018, trong hộ ông/bà có nhân khẩu thực tế thường trú nào đã chết không (kể cả cháu nhỏ)?",
+      "type": 2,
+      "options": [
+        {
+          "option" : "CÓ",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "KHÔNG",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"dead"
+    },
+    {
+      "id": "Q43",
+      "name": "Q43",
+      "question": "Xin ông/bà cho biết họ và tên của (từng) người chết?",
+      "type": 1,
+      "options": []
+      ,
+      "placeHolders": "",
+      "survey":"dead"
+    },
+    {
+      "id": "Q44",
+      "name": "Q44",
+      "question": "[TÊN] là nam hay nữ?",
+      "type": 2,
+      "options": [
+        {
+          "option" : "NAM",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "NỮ",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"dead"
+    },
+    {
+      "id": "Q45",
+      "name": "Q45",
+      "question": ". [TÊN] chết vào tháng, năm dương lịch nào?",
+      "type": 7,
+      "options": [
+        {
+          "option" : "THÁNG",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "NĂM",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"dead"
+    },
+    {
+      "id": "Q46",
+      "name": "Q46",
+      "question": "[TÊN] sinh vào tháng, năm dương lịch nào?",
+      "type": 7,
+
+      "options": [
+        {
+          "option" : "THÁNG",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "NĂM",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "KHÔNG XÁC ĐỊNH",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"dead"
+    },
+    {
+      "id": "Q47",
+      "name": "Q47",
+      "question": "Khi chết, [TÊN] được bao nhiêu tuổi theo dương lịch?",
+      "type": 6,
+      "options": [
+        {
+          "option" : "TUỔI TRÒN ",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"dead"
+    },
+    {
+      "id": "Q48",
+      "name": "Q48",
+      "question": "[TÊN] chết vì nguyên nhân gì?",
+      "type": 4,
+      "options": [
+        {
+          "option" : "BỆNH TẬT",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "TAI NẠN LAO ĐỘNG",
+          "type" : "NORMAL"
+        },{
+          "option" : "STAI NẠN GIAO THÔNG",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "TỰ TỬ",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "TAI NẠN KHÁC",
+          "type" : "SHOW"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"dead"
+    },
+    {
+      "id": "Q49",
+      "name": "Q49",
+      "question": "[TÊN] chết trong trường hợp nào?",
+      "type": 4,
+      "options": [
+        {
+          "option" : "KHI ĐANG MANG THAI",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "KHI SINH CON",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "TRONG VÒNG 42 NGÀY SAU KHI ĐẺ ",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "TRONG VÒNG 42 NGÀY SAU SẨY/NẠO/HÚT THAI,THAI LƯU/THAI HỎNG",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "KHÁC",
+          "type" : "SHOW"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"dead"
+    }
+  ]
+}

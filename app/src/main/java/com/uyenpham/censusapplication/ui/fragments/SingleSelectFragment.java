@@ -97,6 +97,7 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
             radioGroup.setAdapter(radioButtonAdapter);
             radioButtonAdapter.setListener(this);
         } else {
+            if (!listOption.isEmpty()) {
             listOption = question.getOptions();
             if (listOption.size() > 0) {
                 if (answerDTO.getAnswerString() != null) {
@@ -325,10 +326,37 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
             }
             if (currentIndex == -1) {
 
+            if(currentIndex == -1){
+                 nextMember();
+            }
+            replcaeFragmentByType(getListQuestion().get(currentIndex), true);
+        }
+    }
+
+    private void nextMember(){
+        posMember ++;
+        switch (questionDTO.getSurvey()){
+            case Constants.SURVEY_MEMBER:
+                if(posMember < Constants.mStaticObject.getMemberDTO().size()){
+                    currentIndex =0;
+                    replcaeFragmentByType(getListQuestion().get(currentIndex), true);
+                }else{
+                    if (Constants.mStaticObject.getWomanDTO().size() > 0) {
+                        posMember = 0;
+                        activity.survey = Constants.SURVEY_WOMAN;
+                        activity.isMember = true;
+                        activity.setListPeople();
+                        activity.getNavigationBar().setTitle("1 - " + Constants.mStaticObject
+                                .getWomanDTO().get(0).getTenTV());
+                    } else {
+                        nextFragment();
+                    }
+                }
             } else if (currentIndex < getListQuestion().size()) {
                 replcaeFragmentByType(getListQuestion().get(currentIndex), true);
             }
         }
+
     }
 
     private int getStep(QuestionDTO question, AnswerDTO answerDTO) {
@@ -423,9 +451,9 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                 }
                 break;
             case Constants.QUESTION_C34:
-                if (answerDTO.getAnswerInt() == 2) {
+                if(answerDTO.getAnswerInt() ==2){
                     index = -1;
-                } else {
+                }else {
                     index++;
                 }
                 break;

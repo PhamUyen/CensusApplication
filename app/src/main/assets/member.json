@@ -116,8 +116,8 @@
       "survey": "member"
     },
     {
-      "id": "C07",
-      "name": "C07",
+      "id": "C7A",
+      "name": "C7A",
       "question": "Tôn giáo",
       "type": 4,
       "options": [
@@ -442,7 +442,7 @@
         {
           "option": "MẦM NON DƯỚI 5 TUỔI",
           "type": "NORMAL"
-        },C
+        },
         {
           "option": "MẦM NON 5 TUỔI",
           "type": "NORMAL"

@@ -49,6 +49,7 @@ public class Constants {
     public static final String QUESTION_C01 = "C01";
     public static final String QUESTION_C02 = "C02";
     public static final String QUESTION_C03 = "C03";
+    public static final String QUESTION_C04 = "C04";
     public static final String QUESTION_C05 = "C05";
     public static final String QUESTION_C08= "C08";
     public static final String QUESTION_C09 ="C09";
@@ -72,6 +73,7 @@ public class Constants {
     public static final String QUESTION_C20= "C20";
     public static final String QUESTION_C21= "C21";
     public static final String QUESTION_C22=  "C22";
+    public static final String QUESTION_C23=  "C23";
     public static final String QUESTION_C23N=  "C23N";
     public static final String QUESTION_C23T=  "C23T";
     public static final String QUESTION_C24=  "C24";
@@ -100,6 +102,12 @@ public class Constants {
 
     //id woman
     public static final String QUESTION_C34= "C34";
+    public static final String QUESTION_C38= "C38";
+    public static final String QUESTION_C39= "C39";
+    public static final String QUESTION_C35= "C35";
+    public static final String QUESTION_C36= "C36";
+    public static final String QUESTION_C37= "C37";
+    public static final String QUESTION_C40= "C40";
     public static final String QUESTION_C35A=  "C35A";
     public static final String QUESTION_C35B=  "C35B";
     public static final String QUESTION_C36A=  "C36A";
@@ -199,5 +207,8 @@ public class Constants {
     //type radioButton
     public static final String TYPE_NORMAL = "normal";
     public static final String TYPE_SHOW = "show";
-
+    public static final String MONTH = "THANG";
+    public static final String YEAR = "NAM";
+    public static final String NUMBER_BOY = "SỐ CON TRAI";
+    public static final String NUMBER_GIRL = "SỐ CON GÁI";
 }

@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class StaticObject {
     private FamilyDTO familyDTO;
     private FamilyDetailDTO familyDetailDTO;
-    private WomanDTO womanDTO;
+    private  ArrayList<WomanDTO> womanDTOs;
     private ArrayList<MemberDTO> memberDTOs;
     private PeopleDTO peopleDTO;
     private HouseDTO houseDTO;
@@ -43,7 +43,7 @@ public class StaticObject {
     public StaticObject() {
         familyDetailDTO = new FamilyDetailDTO();
         familyDTO = new FamilyDTO();
-        womanDTO = new WomanDTO();
+        womanDTOs = new ArrayList<>();
         memberDTOs = new ArrayList<>();
         peopleDTO = new PeopleDTO();
         houseDTO = new HouseDTO();
@@ -83,12 +83,12 @@ public class StaticObject {
         this.familyDetailDTO = familyDetailDTO;
     }
 
-    public WomanDTO getWomanDTO() {
-        return womanDTO;
+    public  ArrayList<WomanDTO> getWomanDTO() {
+        return womanDTOs;
     }
 
-    public void setWomanDTO(WomanDTO womanDTO) {
-        this.womanDTO = womanDTO;
+    public void setWomanDTO( ArrayList<WomanDTO> womanDTO) {
+        this.womanDTOs = womanDTO;
     }
 
     public ArrayList<MemberDTO> getMemberDTO() {
@@ -124,7 +124,9 @@ public class StaticObject {
     }
     public void updateDB(){
         PeopleDAO.getInstance().insert(peopleDTO);
-        WomanDAO.getInstance().insert(womanDTO);
+        for(WomanDTO womanDTO : womanDTOs){
+            WomanDAO.getInstance().insert(womanDTO);
+        }
         for(PeopleDetailDTO peopleDetailDTO : peopleDetailDTOs){
             PeopleDetailDAO.getInstance().insert(peopleDetailDTO);
         }

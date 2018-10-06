@@ -47,7 +47,7 @@ public class DrawerAdapter extends ExpandableRecyclerViewAdapter<GroupDrawerView
 
         final QuestionDTO question = ((GroupDrawer) group).getItems().get(childIndex);
         AnswerDTO answerDTO = AnswerDAO.getInstance().findById(question.getId(),Constants.mStaticObject.getIdHo());
-        holder.setChildInfo(question.getQuestion(), (answerDTO== null || answerDTO.getAnswerString() == null) ? "Chưa xác định" : (String)answerDTO.getAnswerString());
+        holder.setChildInfo(question.getQuestion(), (answerDTO== null || answerDTO.getAnswerString() == null) ? "Chưa xác định" : answerDTO.getAnswerString());
         holder.setListener(listener);
         holder.setEvenClickItem(question);
     }

@@ -1,0 +1,412 @@
+{
+  "questions": [
+    {
+      "id": "Q50",
+      "name": "Q50",
+      "question": "HỘ CÓ NHÀ Ở HAY KHÔNG CÓ NHÀ Ở?",
+      "type": 2,
+      "options": [
+        {
+          "option" : "CÓ",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "KHÔNG, ĐANG XÂY DỰNG VÀ Ở LÁN TẠM ",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "KHÔNG",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"house"
+    },
+    {
+      "id": "Q51",
+      "name": "Q51",
+      "question": "Hộ Ông/Bà có đang ở chung với (các) hộ khác trong cùng ngôi nhà/căn hộ này không?",
+      "type": 2,
+      "options": [{
+          "option" : "CÓ",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "KHÔNG",
+          "type" : "NORMAL"
+        }]
+      ,
+      "placeHolders": "",
+      "survey":"house"
+    },
+    {
+      "id": "Q52",
+      "name": "Q52",
+      "question": "Hộ Ông/Bà có phải là hộ đại diện không?",
+      "type": 4,
+      "options": [
+        {
+          "option" : "CÓ",
+          "type" : "SHOW"
+        },
+        {
+          "option" : "KHÔNG",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"house"
+    },
+    {
+      "id": "Q53",
+      "name": "Q53",
+      "question": "Ngôi nhà/căn hộ mà hộ Ông/Bà đang ở là nhà chung cư hay nhà riêng lẻ?  /nNgôi nhà/căn hộ này có bao nhiêu phòng ngủ riêng biệt?",
+      "type": 4,
+      "options": [
+        {
+          "option" : "NHÀ CHUNG CƯ",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "NHÀ RIÊNG LẺ ",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "SỐ PHÒNG NGỦ RIÊNG BIỆT",
+          "type" : "NUMBER"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"house"
+    },
+    {
+      "id": "Q54",
+      "name": "Q54",
+      "question": "Tổng diện tích sàn xây dựng của ngôi nhà/căn hộ này là bao nhiêu mét vuông?",
+      "type": 6,
+
+      "options": [
+        {
+          "option" : "DIỆN TÍCH (m2)",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"house"
+    },
+    {
+      "id": "Q55",
+      "name": "Q55",
+      "question": "Vật liệu chính làm cột (hoặc trụ, hoặc tường chịu lực) của ngôi nhà/căn hộ này là gì?",
+      "type": 2,
+      "options": [
+        {
+          "option" : "VẬT LIỆU BỀN CHẮC (BÊ TÔNG CỐT THÉP, XÂY GẠCH/ĐÁ, SẮT/THÉP/GỖ BỀN CHẮC)",
+          "type" : "NORMAL"
+        },{
+          "option" : "VẬT LIỆU TẠM (GỖ TẠP/TRE, ĐẤT, VẬT LIỆU KHÁC) ",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"house"
+    },
+    {
+      "id": "Q56",
+      "name": "Q56",
+      "question": "Vật liệu chính làm mái của ngôi nhà/căn hộ này là gì?",
+      "type": 2,
+      "options": [
+        {
+          "option" : "VẬT LIỆU BỀN CHẮC (BÊ TÔNG CỐT THÉP, NGÓ)",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "VẬT LIỆU TẠM (TẤM LỢP, LÁ/RƠM RẠ/GIẤY DẦU, VẬT LIỆU KHÁC) ",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"house"
+    },
+    {
+      "id": "Q57",
+      "name": "Q57",
+      "question": "Vật liệu chính làm tường hoặc bao che của ngôi nhà/căn hộ này là gì?",
+      "type": 2,
+      "options": [
+        {
+          "option" : "VẬT LIỆU BỀN CHẮC (BÊ TÔNG CỐT THÉP, XÂY GẠCH/ĐÁ, GỖ/KIM LOẠI)",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "VẬT LIỆU TẠM (ĐẤT VÔI/RƠM, PHIÊN/LIẾP/VÁN ÉP,VẬT LIỆU KHÁC) ",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"house"
+    },
+    {
+      "id": "Q58",
+      "name": "Q58",
+      "question": "Ngôi nhà/căn hộ này được sử dụng từ năm nào? ",
+      "type": 4,
+      "options": [
+        {
+          "option" : "TRƯỚC 1975",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "TỪ 1975 ĐẾN 1999",
+          "type" : "NORMAL"
+        },{
+          "option" : "TỪ 2000 ĐẾN 2009",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "TỪ 2010 ĐẾN NAY",
+          "type" : "SHOW"
+        },
+        {
+          "option" : "KHÔNG XÁC ĐỊNH",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"house"
+    },
+    {
+      "id": "Q59",
+      "name": "Q59",
+      "question": "Ngôi nhà/căn hộ mà hộ Ông/Bà đang ở thuộc quyền sở hữu của ai?",
+      "type": 2,
+      "options": [
+        {
+          "option" : "NHÀ RIÊNG CỦA HỘ",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "NHÀ THUÊ/MƯỢN CỦA NHÀ NƯỚC",
+          "type" : "NORMAL"
+        },{
+          "option" : "NHÀ THUÊ/MƯỢN CỦA TƯ NHÂN",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "NHÀ CỦA TẬP THỂ",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "CÁC HÌNH THỨC SỞ HỮU KHÁC HOẶC CHƯA RÕ QUYỀN SỞ HỮU",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"house"
+    },
+    {
+      "id": "Q60",
+      "name": "Q60",
+      "question": "Trong thời gian tới, hộ Ông/Bà có kế hoạch mua nhà/căn hộ không? \n NẾU CÓ: Hộ Ông/Bà có kế hoạch mua nhà/căn hộ ở tỉnh/thành phố nào?",
+      "type": 4,
+      "options": [
+        {
+          "option" : "CÓ",
+          "type" : "SHOW"
+        },
+        {
+          "option" : "KHÔNG",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"house"
+    },
+    {
+      "id": "Q61",
+      "name": "Q61",
+      "question": "Loại nhiên liệu (năng lượng) chính mà hộ Ông/Bà dùng để thắp sáng là gì?",
+      "type": 4,
+      "options": [
+        {
+          "option" : "ĐIỆN LƯỚI",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "ĐIỆN MÁY PHÁT",
+          "type" : "NORMAL"
+        },{
+          "option" : "DẦU LỬA",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "KHÍ GA",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "KHÁC",
+          "type" : "SHOW"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"house"
+    },
+    {
+      "id": "Q62",
+      "name": "Q62",
+      "question": "Loại nhiên liệu (năng lượng) chính mà hộ Ông/Bà dùng để nấu ăn là gì?",
+      "type": 4,
+      "options": [
+        {
+          "option" : "ĐIỆN",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "GAS/BIOGA",
+          "type" : "NORMAL"
+        },{
+          "option" : "THAN",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "CỦI",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "KHÁC",
+          "type" : "SHOW"
+        },
+        {
+          "option" : "KHÔNG DÙNG GÌ",
+          "type" : "NORMAL"
+        } 
+      ],
+      "placeHolders": "",
+      "survey":"house"
+    },
+    {
+      "id": "Q63",
+      "name": "Q63",
+      "question": "Nguồn nước ăn uống chính của hộ Ông/Bà là loại nào?",
+      "type": 4,
+      "options": [
+        {
+          "option" : "NƯỚC MÁY",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "NƯỚC MUA (XITÉC, BÌNH…)",
+          "type" : "NORMAL"
+        },{
+          "option" : "NƯỚC GIẾNG KHOAN",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "NƯỚC GIẾNG ĐÀO ĐƯỢC BẢO VỆ",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "NƯỚC GIẾNG ĐÀO KHÔNG ĐƯỢC BẢO VỆ",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "NƯỚC KHE/MÓ ĐƯỢC BẢO VỆ",
+          "type" : "NORMAL"
+        } ,
+        {
+          "option" : "NƯỚC MƯA",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "NƯỚC KHÁC",
+          "type" : "SHOW"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"house"
+    },
+    {
+      "id": "Q64",
+      "name": "Q64",
+      "question": "Hộ Ông/Bà sử dụng loại hố xí nào là chính? ",
+      "type": 2,
+      "options": [
+        {
+          "option" : "HỐ XÍ TỰ HOẠI/BÁN TỰ HOẠI TRONG NHÀ",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "HỐ XÍ TỰ HOẠI/BÁN TỰ HOẠI NGOÀI NHÀ",
+          "type" : "NORMAL"
+        },{
+          "option" : "HỐ XÍ KHÁC",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "KHÔNG CÓ HỐ XÍ",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"house"
+    },
+    {
+      "id": "Q65",
+      "name": "Q65",
+      "question": "Hiện nay, hộ Ông/Bà có các loại thiết bị phục vụ sinh hoạt sau đây không ?",
+      "type": 3,
+      "options": [
+        {
+          "option" : "Tivi",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "Đài (Radio/Radio Casetts)",
+          "type" : "NORMAL"
+        },{
+          "option" : "Máy vi tính (máy bàn, laptop)",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "Điện thoại cố định/di động/máy tính bảng",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "Tủ lạnh",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "Máy giặt",
+          "type" : "NORMAL"
+        } ,
+        {
+          "option" : "Bình tắm nóng lạnh",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "Điều hòa nhiệt độ",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "Mô tô/xe gắn máy/xe đạp điện/Xe máy điện",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "Xe đạp",
+          "type" : "NORMAL"
+        },
+        {
+          "option" : "Xuồng/ghe",
+          "type" : "NORMAL"
+        } ,
+        {
+          "option" : "Ô tô",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"house"
+    }
+  ]
+}

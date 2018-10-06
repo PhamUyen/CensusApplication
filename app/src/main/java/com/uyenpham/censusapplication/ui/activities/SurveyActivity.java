@@ -19,6 +19,7 @@ import com.uyenpham.censusapplication.models.DrawerDataFactory;
 import com.uyenpham.censusapplication.models.drawer.GroupDrawer;
 import com.uyenpham.censusapplication.models.family.FamilyDTO;
 import com.uyenpham.censusapplication.models.family.PeopleDetailDTO;
+import com.uyenpham.censusapplication.models.family.WomanDTO;
 import com.uyenpham.censusapplication.models.survey.AnswerDTO;
 import com.uyenpham.censusapplication.models.survey.QuestionDTO;
 import com.uyenpham.censusapplication.ui.adapters.DrawerAdapter;
@@ -65,7 +66,7 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick,
     private FamilyDTO familyDTO;
     public static int currentIndex = 8;
     private ArrayList<QuestionDTO> listQuestion;
-    private ArrayList<PeopleDetailDTO> listPeople;
+    private ArrayList<String> listPeople;
     private MemberAdapter memberAdapter;
     public boolean isMember;
     public String survey;
@@ -100,7 +101,7 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick,
 
         //set default quest
         Utils.replcaeFragmentByType(listQuestion.get(currentIndex), true, listQuestion,
-                ID_SURVEY_CONTENT, mFragmentManager,-1);
+                ID_SURVEY_CONTENT, mFragmentManager, -1);
     }
 
     @Override
@@ -121,11 +122,7 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick,
                         .getName(), familyDTO.getIDHO(), (Integer) familyDTO.get(field.getName()));
             }
 
-            if (AnswerDAO.getInstance().checkIsExistDB(answerDTO.getId())) {
-                AnswerDAO.getInstance().update(answerDTO);
-            } else {
-                AnswerDAO.getInstance().insert(answerDTO);
-            }
+            AnswerDAO.getInstance().insert(answerDTO);
 
         }
     }
@@ -189,6 +186,7 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick,
 
     public void openDrawer() {
         drawer.openDrawer(GravityCompat.START);
+        setListDrawer();
     }
 
     public void toggleDrawer() {
@@ -206,7 +204,7 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick,
     public void setNavigationBar() {
         navigationBar = findViewById(R.id.toolbar);
         navigationBar.reSetAll();
-        navigationBar.setIconLeft(R.drawable.ic_menu);
+        navigationBar.setIconLeft(R.drawable.ic_menu_gallery);
 
         navigationBar.setTitle(getString(R.string.txt_interview_detail));
     }
@@ -226,7 +224,7 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick,
         if (iExitClick != null) {
             iExitClick.onExitClick();
         } else {
-            currentIndex =8;
+            currentIndex = 8;
             finish();
             Constants.mStaticObject.updateDB();
             Constants.mStaticObject.reset();
@@ -258,7 +256,7 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick,
         toggleDrawer();
         if (currentIndex != getIndexOfQuestion(quest)) {
             Utils.replcaeFragmentByType(quest, true, listQuestion, ID_SURVEY_CONTENT,
-                    mFragmentManager,-1);
+                    mFragmentManager, -1);
             currentIndex = getIndexOfQuestion(quest);
         }
     }
@@ -293,13 +291,22 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick,
         listPeople = new ArrayList<>();
         drawerList.setVisibility(View.GONE);
         listMember.setVisibility(View.VISIBLE);
-        listPeople.addAll(Constants.mStaticObject.getPeopleDetailDTO());
+        if (survey.equals(Constants.SURVEY_MEMBER)) {
+            for (PeopleDetailDTO peopleDetailDTO : Constants.mStaticObject.getPeopleDetailDTO()) {
+                listPeople.add(peopleDetailDTO.getQ1());
+            }
+        } else if (survey.equals(Constants.SURVEY_WOMAN)) {
+            for (WomanDTO womanDTO : Constants.mStaticObject.getWomanDTO()) {
+                listPeople.add(womanDTO.getIDTV());
+            }
+        }
+
 
         memberAdapter = new MemberAdapter(listPeople);
         memberAdapter.setListener(this);
         listMember.setAdapter(memberAdapter);
         makeListQuestionMember();
-        currentIndex =0;
+        currentIndex = 0;
         Utils.replcaeFragmentByType(listQuestion.get(currentIndex), true, listQuestion, ID_SURVEY_CONTENT,
                 mFragmentManager, 0);
     }
@@ -326,9 +333,9 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick,
     @Override
     public void onClickItem(View view, int postion) {
         toggleDrawer();
-        currentIndex =0;
-            Utils.replcaeFragmentByType(listQuestion.get(currentIndex), true, listQuestion, ID_SURVEY_CONTENT,
-                    mFragmentManager, postion);
+        currentIndex = 0;
+        Utils.replcaeFragmentByType(listQuestion.get(currentIndex), true, listQuestion, ID_SURVEY_CONTENT,
+                mFragmentManager, postion);
     }
 
     @Override
