@@ -26,36 +26,13 @@ public class DrawerDataFactory {
 
 
     public static GroupDrawer makeInfoGroup() {
-        return new GroupDrawer(App.getInstance().getString(R.string.txt_info), makeListInfo
-                ());
-    }
-
-    public static ArrayList<QuestionDTO> makeListInfo() {
-        String json = Utils.readFromAsset(App.getInstance(), "question_people.json");
-        FakeQuestionsResponse fakeQuestionsResponse = null;
-        try {
-            fakeQuestionsResponse = new Gson().fromJson(json, FakeQuestionsResponse.class);
-        }catch (JsonSyntaxException w){
-            Logger.e(w);
-        }
-        return fakeQuestionsResponse == null  ? ( new ArrayList<QuestionDTO>()):fakeQuestionsResponse.getQuestions();
+        return new GroupDrawer(App.getInstance().getString(R.string.txt_info), makeListQuestion("question_people.json"));
     }
 
     public static GroupDrawer makePeopleGroup() {
-        return new GroupDrawer(App.getInstance().getString(R.string.txt_people), makeListPeople());
+        return new GroupDrawer(App.getInstance().getString(R.string.txt_people), makeListQuestion("people.json"));
     }
 
-    //
-    public static ArrayList<QuestionDTO> makeListPeople() {
-        String json = Utils.readFromAsset(App.getInstance(), "people_question.json");
-        FakeQuestionsResponse fakeQuestionsResponse = null;
-        try {
-             fakeQuestionsResponse = new Gson().fromJson(json, FakeQuestionsResponse.class);
-        }catch (JsonSyntaxException w){
-            Logger.e(w);
-        }
-        return fakeQuestionsResponse == null  ? ( new ArrayList<QuestionDTO>()):fakeQuestionsResponse.getQuestions();
-    }
 
     public static GroupDrawer makeWomanGroup() {
         return new GroupDrawer(App.getInstance().getString(R.string.txt_woman), genListWoman());
@@ -68,22 +45,9 @@ public class DrawerDataFactory {
         }
         return list;
     }
-    public static ArrayList<QuestionDTO> makeListWoman() {
-        String json = Utils.readFromAsset(App.getInstance(), "woman_question.json");
-        FakeQuestionsResponse fakeQuestionsResponse = null;
-        try {
-            fakeQuestionsResponse = new Gson().fromJson(json, FakeQuestionsResponse.class);
-        }catch (JsonSyntaxException w){
-            Logger.e(w);
-        }
-        return fakeQuestionsResponse == null  ? ( new ArrayList<QuestionDTO>()):fakeQuestionsResponse.getQuestions();
-    }
-
     public static GroupDrawer makeMemberGroup() {
         return new GroupDrawer(App.getInstance().getString(R.string.txt_member),genListMember());
     }
-    //
-//
     public static ArrayList<QuestionDTO> genListMember(){
         ArrayList<QuestionDTO> list = new ArrayList<>();
         for(PeopleDetailDTO peopleDetailDTO : Constants.mStaticObject.getPeopleDetailDTO()){
@@ -92,8 +56,8 @@ public class DrawerDataFactory {
         }
         return list;
     }
-    public static ArrayList<QuestionDTO> makeListMember() {
-        String json = Utils.readFromAsset(App.getInstance(), "member_question.json");
+    public static ArrayList<QuestionDTO> makeListQuestion(String file) {
+        String json = Utils.readFromAsset(App.getInstance(), file);
         FakeQuestionsResponse fakeQuestionsResponse = null;
         try {
             fakeQuestionsResponse = new Gson().fromJson(json, FakeQuestionsResponse.class);
@@ -102,6 +66,5 @@ public class DrawerDataFactory {
         }
         return fakeQuestionsResponse == null  ? ( new ArrayList<QuestionDTO>()):fakeQuestionsResponse.getQuestions();
     }
-
 
 }

@@ -97,18 +97,19 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
             radioGroup.setAdapter(radioButtonAdapter);
             radioButtonAdapter.setListener(this);
         } else {
-            if (!listOption.isEmpty()) {
             listOption = question.getOptions();
-            if (listOption.size() > 0) {
+            if (!listOption.isEmpty()) {
                 if (answerDTO.getAnswerString() != null) {
                     listOption.get(answerDTO.getAnswerInt() - 1).setSelected(true);
                 }
                 radioButtonAdapter = new RadioButtonAdapter(listOption);
                 if (listOption.size() > 2) {
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+
                     radioGroup.setLayoutManager(linearLayoutManager);
                 } else {
-                    GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+                    GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),
+                            2);
                     radioGroup.setLayoutManager(gridLayoutManager);
                 }
                 radioGroup.setAdapter(radioButtonAdapter);
@@ -119,7 +120,6 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                 setupListSelected();
             }
         }
-
         return true;
     }
 
@@ -324,23 +324,23 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
             } else {
                 currentIndex++;
             }
-            if (currentIndex == -1) {
 
-            if(currentIndex == -1){
-                 nextMember();
+            if (currentIndex == -1) {
+                nextMember();
+            } else {
+                replcaeFragmentByType(getListQuestion().get(currentIndex), true);
             }
-            replcaeFragmentByType(getListQuestion().get(currentIndex), true);
         }
     }
 
-    private void nextMember(){
-        posMember ++;
-        switch (questionDTO.getSurvey()){
+    private void nextMember() {
+        posMember++;
+        switch (questionDTO.getSurvey()) {
             case Constants.SURVEY_MEMBER:
-                if(posMember < Constants.mStaticObject.getMemberDTO().size()){
-                    currentIndex =0;
+                if (posMember < Constants.mStaticObject.getMemberDTO().size()) {
+                    currentIndex = 0;
                     replcaeFragmentByType(getListQuestion().get(currentIndex), true);
-                }else{
+                } else {
                     if (Constants.mStaticObject.getWomanDTO().size() > 0) {
                         posMember = 0;
                         activity.survey = Constants.SURVEY_WOMAN;
@@ -352,9 +352,6 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                         nextFragment();
                     }
                 }
-            } else if (currentIndex < getListQuestion().size()) {
-                replcaeFragmentByType(getListQuestion().get(currentIndex), true);
-            }
         }
 
     }
@@ -370,7 +367,7 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                 }
                 break;
             case Constants.QUESTION_C7A:
-                if (answerDTO.getAnswerInt() == 1) {
+                if (answerDTO.getAnswerInt() == 2) {
                     if (memberDTO.getmC05() < 5 || memberDTO.getmC4N() > 2013
                             || (memberDTO.getmC4N() == 2013 && memberDTO.getmC4T() > Calendar
                             .getInstance().get(Calendar.MONTH))) {
@@ -451,9 +448,9 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                 }
                 break;
             case Constants.QUESTION_C34:
-                if(answerDTO.getAnswerInt() ==2){
+                if (answerDTO.getAnswerInt() == 2) {
                     index = -1;
-                }else {
+                } else {
                     index++;
                 }
                 break;
@@ -473,7 +470,7 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                 break;
 
             default:
-                index++;
+                 index++;
                 break;
 
         }
@@ -523,8 +520,7 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
         resetAllListOption();
         OptionDTO option = listOption.get(pos);
         option.setSelected(!isSelected);
-        radioGroup.post(new Runnable()
-        {
+        radioGroup.post(new Runnable() {
             @Override
             public void run() {
                 radioButtonAdapter.notifyDataSetChanged();

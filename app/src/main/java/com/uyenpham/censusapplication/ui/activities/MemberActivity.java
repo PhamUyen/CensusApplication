@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.uyenpham.censusapplication.R;
-import com.uyenpham.censusapplication.models.DrawerDataFactory;
 import com.uyenpham.censusapplication.models.family.PeopleDetailDTO;
 import com.uyenpham.censusapplication.models.survey.QuestionDTO;
 import com.uyenpham.censusapplication.ui.adapters.MemberAdapter;
@@ -99,10 +98,10 @@ public class MemberActivity extends SurveyActivity implements IRecyclerViewListe
         listQuestion = new ArrayList<>();
         switch (survey) {
             case Constants.SURVEY_MEMBER:
-                listQuestion.addAll(DrawerDataFactory.makeListMember());
+//                listQuestion.addAll(DrawerDataFactory.makeListQuestionMember());
                 break;
             case Constants.SURVEY_WOMAN:
-                listQuestion.addAll(DrawerDataFactory.makeListWoman());
+//                listQuestion.addAll(DrawerDataFactory.makeListWoman());
                 break;
             default:
                 break;

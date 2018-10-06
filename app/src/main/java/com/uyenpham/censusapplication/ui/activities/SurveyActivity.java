@@ -136,11 +136,12 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick,
     }
 
     private void makeListQuestion() {
-        listQuestion = DrawerDataFactory.makeListInfo();
-        listQuestion.addAll(DrawerDataFactory.makeListPeople());
+        listQuestion = DrawerDataFactory.makeListQuestion("question_people.json");
+        listQuestion.addAll(DrawerDataFactory.makeListQuestion("people.json"));
     }
 
     private void setListDrawer() {
+        list.clear();
         list.add(DrawerDataFactory.makeInfoGroup());
         list.add(DrawerDataFactory.makePeopleGroup());
         list.add(DrawerDataFactory.makeMemberGroup());
@@ -204,7 +205,7 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick,
     public void setNavigationBar() {
         navigationBar = findViewById(R.id.toolbar);
         navigationBar.reSetAll();
-        navigationBar.setIconLeft(R.drawable.ic_menu_gallery);
+        navigationBar.setIconLeft(R.drawable.ic_menu);
 
         navigationBar.setTitle(getString(R.string.txt_interview_detail));
     }
@@ -313,21 +314,8 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick,
 
     private void makeListQuestionMember() {
         listQuestion.clear();
-        switch (survey) {
-            case Constants.SURVEY_MEMBER:
-                listQuestion = DrawerDataFactory.makeListMember();
-                break;
-            case Constants.SURVEY_WOMAN:
-                listQuestion = DrawerDataFactory.makeListWoman();
-                break;
-            case Constants.SURVEY_DEAD:
-                //make list dead question
-//                listQuestion.
-            default:
-                break;
-
-
-        }
+        String fileName = survey+".json";
+        listQuestion = DrawerDataFactory.makeListQuestion(fileName);
     }
 
     @Override
