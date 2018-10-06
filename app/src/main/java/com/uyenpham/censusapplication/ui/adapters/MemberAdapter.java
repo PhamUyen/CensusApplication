@@ -9,17 +9,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.uyenpham.censusapplication.R;
-import com.uyenpham.censusapplication.models.family.PeopleDetailDTO;
 import com.uyenpham.censusapplication.ui.interfaces.IRecyclerViewListener;
 
 import java.util.ArrayList;
 
 public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.LocalityViewHolder> {
 
-    private ArrayList<PeopleDetailDTO> listText;
+    private ArrayList<String> listText;
     private IRecyclerViewListener listener;
 
-    public MemberAdapter(ArrayList<PeopleDetailDTO> listLocality) {
+    public MemberAdapter(ArrayList<String> listLocality) {
         this.listText = listLocality;
     }
 
@@ -34,7 +33,7 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.LocalityVi
 
     @Override
     public void onBindViewHolder(@NonNull MemberAdapter.LocalityViewHolder holder, final int position) {
-        holder.tvText.setText((position+1) +" - " +listText.get(position).getQ1());
+        holder.tvText.setText((position+1) +" - " +listText.get(position));
             holder.icon.setVisibility(View.GONE);
     }
 

@@ -6,6 +6,7 @@ import com.uyenpham.censusapplication.App;
 import com.uyenpham.censusapplication.R;
 import com.uyenpham.censusapplication.models.drawer.GroupDrawer;
 import com.uyenpham.censusapplication.models.family.PeopleDetailDTO;
+import com.uyenpham.censusapplication.models.family.WomanDTO;
 import com.uyenpham.censusapplication.models.survey.FakeQuestionsResponse;
 import com.uyenpham.censusapplication.models.survey.QuestionDTO;
 import com.uyenpham.censusapplication.utils.Constants;
@@ -57,9 +58,16 @@ public class DrawerDataFactory {
     }
 
     public static GroupDrawer makeWomanGroup() {
-        return new GroupDrawer(App.getInstance().getString(R.string.txt_woman), null);
+        return new GroupDrawer(App.getInstance().getString(R.string.txt_woman), genListWoman());
     }
-
+    public static ArrayList<QuestionDTO> genListWoman(){
+        ArrayList<QuestionDTO> list = new ArrayList<>();
+        for(WomanDTO womanDTO : Constants.mStaticObject.getWomanDTO()){
+            QuestionDTO questionDTO = new QuestionDTO(womanDTO.getTenTV());
+            list.add(questionDTO);
+        }
+        return list;
+    }
     public static ArrayList<QuestionDTO> makeListWoman() {
         String json = Utils.readFromAsset(App.getInstance(), "woman_question.json");
         FakeQuestionsResponse fakeQuestionsResponse = null;
@@ -95,33 +103,5 @@ public class DrawerDataFactory {
         return fakeQuestionsResponse == null  ? ( new ArrayList<QuestionDTO>()):fakeQuestionsResponse.getQuestions();
     }
 
-//    public static GroupDrawer makeSalsaGenre() {
-//        return new GroupDrawer("Salsa", makeSalsaArtists());
-//    }
-//
-//
-//
-//    public static List<ChildDrawer> makeSalsaArtists() {
-//        ChildDrawer hectorLavoe = new ChildDrawer("Hector Lavoe", "");
-//        ChildDrawer celiaCruz = new ChildDrawer("Celia Cruz", "");
-//        ChildDrawer willieColon = new ChildDrawer("Willie Colon", "");
-//        ChildDrawer marcAnthony = new ChildDrawer("Marc Anthony", "");
-//
-//        return Arrays.asList(hectorLavoe, celiaCruz, willieColon, marcAnthony);
-//    }
-//
-//    public static GroupDrawer makeBluegrassGenre() {
-//        return new GroupDrawer("Bluegrass", makeBluegrassArtists());
-//    }
-//
-//
-//    public static List<ChildDrawer> makeBluegrassArtists() {
-//        ChildDrawer billMonroe = new ChildDrawer("Bill Monroe", "");
-//        ChildDrawer earlScruggs = new ChildDrawer("Earl Scruggs", "");
-//        ChildDrawer osborneBrothers = new ChildDrawer("Osborne Brothers", "");
-//        ChildDrawer johnHartford = new ChildDrawer("John Hartford", "");
-//
-//        return Arrays.asList(billMonroe, earlScruggs, osborneBrothers, johnHartford);
-//    }
 
 }

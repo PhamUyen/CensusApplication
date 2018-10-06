@@ -73,20 +73,14 @@ public class WomanDAO {
     }
 
 
-    public WomanDTO findById(String id) {
-        try {
-            ArrayList<WomanDTO> list = mLiteOrm.query(
+    public ArrayList<WomanDTO> findById(String id) {
+          try {  return mLiteOrm.query(
                     new QueryBuilder<>(WomanDTO.class)
                             .whereEquals(WomanDTO.ID_HO, id)
             );
-            if(list.size()>0){
-                return list.get(0);
-            }else {
-                return new WomanDTO(id);
-            }
         } catch (Exception e) {
             Logger.e(TAG, e.getMessage(), e);
-            return new WomanDTO(id);
+            return new ArrayList<>();
         }
     }
 

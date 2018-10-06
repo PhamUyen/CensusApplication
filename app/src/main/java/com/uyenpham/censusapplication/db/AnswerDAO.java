@@ -42,9 +42,12 @@ public class AnswerDAO {
         return result;
     }
 
-    public long insert(AnswerDTO cacheEntity) {
-        long result = mLiteOrm.insert(cacheEntity);
-        return result;
+    public long insert(AnswerDTO answerDTO) {
+        if (checkIsExistDB(answerDTO.getId())) {
+            return mLiteOrm.update(answerDTO);
+        } else {
+            return mLiteOrm.insert(answerDTO);
+        }
     }
 
     public int update(AnswerDTO cacheEntity) {
@@ -71,6 +74,7 @@ public class AnswerDAO {
 
 
     public AnswerDTO findById(String idQuest, String idHo) {
+        idQuest = idQuest.startsWith("m") ?idQuest : "m"+idQuest;
         String id = idHo+idQuest;
         try {
             ArrayList<AnswerDTO> list =  mLiteOrm.query(

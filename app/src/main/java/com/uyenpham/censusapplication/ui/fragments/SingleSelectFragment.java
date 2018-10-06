@@ -93,7 +93,7 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
         if (question.getId().equals(Constants.QUESTION_C01) && posMember == 0) {
             listOption.add(new OptionDTO("CHỦ HỘ", "NORMAL", true));
         } else {
-            if (listOption.size() > 0) {
+            if (!listOption.isEmpty()) {
                 if (answerDTO.getAnswerString() != null) {
                     listOption.get(answerDTO.getAnswerInt() - 1).setSelected(true);
                 }
@@ -314,8 +314,34 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                 currentIndex++;
             }
 
+            if(currentIndex == -1){
+                 nextMember();
+            }
             replcaeFragmentByType(getListQuestion().get(currentIndex), true);
         }
+    }
+
+    private void nextMember(){
+        posMember ++;
+        switch (questionDTO.getSurvey()){
+            case Constants.SURVEY_MEMBER:
+                if(posMember < Constants.mStaticObject.getMemberDTO().size()){
+                    currentIndex =0;
+                    replcaeFragmentByType(getListQuestion().get(currentIndex), true);
+                }else{
+                    if (Constants.mStaticObject.getWomanDTO().size() > 0) {
+                        posMember = 0;
+                        activity.survey = Constants.SURVEY_WOMAN;
+                        activity.isMember = true;
+                        activity.setListPeople();
+                        activity.getNavigationBar().setTitle("1 - " + Constants.mStaticObject
+                                .getWomanDTO().get(0).getTenTV());
+                    } else {
+                        nextFragment();
+                    }
+                }
+        }
+
     }
 
     private int getStep(QuestionDTO question, AnswerDTO answerDTO) {
@@ -388,7 +414,7 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                 if(answerDTO.getAnswerInt() ==1){
                     index+=3;
                 }else if(answerDTO.getAnswerInt() ==3){
-                    index =-1;
+                    index = -1;
                 }else {
                     index++;
                 }
@@ -401,7 +427,7 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                 }
                 break;
             case Constants.QUESTION_C30:
-               index =-1;
+               index = -1;
                 break;
             case Constants.QUESTION_C31:
                 if(answerDTO.getAnswerInt() ==1){
@@ -412,7 +438,7 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                 break;
             case Constants.QUESTION_C34:
                 if(answerDTO.getAnswerInt() ==2){
-                    index =-1;
+                    index = -1;
                 }else {
                     index++;
                 }
