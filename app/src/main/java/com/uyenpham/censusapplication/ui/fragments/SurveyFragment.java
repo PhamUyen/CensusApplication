@@ -6,14 +6,9 @@ import android.view.View;
 import com.uyenpham.censusapplication.R;
 import com.uyenpham.censusapplication.models.drawer.GroupDrawer;
 import com.uyenpham.censusapplication.ui.activities.SurveyActivity;
-import com.uyenpham.censusapplication.utils.FragmentHelper;
 import com.uyenpham.censusapplication.views.CustomNavigationBar;
 
 import java.util.ArrayList;
-
-import butterknife.OnClick;
-
-import static com.uyenpham.censusapplication.ui.activities.SurveyActivity.ID_SURVEY_CONTENT;
 
 public class SurveyFragment extends BaseFragment implements CustomNavigationBar.INavigationOnClick{
     private CustomNavigationBar navigationBar;
@@ -70,9 +65,5 @@ public class SurveyFragment extends BaseFragment implements CustomNavigationBar.
         list.add(new GroupDrawer("Thành viên phụ nữ", null));
     }
 
-    @OnClick(R.id.btTest)
-    void onTest(){
-        TextFragment surveyFragment = new TextFragment();
-        FragmentHelper.replaceFagmentFromRight(surveyFragment, main.mFragmentManager, ID_SURVEY_CONTENT);
-    }
+
 }

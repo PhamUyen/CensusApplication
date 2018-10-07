@@ -3,6 +3,8 @@ package com.uyenpham.censusapplication.models.family;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.lang.reflect.Field;
+
 @SuppressWarnings("unused")
 public class DeadDTO {
     public static final String ID_HO = "ID";
@@ -35,6 +37,11 @@ public class DeadDTO {
     private String mIDCHET;
 
     public DeadDTO() {
+    }
+
+    public DeadDTO(String mC43, String mIDCHET) {
+        this.mC43 = mC43;
+        this.mIDCHET = mIDCHET;
     }
 
     public DeadDTO(String mID) {
@@ -161,5 +168,38 @@ public class DeadDTO {
 
     public void setmIDCHET(String mIDCHET) {
         this.mIDCHET = mIDCHET;
+
+    }
+    public  boolean set(String fieldName, Object fieldValue) {
+        Class<?> clazz = this.getClass();
+        while (clazz != null) {
+            try {
+                Field field = clazz.getDeclaredField(fieldName);
+                field.setAccessible(true);
+                field.set(this, fieldValue);
+                return true;
+            } catch (NoSuchFieldException e) {
+                clazz = clazz.getSuperclass();
+            } catch (Exception e) {
+                throw new IllegalStateException(e);
+            }
+        }
+        return false;
+    }
+    public  Object get(String fieldName) {
+        fieldName = "m"+fieldName;
+        Class<?> clazz = this.getClass();
+        while (clazz != null) {
+            try {
+                Field field = clazz.getDeclaredField(fieldName);
+                field.setAccessible(true);
+                return field.get(this);
+            } catch (NoSuchFieldException e) {
+                clazz = clazz.getSuperclass();
+            } catch (Exception e) {
+                throw new IllegalStateException(e);
+            }
+        }
+        return null;
     }
 }

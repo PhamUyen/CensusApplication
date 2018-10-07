@@ -23,7 +23,7 @@ public class StaticObject {
     private ArrayList<MemberDTO> memberDTOs;
     private PeopleDTO peopleDTO;
     private HouseDTO houseDTO;
-    private DeadDTO deadDTO;
+    private  ArrayList<DeadDTO>  deadDTOs;
     private ArrayList<PeopleDetailDTO> peopleDetailDTOs;
     private String idHo;
 
@@ -47,7 +47,7 @@ public class StaticObject {
         memberDTOs = new ArrayList<>();
         peopleDTO = new PeopleDTO();
         houseDTO = new HouseDTO();
-        deadDTO = new DeadDTO();
+        deadDTOs = new ArrayList<>();
         peopleDetailDTOs = new ArrayList<>();
     }
 
@@ -115,12 +115,12 @@ public class StaticObject {
         this.houseDTO = houseDTO;
     }
 
-    public DeadDTO getDeadDTO() {
-        return deadDTO;
+    public ArrayList<DeadDTO> getDeadDTO() {
+        return deadDTOs;
     }
 
-    public void setDeadDTO(DeadDTO deadDTO) {
-        this.deadDTO = deadDTO;
+    public void setDeadDTO(ArrayList<DeadDTO> deadDTO) {
+        this.deadDTOs = deadDTO;
     }
     public void updateDB(){
         PeopleDAO.getInstance().insert(peopleDTO);
@@ -133,6 +133,8 @@ public class StaticObject {
         for(MemberDTO memberDTO : memberDTOs){
             MemberDAO.getInstance().insert(memberDTO);
         }
-        DeadDAO.getInstance().insert(deadDTO);
+        for(DeadDTO deadDTO : deadDTOs){
+            DeadDAO.getInstance().insert(deadDTO);
+        }
     }
 }

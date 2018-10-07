@@ -33,7 +33,7 @@ public class MenuFragment extends BaseFragment {
         switch (v.getId()){
             case R.id.btn_interview:
                 LocalityFragment localityFragment = new LocalityFragment();
-                FragmentHelper.replaceFragmentAddToBackStack(localityFragment, main.mFragmentManager, main.ID_MAIN_CONTENT);
+                FragmentHelper.replaceFragmentAddToBackStack(localityFragment, main.mFragmentManager);
                 break;
             case R.id.btn_search:
                 break;

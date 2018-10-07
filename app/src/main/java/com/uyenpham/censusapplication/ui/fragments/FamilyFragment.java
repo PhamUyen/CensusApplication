@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.uyenpham.censusapplication.R;
+import com.uyenpham.censusapplication.db.FamilyDAO;
 import com.uyenpham.censusapplication.models.family.FamilyDTO;
 import com.uyenpham.censusapplication.models.family.FamilyResponse;
 import com.uyenpham.censusapplication.service.BaseCallback;
@@ -147,7 +148,7 @@ public class FamilyFragment extends BaseFragment implements
         });
     }
 
-    private void getListFamily(String id){
+    private void getListFamily(final String id){
         DialogUtils.showProgressDialog(main);
         ServiceBuilder.getApiServiceNormal().getListFamily(1,100,id)
                 .enqueue(new BaseCallback<FamilyResponse>() {
@@ -162,7 +163,13 @@ public class FamilyFragment extends BaseFragment implements
                         DialogUtils.dismissProgressDialog();
                         list.addAll(data.getListLocality());
                         adapter.notifyDataSetChanged();
+                        insertDB();
                     }
                 });
+    }
+    private void insertDB(){
+        for(FamilyDTO family : list){
+            FamilyDAO.getInstance().insert(family);
+        }
     }
 }

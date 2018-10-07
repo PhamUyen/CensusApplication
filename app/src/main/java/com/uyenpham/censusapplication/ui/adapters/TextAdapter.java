@@ -9,14 +9,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.uyenpham.censusapplication.R;
-import com.uyenpham.censusapplication.ui.interfaces.IRecyclerViewListener;
+import com.uyenpham.censusapplication.ui.interfaces.IClearListener;
 
 import java.util.ArrayList;
 
 public class TextAdapter extends RecyclerView.Adapter<TextAdapter.LocalityViewHolder> {
 
     private ArrayList<String> listText;
-    private IRecyclerViewListener listener;
+    private IClearListener listener;
 
     public TextAdapter(ArrayList<String> listLocality) {
         this.listText = listLocality;
@@ -34,6 +34,14 @@ public class TextAdapter extends RecyclerView.Adapter<TextAdapter.LocalityViewHo
     @Override
     public void onBindViewHolder(@NonNull TextAdapter.LocalityViewHolder holder, final int position) {
         holder.tvText.setText(listText.get(position));
+        holder.icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(listener != null){
+                    listener.onClear(position);
+                }
+            }
+        });
     }
 
     @Override
@@ -50,7 +58,7 @@ public class TextAdapter extends RecyclerView.Adapter<TextAdapter.LocalityViewHo
             icon = itemView.findViewById(R.id.imv_icon);
         }
     }
-    public void setListener(IRecyclerViewListener listener) {
+    public void setListener(IClearListener listener) {
         this.listener = listener;
     }
 }

@@ -73,20 +73,15 @@ public class DeadDAO {
     }
 
 
-    public DeadDTO findById(String id) {
+    public ArrayList<DeadDTO> findById(String id) {
         try {
-            ArrayList<DeadDTO> list =  mLiteOrm.query(
+            return mLiteOrm.query(
                     new QueryBuilder<>(DeadDTO.class)
                             .whereEquals(DeadDTO.ID_HO, id)
             );
-            if(list.size() >0){
-                return list.get(0);
-            }else {
-                return  new DeadDTO(id);
-            }
         } catch (Exception e) {
             Logger.e(TAG, e.getMessage(), e);
-            return  new DeadDTO(id);
+            return  new ArrayList<>();
         }
     }
 

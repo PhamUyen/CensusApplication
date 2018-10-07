@@ -98,6 +98,15 @@
       "options": [],
       "placeHolders": "Điện thoại",
       "survey":"family"
+    },
+    {
+      "id": "mLoaiphieu",
+      "name": "",
+      "question": "Loại phiếu",
+      "type": 1,
+      "options": [],
+      "placeHolders": "Loại phiếu",
+      "survey":"family"
     }
   ]
 }

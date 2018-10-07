@@ -47,7 +47,7 @@ public class Utils {
         }
         return returnString.toString();
     }
-    public static void replcaeFragmentByType(QuestionDTO questionDTO, boolean isNext, ArrayList<QuestionDTO>listQuestion, int content, FragmentManager fragmentManager, int posMember) {
+    public static void replcaeFragmentByType(QuestionDTO questionDTO, boolean isNext, ArrayList<QuestionDTO>listQuestion, FragmentManager fragmentManager, int posMember) {
         int type = questionDTO.getType();
 
         switch (type) {
@@ -57,9 +57,8 @@ public class Utils {
                 fragment.setQuestionDTO(questionDTO);
                 fragment.setAnswerDTO(null);
                 fragment.setListQuestion(listQuestion);
-                fragment.setContentID(content);
                 fragment.setPosMember(posMember);
-                replaceAnimation(fragment, isNext, content,fragmentManager);
+                replaceAnimation(fragment, isNext,fragmentManager);
                 break;
             case Constants.TYPE_SINGLE_SELECT:
             case Constants.TYPE_SELECT_INPUT:
@@ -70,37 +69,34 @@ public class Utils {
                 singleSelectFragment.setQuestionDTO(questionDTO);
                 singleSelectFragment.setAnswerDTO(null);
                 singleSelectFragment.setListQuestion(listQuestion);
-                singleSelectFragment.setContentID(content);
                 singleSelectFragment.setPosMember(posMember);
-                replaceAnimation(singleSelectFragment, isNext, content,fragmentManager);
+                replaceAnimation(singleSelectFragment, isNext,fragmentManager);
                 break;
             case Constants.TYPE_NUMBER_INPUT:
             case Constants.TYPE_DATE_INPUT:
                 NumberInputFragment numberInputFragment = new NumberInputFragment();
                 numberInputFragment.setQuestionDTO(questionDTO);
-//                numberInputFragment.setContentID(content);
-                replaceAnimation(numberInputFragment, isNext, content,fragmentManager);
+                numberInputFragment.setListQuestion(listQuestion);
+                numberInputFragment.setPosMember(posMember);
+                replaceAnimation(numberInputFragment, isNext,fragmentManager);
                 break;
             case Constants.TYPE_MULTI_SELECT:
             case Constants.TYPE_MULTI_SELECT_INPUT:
                 MultiSelectionFragment multiSelectionFragment = new MultiSelectionFragment();
                 multiSelectionFragment.setQuestionDTO(questionDTO);
                 multiSelectionFragment.setAnswerDTO(null);
-                multiSelectionFragment.setContentID(content);
-                replaceAnimation(multiSelectionFragment, isNext, content,fragmentManager);
+                replaceAnimation(multiSelectionFragment, isNext,fragmentManager);
                 break;
             default:
                 break;
         }
     }
 
-    public static  void replaceAnimation(Fragment fragment, boolean isNext, int content, FragmentManager fragmentManager) {
+    public static  void replaceAnimation(Fragment fragment, boolean isNext, FragmentManager fragmentManager) {
         if (isNext) {
-            FragmentHelper.replaceFagmentFromRight(fragment, fragmentManager,
-                    content);
+            FragmentHelper.replaceFagmentFromRight(fragment, fragmentManager);
         } else {
-            FragmentHelper.replaceFagmentFromLeft(fragment, fragmentManager,
-                    content);
+            FragmentHelper.replaceFagmentFromLeft(fragment, fragmentManager);
         }
     }
 }

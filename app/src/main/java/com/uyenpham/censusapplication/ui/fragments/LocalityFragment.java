@@ -21,8 +21,6 @@ import com.uyenpham.censusapplication.views.CustomNavigationBar;
 
 import java.util.ArrayList;
 
-import static com.uyenpham.censusapplication.ui.activities.MainActivity.ID_MAIN_CONTENT;
-
 public class LocalityFragment extends BaseFragment implements
         CustomNavigationBar.INavigationOnClick, IRecyclerViewListener{
     private MainActivity main;
@@ -91,7 +89,7 @@ public class LocalityFragment extends BaseFragment implements
         Bundle bundle = new Bundle();
         bundle.putString(Constants.KEY_IDDB, list.get(postion).getIDDB());
         familyFragment.setArguments(bundle);
-        FragmentHelper.replaceFragmentAddToBackStackByTag(familyFragment, main.mFragmentManager, FamilyFragment.class.getSimpleName(), ID_MAIN_CONTENT);
+        FragmentHelper.replaceFragmentAddToBackStackByTag(familyFragment, main.mFragmentManager, FamilyFragment.class.getSimpleName());
     }
 
     @Override

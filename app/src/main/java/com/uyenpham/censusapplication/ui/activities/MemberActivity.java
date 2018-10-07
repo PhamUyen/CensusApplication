@@ -94,20 +94,20 @@ public class MemberActivity extends SurveyActivity implements IRecyclerViewListe
     }
 
 
-    private void makeListQuestion() {
-        listQuestion = new ArrayList<>();
-        switch (survey) {
-            case Constants.SURVEY_MEMBER:
-//                listQuestion.addAll(DrawerDataFactory.makeListQuestionMember());
-                break;
-            case Constants.SURVEY_WOMAN:
-//                listQuestion.addAll(DrawerDataFactory.makeListWoman());
-                break;
-            default:
-                break;
-        }
-
-    }
+//    private void makeListQuestion() {
+//        listQuestion = new ArrayList<>();
+//        switch (survey) {
+//            case Constants.SURVEY_MEMBER:
+////                listQuestion.addAll(DrawerDataFactory.makeListQuestionMember());
+//                break;
+//            case Constants.SURVEY_WOMAN:
+////                listQuestion.addAll(DrawerDataFactory.makeListWoman());
+//                break;
+//            default:
+//                break;
+//        }
+//
+//    }
     private void setListDrawer() {
         list.addAll(Constants.mStaticObject.getPeopleDetailDTO());
 

@@ -105,15 +105,15 @@ public class PeopleDetailDAO {
 //        return (areaEntities == null || areaEntities.size() <=0) ? null : areaEntities.get(0);
 //    }
 
-    public PeopleDetailDTO findById(String id) {
+    public ArrayList<PeopleDetailDTO> findById(String id) {
         try {
             return mLiteOrm.query(
                     new QueryBuilder<>(PeopleDetailDTO.class)
                             .whereEquals(PeopleDetailDTO.ID_HO, id)
-            ).get(0);
+            );
         } catch (Exception e) {
             Logger.e(TAG, e.getMessage(), e);
-            return null;
+            return new ArrayList<>();
         }
     }
 

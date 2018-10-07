@@ -17,6 +17,7 @@ import com.uyenpham.censusapplication.ui.interfaces.INextQuestion;
 import com.uyenpham.censusapplication.ui.interfaces.IPreviousQuestion;
 import com.uyenpham.censusapplication.ui.interfaces.IRadioButtonClick;
 import com.uyenpham.censusapplication.utils.Constants;
+import com.uyenpham.censusapplication.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -121,7 +122,7 @@ public class MultiSelectionFragment extends BaseTypeFragment implements IRadioBu
     public void previuos() {
         if (currentIndex > 0) {
             currentIndex--;
-            replcaeFragmentByType(getListQuestion().get(currentIndex), false);
+            Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), false,getListQuestion(),activity.mFragmentManager,getPosMember());
         }
     }
 }

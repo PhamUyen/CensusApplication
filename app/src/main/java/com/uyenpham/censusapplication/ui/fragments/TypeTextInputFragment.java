@@ -14,15 +14,18 @@ import android.widget.TextView;
 import com.uyenpham.censusapplication.R;
 import com.uyenpham.censusapplication.db.AnswerDAO;
 import com.uyenpham.censusapplication.models.family.MemberDTO;
+import com.uyenpham.censusapplication.models.family.PeopleDTO;
 import com.uyenpham.censusapplication.models.family.PeopleDetailDTO;
 import com.uyenpham.censusapplication.models.survey.AnswerDTO;
 import com.uyenpham.censusapplication.models.survey.QuestionDTO;
 import com.uyenpham.censusapplication.ui.adapters.TextAdapter;
+import com.uyenpham.censusapplication.ui.interfaces.IClearListener;
 import com.uyenpham.censusapplication.ui.interfaces.INextQuestion;
 import com.uyenpham.censusapplication.ui.interfaces.IPreviousQuestion;
 import com.uyenpham.censusapplication.utils.Constants;
 import com.uyenpham.censusapplication.utils.DialogUtils;
 import com.uyenpham.censusapplication.utils.StringUtils;
+import com.uyenpham.censusapplication.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -31,7 +34,7 @@ import butterknife.Bind;
 import static com.uyenpham.censusapplication.ui.activities.SurveyActivity.currentIndex;
 
 public class TypeTextInputFragment extends BaseTypeFragment implements INextQuestion,
-        IPreviousQuestion {
+        IPreviousQuestion , IClearListener {
     @Bind(R.id.tv_question)
     TextView tvQuestion;
     @Bind(R.id.ed_answer)
@@ -45,6 +48,8 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
     private TextAdapter adapter;
     private boolean isValidate;
     private int posMember =-1;
+    private ArrayList<PeopleDetailDTO> listNewPeople;
+    private ArrayList<MemberDTO> listNewMem;
 
     @Override
     protected int getLayoutId() {
@@ -55,8 +60,11 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
     protected void createView(View view) {
         activity.setiNext(this);
         activity.setiPrevious(this);
-        loadQuestion(questionDTO);
         edAnswer.setSingleLine();
+        listNewMem = new ArrayList<>();
+        listNewPeople= new ArrayList<>();
+        posMember = getPosMember();
+        loadQuestion(questionDTO);
         if (questionDTO.getType() == Constants.TYPE_TEXT_INPUT_LIST) {
             rcvText.setVisibility(View.VISIBLE);
             setRcvText();
@@ -83,7 +91,6 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
     }
 
     private void setMember(String name) {
-        answerDTO.setAnswerString(name);
         switch (questionDTO.getSurvey()) {
             case Constants.SURVEY_PEOPLE:
                 int index = listText.indexOf(name);
@@ -94,15 +101,17 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
                 peopleDetailDTO.setSTT(index);
                 peopleDetailDTO.setChuho(index == 0 ? 2 : 1);
                 peopleDetailDTO.setID(Constants.mStaticObject.getIdHo() + index);
+                listNewPeople.add(peopleDetailDTO);
 
                 MemberDTO memberDTO = new MemberDTO();
                 memberDTO.setmC01(name);
                 memberDTO.setmIDTV(Constants.mStaticObject.getIdHo()+index);
                 memberDTO.setmSTTNKTT(index+1);
+                listNewMem.add(memberDTO);
 
-                Constants.mStaticObject.getMemberDTO().add(memberDTO);
-                Constants.mStaticObject.getPeopleDetailDTO().add(peopleDetailDTO);
+//
                 edAnswer.setText(null);
+//                answerDTO.setAnswerString(name);
                 break;
 
             case Constants.SURVEY_FAMILY:
@@ -111,6 +120,7 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
                 Constants.mStaticObject.getFamilyDetailDTO().set(questionDTO.getId(),name);
                 break;
             case Constants.SURVEY_MEMBER:
+                answerDTO.setAnswerString(name);
                 String regex = "[A-Za-z ]*";
                 if(name.matches(regex)){
                     if(posMember != -1){
@@ -132,13 +142,26 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
         if (question == null) return false;
         tvQuestion.setText(question.getQuestion());
         if(Constants.SURVEY_PEOPLE.equals(question.getSurvey())){
-            if (answerDTO != null && !StringUtils.isEmpty(answerDTO.getAnswerString())) {
-                edAnswer.setText( answerDTO.getAnswerString());
+            PeopleDTO peopleDTO = Constants.mStaticObject.getPeopleDTO();
+            if(question.getId().equals(Constants.QUESTION_Q1)){
+                ArrayList<PeopleDetailDTO> list = Constants.mStaticObject.getPeopleDetailDTO();
+                for(PeopleDetailDTO people : list){
+                    listText.add(people.getQ1());
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            if (!StringUtils.isEmpty(String.valueOf(peopleDTO.get(question.getId())))){
+                edAnswer.setText(String.valueOf(peopleDTO.get(question.getId())));
             } else {
                 edAnswer.setHint(question.getPlaceHolder());
             }
         }else if(Constants.SURVEY_MEMBER.equals(question.getSurvey())){
-            edAnswer.setText(Constants.mStaticObject.getMemberDTO().get(posMember).getmC01());
+            if(question.getId().equals(Constants.QUESTION_C01)){
+                edAnswer.setText(Constants.mStaticObject.getMemberDTO().get(posMember).getmC01());
+            }
+        }else if(Constants.SURVEY_FAMILY.equals(question.getSurvey())){
+            edAnswer.setText(String.valueOf(Constants.mStaticObject.getFamilyDTO().get(question.getId())));
         }
         return true;
     }
@@ -151,9 +174,9 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
                 return listText.size()>0;
             case Constants.mDIENTHOAI:
                 String regexStr = "^[0-9]*$";
-               return  (answer.getAnswerString().matches(regexStr) && 9<answer.getAnswerString().length() && answer.getAnswerString().length()<12);
+               return  (edAnswer.getText().toString().matches(regexStr) && 9<edAnswer.getText().toString().length() && edAnswer.getText().toString().length()<12);
             default:
-                if(answer.getAnswerString() == null){
+                if(StringUtils.isEmpty(edAnswer.getText().toString())){
                     return false;
                 }else {
                     return true;
@@ -174,6 +197,7 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
         rcvText.setLayoutManager(manager);
         listText = new ArrayList<>();
         adapter = new TextAdapter(listText);
+        adapter.setListener(this);
         rcvText.setAdapter(adapter);
     }
 
@@ -182,14 +206,13 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
         changeQuestion();
     }
     private void nextFragment(){
-        save(answerDTO, questionDTO);
         InputMethodManager imm = (InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE);
         if(imm!= null){
             imm.hideSoftInputFromWindow(edAnswer.getWindowToken(), 0);
         }
         if (currentIndex < getListQuestion().size() - 1) {
             currentIndex++;
-            replcaeFragmentByType(getListQuestion().get(currentIndex), true);
+            Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true,getListQuestion(),activity.mFragmentManager,getPosMember());
         }
     }
 
@@ -198,7 +221,7 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
 //        save();
         if (currentIndex > 0) {
             currentIndex--;
-            replcaeFragmentByType(getListQuestion().get(currentIndex), false);
+            Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), false,getListQuestion(),activity.mFragmentManager,getPosMember());
         }
     }
 
@@ -213,7 +236,10 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
                         }, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                Constants.mStaticObject.getMemberDTO().addAll(listNewMem);
+                                Constants.mStaticObject.getPeopleDetailDTO().addAll(listNewPeople);
                                 nextFragment();
+
                             }
                         });
             }else {
@@ -228,7 +254,12 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
         }
     }
 
-    public void setPosMember(int posMember) {
-        this.posMember = posMember;
+
+    @Override
+    public void onClear(int pos) {
+        listText.remove(pos);
+        listNewMem.remove(pos);
+        listNewPeople.remove(pos);
+        adapter.notifyDataSetChanged();
     }
 }

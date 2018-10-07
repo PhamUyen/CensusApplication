@@ -25,7 +25,7 @@ public class MainActivity extends BaseActivity {
         setNavigationBar();
 
         MenuFragment profileFragment = new MenuFragment();
-        FragmentHelper.replaceFragmentAddToBackStack(profileFragment, mFragmentManager, ID_MAIN_CONTENT);
+        FragmentHelper.replaceFragmentAddToBackStack(profileFragment, mFragmentManager) ;
     }
     public CustomNavigationBar getNavigationBar() {
         return navigationBar;

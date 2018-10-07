@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentTransaction;
 
 import com.uyenpham.censusapplication.R;
 
+import static com.uyenpham.censusapplication.ui.activities.SurveyActivity.ID_SURVEY_CONTENT;
+
 /**
  * Define fragment manager
  *
@@ -17,9 +19,9 @@ public class FragmentHelper {
      * @param fragment        This is fragment need replace in layout contentTab
      * @param fragmentManager This is fragment manager
      */
-    public static void replaceFragmentAddToBackStack(Fragment fragment, FragmentManager fragmentManager,int content) {
+    public static void replaceFragmentAddToBackStack(Fragment fragment, FragmentManager fragmentManager) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(content, fragment);
+        fragmentTransaction.replace(ID_SURVEY_CONTENT, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
@@ -30,9 +32,9 @@ public class FragmentHelper {
      * @param fragment        This is fragment need replace in layout contentTab
      * @param fragmentManager This is fragment manager
      */
-    public static void replaceFragmentAddToBackStackByTag(Fragment fragment, FragmentManager fragmentManager, String tag, int content) {
+    public static void replaceFragmentAddToBackStackByTag(Fragment fragment, FragmentManager fragmentManager, String tag) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(content, fragment, tag);
+        fragmentTransaction.replace(ID_SURVEY_CONTENT, fragment, tag);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
@@ -43,9 +45,9 @@ public class FragmentHelper {
      * @param fragment        This is fragment need replace in layout contentTab
      * @param fragmentManager This is fragment manager
      */
-    public static void replaceFragment(Fragment fragment, FragmentManager fragmentManager, int content) {
+    public static void replaceFragment(Fragment fragment, FragmentManager fragmentManager) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(content, fragment);
+        fragmentTransaction.replace(ID_SURVEY_CONTENT, fragment);
         fragmentTransaction.commit();
     }
 
@@ -55,9 +57,9 @@ public class FragmentHelper {
      * @param fragment        This is fragment need replace in layout contentMenu
      * @param fragmentManager This is fragment manager
      */
-    public static void replaceMenuFragment(Fragment fragment, FragmentManager fragmentManager, int content) {
+    public static void replaceMenuFragment(Fragment fragment, FragmentManager fragmentManager) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(content, fragment);
+        fragmentTransaction.replace(ID_SURVEY_CONTENT, fragment);
         fragmentTransaction.commit();
     }
 
@@ -67,29 +69,29 @@ public class FragmentHelper {
      * @param fragment        This is fragment need replace in layout contentMenu
      * @param fragmentManager This is fragment manager
      */
-    public static void replaceMenuAddToBackStack(Fragment fragment, FragmentManager fragmentManager, int content) {
+    public static void replaceMenuAddToBackStack(Fragment fragment, FragmentManager fragmentManager) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(content, fragment);
+        fragmentTransaction.replace(ID_SURVEY_CONTENT, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 
-    public static void replaceFagmentFromLeft(Fragment fragment, FragmentManager fragmentManager, int content){
+    public static void replaceFagmentFromLeft(Fragment fragment, FragmentManager fragmentManager){
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_to_right);
-        fragmentTransaction.replace(content, fragment);
+        fragmentTransaction.replace(ID_SURVEY_CONTENT, fragment);
         fragmentTransaction.commit();
     }
-    public static void replaceFagmentFromRight(Fragment fragment, FragmentManager fragmentManager, int content){
+    public static void replaceFagmentFromRight(Fragment fragment, FragmentManager fragmentManager){
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.slide_out_right, R.anim.slide_to_left);
-        fragmentTransaction.replace(content, fragment);
+        fragmentTransaction.replace(ID_SURVEY_CONTENT, fragment);
         fragmentTransaction.commit();
     }
-    public static void replaceFagmentFromRightAddToBackstack(Fragment fragment, FragmentManager fragmentManager,int content){
+    public static void replaceFagmentFromRightAddToBackstack(Fragment fragment, FragmentManager fragmentManager){
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.slide_out_right, R.anim.slide_to_left);
-        fragmentTransaction.replace(content, fragment);
+        fragmentTransaction.replace(ID_SURVEY_CONTENT, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }

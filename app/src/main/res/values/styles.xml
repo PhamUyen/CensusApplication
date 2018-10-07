@@ -8,8 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
     <style name="TextView.Option">
-        <item name="android:textSize">15sp</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textStyle">normal</item>
         <item name="android:textColor">@color/black</item>
     </style>
     <style name="Toolbar">

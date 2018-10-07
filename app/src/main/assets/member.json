@@ -98,7 +98,7 @@
       "survey": "member"
     },
     {
-      "id": "C06",
+      "id": "C6A",
       "name": "C06",
       "question": "Dân tộc",
       "type": 9,
@@ -117,9 +117,9 @@
     },
     {
       "id": "C7A",
-      "name": "C7A",
+      "name": "C07",
       "question": "Tôn giáo",
-      "type": 4,
+      "type": 11,
       "options": [
         {
           "option": "CÓ",
@@ -183,7 +183,7 @@
     },
     {
       "id": "C10",
-      "name": "Q10",
+      "name": "C10",
       "question": "Chuyển đến từ tỉnh/thành phố, quận/huyện nào?",
       "type": 1,
       "options": [
