@@ -24,6 +24,7 @@ import com.uyenpham.censusapplication.models.locality.ReligionDTO;
 import com.uyenpham.censusapplication.models.survey.AnswerDTO;
 import com.uyenpham.censusapplication.models.survey.OptionDTO;
 import com.uyenpham.censusapplication.models.survey.QuestionDTO;
+import com.uyenpham.censusapplication.models.survey.WarningDTO;
 import com.uyenpham.censusapplication.ui.adapters.MultiSelectAdapter;
 import com.uyenpham.censusapplication.ui.adapters.RadioButtonAdapter;
 import com.uyenpham.censusapplication.ui.adapters.SpinnerAdapter;
@@ -170,33 +171,46 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
     }
 
     @Override
-    public boolean validateQuaetion(QuestionDTO question, AnswerDTO answer) {
+    public WarningDTO validateQuaetion(QuestionDTO question, AnswerDTO answer) {
+        WarningDTO messge = null;
         switch (question.getSurvey()) {
             case Constants.SURVEY_PEOPLE:
                 if (!isYes || (isYes && listSelected.size() != 0) || (Constants.mStaticObject.getPeopleDTO
                         ().get(questionDTO.getName()) != null || (isYes && listMember.size() != 0))) {
-                    return true;
                 } else {
-                    return false;
                 }
             case Constants.SURVEY_MEMBER:
             case Constants.SURVEY_WOMAN:
             case Constants.SURVEY_DEAD:
+                String idTV = Constants.mStaticObject.getIdHo() + Constants.mStaticObject
+                        .getPeopleDetailDTO().get(0).getSTT();
+                MemberDTO chuho = MemberDAO.getInstance().findById(idTV);
                 switch (question.getId()) {
-                    case Constants.QUESTION_C03:
-                        String idTV = Constants.mStaticObject.getIdHo() + Constants.mStaticObject
-                                .getPeopleDetailDTO().get(0).getSTT();
-                        MemberDTO chuho = MemberDAO.getInstance().findById(idTV);
-                        if (chuho.getmC03() == memberDTO.getmC03()) {
-                            return false;
-                        } else {
-                            return true;
+                    case Constants.QUESTION_C02:
+                        if(memberDTO.getmC02() == 1 && chuho.getmC22() ==1){
+                            return new WarningDTO(getString(R.string.txt_invalid_relation,posMember+1,memberDTO.getmC01(),listOption.get(memberDTO.getmC02()-1),listOption.get(0).getOption()),Constants.TYPE_NOTI);
+                        }else if(isOverNumberWife() && memberDTO.getmC02() ==1){
+                            return new WarningDTO(getString(R.string.txt_number_couple,2),Constants.TYPE_CONFIRM);
                         }
+                        break;
+                    case Constants.QUESTION_C03:
+                        if (chuho != null && chuho.getmC03() == memberDTO.getmC03() && memberDTO.getmC02() ==1) {
+                            return new WarningDTO(getString(R.string.txt_invalid_sex,posMember+1,memberDTO.getmC01(),listOption.get(memberDTO.getmC03()-1).getOption(),listOption.get(memberDTO.getmC03()-1).getOption()),Constants.TYPE_NOTI);
+                        }
+                        break;
+
+                    case Constants.QUESTION_C6A:
+                        if (memberDTO.getmC6A() == 2 && StringUtils.isEmpty(memberDTO.getmC6B())) {
+                            return new WarningDTO(getString(R.string.txt_empty_folk,posMember+1,memberDTO.getmC01()),Constants.TYPE_NOTI);
+                        }
+                        if(posMember != 0 && !memberDTO.getmC6C().equals(chuho.getmC6C())){
+                            return new WarningDTO(getString(R.string.txt_invalid_folk,posMember+1,memberDTO.getmC01(),memberDTO.getmC6C(),chuho.getmC6C()),Constants.TYPE_NOTI);
+                        }
+                        break;
                     case Constants.QUESTION_C14:
-                        if (memberDTO.getmC05() == 60) {
-                            return false;
-                        } else {
-                            return true;
+                        if (memberDTO.getmC14() == 1 &&memberDTO.getmC05() == 60) {
+                            return new WarningDTO(getString(R.string.txt_confirm_continue_study,posMember+1,
+                                    memberDTO.getmC01(),memberDTO.getmC4T() == null ? 0: memberDTO.getmC4T(), memberDTO.getmC4N() == null ? 0: memberDTO.getmC4N()),Constants.TYPE_CONFIRM);
                         }
                     case Constants.QUESTION_C15:
                         if ((memberDTO.getmC4N() > 2012 && (memberDTO.getmC15() == 1 || memberDTO.getmC15() == 2))
@@ -213,9 +227,9 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                                 memberDTO.getmC05() >= 11))
                                 || ((memberDTO.getmC15() > 6 && memberDTO.getmC15() < 12) &&
                                 (memberDTO.getmC4N() > 2000 || memberDTO.getmC05() < 15))) {
-                            return false;
+                            return null;
                         } else {
-                            return true;
+                            return null;
                         }
                     case Constants.QUESTION_C18:
                         if (memberDTO.getmC14() == 3 && (memberDTO.getmC18() == 1 || memberDTO.getmC18() == 2)) {
@@ -235,7 +249,16 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
 
                 }
         }
-        return true;
+        return messge;
+    }
+
+    private boolean isOverNumberWife(){
+        for(MemberDTO memberDTO1 : Constants.mStaticObject.getMemberDTO()){
+            if(memberDTO1.getmC02() ==1){
+                return true;
+            }
+        }
+        return false;
     }
 
     protected RadioButton getRadioButton(Integer id, String text, String tag, String value) {

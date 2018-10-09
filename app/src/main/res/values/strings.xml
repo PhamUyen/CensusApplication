@@ -231,4 +231,17 @@
     <string name="txt_yes">Có</string>
     <string name="txt_no">Không</string>
     <string name="txt_valid_name">Tên thành viên chỉ được phép bao gồm chữ cái và khoảng cách</string>
+    <string name="txt_invalid_relation">Lỗi: Thành viên STT %1$d %2$s có Quan hệ  %3$s của chủ hộ nhưng Tình trạng hôn nhân của chủ hộ là %4$s </string>
+    <string name="txt_number_couple">Cảnh báo: Có %d người là vợ/chồng với Chủ hộ? Có tiếp tục không?</string>
+    <string name="txt_invalid_sex">Lỗi: Thành viên STT %1$d %2$s là vợ/chồng chủ hộ có giới tính %3$s trùng với giới tính của chủ hộ (%4$s)</string>
+    <string name="txt_invalid_month">Lỗi: Thành viên STT %1$d %2$s có Tháng sinh =%3$d không hợp lệ</string>
+    <string name="txt_age_too_small">Cảnh báo: Tuổi của Chủ hộ %1$s = %2$d quá nhỏ! Có tiếp tục không?</string>
+    <string name="txt_age_couple">Cảnh báo: Thành viên STT %1$d %2$s là vợ/chồng của chủ hộ có tuổi %3$d so với tuổi của Chủ hộ %4$s (%5$d) chênh %6$d. Có tiếp tục không?</string>
+    <string name="txt_age_parent">Lỗi: Thành viên STT %1$d %2$s là bố/mẹ của Chủ hộ có tuổi %3$d nhỏ hơn hoặc bằng tuổi của Chủ hộ %4$s %5$d</string>
+    <string name="txt_age_grandparent">Cảnh báo: Thành viên STT %1$d %2$s là cháu nội/ngoại của Chủ hộ mà Chủ hộ %3$s có tuổi %4$d nhỏ hơn 30. Có tiếp tục không?</string>
+    <string name="txt_empty_folk">Lỗi: Thành viên STT %1$d %2$s có C6A=2 (dân tộc khác) nhưng Tên dân tộc khác bỏ trống.</string>
+    <string name="txt_invalid_folk">Cảnh báo: Thành viên STT %1$d %2$s là con đẻ của chủ hộ thuộc dân tộc %3$s mà chủ hộ thuộc dân tộc %4$s. Có tiếp tục không?</string>
+    <string name="txt_invalid_number_phone">Số điện thoại không hợp lệ</string>
+    <string name="txt_invalid_district">LỖI:  Thành viên STT %1$d %2$s có mã huyện cũ trùng với mã huyện đang ở =%3$s</string>
+    <string name="txt_confirm_continue_study">Cảnh báo: Thành viên STT %1$d %2$S sinh %3$d/%4$d nhưng vẫn đang đi học (C14=1). Có tiếp tục không?</string>
 </resources>

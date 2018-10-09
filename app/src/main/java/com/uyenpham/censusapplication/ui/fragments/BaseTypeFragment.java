@@ -7,6 +7,7 @@ import com.uyenpham.censusapplication.db.FamilyDAO;
 import com.uyenpham.censusapplication.db.PeopleDAO;
 import com.uyenpham.censusapplication.models.survey.AnswerDTO;
 import com.uyenpham.censusapplication.models.survey.QuestionDTO;
+import com.uyenpham.censusapplication.models.survey.WarningDTO;
 import com.uyenpham.censusapplication.ui.activities.SurveyActivity;
 import com.uyenpham.censusapplication.utils.Constants;
 
@@ -27,7 +28,7 @@ public abstract class BaseTypeFragment extends BaseFragment {
         }
     }
 
-    public abstract boolean validateQuaetion(QuestionDTO question, AnswerDTO answer);
+    public abstract WarningDTO validateQuaetion(QuestionDTO question, AnswerDTO answer);
 
     @Override
     public void onAttach(Context context) {

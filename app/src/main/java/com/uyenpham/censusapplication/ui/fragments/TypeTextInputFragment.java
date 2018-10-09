@@ -18,6 +18,7 @@ import com.uyenpham.censusapplication.models.family.PeopleDTO;
 import com.uyenpham.censusapplication.models.family.PeopleDetailDTO;
 import com.uyenpham.censusapplication.models.survey.AnswerDTO;
 import com.uyenpham.censusapplication.models.survey.QuestionDTO;
+import com.uyenpham.censusapplication.models.survey.WarningDTO;
 import com.uyenpham.censusapplication.ui.adapters.TextAdapter;
 import com.uyenpham.censusapplication.ui.interfaces.IClearListener;
 import com.uyenpham.censusapplication.ui.interfaces.INextQuestion;
@@ -50,6 +51,7 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
     private int posMember =-1;
     private ArrayList<PeopleDetailDTO> listNewPeople;
     private ArrayList<MemberDTO> listNewMem;
+    private MemberDTO memberDTO;
 
     @Override
     protected int getLayoutId() {
@@ -64,6 +66,9 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
         listNewMem = new ArrayList<>();
         listNewPeople= new ArrayList<>();
         posMember = getPosMember();
+        if(questionDTO.getSurvey().equals(Constants.SURVEY_MEMBER)){
+            memberDTO = Constants.mStaticObject.getMemberDTO().get(posMember);
+        }
         loadQuestion(questionDTO);
         if (questionDTO.getType() == Constants.TYPE_TEXT_INPUT_LIST) {
             rcvText.setVisibility(View.VISIBLE);
@@ -103,11 +108,11 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
                 peopleDetailDTO.setID(Constants.mStaticObject.getIdHo() + index);
                 listNewPeople.add(peopleDetailDTO);
 
-                MemberDTO memberDTO = new MemberDTO();
-                memberDTO.setmC01(name);
-                memberDTO.setmIDTV(Constants.mStaticObject.getIdHo()+index);
-                memberDTO.setmSTTNKTT(index+1);
-                listNewMem.add(memberDTO);
+                MemberDTO memberDTO1 = new MemberDTO();
+                memberDTO1.setmC01(name);
+                memberDTO1.setmIDTV(Constants.mStaticObject.getIdHo()+index);
+                memberDTO1.setmSTTNKTT(index+1);
+                listNewMem.add(memberDTO1);
 
 //
                 edAnswer.setText(null);
@@ -124,7 +129,7 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
                 String regex = "[A-Za-z ]*";
                 if(name.matches(regex)){
                     if(posMember != -1){
-                        Constants.mStaticObject.getPeopleDetailDTO().get(posMember).set(questionDTO.getId(),name);
+                        memberDTO.set(questionDTO.getId(),name);
                     }
                 }else {
                     DialogUtils.showAlert(activity,R.string.txt_valid_name);
@@ -158,7 +163,7 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
             }
         }else if(Constants.SURVEY_MEMBER.equals(question.getSurvey())){
             if(question.getId().equals(Constants.QUESTION_C01)){
-                edAnswer.setText(Constants.mStaticObject.getMemberDTO().get(posMember).getmC01());
+                edAnswer.setText(memberDTO.getmC01() == null ? "" : memberDTO.getmC01());
             }
         }else if(Constants.SURVEY_FAMILY.equals(question.getSurvey())){
             edAnswer.setText(String.valueOf(Constants.mStaticObject.getFamilyDTO().get(question.getId())));
@@ -168,18 +173,26 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
 
 
     @Override
-    public boolean validateQuaetion(QuestionDTO question, AnswerDTO answer) {
+    public WarningDTO validateQuaetion(QuestionDTO question, AnswerDTO answer) {
         switch (question.getId()) {
             case Constants.QUESTION_Q1:
-                return listText.size()>0;
+                return listText.size()>0 ? null :new WarningDTO(getString(R.string.txt_empty), Constants.TYPE_NOTI);
             case Constants.mDIENTHOAI:
                 String regexStr = "^[0-9]*$";
-               return  (edAnswer.getText().toString().matches(regexStr) && 9<edAnswer.getText().toString().length() && edAnswer.getText().toString().length()<12);
+                if((edAnswer.getText().toString().matches(regexStr) && 9<edAnswer.getText().toString().length() && edAnswer.getText().toString().length()<12)){
+                    return null;
+                }else {
+                    return  new WarningDTO(getString(R.string.txt_invalid_number_phone),Constants.TYPE_NOTI);
+                }
+            case Constants.QUESTION_C10A:
+                if(Constants.mStaticObject.getFamilyDTO().getMAHUYEN().equals(memberDTO.getmC10B())){
+                    return  new WarningDTO(getString(R.string.txt_invalid_district,posMember+1, memberDTO.getmC01(),memberDTO.getmC10B()),Constants.TYPE_NOTI);
+                }
             default:
                 if(StringUtils.isEmpty(edAnswer.getText().toString())){
-                    return false;
+                    return listText.size()>0 ? null :new WarningDTO(getString(R.string.txt_empty), Constants.TYPE_NOTI);
                 }else {
-                    return true;
+                    return null;
                 }
         }
     }
@@ -206,6 +219,9 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
         changeQuestion();
     }
     private void nextFragment(){
+        if(questionDTO.getSurvey().equals(Constants.SURVEY_MEMBER)){
+            Constants.mStaticObject.getMemberDTO().set(posMember,memberDTO);
+        }
         InputMethodManager imm = (InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE);
         if(imm!= null){
             imm.hideSoftInputFromWindow(edAnswer.getWindowToken(), 0);
@@ -227,7 +243,7 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
 
     private void changeQuestion(){
         if(questionDTO.getId().equals(Constants.QUESTION_Q1)){
-            if(validateQuaetion(questionDTO,answerDTO)){
+            if(validateQuaetion(questionDTO,answerDTO) == null){
                 DialogUtils.showErrorAlert2Option(activity, R.string.txt_another_else, R.string.txt_yes, R.string.txt_no,
                         new DialogInterface.OnClickListener() {
                             @Override
@@ -246,10 +262,10 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
                 DialogUtils.showAlert(activity,R.string.txt_empty);
             }
         }else {
-            if (validateQuaetion(questionDTO, answerDTO)) {
+            if (validateQuaetion(questionDTO, answerDTO) == null) {
                     nextFragment();
             } else {
-                DialogUtils.showAlert(activity,R.string.txt_empty);
+                DialogUtils.showAlert(activity, validateQuaetion(questionDTO,answerDTO).getMessage());
             }
         }
     }
