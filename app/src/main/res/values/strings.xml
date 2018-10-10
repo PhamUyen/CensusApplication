@@ -244,4 +244,13 @@
     <string name="txt_invalid_number_phone">Số điện thoại không hợp lệ</string>
     <string name="txt_invalid_district">LỖI:  Thành viên STT %1$d %2$s có mã huyện cũ trùng với mã huyện đang ở =%3$s</string>
     <string name="txt_confirm_continue_study">Cảnh báo: Thành viên STT %1$d %2$S sinh %3$d/%4$d nhưng vẫn đang đi học (C14=1). Có tiếp tục không?</string>
+    <string name="txt_invalid_age_study">Cảnh báo: Thành viên STT %1$d %2$S sinh %3$d/%4$d mà đang đi học %5$s. Có tiếp tục không?</string>
+    <string name="txt_invalid_study">Lỗi: Thành viên STT %1$d %2$s đang học %3$s mà không thể nhìn, nghe, đi bộ, ghi nhớ, tự chăm sóc, giao tiếp được</string>
+    <string name="txt_invalid_max_study">Cảnh báo: Thành viên STT %1$d %2$S sinh %3$d/%4$d (tuổi=%5$d) hiện đang đi học cấp học %6$d  mà Trình độ học vấn cao nhất %7$s. Có tiếp tục không?</string>
+    <string name="txt_invalid_age_for_level">Lỗi: Thành viên STT %1$d %2$S sinh %3$d/%4$d (tuổi=%5$d) mà có Trình độ học vấn cao nhất = %6$s</string>
+    <string name="txt_disabilities">Lỗi: Thành viên STT %1$d %2$s có Trình độ học vấn cao nhất đạt được = %3$s mà không thể nhìn, nghe, đi bộ, ghi nhớ, tự chăm sóc, giao tiếp được</string>
+    <string name="txt_error_job">Lỗi: Thành viên STT %1$d %2$s sinh %3$d/%4$d  mà có  C17_Kỹ năng nghề = %65s.</string>
+    <string name="txt_warning_job">Cảnh báo: Thành viên STT %1$d %2$s sinh %3$d/%4$d  mà có  C17_Kỹ năng nghề = %5$s. Có tiếp tục không?</string>
+    <string name="txt_invalid_level_job">Lỗi: Thành viên STT %1$d %2$s có C14=3 (Chưa bao giờ đi học) không phù hợp với C18_Trình độ nghề cao nhất đạt được (%3$s)</string>
+    <string name="txt_error_level_job">LỖI: Thành viên STT %1$d %2$s có Trình độ học vấn cao nhất= %3$d mà Trình độ nghề cao nhất đạt được =%4$s!</string>
 </resources>

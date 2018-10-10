@@ -227,15 +227,36 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                                 memberDTO.getmC05() >= 11))
                                 || ((memberDTO.getmC15() > 6 && memberDTO.getmC15() < 12) &&
                                 (memberDTO.getmC4N() > 2000 || memberDTO.getmC05() < 15))) {
-                            return null;
-                        } else {
-                            return null;
+                            return new WarningDTO(getString(R.string.txt_invalid_age_study,
+                                    posMember+1,memberDTO.getmC01(),memberDTO.getmC4T(),memberDTO.getmC4N()
+                            ,listOption.get(memberDTO.getmC15()-1).getOption()),Constants.TYPE_CONFIRM);
+                        }
+                        if(memberDTO.getmC13A() ==4 && memberDTO.getmC13B() ==4 && memberDTO.getmC13C() ==4
+                                || memberDTO.getmC13D() ==4 || memberDTO.getmC13E() ==4 && memberDTO.getmC13F() ==4){
+                            return new WarningDTO(getString(R.string.txt_invalid_study,
+                                    posMember+1,memberDTO.getmC01()
+                                    ,listOption.get(memberDTO.getmC15()-1).getOption()),Constants.TYPE_NOTI);
+                        }
+                    case Constants.QUESTION_C16:
+                            return checkLevelStudy(memberDTO);
+                    case Constants.QUESTION_C17:
+                       if(memberDTO.getmC05() <8 && memberDTO.getmC17() ==1){
+                           return new WarningDTO(getString(R.string.txt_error_job,
+                                   posMember+1,memberDTO.getmC01(),memberDTO.getmC4T(),memberDTO.getmC4N()
+                                   ,listOption.get(memberDTO.getmC15()-1).getOption()),Constants.TYPE_NOTI);
+                       }
+                        if(8 <memberDTO.getmC05() && memberDTO.getmC05() <15 && memberDTO.getmC17() ==1){
+                            return new WarningDTO(getString(R.string.txt_warning_job,
+                                    posMember+1,memberDTO.getmC01(),memberDTO.getmC4T(),memberDTO.getmC4N()
+                                    ,listOption.get(memberDTO.getmC15()-1).getOption()),Constants.TYPE_CONFIRM);
                         }
                     case Constants.QUESTION_C18:
                         if (memberDTO.getmC14() == 3 && (memberDTO.getmC18() == 1 || memberDTO.getmC18() == 2)) {
-                            return false;
-                        } else {
-                            return true;
+                            return new WarningDTO(getString(R.string.txt_invalid_level_job,posMember+1,memberDTO.getmC01(),listOption.get(memberDTO.getmC17()-1).getOption()),Constants.TYPE_NOTI);
+                        }
+                        if((memberDTO.getmC16() ==1 || memberDTO.getmC16() ==2) &&(memberDTO.getmC18() ==4 || memberDTO.getmC18() ==5)){
+                            return new WarningDTO(getString(R.string.txt_error_level_job,posMember+1, memberDTO.getmC01(),memberDTO.getmC16()
+                            ,listOption.get(memberDTO.getmC18()-1).getOption()), Constants.TYPE_NOTI);
                         }
                     case Constants.QUESTION_C22:
                         if (memberDTO.getmSTTNKTT() != 1 && memberDTO.getmC02() == 2 && memberDTO.getmC22() != 2) {
@@ -250,6 +271,36 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                 }
         }
         return messge;
+    }
+
+    private WarningDTO checkLevelStudy(MemberDTO memberDTO){
+        if ((memberDTO.getmC16() ==1 && memberDTO.getmC15() ==3)
+        || (memberDTO.getmC16() == 2 && memberDTO.getmC15() == 4)
+        || (memberDTO.getmC16() == 3  && memberDTO.getmC15() ==5)
+        || (memberDTO.getmC16() ==4 && 7 <= memberDTO.getmC15() && memberDTO.getmC15() <=11)
+        || (5<=memberDTO.getmC16() && memberDTO.getmC16() <= 7 && 7 <= memberDTO.getmC15() && memberDTO.getmC15() <=11)
+        ||((memberDTO.getmC16() ==8 || memberDTO.getmC16() ==9) && (memberDTO.getmC15() == 9 || memberDTO.getmC15() ==10 || memberDTO.getmC15() ==11))){
+            return new WarningDTO(getString(R.string.txt_invalid_max_study,posMember+1,memberDTO.getmC01(),
+                    memberDTO.getmC4T(), memberDTO.getmC4N(),memberDTO.getmC05(),memberDTO.getmC15(),listOption.get(memberDTO.getmC16()-1).getOption()),Constants.TYPE_CONFIRM);
+        }
+        if ((memberDTO.getmC16() ==2 && memberDTO.getmC4N()!= null && memberDTO.getmC4N() <=2009)
+                || (memberDTO.getmC16() == 3 && memberDTO.getmC4N()!= null && memberDTO.getmC4N() <=2005)
+                || (memberDTO.getmC16() ==4 && memberDTO.getmC4N()!= null && memberDTO.getmC4N() <=2002)
+                || (memberDTO.getmC16() ==5 && memberDTO.getmC4N()!= null && memberDTO.getmC4N() <=2005)
+                || (memberDTO.getmC16() ==6 && memberDTO.getmC4N()!= null && memberDTO.getmC4N() <=2000)
+                ||(memberDTO.getmC16() ==7 && memberDTO.getmC4N()!= null && memberDTO.getmC4N() <=1999)
+                ||(memberDTO.getmC16() ==8 && memberDTO.getmC4N()!= null && memberDTO.getmC4N() <=1998)){
+            return new WarningDTO(getString(R.string.txt_invalid_age_for_level,posMember+1,memberDTO.getmC01(),
+                    memberDTO.getmC4T(), memberDTO.getmC4N(),memberDTO.getmC05(),listOption.get(memberDTO.getmC16()+1).getOption()),Constants.TYPE_NOTI);
+        }
+        if(memberDTO.getmC13A() ==4 && memberDTO.getmC13B() ==4 && memberDTO.getmC13C() ==4
+                || memberDTO.getmC13D() ==4 || memberDTO.getmC13E() ==4 && memberDTO.getmC13F() ==4){
+            return new WarningDTO(getString(R.string.txt_disabilities,
+                    posMember+1,memberDTO.getmC01()
+                    ,listOption.get(memberDTO.getmC16()-1).getOption()),Constants.TYPE_NOTI);
+        }
+        return null;
+
     }
 
     private boolean isOverNumberWife(){
@@ -331,7 +382,7 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                     nextFragment();
                 }
             } else {
-                if (validateQuaetion(questionDTO, answerDTO)) {
+                if (validateQuaetion(questionDTO, answerDTO) == null) {
                     if (questionDTO.getType() == Constants.TYPE_SINGLE_SELECT_LIST) {
                         for (PeopleDetailDTO peopleDetailDTO : listSelected) {
                             Constants.mStaticObject.getPeopleDetailDTO().remove(peopleDetailDTO);
@@ -358,7 +409,7 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
         } else if (Constants.SURVEY_HOUSE.equals(questionDTO.getSurvey())) {
 
         } else {
-            if (validateQuaetion(questionDTO, answerDTO)) {
+            if (validateQuaetion(questionDTO, answerDTO)== null) {
                 switch (questionDTO.getSurvey()) {
                     case Constants.SURVEY_MEMBER:
                         Constants.mStaticObject.getMemberDTO().set(posMember, memberDTO);

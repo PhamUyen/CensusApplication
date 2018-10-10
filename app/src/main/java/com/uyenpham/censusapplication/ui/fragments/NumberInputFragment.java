@@ -140,7 +140,6 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
                         )) {
                     return new WarningDTO(getString(R.string.txt_invalid_month,posMember+1,memberDTO.getmC01(),memberDTO.getmC4T()),Constants.TYPE_NOTI);
                 }
-                break;
             case Constants.QUESTION_C05:
                 if(posMember == 0 && memberDTO.getmC05() <6){
                     return new WarningDTO(getString(R.string.txt_age_too_small,memberDTO.getmC01(), memberDTO.getmC05()),Constants.TYPE_CONFIRM);
@@ -157,11 +156,11 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
                     return new WarningDTO(getString(R.string.txt_age_grandparent
                             ,posMember+1,memberDTO.getmC01(),chuho.getmC01(),chuho.getmC05()),Constants.TYPE_CONFIRM);
                 }
-                break;
+            case Constants.QUESTION_C19:
+
             default:
                 return null;
         }
-        return null;
     }
 
     @Override
