@@ -12,11 +12,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.uyenpham.censusapplication.R;
+import com.uyenpham.censusapplication.db.MemberDAO;
 import com.uyenpham.censusapplication.models.family.MemberDTO;
 import com.uyenpham.censusapplication.models.family.WomanDTO;
 import com.uyenpham.censusapplication.models.survey.AnswerDTO;
 import com.uyenpham.censusapplication.models.survey.OptionDTO;
 import com.uyenpham.censusapplication.models.survey.QuestionDTO;
+import com.uyenpham.censusapplication.models.survey.WarningDTO;
 import com.uyenpham.censusapplication.ui.interfaces.INextQuestion;
 import com.uyenpham.censusapplication.ui.interfaces.IPreviousQuestion;
 import com.uyenpham.censusapplication.utils.Constants;
@@ -167,25 +169,37 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
 
 
     @Override
-    public boolean validateQuaetion(QuestionDTO question, AnswerDTO answer) {
+    public WarningDTO validateQuaetion(QuestionDTO question, AnswerDTO answer) {
+        String idTV = Constants.mStaticObject.getIdHo() + Constants.mStaticObject
+                .getPeopleDetailDTO().get(0).getSTT();
+        MemberDTO chuho = MemberDAO.getInstance().findById(idTV);
         switch (question.getId()) {
             case Constants.QUESTION_C04:
-                if (memberDTO.getmC4N() == null || memberDTO.getmC4T() == null
-                ||((memberDTO.getmC4N() == Calendar.getInstance().get(Calendar.YEAR))
-                        && memberDTO.getmC4T() > Calendar.getInstance().get(Calendar.MONTH))
-                        ) {
-                    return false;
-                } else {
-                    return true;
+                if (memberDTO.getmC4T() <0 ||(memberDTO.getmC4T() >12 && memberDTO.getmC4T() != 98) ||
+                        (memberDTO.getmC4N() == Calendar.getInstance().get(Calendar.YEAR) && memberDTO.getmC4T() > Calendar.getInstance().get(Calendar.MONTH)
+                        )) {
+                    return new WarningDTO(getString(R.string.txt_invalid_month,posMember+1,memberDTO.getmC01(),memberDTO.getmC4T()),Constants.TYPE_NOTI);
                 }
             case Constants.QUESTION_C05:
-                if(memberDTO != null && memberDTO.getmC02() ==1 && memberDTO.getmC05() <6){
-                    return false;
-                }else {
-                    return true;
+                if(posMember == 0 && memberDTO.getmC05() <6){
+                    return new WarningDTO(getString(R.string.txt_age_too_small,memberDTO.getmC01(), memberDTO.getmC05()),Constants.TYPE_CONFIRM);
                 }
+                if(posMember != 0 && memberDTO.getmC02() ==1 && Math.abs(chuho.getmC05()-memberDTO.getmC05()) >= 20){
+                    return new WarningDTO(getString(R.string.txt_age_couple
+                            ,posMember+1,memberDTO.getmC01(),memberDTO.getmC05(),chuho.getmC01(),chuho.getmC05(),Math.abs(chuho.getmC05() - memberDTO.getmC05())),Constants.TYPE_CONFIRM);
+                }
+                if(posMember != 0 && memberDTO.getmC02() ==4 && chuho.getmC05() >= memberDTO.getmC05()){
+                    return new WarningDTO(getString(R.string.txt_age_parent
+                            ,posMember+1,memberDTO.getmC01(),memberDTO.getmC05(),chuho.getmC01(),chuho.getmC05()),Constants.TYPE_NOTI);
+                }
+                if(posMember != 0 && memberDTO.getmC02() == 3&& chuho.getmC05() <= 30){
+                    return new WarningDTO(getString(R.string.txt_age_grandparent
+                            ,posMember+1,memberDTO.getmC01(),chuho.getmC01(),chuho.getmC05()),Constants.TYPE_CONFIRM);
+                }
+            case Constants.QUESTION_C19:
+
             default:
-                return true;
+                return null;
         }
     }
 
@@ -281,12 +295,14 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
     @Override
     public void next() {
         Utils.hideKeyboard(activity,lnContent);
-          if(validateQuaetion(questionDTO, null)){
+          if(validateQuaetion(questionDTO, null)  == null){
               Constants.mStaticObject.getMemberDTO().set(posMember,memberDTO);
               if (currentIndex < getListQuestion().size()-1) {
                   currentIndex++;
                   Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true,getListQuestion(),activity.mFragmentManager,getPosMember());
               }
+          }else {
+              //show dialog error
           }
     }
 

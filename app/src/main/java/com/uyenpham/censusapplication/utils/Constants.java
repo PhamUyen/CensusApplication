@@ -211,4 +211,8 @@ public class Constants {
     public static final String YEAR = "NAM";
     public static final String NUMBER_BOY = "SỐ CON TRAI";
     public static final String NUMBER_GIRL = "SỐ CON GÁI";
+
+    //type  warning
+    public static final int TYPE_CONFIRM = 2;
+    public static final int TYPE_NOTI = 1;
 }
