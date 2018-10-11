@@ -40,18 +40,18 @@
       "survey":"house"
     },
     {
-      "id": "Q52",
+      "id": "Q52A",
       "name": "Q52",
       "question": "Hộ Ông/Bà có phải là hộ đại diện không?",
       "type": 4,
       "options": [
         {
-          "option" : "CÓ",
-          "type" : "SHOW"
-        },
-        {
           "option" : "KHÔNG",
           "type" : "NORMAL"
+        },
+        {
+          "option" : "CÓ",
+          "type" : "SHOW"
         }
       ],
       "placeHolders": "",

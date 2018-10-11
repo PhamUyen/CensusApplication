@@ -288,4 +288,9 @@
     <string name="txt_invalid_month_die">LỖI: Người chết thứ %1$d %2$s có Tháng chết = %3$d không hợp lệ</string>
     <string name="txt_invalid_month_birth_die">LỖI: Người chết thứ %1$d %2$s có Tháng sinh của người chết = %3$d không hợp lệ</string>
     <string name="txt_invalid_time_birth_die">LỖI: Người chết thứ %1$d %2$s sinh %3$d/2018 sau thời điểm điều tra 1/8/2018</string>
+    <string name="txt_die_before_birth">LỖI: Người chết thứ %1$d %2$s sinh %3$s/%4$s chết %5$s/%6$s. Chết trước khi sinh!</string>
+    <string name="txt_age_die">Cảnh báo: Người chết thứ %1$d %2$s  sinh năm %3$s, mất năm %4$s, có tuổi chết =%5$d. Có tiếp tục không?</string>
+    <string name="txt_warning_die">Cảnh báo: Người chết thứ %1$d %2$s có Tuổi chết =%3$d mà Nguyên nhân chết = %4$s. Có tiếp tục không?</string>
+    <string name="txt_invalid_reason_die">LỖI: Người chết thứ %1$d %2$S có Nguyên nhân chết khác mà không ghi rõ nguyên nhân</string>
+    <string name="txt_invalid_case_die">LỖI: Người chết thứ %1$d %2$s có chết trong trường hợp khác mà không ghi rõ trường hợp</string>
 </resources>

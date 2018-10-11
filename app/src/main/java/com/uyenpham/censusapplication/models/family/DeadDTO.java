@@ -12,7 +12,7 @@ public class DeadDTO {
     @SerializedName("C43")
     private String mC43;
     @SerializedName("C44")
-    private Long mC44;
+    private Integer mC44;
     @SerializedName("C45N")
     private String mC45N;
     @SerializedName("C45T")
@@ -24,7 +24,7 @@ public class DeadDTO {
     @SerializedName("C47")
     private Integer mC47;
     @SerializedName("C48")
-    private Long mC48;
+    private Integer mC48;
     @SerializedName("C48K")
     private String mC48K;
     @SerializedName("C49")
@@ -48,8 +48,8 @@ public class DeadDTO {
         this.mID = mID;
     }
 
-    public DeadDTO(String mC43, Long mC44, String mC45N, String mC45T, String mC46N, String
-            mC46T, Integer mC47, Long mC48, String mC48K, Integer mC49, String mC49K, String mID,
+    public DeadDTO(String mC43, Integer mC44, String mC45N, String mC45T, String mC46N, String
+            mC46T, Integer mC47, Integer mC48, String mC48K, Integer mC49, String mC49K, String mID,
                    String mIDCHET) {
         this.mC43 = mC43;
         this.mC44 = mC44;
@@ -74,11 +74,11 @@ public class DeadDTO {
         this.mC43 = mC43;
     }
 
-    public Long getmC44() {
+    public Integer getmC44() {
         return mC44;
     }
 
-    public void setmC44(Long mC44) {
+    public void setmC44(Integer mC44) {
         this.mC44 = mC44;
     }
 
@@ -122,11 +122,11 @@ public class DeadDTO {
         this.mC47 = mC47;
     }
 
-    public Long getmC48() {
+    public Integer getmC48() {
         return mC48;
     }
 
-    public void setmC48(Long mC48) {
+    public void setmC48(Integer mC48) {
         this.mC48 = mC48;
     }
 

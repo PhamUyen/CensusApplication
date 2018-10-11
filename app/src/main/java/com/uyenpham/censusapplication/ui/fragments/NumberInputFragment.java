@@ -296,16 +296,27 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
                 break;
 
             case Constants.QUESTION_C46:
-                //LỖI: Người chết thứ %d %s có Tháng sinh của người chết = %d không hợp lệ
-                //LỖI: Người chết thứ %d %s sinh %d/2018 sau thời điểm điều tra 1/8/2018
-                //LỖI: Người chết thứ %d %s sinh %d/%d chết %d/%d. Chết trước khi sinh!
                 if(1< Integer.parseInt(deadDTO.getmC45T()) && Integer.parseInt(deadDTO.getmC45T()) >12 && Integer.parseInt(deadDTO.getmC45T())!=98){
                     return   new WarningDTO(getString(R.string.txt_invalid_month_birth_die,posMember+1, deadDTO.getmC43(),Integer.parseInt(deadDTO.getmC46T())),Constants.TYPE_NOTI);
                 }
                 if(Integer.parseInt(deadDTO.getmC46N()) == 2018 && Integer.parseInt(deadDTO.getmC46T()) >7){
                     return   new WarningDTO(getString(R.string.txt_invalid_time_die,posMember+1, deadDTO.getmC43(),Integer.parseInt(deadDTO.getmC46T())),Constants.TYPE_NOTI);
                 }
+                if(Integer.valueOf(deadDTO.getmC45N()) < Integer.valueOf(deadDTO.getmC46N())
+                    || (Integer.valueOf(deadDTO.getmC45N()) == Integer.valueOf(deadDTO.getmC46N()) &&
+                        Integer.valueOf(deadDTO.getmC45T()) < Integer.valueOf(deadDTO.getmC46T()))){
+                    return   new WarningDTO(getString(R.string.txt_die_before_birth,posMember+1, deadDTO.getmC43(),deadDTO.getmC45T()
+                            ,deadDTO.getmC45N(),deadDTO.getmC46T(),deadDTO.getmC46N()),Constants.TYPE_NOTI);
+            }
                 break;
+            case Constants.QUESTION_C47:
+                if(deadDTO.getmC47() >100){
+                    return   new WarningDTO(getString(R.string.txt_age_die,posMember+1, deadDTO.getmC43()
+                            ,deadDTO.getmC46N(),deadDTO.getmC45N(),deadDTO.getmC47()),Constants.TYPE_CONFIRM);
+                }
+                break;
+
+
             default:
                 break;
         }

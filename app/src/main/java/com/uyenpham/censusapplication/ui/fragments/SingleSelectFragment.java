@@ -42,6 +42,7 @@ import java.util.Calendar;
 import butterknife.Bind;
 
 import static com.uyenpham.censusapplication.ui.activities.SurveyActivity.currentIndex;
+import static com.uyenpham.censusapplication.utils.Constants.TYPE_SELECT_INPUT;
 
 public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerViewListener,
         INextQuestion, IPreviousQuestion, IRadioButtonClick {
@@ -316,10 +317,23 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                         }
                         break;
 
-                    case Constants.QUESTION_C42:
                         //Cảnh báo: Hộ có Tổng số nhân khẩu thực tế thường trú trong hộ =0 và cũng không có người chết. Có đúng không?
                         //LỖI: Hộ không có người chết (C42=2) mà Tình trạng phỏng vấn ban đầu = 5 (Chết cả hộ)
                         //LỖI: Hộ có người chết (C42=1) nhưng số người chết =0. Hãy nhập lại!
+                    case Constants.QUESTION_C48:
+                        if(deadDTO.getmC47() <= 5 && 0< deadDTO.getmC47() && (deadDTO.getmC48() ==2 || deadDTO.getmC48() ==5)){
+                            return   new WarningDTO(getString(R.string.txt_warning_die,posMember+1, deadDTO.getmC43()
+                                    ,deadDTO.getmC47(),listOption.get(deadDTO.getmC48()-1).getOption()),Constants.TYPE_CONFIRM);
+                        }
+                        if(deadDTO.getmC48() ==6 &&StringUtils.isEmpty(deadDTO.getmC48K())){
+                            return   new WarningDTO(getString(R.string.txt_invalid_reason_die,posMember+1, deadDTO.getmC43()),Constants.TYPE_NOTI);
+                        }
+                        break;
+
+                    case Constants.QUESTION_C49:
+                        if(deadDTO.getmC49() == 5 && StringUtils.isEmpty(deadDTO.getmC49K())){
+                            return   new WarningDTO(getString(R.string.txt_invalid_case_die,posMember+1, deadDTO.getmC43()),Constants.TYPE_NOTI);
+                        }
                     default:
                         break;
 
@@ -819,6 +833,23 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
 
                     SpinnerAdapter adapter = new SpinnerAdapter(activity, listOptionSpinner);
                     spinner.setAdapter(adapter);
+                }else if(questionDTO.getType() == TYPE_SELECT_INPUT){
+                    edOther.setVisibility(View.VISIBLE);
+                    edOther.setSingleLine();
+                    edOther.setImeOptions(EditorInfo.IME_ACTION_DONE);
+                    edOther.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                        @Override
+                        public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                            if(i== EditorInfo.IME_ACTION_DONE){
+                                if(questionDTO.getId().equals(Constants.QUESTION_C48)){
+                                    deadDTO.setmC48K(edOther.getText().toString());
+                                }else if(questionDTO.getId().equals(Constants.QUESTION_C49)){
+                                    deadDTO.setmC49K(edOther.getText().toString());
+                                }
+                            }
+                            return false;
+                        }
+                    });
                 }
             }else {
             edOther.setVisibility(View.GONE);
