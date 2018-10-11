@@ -1,5 +1,6 @@
 package com.uyenpham.censusapplication.ui.fragments;
 
+import android.content.DialogInterface;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,10 +17,8 @@ import android.widget.TextView;
 import com.uyenpham.censusapplication.R;
 import com.uyenpham.censusapplication.db.MemberDAO;
 import com.uyenpham.censusapplication.models.family.DeadDTO;
-import com.uyenpham.censusapplication.models.family.HouseDTO;
 import com.uyenpham.censusapplication.models.family.MemberDTO;
 import com.uyenpham.censusapplication.models.family.PeopleDetailDTO;
-import com.uyenpham.censusapplication.models.family.WomanDTO;
 import com.uyenpham.censusapplication.models.locality.ReligionDTO;
 import com.uyenpham.censusapplication.models.survey.AnswerDTO;
 import com.uyenpham.censusapplication.models.survey.OptionDTO;
@@ -73,10 +72,10 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
     private ArrayList<OptionDTO> listOption;
     private RadioButtonAdapter radioButtonAdapter;
     private int posMember;
-    private MemberDTO memberDTO;
-    private WomanDTO womanDTO;
-    private DeadDTO deadDTO;
-    private HouseDTO houseDTO;
+//    private MemberDTO memberDTO;
+//    private WomanDTO womanDTO;
+//    private DeadDTO deadDTO;
+//    private HouseDTO houseDTO;
 
     @Override
     protected int getLayoutId() {
@@ -91,21 +90,33 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
         listSelected = new ArrayList<>();
         listMember = new ArrayList<>();
         posMember = getPosMember();
+        questionDTO = getQuestionDTO();
         if (questionDTO.getType() == Constants.TYPE_SINGLE_SELECT_LIST) {
             adapter = new MultiSelectAdapter(listMember, true);
         } else if (questionDTO.getType() == Constants.TYPE_MIX) {
             adapter = new MultiSelectAdapter(listMember, false);
         }
-        if (questionDTO.getSurvey().equals(Constants.SURVEY_MEMBER)) {
-            memberDTO = Constants.mStaticObject.getMemberDTO().get(posMember);
-        } else if (Constants.SURVEY_WOMAN.equals(questionDTO.getSurvey())) {
-            womanDTO = Constants.mStaticObject.getWomanDTO().get(posMember);
-        } else if (Constants.SURVEY_DEAD.equals(questionDTO.getSurvey())) {
-            deadDTO = Constants.mStaticObject.getDeadDTO().get(posMember);
-        }else if (Constants.SURVEY_HOUSE.equals(questionDTO.getSurvey())) {
-            houseDTO = Constants.mStaticObject.getHouseDTO();
-        }
+//        if (questionDTO.getSurvey().equals(Constants.SURVEY_MEMBER)) {
+//            memberDTO = Constants.mStaticObject.getMemberDTO().get(posMember);
+//        } else if (Constants.SURVEY_WOMAN.equals(questionDTO.getSurvey())) {
+//            womanDTO = Constants.mStaticObject.getWomanDTO().get(posMember);
+//            memberDTO = getMemberById(womanDTO.getIDTV());
+//        } else if (Constants.SURVEY_DEAD.equals(questionDTO.getSurvey())) {
+//            deadDTO = Constants.mStaticObject.getDeadDTO().get(posMember);
+//            memberDTO = getMemberById(deadDTO.getmIDCHET());
+//        } else if (Constants.SURVEY_HOUSE.equals(questionDTO.getSurvey())) {
+//            houseDTO = Constants.mStaticObject.getHouseDTO();
+//        }
         loadQuestion(questionDTO);
+    }
+
+    private MemberDTO getMemberById(String id){
+        for(MemberDTO member : Constants.mStaticObject.getMemberDTO()){
+            if(member.getmIDTV().equalsIgnoreCase(id)){
+                return member;
+            }
+        }
+        return null;
     }
 
     public boolean loadQuestion(final QuestionDTO question) {
@@ -172,13 +183,13 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
 
     @Override
     public WarningDTO validateQuaetion(QuestionDTO question, AnswerDTO answer) {
-        WarningDTO messge = null;
         switch (question.getSurvey()) {
             case Constants.SURVEY_PEOPLE:
                 if (!isYes || (isYes && listSelected.size() != 0) || (Constants.mStaticObject.getPeopleDTO
                         ().get(questionDTO.getName()) != null || (isYes && listMember.size() != 0))) {
-                } else {
+                    return  new WarningDTO(getString(R.string.txt_invalid_info), Constants.TYPE_NOTI);
                 }
+                break;
             case Constants.SURVEY_MEMBER:
             case Constants.SURVEY_WOMAN:
             case Constants.SURVEY_DEAD:
@@ -187,31 +198,32 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                 MemberDTO chuho = MemberDAO.getInstance().findById(idTV);
                 switch (question.getId()) {
                     case Constants.QUESTION_C02:
-                        if(memberDTO.getmC02() == 1 && chuho.getmC22() ==1){
-                            return new WarningDTO(getString(R.string.txt_invalid_relation,posMember+1,memberDTO.getmC01(),listOption.get(memberDTO.getmC02()-1),listOption.get(0).getOption()),Constants.TYPE_NOTI);
-                        }else if(isOverNumberWife() && memberDTO.getmC02() ==1){
-                            return new WarningDTO(getString(R.string.txt_number_couple,2),Constants.TYPE_CONFIRM);
+                        if (memberDTO.getmC02() == 1 && chuho.getmC22() == 1) {
+                            return new WarningDTO(getString(R.string.txt_invalid_relation, posMember + 1, memberDTO.getmC01(), listOption.get(memberDTO.getmC02() - 1), listOption.get(0).getOption()), Constants.TYPE_NOTI);
+                        } else if (isOverNumberWife() && memberDTO.getmC02() == 1) {
+                            return new WarningDTO(getString(R.string.txt_number_couple, 2), Constants.TYPE_CONFIRM);
                         }
                         break;
                     case Constants.QUESTION_C03:
-                        if (chuho != null && chuho.getmC03() == memberDTO.getmC03() && memberDTO.getmC02() ==1) {
-                            return new WarningDTO(getString(R.string.txt_invalid_sex,posMember+1,memberDTO.getmC01(),listOption.get(memberDTO.getmC03()-1).getOption(),listOption.get(memberDTO.getmC03()-1).getOption()),Constants.TYPE_NOTI);
+                        if (chuho != null && chuho.getmC03().equals(memberDTO.getmC03()) && memberDTO.getmC02() == 1) {
+                            return new WarningDTO(getString(R.string.txt_invalid_sex, posMember + 1, memberDTO.getmC01(), listOption.get(memberDTO.getmC03() - 1).getOption(), listOption.get(memberDTO.getmC03() - 1).getOption()), Constants.TYPE_NOTI);
                         }
                         break;
 
                     case Constants.QUESTION_C6A:
                         if (memberDTO.getmC6A() == 2 && StringUtils.isEmpty(memberDTO.getmC6B())) {
-                            return new WarningDTO(getString(R.string.txt_empty_folk,posMember+1,memberDTO.getmC01()),Constants.TYPE_NOTI);
+                            return new WarningDTO(getString(R.string.txt_empty_folk, posMember + 1, memberDTO.getmC01()), Constants.TYPE_NOTI);
                         }
-                        if(posMember != 0 && !memberDTO.getmC6C().equals(chuho.getmC6C())){
-                            return new WarningDTO(getString(R.string.txt_invalid_folk,posMember+1,memberDTO.getmC01(),memberDTO.getmC6C(),chuho.getmC6C()),Constants.TYPE_NOTI);
+                        if (posMember != 0 && !memberDTO.getmC6C().equals(chuho.getmC6C())) {
+                            return new WarningDTO(getString(R.string.txt_invalid_folk, posMember + 1, memberDTO.getmC01(), memberDTO.getmC6C(), chuho.getmC6C()), Constants.TYPE_NOTI);
                         }
                         break;
                     case Constants.QUESTION_C14:
-                        if (memberDTO.getmC14() == 1 &&memberDTO.getmC05() == 60) {
-                            return new WarningDTO(getString(R.string.txt_confirm_continue_study,posMember+1,
-                                    memberDTO.getmC01(),memberDTO.getmC4T() == null ? 0: memberDTO.getmC4T(), memberDTO.getmC4N() == null ? 0: memberDTO.getmC4N()),Constants.TYPE_CONFIRM);
+                        if (memberDTO.getmC14() == 1 && memberDTO.getmC05() == 60) {
+                            return new WarningDTO(getString(R.string.txt_confirm_continue_study, posMember + 1,
+                                    memberDTO.getmC01(), memberDTO.getmC4T() == null ? 0 : memberDTO.getmC4T(), memberDTO.getmC4N() == null ? 0 : memberDTO.getmC4N()), Constants.TYPE_CONFIRM);
                         }
+                        break;
                     case Constants.QUESTION_C15:
                         if ((memberDTO.getmC4N() > 2012 && (memberDTO.getmC15() == 1 || memberDTO.getmC15() == 2))
                                 || (memberDTO.getmC15() == 3 && ((memberDTO.getmC4N() <= 2012
@@ -228,84 +240,127 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                                 || ((memberDTO.getmC15() > 6 && memberDTO.getmC15() < 12) &&
                                 (memberDTO.getmC4N() > 2000 || memberDTO.getmC05() < 15))) {
                             return new WarningDTO(getString(R.string.txt_invalid_age_study,
-                                    posMember+1,memberDTO.getmC01(),memberDTO.getmC4T(),memberDTO.getmC4N()
-                            ,listOption.get(memberDTO.getmC15()-1).getOption()),Constants.TYPE_CONFIRM);
+                                    posMember + 1, memberDTO.getmC01(), memberDTO.getmC4T(), memberDTO.getmC4N()
+                                    , listOption.get(memberDTO.getmC15() - 1).getOption()), Constants.TYPE_CONFIRM);
                         }
-                        if(memberDTO.getmC13A() ==4 && memberDTO.getmC13B() ==4 && memberDTO.getmC13C() ==4
-                                || memberDTO.getmC13D() ==4 || memberDTO.getmC13E() ==4 && memberDTO.getmC13F() ==4){
+                        if (memberDTO.getmC13A() == 4 && memberDTO.getmC13B() == 4 && memberDTO.getmC13C() == 4
+                                || memberDTO.getmC13D() == 4 || memberDTO.getmC13E() == 4 && memberDTO.getmC13F() == 4) {
                             return new WarningDTO(getString(R.string.txt_invalid_study,
-                                    posMember+1,memberDTO.getmC01()
-                                    ,listOption.get(memberDTO.getmC15()-1).getOption()),Constants.TYPE_NOTI);
+                                    posMember + 1, memberDTO.getmC01()
+                                    , listOption.get(memberDTO.getmC15() - 1).getOption()), Constants.TYPE_NOTI);
                         }
+                        break;
                     case Constants.QUESTION_C16:
-                            return checkLevelStudy(memberDTO);
+                        return checkLevelStudy(memberDTO);
                     case Constants.QUESTION_C17:
-                       if(memberDTO.getmC05() <8 && memberDTO.getmC17() ==1){
-                           return new WarningDTO(getString(R.string.txt_error_job,
-                                   posMember+1,memberDTO.getmC01(),memberDTO.getmC4T(),memberDTO.getmC4N()
-                                   ,listOption.get(memberDTO.getmC15()-1).getOption()),Constants.TYPE_NOTI);
-                       }
-                        if(8 <memberDTO.getmC05() && memberDTO.getmC05() <15 && memberDTO.getmC17() ==1){
-                            return new WarningDTO(getString(R.string.txt_warning_job,
-                                    posMember+1,memberDTO.getmC01(),memberDTO.getmC4T(),memberDTO.getmC4N()
-                                    ,listOption.get(memberDTO.getmC15()-1).getOption()),Constants.TYPE_CONFIRM);
+                        if (memberDTO.getmC05() < 8 && memberDTO.getmC17() == 1) {
+                            return new WarningDTO(getString(R.string.txt_error_job,
+                                    posMember + 1, memberDTO.getmC01(), memberDTO.getmC4T(), memberDTO.getmC4N()
+                                    , listOption.get(memberDTO.getmC15() - 1).getOption()), Constants.TYPE_NOTI);
                         }
+                        if (8 < memberDTO.getmC05() && memberDTO.getmC05() < 15 && memberDTO.getmC17() == 1) {
+                            return new WarningDTO(getString(R.string.txt_warning_job,
+                                    posMember + 1, memberDTO.getmC01(), memberDTO.getmC4T(), memberDTO.getmC4N()
+                                    , listOption.get(memberDTO.getmC15() - 1).getOption()), Constants.TYPE_CONFIRM);
+                        }
+                        break;
                     case Constants.QUESTION_C18:
                         if (memberDTO.getmC14() == 3 && (memberDTO.getmC18() == 1 || memberDTO.getmC18() == 2)) {
-                            return new WarningDTO(getString(R.string.txt_invalid_level_job,posMember+1,memberDTO.getmC01(),listOption.get(memberDTO.getmC17()-1).getOption()),Constants.TYPE_NOTI);
+                            return new WarningDTO(getString(R.string.txt_invalid_level_job, posMember + 1, memberDTO.getmC01(), listOption.get(memberDTO.getmC17() - 1).getOption()), Constants.TYPE_NOTI);
                         }
-                        if((memberDTO.getmC16() ==1 || memberDTO.getmC16() ==2) &&(memberDTO.getmC18() ==4 || memberDTO.getmC18() ==5)){
-                            return new WarningDTO(getString(R.string.txt_error_level_job,posMember+1, memberDTO.getmC01(),memberDTO.getmC16()
-                            ,listOption.get(memberDTO.getmC18()-1).getOption()), Constants.TYPE_NOTI);
+                        if ((memberDTO.getmC16() == 1 || memberDTO.getmC16() == 2) && (memberDTO.getmC18() == 4 || memberDTO.getmC18() == 5)) {
+                            return new WarningDTO(getString(R.string.txt_error_level_job, posMember + 1, memberDTO.getmC01(), memberDTO.getmC16()
+                                    , listOption.get(memberDTO.getmC18() - 1).getOption()), Constants.TYPE_NOTI);
                         }
+                        break;
+
+                        //tinh trang hon nhan
                     case Constants.QUESTION_C22:
+                        //co quan he vo/chong voi chu ho nhung tinh trang hon nhan khong phai la ket hon
                         if (memberDTO.getmSTTNKTT() != 1 && memberDTO.getmC02() == 2 && memberDTO.getmC22() != 2) {
-                            return false;
-                        } else if (memberDTO.getmC12() != null && memberDTO.getmC12() == 4 &&
-                                memberDTO.getmC22() == 1) {
-                            return false;
-                        } else {
-                            return true;
+                            return new WarningDTO(getString(R.string.txt_invalid_marital,posMember+1,memberDTO.getmC01(),listOption.get(memberDTO.getmC22()-1).getOption()), Constants.TYPE_CONFIRM);
                         }
+
+                        //chuyen den ho voi li do ket hon nhung tinh trang hon nhan laf chua ket hon
+                        if (memberDTO.getmC12() != null && memberDTO.getmC12() == 5 &&
+                                memberDTO.getmC22() == 1) {
+                            return new WarningDTO(getString(R.string.txt_wrong_marital,posMember+1,memberDTO.getmC01(),
+                                    listOption.get(memberDTO.getmC22()-1).getOption()), Constants.TYPE_NOTI);
+                        }
+
+                        //tuoi  nho hon 18 nhung da ket hon
+                        if(memberDTO.getmC05() < 18 && 1<memberDTO.getmC22() && memberDTO.getmC22() <=5){
+                            return new WarningDTO(getString(R.string.txt_invalid_age_for_marital,posMember+1,memberDTO.getmC01(),
+                                    memberDTO.getmC05(),listOption.get(memberDTO.getmC22()-1).getOption()), Constants.TYPE_CONFIRM);
+                        }
+                        break;
+
+                    case Constants.QUESTION_C25:
+                        if (memberDTO.getmC13A() == 4 && memberDTO.getmC13B() == 4 && memberDTO.getmC13C() == 4
+                                || memberDTO.getmC13D() == 4 || memberDTO.getmC13E() == 4 && memberDTO.getmC13F() == 4 && memberDTO.getmC25() ==1) {
+                            return new WarningDTO(getString(R.string.txt_invalid_work_state,
+                                    posMember + 1, memberDTO.getmC01()), Constants.TYPE_CONFIRM);
+                        }
+                        break;
+
+                    case Constants.QUESTION_C30:
+                        if(memberDTO.getmC05() <18 && (memberDTO.getmC30() ==1 || memberDTO.getmC30() ==4)){
+                            return new WarningDTO(getString(R.string.txt_invalid_work_position,posMember+1, memberDTO.getmC01()
+                                    , listOption.get(memberDTO.getmC30()-1).getOption(), memberDTO.getmC05()), Constants.TYPE_CONFIRM);
+                        }
+                        break;
+
+                    case Constants.QUESTION_C34:
+                        if(womanDTO.getC34() ==1 && memberDTO.getmC05() <12){
+                            return new WarningDTO(getString(R.string.txt_age_have_child, posMember+1,womanDTO.getTenTV(), memberDTO.getmC05()), Constants.TYPE_CONFIRM);
+                        }
+                        break;
+
+                    case Constants.QUESTION_C42:
+                        //Cảnh báo: Hộ có Tổng số nhân khẩu thực tế thường trú trong hộ =0 và cũng không có người chết. Có đúng không?
+                        //LỖI: Hộ không có người chết (C42=2) mà Tình trạng phỏng vấn ban đầu = 5 (Chết cả hộ)
+                        //LỖI: Hộ có người chết (C42=1) nhưng số người chết =0. Hãy nhập lại!
+                    default:
+                        break;
 
                 }
         }
-        return messge;
+        return null;
     }
 
-    private WarningDTO checkLevelStudy(MemberDTO memberDTO){
-        if ((memberDTO.getmC16() ==1 && memberDTO.getmC15() ==3)
-        || (memberDTO.getmC16() == 2 && memberDTO.getmC15() == 4)
-        || (memberDTO.getmC16() == 3  && memberDTO.getmC15() ==5)
-        || (memberDTO.getmC16() ==4 && 7 <= memberDTO.getmC15() && memberDTO.getmC15() <=11)
-        || (5<=memberDTO.getmC16() && memberDTO.getmC16() <= 7 && 7 <= memberDTO.getmC15() && memberDTO.getmC15() <=11)
-        ||((memberDTO.getmC16() ==8 || memberDTO.getmC16() ==9) && (memberDTO.getmC15() == 9 || memberDTO.getmC15() ==10 || memberDTO.getmC15() ==11))){
-            return new WarningDTO(getString(R.string.txt_invalid_max_study,posMember+1,memberDTO.getmC01(),
-                    memberDTO.getmC4T(), memberDTO.getmC4N(),memberDTO.getmC05(),memberDTO.getmC15(),listOption.get(memberDTO.getmC16()-1).getOption()),Constants.TYPE_CONFIRM);
+    private WarningDTO checkLevelStudy(MemberDTO memberDTO) {
+        if ((memberDTO.getmC16() == 1 && memberDTO.getmC15() == 3)
+                || (memberDTO.getmC16() == 2 && memberDTO.getmC15() == 4)
+                || (memberDTO.getmC16() == 3 && memberDTO.getmC15() == 5)
+                || (memberDTO.getmC16() == 4 && 7 <= memberDTO.getmC15() && memberDTO.getmC15() <= 11)
+                || (5 <= memberDTO.getmC16() && memberDTO.getmC16() <= 7 && 7 <= memberDTO.getmC15() && memberDTO.getmC15() <= 11)
+                || ((memberDTO.getmC16() == 8 || memberDTO.getmC16() == 9) && (memberDTO.getmC15() == 9 || memberDTO.getmC15() == 10 || memberDTO.getmC15() == 11))) {
+            return new WarningDTO(getString(R.string.txt_invalid_max_study, posMember + 1, memberDTO.getmC01(),
+                    memberDTO.getmC4T(), memberDTO.getmC4N(), memberDTO.getmC05(), memberDTO.getmC15(), listOption.get(memberDTO.getmC16() - 1).getOption()), Constants.TYPE_CONFIRM);
         }
-        if ((memberDTO.getmC16() ==2 && memberDTO.getmC4N()!= null && memberDTO.getmC4N() <=2009)
-                || (memberDTO.getmC16() == 3 && memberDTO.getmC4N()!= null && memberDTO.getmC4N() <=2005)
-                || (memberDTO.getmC16() ==4 && memberDTO.getmC4N()!= null && memberDTO.getmC4N() <=2002)
-                || (memberDTO.getmC16() ==5 && memberDTO.getmC4N()!= null && memberDTO.getmC4N() <=2005)
-                || (memberDTO.getmC16() ==6 && memberDTO.getmC4N()!= null && memberDTO.getmC4N() <=2000)
-                ||(memberDTO.getmC16() ==7 && memberDTO.getmC4N()!= null && memberDTO.getmC4N() <=1999)
-                ||(memberDTO.getmC16() ==8 && memberDTO.getmC4N()!= null && memberDTO.getmC4N() <=1998)){
-            return new WarningDTO(getString(R.string.txt_invalid_age_for_level,posMember+1,memberDTO.getmC01(),
-                    memberDTO.getmC4T(), memberDTO.getmC4N(),memberDTO.getmC05(),listOption.get(memberDTO.getmC16()+1).getOption()),Constants.TYPE_NOTI);
+        if ((memberDTO.getmC16() == 2 && memberDTO.getmC4N() != null && memberDTO.getmC4N() <= 2009)
+                || (memberDTO.getmC16() == 3 && memberDTO.getmC4N() != null && memberDTO.getmC4N() <= 2005)
+                || (memberDTO.getmC16() == 4 && memberDTO.getmC4N() != null && memberDTO.getmC4N() <= 2002)
+                || (memberDTO.getmC16() == 5 && memberDTO.getmC4N() != null && memberDTO.getmC4N() <= 2005)
+                || (memberDTO.getmC16() == 6 && memberDTO.getmC4N() != null && memberDTO.getmC4N() <= 2000)
+                || (memberDTO.getmC16() == 7 && memberDTO.getmC4N() != null && memberDTO.getmC4N() <= 1999)
+                || (memberDTO.getmC16() == 8 && memberDTO.getmC4N() != null && memberDTO.getmC4N() <= 1998)) {
+            return new WarningDTO(getString(R.string.txt_invalid_age_for_level, posMember + 1, memberDTO.getmC01(),
+                    memberDTO.getmC4T(), memberDTO.getmC4N(), memberDTO.getmC05(), listOption.get(memberDTO.getmC16() + 1).getOption()), Constants.TYPE_NOTI);
         }
-        if(memberDTO.getmC13A() ==4 && memberDTO.getmC13B() ==4 && memberDTO.getmC13C() ==4
-                || memberDTO.getmC13D() ==4 || memberDTO.getmC13E() ==4 && memberDTO.getmC13F() ==4){
+        if (memberDTO.getmC13A() == 4 && memberDTO.getmC13B() == 4 && memberDTO.getmC13C() == 4
+                || memberDTO.getmC13D() == 4 || memberDTO.getmC13E() == 4 && memberDTO.getmC13F() == 4) {
             return new WarningDTO(getString(R.string.txt_disabilities,
-                    posMember+1,memberDTO.getmC01()
-                    ,listOption.get(memberDTO.getmC16()-1).getOption()),Constants.TYPE_NOTI);
+                    posMember + 1, memberDTO.getmC01()
+                    , listOption.get(memberDTO.getmC16() - 1).getOption()), Constants.TYPE_NOTI);
         }
         return null;
 
     }
 
-    private boolean isOverNumberWife(){
-        for(MemberDTO memberDTO1 : Constants.mStaticObject.getMemberDTO()){
-            if(memberDTO1.getmC02() ==1){
+    private boolean isOverNumberWife() {
+        for (MemberDTO memberDTO1 : Constants.mStaticObject.getMemberDTO()) {
+            if (memberDTO1.getmC02() == 1) {
                 return true;
             }
         }
@@ -328,10 +383,6 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
             radioButton.setChecked(false);
         }
         return radioButton;
-    }
-
-    public void setQuestionDTO(QuestionDTO questionDTO) {
-        this.questionDTO = questionDTO;
     }
 
     public void setAnswerDTO(AnswerDTO answerDTO) {
@@ -388,9 +439,9 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                             Constants.mStaticObject.getPeopleDetailDTO().remove(peopleDetailDTO);
                         }
                     } else if (questionDTO.getType() == Constants.TYPE_MIX) {
-                        if(questionDTO.getId().equals(Constants.QUESTION_Q7)){
+                        if (questionDTO.getId().equals(Constants.QUESTION_Q7)) {
                             for (PeopleDetailDTO peopleDetailDTO : listSelected) {
-                                DeadDTO deadDTO = new DeadDTO(peopleDetailDTO.getQ1(),peopleDetailDTO.getIDHO()+peopleDetailDTO.getSTT());
+                                DeadDTO deadDTO = new DeadDTO(peopleDetailDTO.getQ1(), peopleDetailDTO.getIDHO() + peopleDetailDTO.getSTT());
                                 Constants.mStaticObject.getDeadDTO().add(deadDTO);
                             }
                         }
@@ -398,18 +449,39 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                     }
                     nextFragment();
                 } else {
-                    String message = activity.getString(R.string.txt_select_require);
-                    if (questionDTO.getType() == Constants.TYPE_MIX) {
-                        message = activity.getString(R.string.txt_input_require);
+//                    String message = activity.getString(R.string.txt_select_require);
+//                    if (questionDTO.getType() == Constants.TYPE_MIX) {
+//                        message = activity.getString(R.string.txt_input_require);
+//                    }
+//                    DialogUtils.showErrorAlert(activity, message);
+                    WarningDTO warning = validateQuaetion(questionDTO, null);
+                    if(warning.getType() == Constants.TYPE_CONFIRM){
+                        DialogUtils.showErrorAlert2Option(activity, warning.getMessage(), R.string.txt_yes, R.string.txt_no,
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        Constants.mStaticObject.getMemberDTO().set(posMember, memberDTO);
+                                        if (currentIndex < getListQuestion().size() - 1) {
+                                            currentIndex++;
+                                            Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true, getListQuestion(), activity.mFragmentManager, getPosMember());
+                                        }
+                                    }
+                                }, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        //dissmiss dialog
+                                    }
+                                });
+                    }else {
+                        DialogUtils.showErrorAlert(activity, warning.getMessage());
                     }
-                    DialogUtils.showErrorAlert(activity, message);
                 }
             }
 
         } else if (Constants.SURVEY_HOUSE.equals(questionDTO.getSurvey())) {
 
         } else {
-            if (validateQuaetion(questionDTO, answerDTO)== null) {
+            if (validateQuaetion(questionDTO, answerDTO) == null) {
                 switch (questionDTO.getSurvey()) {
                     case Constants.SURVEY_MEMBER:
                         Constants.mStaticObject.getMemberDTO().set(posMember, memberDTO);
@@ -479,7 +551,7 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                         } else {
                             if (currentIndex < getListQuestion().size()) {
                                 activity.makeListQuestion();
-                                currentIndex =22;
+                                currentIndex = 22;
                                 Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true,
                                         getListQuestion(), activity.mFragmentManager, -1);
                             }
@@ -504,7 +576,7 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                     } else {
                         if (currentIndex < getListQuestion().size()) {
                             activity.makeListQuestion();
-                            currentIndex =22;
+                            currentIndex = 22;
                             Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true,
                                     getListQuestion(), activity.mFragmentManager, -1);
                         }
@@ -520,7 +592,7 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                             .getDeadDTO().get(posMember).getmC43());
                 } else {
                     activity.makeListQuestion();
-                    currentIndex =22;
+                    currentIndex = 22;
                     Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true,
                             getListQuestion(), activity.mFragmentManager, -1);
                 }
@@ -692,8 +764,7 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                 radioButtonAdapter.notifyDataSetChanged();
             }
         });
-        if (option.isSelected() && option.getType().toLowerCase().equals(Constants.TYPE_SHOW)) {
-            {
+        if (option.isSelected() && option.getType().equalsIgnoreCase(Constants.TYPE_SHOW)) {
                 isYes = true;
                 if (questionDTO.getSurvey().equals(Constants.SURVEY_PEOPLE)) {
                     Constants.mStaticObject.getPeopleDTO().set(questionDTO.getId(), pos + 1);
@@ -749,8 +820,7 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                     SpinnerAdapter adapter = new SpinnerAdapter(activity, listOptionSpinner);
                     spinner.setAdapter(adapter);
                 }
-            }
-        } else {
+            }else {
             edOther.setVisibility(View.GONE);
             rcvSelect.setVisibility(View.GONE);
             if (questionDTO.getType() == Constants.TYPE_MIX) {

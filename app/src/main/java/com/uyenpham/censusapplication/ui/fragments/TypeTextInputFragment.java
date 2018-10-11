@@ -186,6 +186,14 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
                 if(Constants.mStaticObject.getFamilyDTO().getMAHUYEN().equals(memberDTO.getmC10B())){
                     return  new WarningDTO(getString(R.string.txt_invalid_district,posMember+1, memberDTO.getmC01(),memberDTO.getmC10B()),Constants.TYPE_NOTI);
                 }
+                break;
+
+            case Constants.QUESTION_C43:
+                if((edAnswer.getText().toString().matches("^[0-9]*$") && 9<edAnswer.getText().toString().length() && edAnswer.getText().toString().length()<12)){
+                    return null;
+                }else {
+                    return  new WarningDTO(getString(R.string.txt_error_dead_name),Constants.TYPE_NOTI);
+                }
             default:
                 if(StringUtils.isEmpty(edAnswer.getText().toString())){
                     return listText.size()>0 ? null :new WarningDTO(getString(R.string.txt_empty), Constants.TYPE_NOTI);
@@ -193,6 +201,7 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
                     return null;
                 }
         }
+        return null;
     }
 
     public void setQuestionDTO(QuestionDTO questionDTO) {
@@ -239,7 +248,7 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
     private void changeQuestion(){
         if(questionDTO.getId().equals(Constants.QUESTION_Q1)){
             if(validateQuaetion(questionDTO,answerDTO) == null){
-                DialogUtils.showErrorAlert2Option(activity, R.string.txt_another_else, R.string.txt_yes, R.string.txt_no,
+                DialogUtils.showErrorAlert2Option(activity, getString(R.string.txt_another_else), R.string.txt_yes, R.string.txt_no,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {

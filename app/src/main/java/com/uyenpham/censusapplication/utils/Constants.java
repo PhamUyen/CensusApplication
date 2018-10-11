@@ -124,8 +124,11 @@ public class Constants {
     public static final String QUESTION_C41K= "C41K";
 
     //dead
+    public static final String QUESTION_C42=  "C42";
     public static final String QUESTION_C43=  "C43";
     public static final String QUESTION_C44=  "C44";
+    public static final String QUESTION_C45=  "C45";
+    public static final String QUESTION_C46=  "C46";
     public static final String QUESTION_C45N=  "C45N";
     public static final String QUESTION_C45T= "C45T";
     public static final String QUESTION_C46N= "C46N";
@@ -209,8 +212,8 @@ public class Constants {
     public static final String TYPE_SHOW = "show";
     public static final String MONTH = "THANG";
     public static final String YEAR = "NAM";
-    public static final String NUMBER_BOY = "SỐ CON TRAI";
-    public static final String NUMBER_GIRL = "SỐ CON GÁI";
+    public static final String NUMBER_BOY = "Số con trai";
+    public static final String NUMBER_GIRL = "Số con gái";
 
     //type  warning
     public static final int TYPE_CONFIRM = 2;

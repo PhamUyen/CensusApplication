@@ -228,6 +228,7 @@
     <string name="txt_select_require">Yêu cầu chọn thành viên</string>
     <string name="txt_input_require">Yêu cầu nhập thành viên</string>
     <string name="txt_empty">Thông tin không được để trống</string>
+    <string name="txt_invalid_info">Thông tin không hợp lệ</string>
     <string name="txt_yes">Có</string>
     <string name="txt_no">Không</string>
     <string name="txt_valid_name">Tên thành viên chỉ được phép bao gồm chữ cái và khoảng cách</string>
@@ -253,4 +254,38 @@
     <string name="txt_warning_job">Cảnh báo: Thành viên STT %1$d %2$s sinh %3$d/%4$d  mà có  C17_Kỹ năng nghề = %5$s. Có tiếp tục không?</string>
     <string name="txt_invalid_level_job">Lỗi: Thành viên STT %1$d %2$s có C14=3 (Chưa bao giờ đi học) không phù hợp với C18_Trình độ nghề cao nhất đạt được (%3$s)</string>
     <string name="txt_error_level_job">LỖI: Thành viên STT %1$d %2$s có Trình độ học vấn cao nhất= %3$d mà Trình độ nghề cao nhất đạt được =%4$s!</string>
+    <string name="txt_invalid_number_school">Lỗi: Thành viên STT %1$d %2$s sinh %3$d/%4$d hiện đang đi học  %5$s mà Lớp học PT cao nhất đã học xong  %6$d</string>
+    <string name="txt_invalid_marital">Cảnh báo: Thành viên STT %1$d %2$s là vợ chồng với chủ hộ nhưng có Tình trạng hôn nhân =%3$s. Có tiếp tục không?</string>
+    <string name="txt_wrong_marital">Lỗi: Thành viên STT %1$d %2$s có Lý do chuyển tới hộ = kết hôn mà Tình trạng hôn nhân %3$s.</string>
+    <string name="txt_invalid_age_for_marital">Cảnh báo: Thành viên STT %1$d %2$s có tuổi = %3$d mà Tình trạng hôn nhân %4$s. Có tiếp tục không?</string>
+    <string name="txt_time_mariage">Lỗi: Thành viên STT %1$d %2$s có thời gian kết hôn lần đầu %3$d/2018 sau thời điểm điều tra  1/8/2018</string>
+    <string name="txt_marriage_before_born">Lỗi: Thành viên STT %1$d %2$s có Năm kết hôn lần đầu = %3$d nhỏ hơn Năm sinh =%4$d . Kết hôn trước khi sinh!</string>
+    <string name="txt_too_small_to_marriage">Lỗi: Thành viên STT %1$d %2$s có Năm kết hôn lần đầu = %3$d và Năm sinh =%4$d. Kết hôn lần đầu khi %5$d tuổi!</string>
+    <string name="txt_confirm_time_to_marriage">Cảnh báo: Thành viên STT %1$d %2$s có Năm sinh %3$d và Năm kết hôn lần đầu = %4$d. Có tiếp tục không?</string>
+    <string name="txt_diff_marriage">Cảnh báo: Thành viên STT %1$d %2$s là vợ/chồng với chủ hộ có tháng năm kết hôn lần đầu (%3$d/%4$d)  khác với tháng năm kết hôn lần đầu của chủ hộ (%5$d/%6$d)</string>
+    <string name="txt_age_marriage_too_small">LỖI: Thành viên STT %1$d %2$s có Tuổi kết hôn lần đầu =%3$d quá nhỏ!</string>
+    <string name="txt_confirm_age_marriage">Cảnh báo: Thành viên STT %1$d %2$s có Tuổi kết hôn lần đầu =%3$d. Có tiếp tục không?</string>
+    <string name="txt_error_age_marriage_too_large">LỖI: Thành viên STT %1$d %2$s có Tuổi kết hôn lần đầu =%3$d lớn hơn Tuổi hiện tại %4$d</string>
+    <string name="txt_invalid_work_state">Cảnh báo: Thành viên STT %1$d %2$s có làm việc 7 ngày qua nhưng không thể nhìn, nghe, đi bộ, ghi nhớ, tự chăm sóc bản thân và giao tiếp. Có tiếp tục không?</string>
+    <string name="txt_invalid_work_position">Cảnh báo: Thành viên STT %1$d %2$s có C30_Vị thế việc làm = %3$s mà tuổi =%4$d. Có tiếp tục không?</string>
+    <string name="txt_age_have_child">Cảnh báo: Phụ nữ STT %1$d %2$s có tuổi =%3$d mà đã từng sinh con. Có tiếp tục không?</string>
+    <string name="txt_confirm_number_boy">Cảnh báo: STTPN %1$d %2$s có %3$s sống cùng = %4$d. Có tiếp tục không?</string>
+    <string name="txt_number_boy_over_number_member">LỖI: STTPN %1$d %2$s là vợ chủ hộ thì không thể có %3$s sống cùng (=%4$d) lớn hơn  Tổng số nhân khẩu - 2 (=%5$d)</string>
+    <string name="txt_number_boy_over_number_member2">Lỗi: Phụ nữ STT %1$d %2$s có %3$s sống cùng =%4$d lớn hơn Tổng số người của hộ - 1 (=%5$d)</string>
+    <string name="txt_invalid_number_child">LỖI: Phụ nữ STT %1$d %2$s là vợ chủ hộ thì không thể có tổng số con sống cùng (C35A + C35B =%3$d) lớn hơn Tổng số nhân khẩu - 2 (%4$d)</string>
+    <string name="txt_invalid_number_child2">LỖI: Phụ nữ STT %1$d %2$s có tổng số con sống cùng (C35A + C35B =%3$d) lớn hơn Tổng số nhân khẩu - 1 (%4$d)</string>
+    <string name="txt_confirm_number_child_in_other_place">Cảnh báo: STTPN %1$d %2$s có %3$s sống ở nơi khác = %4$d. Có tiếp tục không?</string>
+    <string name="txt_confirm_number_child_die">Cảnh báo: Phụ nữ STT %1$d %2$s có %3$s đã chết =%4$d. Có tiếp tục không?</string>
+    <string name="txt_error_son">LỖI: Nữ chủ hộ %1$s có Số con trai sống cùng =%2$d khác với số con trai của chủ hộ đếm được %3$d người, mà Số con trai sống nơi khác, Số con trai chết đều =0</string>
+    <string name="txt_error_daughter">LỖI: Nữ chủ hộ %1$s có Số con gái sống cùng =%2$d khác với số con gái của chủ hộ đếm được %3$d người, mà Số con gái sống nơi khác, Số con gái chết đều =0</string>
+    <string name="txt_warning_sum_child">Cảnh báo: Phụ nữ STT %1$d %2$s  có Tuổi %3$d và có tổng số con đã sinh C35A + C35B+C36A+C36B+C37A+C37B =%4$d. Quá nhiều!</string>
+    <string name="txt_invalid_month_birth">Phụ nữ STT %1$d %2$s có lần sinh gần nhất vào %3$d/2018 sau thời điểm điều tra 1/8/2018</string>
+    <string name="txt_invalid_year_birth">LỖI: Phụ nữ STT %1$d %2$s có Năm sinh lần sinh gần nhất =%3$d. Giá trị không hợp lệ</string>
+    <string name="txt_warning_birth_age">Cảnh báo: Phụ nữ STT %1$d %2$s sinh con lần gần nhất vào %3$d/%4$d khi %5$d tuổi. Có tiếp tục không?</string>
+    <string name="txt_error_birth_age">LỖI: Phụ nữ STT %1$d %2$s sinh con lần gần nhất vào %3$d/%4$d khi %5$d tuổi</string>
+    <string name="txt_error_dead_name">LỖI: Người chết thứ %d có tên không hợp lệ</string>
+    <string name="txt_invalid_time_die">LỖI: Người chết thứ %1$d %2$s chết vào tháng %3$d/2018 sau thời điểm điều tra 1/8/2018</string>
+    <string name="txt_invalid_month_die">LỖI: Người chết thứ %1$d %2$s có Tháng chết = %3$d không hợp lệ</string>
+    <string name="txt_invalid_month_birth_die">LỖI: Người chết thứ %1$d %2$s có Tháng sinh của người chết = %3$d không hợp lệ</string>
+    <string name="txt_invalid_time_birth_die">LỖI: Người chết thứ %1$d %2$s sinh %3$d/2018 sau thời điểm điều tra 1/8/2018</string>
 </resources>

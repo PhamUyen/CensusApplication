@@ -175,7 +175,7 @@ public class DialogUtils {
         builder.setCancelable(false);
         builder.create().show();
     }
-    public static void showErrorAlert2Option(Context context, int message, int nagativeButton, int  positiveButton, DialogInterface.OnClickListener onClickNega, DialogInterface.OnClickListener onClickPosi) {
+    public static void showErrorAlert2Option(Context context, String message, int nagativeButton, int  positiveButton, DialogInterface.OnClickListener onClickNega, DialogInterface.OnClickListener onClickPosi) {
         dismissProgressDialog();
         if (!isValidContext(context)) {
             return;
