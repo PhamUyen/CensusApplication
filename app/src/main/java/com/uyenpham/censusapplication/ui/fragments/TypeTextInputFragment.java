@@ -1,13 +1,11 @@
 package com.uyenpham.censusapplication.ui.fragments;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -206,10 +204,7 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
         changeQuestion();
     }
     private void nextFragment(){
-        InputMethodManager imm = (InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-        if(imm!= null){
-            imm.hideSoftInputFromWindow(edAnswer.getWindowToken(), 0);
-        }
+        Utils.hideKeyboard(activity,edAnswer);
         if (currentIndex < getListQuestion().size() - 1) {
             currentIndex++;
             Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true,getListQuestion(),activity.mFragmentManager,getPosMember());

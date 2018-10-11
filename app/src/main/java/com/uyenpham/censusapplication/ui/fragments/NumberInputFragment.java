@@ -1,6 +1,9 @@
 package com.uyenpham.censusapplication.ui.fragments;
 
+import android.text.Editable;
+import android.text.InputFilter;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -28,7 +31,7 @@ import static com.uyenpham.censusapplication.ui.activities.SurveyActivity.curren
 
 public class NumberInputFragment extends BaseTypeFragment implements EditText
         .OnEditorActionListener,
-        INextQuestion, IPreviousQuestion {
+        INextQuestion, IPreviousQuestion{
     @Bind(R.id.tv_question)
     TextView tvQuestion;
     @Bind(R.id.lnContent)
@@ -77,7 +80,7 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
         return true;
     }
 
-    private LinearLayout genlayoutInputNumber(String option, String answer, int posOption) {
+    private LinearLayout genlayoutInputNumber(final String option, String answer, int posOption) {
         int margin = mActivity.getResources().getDimensionPixelOffset(R.dimen.margin_small_x);
         int padding = mActivity.getResources().getDimensionPixelOffset(R.dimen.padding_small);
 
@@ -86,17 +89,22 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
         linearLayout.setLayoutParams(getLayoutParams(0, margin, 0, margin / 2));
 
         TextView textView = new TextView(mActivity);
-        textView.setLayoutParams(getLayoutParamsWeghtWidth(0, 0, margin, 0, 1.5f));
+        textView.setLayoutParams(getLayoutParamsWeghtWidth(0, 0, margin, 0, 1f));
         textView.setText(option);
         textView.setTextAppearance(getActivity(), R.style.TextView_Option);
         linearLayout.addView(textView);
 
         EditText editText = new EditText(mActivity);
-        editText.setLayoutParams(getLayoutParamsWeghtWidth(margin, 0, 0, 0, 2f));
+        editText.setLayoutParams(getLayoutParamsWeghtWidth(margin, 0, 0, 0, 1f));
         textView.setTextAppearance(getActivity(), R.style.TextView_Option);
         editText.setInputType(InputType.TYPE_CLASS_NUMBER);
         editText.setBackgroundResource(R.drawable.bg_edit_text);
         editText.setTag(option);
+        if(option.equals(Constants.MONTH)){
+            editText.setFilters(new InputFilter[] {new InputFilter.LengthFilter(2)});
+        }else if(option.equals(Constants.YEAR)){
+            editText.setFilters(new InputFilter[] {new InputFilter.LengthFilter(4)});
+        }
         if(posOption == listOption.size() -1){
             editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
         }else {
@@ -115,6 +123,38 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
         editText.setText(answer);
         editText.setSingleLine();
         editText.setOnEditorActionListener(this);
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // do nothing
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                switch (questionDTO.getSurvey()) {
+                    case Constants.SURVEY_MEMBER:
+                        Constants.mStaticObject.getMemberDTO().set(posMember, updateMember(option,
+                                charSequence.toString()));
+                        break;
+                    case Constants.SURVEY_WOMAN:
+                        Constants.mStaticObject.getWomanDTO().set(posMember, updateWoman(option,
+                                charSequence.toString()));
+                        break;
+                    case Constants.SURVEY_DEAD:
+//                        Constants.mStaticObject.getDeadDTO().set(posMember, updateWoman(option,
+//                                charSequence.toString()));
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                //do nothing
+            }
+        });
         editText.setPadding(padding, padding, padding, padding);
         linearLayout.addView(editText);
 
@@ -151,23 +191,13 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
 
     @Override
     public boolean onEditorAction(TextView editText, int actionId, KeyEvent keyEvent) {
-        if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT) {
-            String action = editText.getTag().toString();
-            switch (questionDTO.getSurvey()) {
-                case Constants.SURVEY_MEMBER:
-                    Constants.mStaticObject.getMemberDTO().set(posMember, updateMember(action,
-                            editText.getText().toString()));
-                    break;
-                case Constants.SURVEY_WOMAN:
-                    Constants.mStaticObject.getWomanDTO().set(posMember, updateWoman(action,
-                            editText.getText().toString()));
-                    break;
-                default:
-                    break;
-            }
-
-            return true;
-        }
+//        if (actionId == EditorInfo.IME_ACTION_NEXT) {
+//            if(editText.getTag().toString().equals(Constants.MONTH)){
+//
+//            }
+//
+//            return true;
+//        }
         return false;
     }
 
@@ -250,6 +280,7 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
 
     @Override
     public void next() {
+        Utils.hideKeyboard(activity,lnContent);
           if(validateQuaetion(questionDTO, null)){
               Constants.mStaticObject.getMemberDTO().set(posMember,memberDTO);
               if (currentIndex < getListQuestion().size()-1) {
@@ -261,9 +292,11 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
 
     @Override
     public void previuos() {
+        Utils.hideKeyboard(activity,lnContent);
         if (currentIndex > 0) {
             currentIndex--;
             Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), false,getListQuestion(),activity.mFragmentManager,getPosMember());
         }
     }
+
 }

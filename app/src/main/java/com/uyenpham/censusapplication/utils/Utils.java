@@ -1,9 +1,12 @@
 package com.uyenpham.censusapplication.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import com.uyenpham.censusapplication.models.survey.QuestionDTO;
 import com.uyenpham.censusapplication.ui.fragments.MultiSelectionFragment;
@@ -97,6 +100,13 @@ public class Utils {
             FragmentHelper.replaceFagmentFromRight(fragment, fragmentManager);
         } else {
             FragmentHelper.replaceFagmentFromLeft(fragment, fragmentManager);
+        }
+    }
+
+    public static void hideKeyboard(Activity activity, View view){
+        InputMethodManager imm = (InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        if(imm!= null){
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
 }
