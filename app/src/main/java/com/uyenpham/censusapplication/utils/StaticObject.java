@@ -1,6 +1,8 @@
 package com.uyenpham.censusapplication.utils;
 
 import com.uyenpham.censusapplication.db.DeadDAO;
+import com.uyenpham.censusapplication.db.FamilyDAO;
+import com.uyenpham.censusapplication.db.FamilyDetailDAO;
 import com.uyenpham.censusapplication.db.MemberDAO;
 import com.uyenpham.censusapplication.db.PeopleDAO;
 import com.uyenpham.censusapplication.db.PeopleDetailDAO;
@@ -124,6 +126,8 @@ public class StaticObject {
     }
     public void updateDB(){
         PeopleDAO.getInstance().insert(peopleDTO);
+        FamilyDAO.getInstance().insert(familyDTO);
+        FamilyDetailDAO.getInstance().insert(familyDetailDTO);
         for(WomanDTO womanDTO : womanDTOs){
             WomanDAO.getInstance().insert(womanDTO);
         }

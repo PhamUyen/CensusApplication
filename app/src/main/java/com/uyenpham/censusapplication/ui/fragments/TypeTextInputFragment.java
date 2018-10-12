@@ -231,6 +231,7 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
             Constants.mStaticObject.getMemberDTO().set(posMember,memberDTO);
         }
         if (currentIndex < getListQuestion().size() - 1) {
+            saveAnswerToSurvey(questionDTO,posMember);
             currentIndex++;
             Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true,getListQuestion(),activity.mFragmentManager,getPosMember());
         }
@@ -238,7 +239,6 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
 
     @Override
     public void previuos() {
-//        save();
         if (currentIndex > 0) {
             currentIndex--;
             Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), false,getListQuestion(),activity.mFragmentManager,getPosMember());

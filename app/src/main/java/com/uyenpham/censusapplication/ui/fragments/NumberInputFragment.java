@@ -269,8 +269,6 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
                 break;
 
             case Constants.QUESTION_C38:
-                //LỖI: Nữ chủ hộ %s có năm sinh lần gần nhất=%d nhưng đếm được %d người con đẻ của nữ chủ hộ có năm sinh sau năm sinh lần gần nhất
-                //Cảnh báo: Phụ nữ STT %d %s có năm sinh lần gần nhất=%d và chỉ có con sống cùng nhưng đếm được %d người trong hộ có năm sinh = %d
                 if(womanDTO.getC38N() == 2018 && womanDTO.getC38T() >7){
                     return new WarningDTO(getString(R.string.txt_invalid_month_birth,posMember+1, memberDTO.getmC01(),womanDTO.getC38T()), Constants.TYPE_NOTI);
                 }
@@ -303,7 +301,7 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
                     return   new WarningDTO(getString(R.string.txt_invalid_time_die,posMember+1, deadDTO.getmC43(),Integer.parseInt(deadDTO.getmC46T())),Constants.TYPE_NOTI);
                 }
                 if(Integer.valueOf(deadDTO.getmC45N()) < Integer.valueOf(deadDTO.getmC46N())
-                    || (Integer.valueOf(deadDTO.getmC45N()) == Integer.valueOf(deadDTO.getmC46N()) &&
+                    || (Integer.valueOf(deadDTO.getmC45N()).equals(Integer.valueOf(deadDTO.getmC46N())) &&
                         Integer.valueOf(deadDTO.getmC45T()) < Integer.valueOf(deadDTO.getmC46T()))){
                     return   new WarningDTO(getString(R.string.txt_die_before_birth,posMember+1, deadDTO.getmC43(),deadDTO.getmC45T()
                             ,deadDTO.getmC45N(),deadDTO.getmC46T(),deadDTO.getmC46N()),Constants.TYPE_NOTI);
@@ -315,7 +313,21 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
                             ,deadDTO.getmC46N(),deadDTO.getmC45N(),deadDTO.getmC47()),Constants.TYPE_CONFIRM);
                 }
                 break;
-
+            case Constants.QUESTION_C54:
+                if(houseDTO.getC54() <5){
+                    return   new WarningDTO(getString(R.string.txt_house_too_small,houseDTO.getC54()),Constants.TYPE_CONFIRM);
+                }
+                if(houseDTO.getC54() >= 500){
+                    return   new WarningDTO(getString(R.string.txt_house_too_big,houseDTO.getC54()),Constants.TYPE_CONFIRM);
+                }
+                int s = houseDTO.getC54()/houseDTO.getC53B();
+                if(houseDTO.getC53B() != 0 && s <2){
+                    return  new WarningDTO(getString(R.string.txt_room_too_small,s,houseDTO.getC54(), houseDTO.getC53B()), Constants.TYPE_NOTI);
+                }
+                if(houseDTO.getC53B() != 0 && 2<=s && s <=8){
+                    return  new WarningDTO(getString(R.string.txt_warning_room_too_small,s,houseDTO.getC54(), houseDTO.getC53B()), Constants.TYPE_CONFIRM);
+                }
+                break;
 
             default:
                 break;
@@ -465,6 +477,7 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
         if (validateQuaetion(questionDTO, null) == null) {
             Constants.mStaticObject.getMemberDTO().set(posMember, memberDTO);
             if (currentIndex < getListQuestion().size() - 1) {
+                saveAnswerToSurvey(questionDTO,posMember);
                 currentIndex++;
                 Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true, getListQuestion(), activity.mFragmentManager, getPosMember());
             }
@@ -477,6 +490,7 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Constants.mStaticObject.getMemberDTO().set(posMember, memberDTO);
                                 if (currentIndex < getListQuestion().size() - 1) {
+                                    saveAnswerToSurvey(questionDTO,posMember);
                                     currentIndex++;
                                     Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true, getListQuestion(), activity.mFragmentManager, getPosMember());
                                 }

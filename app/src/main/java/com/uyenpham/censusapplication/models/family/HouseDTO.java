@@ -3,89 +3,91 @@ package com.uyenpham.censusapplication.models.family;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.lang.reflect.Field;
+
 public class HouseDTO {
 
     @SerializedName("C50")
-    private int mC50;
+    private Integer mC50;
     @SerializedName("C51")
-    private int mC51;
+    private Integer mC51;
     @SerializedName("C52A")
-    private int mC52A;
+    private Integer mC52A;
     @SerializedName("C52B")
     private String mC52B;
     @SerializedName("C52C")
     private String mC52C;
     @SerializedName("C53A")
-    private int mC53A;
+    private Integer mC53A;
     @SerializedName("C53B")
-    private int mC53B;
+    private Integer mC53B;
     @SerializedName("C54")
-    private int mC54;
+    private Integer mC54;
     @SerializedName("C55")
-    private int mC55;
+    private Integer mC55;
     @SerializedName("C56")
-    private int mC56;
+    private Integer mC56;
     @SerializedName("C57")
-    private int mC57;
+    private Integer mC57;
     @SerializedName("C58A")
-    private int mC58A;
+    private Integer mC58A;
     @SerializedName("C58B")
     private String mC58B;
     @SerializedName("C59")
-    private int mC59;
+    private Integer mC59;
     @SerializedName("C60")
-    private int mC60;
+    private Integer mC60;
     @SerializedName("C60A")
     private String mC60A;
     @SerializedName("C61")
-    private int mC61;
+    private Integer mC61;
     @SerializedName("C61A")
     private String mC61A;
     @SerializedName("C62")
-    private int mC62;
+    private Integer mC62;
     @SerializedName("C62A")
     private String mC62A;
     @SerializedName("C63")
-    private int mC63;
+    private Integer mC63;
     @SerializedName("C63A")
     private String mC63A;
     @SerializedName("C64")
-    private int mC64;
+    private Integer mC64;
     @SerializedName("C65A")
-    private int mC65A;
+    private String mC65A;
     @SerializedName("C65B")
-    private int mC65B;
+    private String mC65B;
     @SerializedName("C65C")
-    private int mC65C;
+    private String mC65C;
     @SerializedName("C65D")
-    private int mC65D;
+    private String mC65D;
     @SerializedName("C65E")
-    private int mC65E;
+    private String mC65E;
     @SerializedName("C65F")
-    private int mC65F;
+    private String mC65F;
     @SerializedName("C65G")
-    private int mC65G;
+    private String mC65G;
     @SerializedName("C65H")
-    private int mC65H;
+    private String mC65H;
     @SerializedName("C65I")
-    private int mC65I;
+    private String mC65I;
     @SerializedName("C65J")
-    private int mC65J;
+    private String mC65J;
     @SerializedName("C65K")
-    private int mC65K;
+    private String mC65K;
     @SerializedName("C65L")
-    private int mC65L;
+    private String mC65L;
 
     public HouseDTO() {
     }
 
-    public HouseDTO(int mC50, int mC51, int mC52A, String mC52B, String mC52C, int mC53A, int
-            mC53B, int mC54, int mC55, int mC56, int mC57, int mC58A, String mC58B, int mC59, int
-                            mC60, String mC60A, int mC61, String mC61A, int mC62, String mC62A,
-                    int mC63, String
-                            mC63A, int mC64, int mC65A, int mC65B, int mC65C, int mC65D, int
-                            mC65E, int mC65F,
-                    int mC65G, int mC65H, int mC65I, int mC65J, int mC65K, int mC65L) {
+    public HouseDTO(Integer mC50, Integer mC51, Integer mC52A, String mC52B, String mC52C, Integer mC53A, Integer
+            mC53B, Integer mC54, Integer mC55, Integer mC56, Integer mC57, Integer mC58A, String mC58B, Integer mC59, Integer
+                            mC60, String mC60A, Integer mC61, String mC61A, Integer mC62, String mC62A,
+                    Integer mC63, String
+                            mC63A, Integer mC64, String mC65A, String mC65B, String mC65C, String mC65D, String
+                            mC65E, String mC65F,
+                    String mC65G, String mC65H, String mC65I, String mC65J, String mC65K, String mC65L) {
         this.mC50 = mC50;
         this.mC51 = mC51;
         this.mC52A = mC52A;
@@ -123,27 +125,27 @@ public class HouseDTO {
         this.mC65L = mC65L;
     }
 
-    public int getC50() {
+    public Integer getC50() {
         return mC50;
     }
 
-    public void setC50(int c50) {
+    public void setC50(Integer c50) {
         mC50 = c50;
     }
 
-    public int getC51() {
+    public Integer getC51() {
         return mC51;
     }
 
-    public void setC51(int c51) {
+    public void setC51(Integer c51) {
         mC51 = c51;
     }
 
-    public int getC52A() {
+    public Integer getC52A() {
         return mC52A;
     }
 
-    public void setC52A(int c52A) {
+    public void setC52A(Integer c52A) {
         mC52A = c52A;
     }
 
@@ -163,59 +165,59 @@ public class HouseDTO {
         mC52C = c52C;
     }
 
-    public int getC53A() {
+    public Integer getC53A() {
         return mC53A;
     }
 
-    public void setC53A(int c53A) {
+    public void setC53A(Integer c53A) {
         mC53A = c53A;
     }
 
-    public int getC53B() {
+    public Integer getC53B() {
         return mC53B;
     }
 
-    public void setC53B(int c53B) {
+    public void setC53B(Integer c53B) {
         mC53B = c53B;
     }
 
-    public int getC54() {
+    public Integer getC54() {
         return mC54;
     }
 
-    public void setC54(int c54) {
+    public void setC54(Integer c54) {
         mC54 = c54;
     }
 
-    public int getC55() {
+    public Integer getC55() {
         return mC55;
     }
 
-    public void setC55(int c55) {
+    public void setC55(Integer c55) {
         mC55 = c55;
     }
 
-    public int getC56() {
+    public Integer getC56() {
         return mC56;
     }
 
-    public void setC56(int c56) {
+    public void setC56(Integer c56) {
         mC56 = c56;
     }
 
-    public int getC57() {
+    public Integer getC57() {
         return mC57;
     }
 
-    public void setC57(int c57) {
+    public void setC57(Integer c57) {
         mC57 = c57;
     }
 
-    public int getC58A() {
+    public Integer getC58A() {
         return mC58A;
     }
 
-    public void setC58A(int c58A) {
+    public void setC58A(Integer c58A) {
         mC58A = c58A;
     }
 
@@ -227,19 +229,19 @@ public class HouseDTO {
         mC58B = c58B;
     }
 
-    public int getC59() {
+    public Integer getC59() {
         return mC59;
     }
 
-    public void setC59(int c59) {
+    public void setC59(Integer c59) {
         mC59 = c59;
     }
 
-    public int getC60() {
+    public Integer getC60() {
         return mC60;
     }
 
-    public void setC60(int c60) {
+    public void setC60(Integer c60) {
         mC60 = c60;
     }
 
@@ -251,11 +253,11 @@ public class HouseDTO {
         mC60A = c60A;
     }
 
-    public int getC61() {
+    public Integer getC61() {
         return mC61;
     }
 
-    public void setC61(int c61) {
+    public void setC61(Integer c61) {
         mC61 = c61;
     }
 
@@ -267,11 +269,11 @@ public class HouseDTO {
         mC61A = c61A;
     }
 
-    public int getC62() {
+    public Integer getC62() {
         return mC62;
     }
 
-    public void setC62(int c62) {
+    public void setC62(Integer c62) {
         mC62 = c62;
     }
 
@@ -283,11 +285,11 @@ public class HouseDTO {
         mC62A = c62A;
     }
 
-    public int getC63() {
+    public Integer getC63() {
         return mC63;
     }
 
-    public void setC63(int c63) {
+    public void setC63(Integer c63) {
         mC63 = c63;
     }
 
@@ -299,108 +301,139 @@ public class HouseDTO {
         mC63A = c63A;
     }
 
-    public int getC64() {
+    public Integer getC64() {
         return mC64;
     }
 
-    public void setC64(int c64) {
+    public void setC64(Integer c64) {
         mC64 = c64;
     }
 
-    public int getC65A() {
+    public String getC65A() {
         return mC65A;
     }
 
-    public void setC65A(int c65A) {
+    public void setC65A(String c65A) {
         mC65A = c65A;
     }
 
-    public int getC65B() {
+    public String getC65B() {
         return mC65B;
     }
 
-    public void setC65B(int c65B) {
+    public void setC65B(String c65B) {
         mC65B = c65B;
     }
 
-    public int getC65C() {
+    public String getC65C() {
         return mC65C;
     }
 
-    public void setC65C(int c65C) {
+    public void setC65C(String c65C) {
         mC65C = c65C;
     }
 
-    public int getC65D() {
+    public String getC65D() {
         return mC65D;
     }
 
-    public void setC65D(int c65D) {
+    public void setC65D(String c65D) {
         mC65D = c65D;
     }
 
-    public int getC65E() {
+    public String getC65E() {
         return mC65E;
     }
 
-    public void setC65E(int c65E) {
+    public void setC65E(String c65E) {
         mC65E = c65E;
     }
 
-    public int getC65F() {
+    public String getC65F() {
         return mC65F;
     }
 
-    public void setC65F(int c65F) {
+    public void setC65F(String c65F) {
         mC65F = c65F;
     }
 
-    public int getC65G() {
+    public String getC65G() {
         return mC65G;
     }
 
-    public void setC65G(int c65G) {
+    public void setC65G(String c65G) {
         mC65G = c65G;
     }
 
-    public int getC65H() {
+    public String getC65H() {
         return mC65H;
     }
 
-    public void setC65H(int c65H) {
+    public void setC65H(String c65H) {
         mC65H = c65H;
     }
 
-    public int getC65I() {
+    public String getC65I() {
         return mC65I;
     }
 
-    public void setC65I(int c65I) {
+    public void setC65I(String c65I) {
         mC65I = c65I;
     }
 
-    public int getC65J() {
+    public String getC65J() {
         return mC65J;
     }
 
-    public void setC65J(int c65J) {
+    public void setC65J(String c65J) {
         mC65J = c65J;
     }
 
-    public int getC65K() {
+    public String getC65K() {
         return mC65K;
     }
 
-    public void setC65K(int c65K) {
+    public void setC65K(String c65K) {
         mC65K = c65K;
     }
 
-    public int getC65L() {
+    public String getC65L() {
         return mC65L;
     }
 
-    public void setC65L(int c65L) {
+    public void setC65L(String c65L) {
         mC65L = c65L;
     }
-
+    public  boolean set(String fieldName, Object fieldValue) {
+        Class<?> clazz = this.getClass();
+        while (clazz != null) {
+            try {
+                Field field = clazz.getDeclaredField(fieldName);
+                field.setAccessible(true);
+                field.set(this, fieldValue);
+                return true;
+            } catch (NoSuchFieldException e) {
+                clazz = clazz.getSuperclass();
+            } catch (Exception e) {
+                throw new IllegalStateException(e);
+            }
+        }
+        return false;
+    }
+    public  Object get(String fieldName) {
+        fieldName = "m"+fieldName;
+        Class<?> clazz = this.getClass();
+        while (clazz != null) {
+            try {
+                Field field = clazz.getDeclaredField(fieldName);
+                field.setAccessible(true);
+                return field.get(this);
+            } catch (NoSuchFieldException e) {
+                clazz = clazz.getSuperclass();
+            } catch (Exception e) {
+                throw new IllegalStateException(e);
+            }
+        }
+        return null;
+    }
 }

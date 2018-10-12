@@ -57,29 +57,29 @@ public class FamilyDetailDTO extends FamilyDTO{
     @SerializedName("C64")
     private Integer mC64;
     @SerializedName("C65A")
-    private Integer mC65A;
+    private String mC65A;
     @SerializedName("C65B")
-    private Integer mC65B;
+    private String mC65B;
     @SerializedName("C65C")
-    private Integer mC65C;
+    private String mC65C;
     @SerializedName("C65D")
-    private Integer mC65D;
+    private String mC65D;
     @SerializedName("C65E")
-    private Integer mC65E;
+    private String mC65E;
     @SerializedName("C65F")
-    private Integer mC65F;
+    private String mC65F;
     @SerializedName("C65G")
-    private Integer mC65G;
+    private String mC65G;
     @SerializedName("C65H")
-    private Integer mC65H;
+    private String mC65H;
     @SerializedName("C65I")
-    private Integer mC65I;
+    private String mC65I;
     @SerializedName("C65J")
-    private Integer mC65J;
+    private String mC65J;
     @SerializedName("C65K")
-    private Integer mC65K;
+    private String mC65K;
     @SerializedName("C65L")
-    private Integer mC65L;
+    private String mC65L;
     @SerializedName("DIACHICHUHO")
     private String mDIACHICHUHO;
     @SerializedName("ID")
@@ -115,9 +115,9 @@ public class FamilyDetailDTO extends FamilyDTO{
                                    mC55, Integer mC56, Integer mC57, Integer mC58A, String mC58B,
                            Integer mC59, Integer mC60, String mC60A, Integer mC61, String mC61A,
                            Integer mC62, String mC62A, Integer mC63, String mC63A, Integer mC64,
-                           Integer mC65A, Integer mC65B, Integer mC65C, Integer mC65D, Integer
-                                   mC65E, Integer mC65F, Integer mC65G, Integer mC65H, Integer
-                                   mC65I, Integer mC65J, Integer mC65K, Integer mC65L, String
+                           String mC65A, String mC65B, String mC65C, String mC65D, String
+                                   mC65E, String mC65F, String mC65G, String mC65H, String
+                                   mC65I, String mC65J, String mC65K, String mC65L, String
                                    mDIACHICHUHO, String mDIENTHOAI, String mHOSO, String mID,
                            String mIDHO, Integer mKT6, Long mLoaiphieu, String mMADIABAN, String
                                    mMAHUYEN, String mMATHON, String mMATINH, String mMAXA, String
@@ -368,99 +368,99 @@ public class FamilyDetailDTO extends FamilyDTO{
         this.mC64 = mC64;
     }
 
-    public Integer getmC65A() {
+    public String getmC65A() {
         return mC65A;
     }
 
-    public void setmC65A(Integer mC65A) {
+    public void setmC65A(String mC65A) {
         this.mC65A = mC65A;
     }
 
-    public Integer getmC65B() {
+    public String getmC65B() {
         return mC65B;
     }
 
-    public void setmC65B(Integer mC65B) {
+    public void setmC65B(String mC65B) {
         this.mC65B = mC65B;
     }
 
-    public Integer getmC65C() {
+    public String getmC65C() {
         return mC65C;
     }
 
-    public void setmC65C(Integer mC65C) {
+    public void setmC65C(String mC65C) {
         this.mC65C = mC65C;
     }
 
-    public Integer getmC65D() {
+    public String getmC65D() {
         return mC65D;
     }
 
-    public void setmC65D(Integer mC65D) {
+    public void setmC65D(String mC65D) {
         this.mC65D = mC65D;
     }
 
-    public Integer getmC65E() {
+    public String getmC65E() {
         return mC65E;
     }
 
-    public void setmC65E(Integer mC65E) {
+    public void setmC65E(String mC65E) {
         this.mC65E = mC65E;
     }
 
-    public Integer getmC65F() {
+    public String getmC65F() {
         return mC65F;
     }
 
-    public void setmC65F(Integer mC65F) {
+    public void setmC65F(String mC65F) {
         this.mC65F = mC65F;
     }
 
-    public Integer getmC65G() {
+    public String getmC65G() {
         return mC65G;
     }
 
-    public void setmC65G(Integer mC65G) {
+    public void setmC65G(String mC65G) {
         this.mC65G = mC65G;
     }
 
-    public Integer getmC65H() {
+    public String getmC65H() {
         return mC65H;
     }
 
-    public void setmC65H(Integer mC65H) {
+    public void setmC65H(String mC65H) {
         this.mC65H = mC65H;
     }
 
-    public Integer getmC65I() {
+    public String getmC65I() {
         return mC65I;
     }
 
-    public void setmC65I(Integer mC65I) {
+    public void setmC65I(String mC65I) {
         this.mC65I = mC65I;
     }
 
-    public Integer getmC65J() {
+    public String getmC65J() {
         return mC65J;
     }
 
-    public void setmC65J(Integer mC65J) {
+    public void setmC65J(String mC65J) {
         this.mC65J = mC65J;
     }
 
-    public Integer getmC65K() {
+    public String getmC65K() {
         return mC65K;
     }
 
-    public void setmC65K(Integer mC65K) {
+    public void setmC65K(String mC65K) {
         this.mC65K = mC65K;
     }
 
-    public Integer getmC65L() {
+    public String getmC65L() {
         return mC65L;
     }
 
-    public void setmC65L(Integer mC65L) {
+    public void setmC65L(String mC65L) {
         this.mC65L = mC65L;
     }
 

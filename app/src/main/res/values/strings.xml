@@ -293,4 +293,25 @@
     <string name="txt_warning_die">Cảnh báo: Người chết thứ %1$d %2$s có Tuổi chết =%3$d mà Nguyên nhân chết = %4$s. Có tiếp tục không?</string>
     <string name="txt_invalid_reason_die">LỖI: Người chết thứ %1$d %2$S có Nguyên nhân chết khác mà không ghi rõ nguyên nhân</string>
     <string name="txt_invalid_case_die">LỖI: Người chết thứ %1$d %2$s có chết trong trường hợp khác mà không ghi rõ trường hợp</string>
+    <string name="txt_warning_no_room">Cảnh báo: Ngôi nhà của hộ không có phòng ngủ riêng biệt. Có tiếp tục không?</string>
+    <string name="txt_warnig_number_room">Cảnh báo: Ngôi nhà của hộ có Số phòng ngủ =%1$d. Có tiếp tục không?</string>
+    <string name="txt_house_too_small">Cảnh báo: Ngôi nhà của hộ có Diện tích sàn xây dựng =%1$d. Quá nhỏ. Có tiếp tục không?</string>
+    <string name="txt_house_too_big">Cảnh báo: Ngôi nhà của hộ có Diện tích sàn xây dựng =%1$d. Quá lớn. Có tiếp tục không?</string>
+    <string name="txt_room_too_small">LỖI: Ngôi nhà của hộ có Diện tích bình quân 1 phòng ngủ riêng =%1$d. (Diện tích nhà %2$d/số phòng ngủ riêng biệt %3$d). Quá nhỏ!</string>
+    <string name="txt_warning_room_too_small">Cảnh báo: Ngôi nhà của hộ có Diện tích bình quân 1 phòng ngủ riêng =%d. (Diện tích nhà %d/số phòng ngủ riêng biệt %d).Có tiếp tục không?</string>
+    <string name="txt_warning_physical">Cảnh báo: Ngôi nhà  có Vật liệu chính làm cột bằng Vật liệu tạm mà Loại nhà = nhà chung cư. Có tiếp tục không?</string>
+    <string name="txt_warning_roof_physical">Cảnh báo: Ngôi nhà có Vật liệu làm mái = Vật liệu bền chắc mà Vật liệu làm cột/tường chịu lực = Vật liệu tạm. Có tiếp tục không?</string>
+    <string name="txt_warning_physical_department">Cảnh báo: Ngôi nhà của hộ thuộc loại Nhà chung cư mà Vật liệu chính làm mái =Vật liệu tạm. Có tiếp tục không?</string>
+    <string name="txt_warning_physical_wall">Cảnh báo: Ngôi nhà của hộ thuộc loại Nhà chung cư mà Vật liệu chính làm tường =Vật liệu tạm. Có tiếp tục không?</string>
+    <string name="txt_year_use">Cảnh báo: Ngôi nhà/căn hộ thuộc loại nhà chung cư và được sử dụng từ %1$s. Có đúng không?</string>
+    <string name="txt_invalid_year_use">LỖI: Hộ có Năm đưa vào sử dụng từ 2010 đến nay = %1$s không hợp lệ</string>
+    <string name="txt_warning_light_energy">Cảnh báo: Hộ sử dụng Nhiên liệu chính thắp sáng = Dầu lửa mà ngôi nhà thuộc loại Nhà chung cư. Có tiếp tục không?</string>
+    <string name="txt_unknow_energy_light">LỖI: Hộ sử dụng Nhiên liệu chính thắp sáng khác mà không ghi rõ</string>
+    <string name="txt_confirm_no_cook_energy">Cảnh báo: Hộ không sử dụng bất kỳ 1 loại nhiên liệu nào để nấu ăn (C62=6). Có tiếp tục không?</string>
+    <string name="txt_invalid_energy">Cảnh báo: Hộ sử dụng Nhiên liệu chính nấu ăn = điện nhưng Nhiên liệu chính thắp sáng =%1$s. Có tiếp tục không?</string>
+    <string name="txt_wrong_energy">Cảnh báo: Hộ sử dụng Nhiên liệu chính nấu ăn = Củi mà loại nhà = Nhà chung cư. Có tiếp tục không?</string>
+    <string name="txt_other_cook_energy">LỖI: Hộ sử dụng Nhiên liệu chính nấu ăn khác mà không ghi rõ</string>
+    <string name="txt_other_water">LỖI: Hộ sử dụng Nguồn nước ăn uống khác mà không ghi rõ</string>
+    <string name="txt_no_equipment">Cảnh báo: Hộ không có bất kỳ 1 trong các loại thiết bị phục vụ sinh hoạt được hỏi?</string>
+    <string name="txt_warning_equipment">Cảnh báo: Hộ có tài sản đắt tiền như tivi, tủ lạnh, điều hòa, ô tô nhưng thắp sáng =%1$d, nấu ăn =%2$d và không có hố xí. Có tiếp tục không?</string>
 </resources>

@@ -58,7 +58,7 @@
       "survey":"house"
     },
     {
-      "id": "Q53",
+      "id": "Q53A",
       "name": "Q53",
       "question": "Ngôi nhà/căn hộ mà hộ Ông/Bà đang ở là nhà chung cư hay nhà riêng lẻ?  /nNgôi nhà/căn hộ này có bao nhiêu phòng ngủ riêng biệt?",
       "type": 4,
@@ -148,7 +148,7 @@
       "survey":"house"
     },
     {
-      "id": "Q58",
+      "id": "Q58A",
       "name": "Q58",
       "question": "Ngôi nhà/căn hộ này được sử dụng từ năm nào? ",
       "type": 4,

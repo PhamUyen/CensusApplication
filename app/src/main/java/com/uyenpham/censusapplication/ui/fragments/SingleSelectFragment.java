@@ -42,6 +42,13 @@ import java.util.Calendar;
 import butterknife.Bind;
 
 import static com.uyenpham.censusapplication.ui.activities.SurveyActivity.currentIndex;
+import static com.uyenpham.censusapplication.utils.Constants.QUESTION_C53A;
+import static com.uyenpham.censusapplication.utils.Constants.QUESTION_C56;
+import static com.uyenpham.censusapplication.utils.Constants.QUESTION_C57;
+import static com.uyenpham.censusapplication.utils.Constants.QUESTION_C58A;
+import static com.uyenpham.censusapplication.utils.Constants.QUESTION_C61;
+import static com.uyenpham.censusapplication.utils.Constants.QUESTION_C62;
+import static com.uyenpham.censusapplication.utils.Constants.QUESTION_C63;
 import static com.uyenpham.censusapplication.utils.Constants.TYPE_SELECT_INPUT;
 
 public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerViewListener,
@@ -73,10 +80,6 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
     private ArrayList<OptionDTO> listOption;
     private RadioButtonAdapter radioButtonAdapter;
     private int posMember;
-//    private MemberDTO memberDTO;
-//    private WomanDTO womanDTO;
-//    private DeadDTO deadDTO;
-//    private HouseDTO houseDTO;
 
     @Override
     protected int getLayoutId() {
@@ -97,23 +100,12 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
         } else if (questionDTO.getType() == Constants.TYPE_MIX) {
             adapter = new MultiSelectAdapter(listMember, false);
         }
-//        if (questionDTO.getSurvey().equals(Constants.SURVEY_MEMBER)) {
-//            memberDTO = Constants.mStaticObject.getMemberDTO().get(posMember);
-//        } else if (Constants.SURVEY_WOMAN.equals(questionDTO.getSurvey())) {
-//            womanDTO = Constants.mStaticObject.getWomanDTO().get(posMember);
-//            memberDTO = getMemberById(womanDTO.getIDTV());
-//        } else if (Constants.SURVEY_DEAD.equals(questionDTO.getSurvey())) {
-//            deadDTO = Constants.mStaticObject.getDeadDTO().get(posMember);
-//            memberDTO = getMemberById(deadDTO.getmIDCHET());
-//        } else if (Constants.SURVEY_HOUSE.equals(questionDTO.getSurvey())) {
-//            houseDTO = Constants.mStaticObject.getHouseDTO();
-//        }
         loadQuestion(questionDTO);
     }
 
-    private MemberDTO getMemberById(String id){
-        for(MemberDTO member : Constants.mStaticObject.getMemberDTO()){
-            if(member.getmIDTV().equalsIgnoreCase(id)){
+    private MemberDTO getMemberById(String id) {
+        for (MemberDTO member : Constants.mStaticObject.getMemberDTO()) {
+            if (member.getmIDTV().equalsIgnoreCase(id)) {
                 return member;
             }
         }
@@ -188,7 +180,7 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
             case Constants.SURVEY_PEOPLE:
                 if (!isYes || (isYes && listSelected.size() != 0) || (Constants.mStaticObject.getPeopleDTO
                         ().get(questionDTO.getName()) != null || (isYes && listMember.size() != 0))) {
-                    return  new WarningDTO(getString(R.string.txt_invalid_info), Constants.TYPE_NOTI);
+                    return new WarningDTO(getString(R.string.txt_invalid_info), Constants.TYPE_NOTI);
                 }
                 break;
             case Constants.SURVEY_MEMBER:
@@ -275,65 +267,138 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                         }
                         break;
 
-                        //tinh trang hon nhan
+                    //tinh trang hon nhan
                     case Constants.QUESTION_C22:
                         //co quan he vo/chong voi chu ho nhung tinh trang hon nhan khong phai la ket hon
                         if (memberDTO.getmSTTNKTT() != 1 && memberDTO.getmC02() == 2 && memberDTO.getmC22() != 2) {
-                            return new WarningDTO(getString(R.string.txt_invalid_marital,posMember+1,memberDTO.getmC01(),listOption.get(memberDTO.getmC22()-1).getOption()), Constants.TYPE_CONFIRM);
+                            return new WarningDTO(getString(R.string.txt_invalid_marital, posMember + 1, memberDTO.getmC01(), listOption.get(memberDTO.getmC22() - 1).getOption()), Constants.TYPE_CONFIRM);
                         }
 
                         //chuyen den ho voi li do ket hon nhung tinh trang hon nhan laf chua ket hon
                         if (memberDTO.getmC12() != null && memberDTO.getmC12() == 5 &&
                                 memberDTO.getmC22() == 1) {
-                            return new WarningDTO(getString(R.string.txt_wrong_marital,posMember+1,memberDTO.getmC01(),
-                                    listOption.get(memberDTO.getmC22()-1).getOption()), Constants.TYPE_NOTI);
+                            return new WarningDTO(getString(R.string.txt_wrong_marital, posMember + 1, memberDTO.getmC01(),
+                                    listOption.get(memberDTO.getmC22() - 1).getOption()), Constants.TYPE_NOTI);
                         }
 
                         //tuoi  nho hon 18 nhung da ket hon
-                        if(memberDTO.getmC05() < 18 && 1<memberDTO.getmC22() && memberDTO.getmC22() <=5){
-                            return new WarningDTO(getString(R.string.txt_invalid_age_for_marital,posMember+1,memberDTO.getmC01(),
-                                    memberDTO.getmC05(),listOption.get(memberDTO.getmC22()-1).getOption()), Constants.TYPE_CONFIRM);
+                        if (memberDTO.getmC05() < 18 && 1 < memberDTO.getmC22() && memberDTO.getmC22() <= 5) {
+                            return new WarningDTO(getString(R.string.txt_invalid_age_for_marital, posMember + 1, memberDTO.getmC01(),
+                                    memberDTO.getmC05(), listOption.get(memberDTO.getmC22() - 1).getOption()), Constants.TYPE_CONFIRM);
                         }
                         break;
 
                     case Constants.QUESTION_C25:
                         if (memberDTO.getmC13A() == 4 && memberDTO.getmC13B() == 4 && memberDTO.getmC13C() == 4
-                                || memberDTO.getmC13D() == 4 || memberDTO.getmC13E() == 4 && memberDTO.getmC13F() == 4 && memberDTO.getmC25() ==1) {
+                                || memberDTO.getmC13D() == 4 || memberDTO.getmC13E() == 4 && memberDTO.getmC13F() == 4 && memberDTO.getmC25() == 1) {
                             return new WarningDTO(getString(R.string.txt_invalid_work_state,
                                     posMember + 1, memberDTO.getmC01()), Constants.TYPE_CONFIRM);
                         }
                         break;
 
                     case Constants.QUESTION_C30:
-                        if(memberDTO.getmC05() <18 && (memberDTO.getmC30() ==1 || memberDTO.getmC30() ==4)){
-                            return new WarningDTO(getString(R.string.txt_invalid_work_position,posMember+1, memberDTO.getmC01()
-                                    , listOption.get(memberDTO.getmC30()-1).getOption(), memberDTO.getmC05()), Constants.TYPE_CONFIRM);
+                        if (memberDTO.getmC05() < 18 && (memberDTO.getmC30() == 1 || memberDTO.getmC30() == 4)) {
+                            return new WarningDTO(getString(R.string.txt_invalid_work_position, posMember + 1, memberDTO.getmC01()
+                                    , listOption.get(memberDTO.getmC30() - 1).getOption(), memberDTO.getmC05()), Constants.TYPE_CONFIRM);
                         }
                         break;
 
                     case Constants.QUESTION_C34:
-                        if(womanDTO.getC34() ==1 && memberDTO.getmC05() <12){
-                            return new WarningDTO(getString(R.string.txt_age_have_child, posMember+1,womanDTO.getTenTV(), memberDTO.getmC05()), Constants.TYPE_CONFIRM);
+                        if (womanDTO.getC34() == 1 && memberDTO.getmC05() < 12) {
+                            return new WarningDTO(getString(R.string.txt_age_have_child, posMember + 1, womanDTO.getTenTV(), memberDTO.getmC05()), Constants.TYPE_CONFIRM);
                         }
                         break;
 
-                        //Cảnh báo: Hộ có Tổng số nhân khẩu thực tế thường trú trong hộ =0 và cũng không có người chết. Có đúng không?
-                        //LỖI: Hộ không có người chết (C42=2) mà Tình trạng phỏng vấn ban đầu = 5 (Chết cả hộ)
-                        //LỖI: Hộ có người chết (C42=1) nhưng số người chết =0. Hãy nhập lại!
+                    //Cảnh báo: Hộ có Tổng số nhân khẩu thực tế thường trú trong hộ =0 và cũng không có người chết. Có đúng không?
+                    //LỖI: Hộ không có người chết (C42=2) mà Tình trạng phỏng vấn ban đầu = 5 (Chết cả hộ)
+                    //LỖI: Hộ có người chết (C42=1) nhưng số người chết =0. Hãy nhập lại!
                     case Constants.QUESTION_C48:
-                        if(deadDTO.getmC47() <= 5 && 0< deadDTO.getmC47() && (deadDTO.getmC48() ==2 || deadDTO.getmC48() ==5)){
-                            return   new WarningDTO(getString(R.string.txt_warning_die,posMember+1, deadDTO.getmC43()
-                                    ,deadDTO.getmC47(),listOption.get(deadDTO.getmC48()-1).getOption()),Constants.TYPE_CONFIRM);
+                        if (deadDTO.getmC47() <= 5 && 0 < deadDTO.getmC47() && (deadDTO.getmC48() == 2 || deadDTO.getmC48() == 5)) {
+                            return new WarningDTO(getString(R.string.txt_warning_die, posMember + 1, deadDTO.getmC43()
+                                    , deadDTO.getmC47(), listOption.get(deadDTO.getmC48() - 1).getOption()), Constants.TYPE_CONFIRM);
                         }
-                        if(deadDTO.getmC48() ==6 &&StringUtils.isEmpty(deadDTO.getmC48K())){
-                            return   new WarningDTO(getString(R.string.txt_invalid_reason_die,posMember+1, deadDTO.getmC43()),Constants.TYPE_NOTI);
+                        if (deadDTO.getmC48() == 6 && StringUtils.isEmpty(deadDTO.getmC48K())) {
+                            return new WarningDTO(getString(R.string.txt_invalid_reason_die, posMember + 1, deadDTO.getmC43()), Constants.TYPE_NOTI);
                         }
                         break;
 
                     case Constants.QUESTION_C49:
-                        if(deadDTO.getmC49() == 5 && StringUtils.isEmpty(deadDTO.getmC49K())){
-                            return   new WarningDTO(getString(R.string.txt_invalid_case_die,posMember+1, deadDTO.getmC43()),Constants.TYPE_NOTI);
+                        if (deadDTO.getmC49() == 5 && StringUtils.isEmpty(deadDTO.getmC49K())) {
+                            return new WarningDTO(getString(R.string.txt_invalid_case_die, posMember + 1, deadDTO.getmC43()), Constants.TYPE_NOTI);
                         }
+                        break;
+                    case QUESTION_C53A:
+                        if (houseDTO.getC53B() >= 10) {
+                            return new WarningDTO(getString(R.string.txt_warnig_number_room, houseDTO.getC53B()), Constants.TYPE_CONFIRM);
+                        }
+                        if (houseDTO.getC53B() <= 0) {
+                            return new WarningDTO(getString(R.string.txt_warning_no_room), Constants.TYPE_CONFIRM);
+                        }
+                        break;
+
+                    case Constants.QUESTION_C55:
+                        if (houseDTO.getC53A() == 1 && houseDTO.getC55() == 2) {
+                            return new WarningDTO(getString(R.string.txt_warning_physical), Constants.TYPE_CONFIRM);
+                        }
+                        break;
+
+                    case QUESTION_C56:
+                        if (houseDTO.getC55() == 2 && houseDTO.getC56() == 1) {
+                            return new WarningDTO(getString(R.string.txt_warning_roof_physical), Constants.TYPE_CONFIRM);
+                        }
+
+                        if (houseDTO.getC56() == 2 && houseDTO.getC53A() == 1) {
+                            return new WarningDTO(getString(R.string.txt_warning_physical_department), Constants.TYPE_CONFIRM);
+                        }
+                        break;
+
+                    case QUESTION_C57:
+                        if (houseDTO.getC57() == 2 && houseDTO.getC53A() == 1) {
+                            return new WarningDTO(getString(R.string.txt_warning_physical_wall), Constants.TYPE_CONFIRM);
+                        }
+                        break;
+
+                    case QUESTION_C58A:
+                        if (houseDTO.getC58A() == 1 && houseDTO.getC53A() == 1) {
+                            return new WarningDTO(getString(R.string.txt_year_use, listOption.get(houseDTO.getC58A() - 1).getOption()), Constants.TYPE_CONFIRM);
+                        }
+
+                        if (houseDTO.getC58A() == 1 && (Integer.parseInt(houseDTO.getC58B()) < 2010 || 2018 < Integer.parseInt(houseDTO.getC58B()))) {
+                            return new WarningDTO(getString(R.string.txt_invalid_year_use, houseDTO.getC58B()), Constants.TYPE_NOTI);
+                        }
+                        break;
+
+                    case QUESTION_C61:
+                        if (houseDTO.getC61() == 3 && houseDTO.getC53A() == 1) {
+                            return new WarningDTO(getString(R.string.txt_warning_light_energy), Constants.TYPE_CONFIRM);
+                        }
+                        if (houseDTO.getC61() == 5 && StringUtils.isEmpty(houseDTO.getC61A())) {
+                            return new WarningDTO(getString(R.string.txt_unknow_energy_light), Constants.TYPE_NOTI);
+                        }
+                        break;
+
+                    case QUESTION_C62:
+                        if (houseDTO.getC62() == 6) {
+                            return new WarningDTO(getString(R.string.txt_confirm_no_cook_energy), Constants.TYPE_CONFIRM);
+                        }
+
+                        if (houseDTO.getC62() == 1 && (houseDTO.getC61() == 3 || houseDTO.getC61() == 4)) {
+                            return new WarningDTO(getString(R.string.txt_invalid_energy, String.valueOf(houseDTO.getC61())), Constants.TYPE_CONFIRM);
+                        }
+                        if (houseDTO.getC62() == 4 && houseDTO.getC53A() == 1) {
+                            return new WarningDTO(getString(R.string.txt_wrong_energy), Constants.TYPE_CONFIRM);
+                        }
+                        if (houseDTO.getC62() == 5 && StringUtils.isEmpty(houseDTO.getC62A())) {
+                            return new WarningDTO(getString(R.string.txt_other_cook_energy), Constants.TYPE_NOTI);
+                        }
+                        break;
+
+                    case QUESTION_C63:
+                        if (houseDTO.getC63() == 8 && StringUtils.isEmpty(houseDTO.getC63A())) {
+                            return new WarningDTO(getString(R.string.txt_other_water), Constants.TYPE_NOTI);
+                        }
+                        break;
+
                     default:
                         break;
 
@@ -436,85 +501,71 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
     @Override
     public void next() {
         if (questionDTO.getSurvey().equals(Constants.SURVEY_PEOPLE)) {
-            if (questionDTO.getId().equals(Constants.QUESTION_Q9)) {
-                if (Constants.mStaticObject.getPeopleDetailDTO().size() > 0) {
-                    activity.survey = Constants.SURVEY_MEMBER;
-                    activity.isMember = true;
-                    activity.setListPeople(0);
-                    activity.getNavigationBar().setTitle("1 - " + Constants.mStaticObject
-                            .getPeopleDetailDTO().get(0).getQ1());
-                } else {
-                    nextFragment();
-                }
-            } else {
-                if (validateQuaetion(questionDTO, answerDTO) == null) {
-                    if (questionDTO.getType() == Constants.TYPE_SINGLE_SELECT_LIST) {
+            if (validateQuaetion(questionDTO, answerDTO) == null) {
+                if (questionDTO.getType() == Constants.TYPE_SINGLE_SELECT_LIST) {
+                    for (PeopleDetailDTO peopleDetailDTO : listSelected) {
+                        Constants.mStaticObject.getPeopleDetailDTO().remove(peopleDetailDTO);
+                    }
+                } else if (questionDTO.getType() == Constants.TYPE_MIX) {
+                    if (questionDTO.getId().equals(Constants.QUESTION_Q7)) {
                         for (PeopleDetailDTO peopleDetailDTO : listSelected) {
-                            Constants.mStaticObject.getPeopleDetailDTO().remove(peopleDetailDTO);
+                            DeadDTO deadDTO = new DeadDTO(peopleDetailDTO.getQ1(), peopleDetailDTO.getIDHO() + peopleDetailDTO.getSTT());
+                            Constants.mStaticObject.getDeadDTO().add(deadDTO);
                         }
-                    } else if (questionDTO.getType() == Constants.TYPE_MIX) {
-                        if (questionDTO.getId().equals(Constants.QUESTION_Q7)) {
-                            for (PeopleDetailDTO peopleDetailDTO : listSelected) {
-                                DeadDTO deadDTO = new DeadDTO(peopleDetailDTO.getQ1(), peopleDetailDTO.getIDHO() + peopleDetailDTO.getSTT());
-                                Constants.mStaticObject.getDeadDTO().add(deadDTO);
-                            }
-                        }
-                        Constants.mStaticObject.getPeopleDetailDTO().addAll(listMember);
                     }
-                    nextFragment();
+                    Constants.mStaticObject.getPeopleDetailDTO().addAll(listMember);
+                }
+                nextFragment();
+            } else {
+                WarningDTO warning = validateQuaetion(questionDTO, null);
+                if (warning.getType() == Constants.TYPE_CONFIRM) {
+                    DialogUtils.showErrorAlert2Option(activity, warning.getMessage(), R.string.txt_yes, R.string.txt_no,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+//                                    saveInfo();
+                                    nextFragment();
+                                }
+                            }, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //dissmiss dialog
+                                }
+                            });
                 } else {
-//                    String message = activity.getString(R.string.txt_select_require);
-//                    if (questionDTO.getType() == Constants.TYPE_MIX) {
-//                        message = activity.getString(R.string.txt_input_require);
-//                    }
-//                    DialogUtils.showErrorAlert(activity, message);
-                    WarningDTO warning = validateQuaetion(questionDTO, null);
-                    if(warning.getType() == Constants.TYPE_CONFIRM){
-                        DialogUtils.showErrorAlert2Option(activity, warning.getMessage(), R.string.txt_yes, R.string.txt_no,
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        Constants.mStaticObject.getMemberDTO().set(posMember, memberDTO);
-                                        if (currentIndex < getListQuestion().size() - 1) {
-                                            currentIndex++;
-                                            Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true, getListQuestion(), activity.mFragmentManager, getPosMember());
-                                        }
-                                    }
-                                }, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        //dissmiss dialog
-                                    }
-                                });
-                    }else {
-                        DialogUtils.showErrorAlert(activity, warning.getMessage());
-                    }
+                    DialogUtils.showErrorAlert(activity, warning.getMessage());
                 }
             }
 
-        } else if (Constants.SURVEY_HOUSE.equals(questionDTO.getSurvey())) {
-
         } else {
             if (validateQuaetion(questionDTO, answerDTO) == null) {
-                switch (questionDTO.getSurvey()) {
-                    case Constants.SURVEY_MEMBER:
-                        Constants.mStaticObject.getMemberDTO().set(posMember, memberDTO);
-                        break;
-                    case Constants.SURVEY_WOMAN:
-                        Constants.mStaticObject.getWomanDTO().set(posMember, womanDTO);
-                        break;
-                    case Constants.SURVEY_DEAD:
-                        Constants.mStaticObject.getDeadDTO().set(posMember, deadDTO);
-                        break;
-                    default:
-                        break;
-                }
+//                saveInfo();
                 nextFragment();
             }
         }
     }
 
+    private void saveInfo() {
+        switch (questionDTO.getSurvey()) {
+            case Constants.SURVEY_MEMBER:
+                Constants.mStaticObject.getMemberDTO().set(posMember, memberDTO);
+                break;
+            case Constants.SURVEY_WOMAN:
+                Constants.mStaticObject.getWomanDTO().set(posMember, womanDTO);
+                break;
+            case Constants.SURVEY_DEAD:
+                Constants.mStaticObject.getDeadDTO().set(posMember, deadDTO);
+                break;
+            case Constants.SURVEY_HOUSE:
+                Constants.mStaticObject.setHouseDTO(houseDTO);
+                break;
+            default:
+                break;
+        }
+    }
+
     private void nextFragment() {
+        saveAnswerToSurvey(questionDTO,posMember);
         if (currentIndex < getListQuestion().size() - 1) {
             if (Constants.SURVEY_MEMBER.equals(questionDTO.getSurvey()) || Constants.SURVEY_WOMAN
                     .equals(questionDTO.getSurvey()) || Constants.SURVEY_DEAD.equals(questionDTO
@@ -535,86 +586,6 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                 }
             }
         }
-    }
-
-    private void nextMember() {
-        posMember++;
-        setPosMember(posMember);
-        switch (questionDTO.getSurvey()) {
-            case Constants.SURVEY_MEMBER:
-                if (posMember < Constants.mStaticObject.getMemberDTO().size()) {
-                    currentIndex = 0;
-                    Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true,
-                            getListQuestion(), activity.mFragmentManager, getPosMember());
-                    activity.getNavigationBar().setTitle("1 - " + Constants.mStaticObject
-                            .getPeopleDetailDTO().get(posMember).getQ1());
-                } else {
-                    if (Constants.mStaticObject.getWomanDTO().size() > 0) {
-                        activity.survey = Constants.SURVEY_WOMAN;
-                        activity.isMember = true;
-                        activity.setListPeople(posMember);
-                        activity.getNavigationBar().setTitle("1 - " + Constants.mStaticObject
-                                .getWomanDTO().get(0).getTenTV());
-                    } else {
-                        if (Constants.mStaticObject.getDeadDTO().size() > 0) {
-                            activity.survey = Constants.SURVEY_DEAD;
-                            activity.isMember = true;
-                            activity.setListPeople(posMember);
-                            activity.getNavigationBar().setTitle("1 - " + Constants.mStaticObject
-                                    .getDeadDTO().get(0).getmC43());
-                        } else {
-                            if (currentIndex < getListQuestion().size()) {
-                                activity.makeListQuestion();
-                                currentIndex = 22;
-                                Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true,
-                                        getListQuestion(), activity.mFragmentManager, -1);
-                            }
-                        }
-                    }
-                }
-                break;
-            case Constants.SURVEY_WOMAN:
-                if (posMember < Constants.mStaticObject.getWomanDTO().size()) {
-                    currentIndex = 0;
-                    Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true,
-                            getListQuestion(), activity.mFragmentManager, getPosMember());
-                    activity.getNavigationBar().setTitle("1 - " + Constants.mStaticObject
-                            .getWomanDTO().get(posMember).getTenTV());
-                } else {
-                    if (Constants.mStaticObject.getDeadDTO().size() > 0) {
-                        activity.survey = Constants.SURVEY_DEAD;
-                        activity.isMember = true;
-                        activity.setListPeople(posMember);
-                        activity.getNavigationBar().setTitle("1 - " + Constants.mStaticObject
-                                .getDeadDTO().get(0).getmC43());
-                    } else {
-                        if (currentIndex < getListQuestion().size()) {
-                            activity.makeListQuestion();
-                            currentIndex = 22;
-                            Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true,
-                                    getListQuestion(), activity.mFragmentManager, -1);
-                        }
-                    }
-                }
-                break;
-            case Constants.SURVEY_DEAD:
-                if (posMember < Constants.mStaticObject.getDeadDTO().size()) {
-                    currentIndex = 0;
-                    Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true,
-                            getListQuestion(), activity.mFragmentManager, getPosMember());
-                    activity.getNavigationBar().setTitle("1 - " + Constants.mStaticObject
-                            .getDeadDTO().get(posMember).getmC43());
-                } else {
-                    activity.makeListQuestion();
-                    currentIndex = 22;
-                    Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true,
-                            getListQuestion(), activity.mFragmentManager, -1);
-                }
-                break;
-            default:
-                break;
-        }
-
     }
 
     private int getStep(QuestionDTO question, AnswerDTO answerDTO) {
@@ -779,79 +750,75 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
             }
         });
         if (option.isSelected() && option.getType().equalsIgnoreCase(Constants.TYPE_SHOW)) {
-                isYes = true;
-                if (questionDTO.getSurvey().equals(Constants.SURVEY_PEOPLE)) {
-                    Constants.mStaticObject.getPeopleDTO().set(questionDTO.getId(), pos + 1);
-                } else if (Constants.SURVEY_MEMBER.equals(questionDTO.getSurvey())) {
-                    memberDTO.set(questionDTO.getId(), pos + 1);
-                }
-                if (questionDTO.getType() == Constants.TYPE_MIX) {
-                    edOther.setVisibility(View.VISIBLE);
-                    rcvSelect.setVisibility(View.VISIBLE);
-                    setupListAdded();
-                    edOther.setSingleLine();
-                    edOther.setImeOptions(EditorInfo.IME_ACTION_DONE);
-                    edOther.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-                        @Override
-                        public boolean onEditorAction(TextView v, int actionId, KeyEvent keyEvent) {
-                            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                                if (questionDTO.getSurvey().equals(Constants.SURVEY_PEOPLE)) {
-                                    int index = Constants.mStaticObject.getPeopleDetailDTO().size();
-                                    PeopleDetailDTO peopleDetailDTO = new PeopleDetailDTO();
-                                    peopleDetailDTO.setIDHO(Constants.mStaticObject.getIdHo());
-                                    peopleDetailDTO.setHOSO(Constants.mStaticObject.getPeopleDTO
-                                            ().getHOSO());
-                                    peopleDetailDTO.setQ1(edOther.getText().toString());
-                                    peopleDetailDTO.setSTT(index);
-                                    peopleDetailDTO.setChuho(1);
-                                    peopleDetailDTO.setID(Constants.mStaticObject.getIdHo() +
-                                            index);
+            isYes = true;
+            setValue(pos);
+            if (questionDTO.getType() == Constants.TYPE_MIX) {
+                edOther.setVisibility(View.VISIBLE);
+                rcvSelect.setVisibility(View.VISIBLE);
+                setupListAdded();
+                edOther.setSingleLine();
+                edOther.setImeOptions(EditorInfo.IME_ACTION_DONE);
+                edOther.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                    @Override
+                    public boolean onEditorAction(TextView v, int actionId, KeyEvent keyEvent) {
+                        if (actionId == EditorInfo.IME_ACTION_DONE) {
+                            if (questionDTO.getSurvey().equals(Constants.SURVEY_PEOPLE)) {
+                                int index = Constants.mStaticObject.getPeopleDetailDTO().size();
+                                PeopleDetailDTO peopleDetailDTO = new PeopleDetailDTO();
+                                peopleDetailDTO.setIDHO(Constants.mStaticObject.getIdHo());
+                                peopleDetailDTO.setHOSO(Constants.mStaticObject.getPeopleDTO
+                                        ().getHOSO());
+                                peopleDetailDTO.setQ1(edOther.getText().toString());
+                                peopleDetailDTO.setSTT(index);
+                                peopleDetailDTO.setChuho(1);
+                                peopleDetailDTO.setID(Constants.mStaticObject.getIdHo() +
+                                        index);
 
-                                    Constants.mStaticObject.getPeopleDetailDTO().add
-                                            (peopleDetailDTO);
-                                    listMember.add(peopleDetailDTO);
-                                    adapter.notifyDataSetChanged();
-                                }
-                                edOther.setText(null);
-                                return true;
+                                Constants.mStaticObject.getPeopleDetailDTO().add
+                                        (peopleDetailDTO);
+                                listMember.add(peopleDetailDTO);
+                                adapter.notifyDataSetChanged();
                             }
-                            return false;
+                            edOther.setText(null);
+                            return true;
                         }
-                    });
-                } else if (questionDTO.getType() == Constants.TYPE_SINGLE_SELECT_LIST) {
-                    rcvSelect.setVisibility(View.VISIBLE);
-                    setupListSelected();
-                } else if (questionDTO.getType() == Constants.TYPE_SINGLE_SELECT_AUTO) {
-                    spinner.setVisibility(View.VISIBLE);
-                    SparseArray<String> listReligion = StringUtils.parseStringArray(R.array
-                            .religion, activity);
-                    ArrayList<ReligionDTO> listOptionSpinner = new ArrayList<>();
-                    for (int i = 0; i < listReligion.size(); i++) {
-                        int key = listReligion.keyAt(i);
-                        listOptionSpinner.add(new ReligionDTO(key, listReligion.get(key)));
+                        return false;
                     }
-
-                    SpinnerAdapter adapter = new SpinnerAdapter(activity, listOptionSpinner);
-                    spinner.setAdapter(adapter);
-                }else if(questionDTO.getType() == TYPE_SELECT_INPUT){
-                    edOther.setVisibility(View.VISIBLE);
-                    edOther.setSingleLine();
-                    edOther.setImeOptions(EditorInfo.IME_ACTION_DONE);
-                    edOther.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-                        @Override
-                        public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                            if(i== EditorInfo.IME_ACTION_DONE){
-                                if(questionDTO.getId().equals(Constants.QUESTION_C48)){
-                                    deadDTO.setmC48K(edOther.getText().toString());
-                                }else if(questionDTO.getId().equals(Constants.QUESTION_C49)){
-                                    deadDTO.setmC49K(edOther.getText().toString());
-                                }
-                            }
-                            return false;
-                        }
-                    });
+                });
+            } else if (questionDTO.getType() == Constants.TYPE_SINGLE_SELECT_LIST) {
+                rcvSelect.setVisibility(View.VISIBLE);
+                setupListSelected();
+            } else if (questionDTO.getType() == Constants.TYPE_SINGLE_SELECT_AUTO) {
+                spinner.setVisibility(View.VISIBLE);
+                SparseArray<String> listReligion = StringUtils.parseStringArray(R.array
+                        .religion, activity);
+                ArrayList<ReligionDTO> listOptionSpinner = new ArrayList<>();
+                for (int i = 0; i < listReligion.size(); i++) {
+                    int key = listReligion.keyAt(i);
+                    listOptionSpinner.add(new ReligionDTO(key, listReligion.get(key)));
                 }
-            }else {
+
+                SpinnerAdapter adapter = new SpinnerAdapter(activity, listOptionSpinner);
+                spinner.setAdapter(adapter);
+            } else if (questionDTO.getType() == TYPE_SELECT_INPUT) {
+                edOther.setVisibility(View.VISIBLE);
+                edOther.setSingleLine();
+                edOther.setImeOptions(EditorInfo.IME_ACTION_DONE);
+                edOther.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                    @Override
+                    public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                        if (i == EditorInfo.IME_ACTION_DONE) {
+                            if (questionDTO.getId().equals(Constants.QUESTION_C48)) {
+                                deadDTO.setmC48K(edOther.getText().toString());
+                            } else if (questionDTO.getId().equals(Constants.QUESTION_C49)) {
+                                deadDTO.setmC49K(edOther.getText().toString());
+                            }
+                        }
+                        return false;
+                    }
+                });
+            }
+        } else {
             edOther.setVisibility(View.GONE);
             rcvSelect.setVisibility(View.GONE);
             if (questionDTO.getType() == Constants.TYPE_MIX) {
@@ -866,13 +833,34 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                 isYes = false;
                 listSelected.clear();
             }
-            if (questionDTO.getSurvey().equals(Constants.SURVEY_PEOPLE)) {
+            setValue(pos);
+        }
+    }
+
+    private void setValue(int pos) {
+        switch (questionDTO.getId()) {
+            case Constants.SURVEY_PEOPLE:
                 Constants.mStaticObject.getPeopleDTO().set(questionDTO.getId(), pos + 1);
-            } else if (Constants.SURVEY_MEMBER.equals(questionDTO.getSurvey())) {
-                Constants.mStaticObject.getMemberDTO().get(posMember).set(questionDTO.getId
-                        (), pos + 1);
-                memberDTO.set(questionDTO.getId(), pos + 1);
-            }
+                break;
+            case Constants.SURVEY_MEMBER:
+                if (questionDTO.getId().equalsIgnoreCase(Constants.QUESTION_C02)) {
+                    memberDTO.set(questionDTO.getId(), pos + 2);
+                } else {
+                    memberDTO.set(questionDTO.getId(), pos + 1);
+                }
+                break;
+            case Constants.SURVEY_DEAD:
+                deadDTO.set(questionDTO.getId(), pos + 1);
+                break;
+            case Constants.SURVEY_WOMAN:
+                womanDTO.set(questionDTO.getId(), pos + 1);
+                break;
+            case Constants.SURVEY_HOUSE:
+                houseDTO.set(questionDTO.getId(), pos + 1);
+                familyDetailDTO.set(questionDTO.getId(), pos + 1);
+                break;
+            default:
+                break;
         }
     }
 }

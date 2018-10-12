@@ -4,9 +4,8 @@ import android.content.Context;
 import android.view.View;
 
 import com.uyenpham.censusapplication.db.AnswerDAO;
-import com.uyenpham.censusapplication.db.FamilyDAO;
-import com.uyenpham.censusapplication.db.PeopleDAO;
 import com.uyenpham.censusapplication.models.family.DeadDTO;
+import com.uyenpham.censusapplication.models.family.FamilyDetailDTO;
 import com.uyenpham.censusapplication.models.family.HouseDTO;
 import com.uyenpham.censusapplication.models.family.MemberDTO;
 import com.uyenpham.censusapplication.models.family.WomanDTO;
@@ -15,8 +14,11 @@ import com.uyenpham.censusapplication.models.survey.QuestionDTO;
 import com.uyenpham.censusapplication.models.survey.WarningDTO;
 import com.uyenpham.censusapplication.ui.activities.SurveyActivity;
 import com.uyenpham.censusapplication.utils.Constants;
+import com.uyenpham.censusapplication.utils.Utils;
 
 import java.util.ArrayList;
+
+import static com.uyenpham.censusapplication.ui.activities.SurveyActivity.currentIndex;
 
 public abstract class BaseTypeFragment extends BaseFragment {
     private ArrayList<QuestionDTO> listQuestion;
@@ -27,11 +29,13 @@ public abstract class BaseTypeFragment extends BaseFragment {
     public WomanDTO womanDTO;
     public DeadDTO deadDTO;
     public HouseDTO houseDTO;
+    public FamilyDetailDTO familyDetailDTO;
     private QuestionDTO questionDTO;
     public abstract boolean loadQuestion(QuestionDTO questionDTO);
 
     @Override
     protected void createView(View view) {
+        familyDetailDTO = Constants.mStaticObject.getFamilyDetailDTO();
         if (questionDTO.getSurvey().equals(Constants.SURVEY_MEMBER)) {
             memberDTO = Constants.mStaticObject.getMemberDTO().get(posMember);
         } else if (Constants.SURVEY_WOMAN.equals(questionDTO.getSurvey())) {
@@ -116,28 +120,105 @@ public abstract class BaseTypeFragment extends BaseFragment {
         return null;
     }
 
-    protected void saveAnswerToSurvey(QuestionDTO question, AnswerDTO answer) {
-        switch (question.getSurvey()) {
+
+    public void nextMember() {
+        posMember++;
+        setPosMember(posMember);
+        switch (questionDTO.getSurvey()) {
+            case Constants.SURVEY_MEMBER:
+                if (posMember < Constants.mStaticObject.getMemberDTO().size()) {
+                    currentIndex = 0;
+                    Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true,
+                            getListQuestion(), activity.mFragmentManager, getPosMember());
+                    activity.getNavigationBar().setTitle("1 - " + Constants.mStaticObject
+                            .getPeopleDetailDTO().get(posMember).getQ1());
+                } else {
+                    if (!Constants.mStaticObject.getWomanDTO().isEmpty()) {
+                        activity.survey = Constants.SURVEY_WOMAN;
+                        activity.isMember = true;
+                        activity.setListPeople(posMember);
+                        activity.getNavigationBar().setTitle("1 - " + Constants.mStaticObject
+                                .getWomanDTO().get(0).getTenTV());
+                    } else {
+                        if (Constants.mStaticObject.getDeadDTO().size() > 0) {
+                            activity.survey = Constants.SURVEY_DEAD;
+                            activity.isMember = true;
+                            activity.setListPeople(posMember);
+                            activity.getNavigationBar().setTitle("1 - " + Constants.mStaticObject
+                                    .getDeadDTO().get(0).getmC43());
+                        } else {
+                            if (currentIndex < getListQuestion().size()) {
+                                activity.makeListQuestion();
+                                currentIndex = 22;
+                                Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true,
+                                        getListQuestion(), activity.mFragmentManager, -1);
+                            }
+                        }
+                    }
+                }
+                break;
             case Constants.SURVEY_WOMAN:
-//                Constants.mStaticObject.getWomanDTO().set(question.getName(), answer.getAnswerString());
-//                WomanDAO.getInstance().insert(Constants.mStaticObject.getWomanDTO());
+                if (posMember < Constants.mStaticObject.getWomanDTO().size()) {
+                    currentIndex = 0;
+                    Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true,
+                            getListQuestion(), activity.mFragmentManager, getPosMember());
+                    activity.getNavigationBar().setTitle("1 - " + Constants.mStaticObject
+                            .getWomanDTO().get(posMember).getTenTV());
+                } else {
+                    if (Constants.mStaticObject.getDeadDTO().size() > 0) {
+                        activity.survey = Constants.SURVEY_DEAD;
+                        activity.isMember = true;
+                        activity.setListPeople(posMember);
+                        activity.getNavigationBar().setTitle("1 - " + Constants.mStaticObject
+                                .getDeadDTO().get(0).getmC43());
+                    } else {
+                        if (currentIndex < getListQuestion().size()) {
+                            activity.makeListQuestion();
+                            currentIndex = 22;
+                            Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true,
+                                    getListQuestion(), activity.mFragmentManager, -1);
+                        }
+                    }
+                }
                 break;
             case Constants.SURVEY_DEAD:
-//                DeadDAO.getInstance().insert(Constants.mStaticObject.getDeadDTO());
+                if (posMember < Constants.mStaticObject.getDeadDTO().size()) {
+                    currentIndex = 0;
+                    Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true,
+                            getListQuestion(), activity.mFragmentManager, getPosMember());
+                    activity.getNavigationBar().setTitle("1 - " + Constants.mStaticObject
+                            .getDeadDTO().get(posMember).getmC43());
+                } else {
+                    activity.makeListQuestion();
+                    currentIndex = 22;
+                    Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true,
+                            getListQuestion(), activity.mFragmentManager, -1);
+                }
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    protected void saveAnswerToSurvey(QuestionDTO question, int postMember) {
+        switch (question.getSurvey()) {
+            case Constants.SURVEY_WOMAN:
+                Constants.mStaticObject.getWomanDTO().set(postMember,womanDTO);
+                break;
+            case Constants.SURVEY_DEAD:
+                Constants.mStaticObject.getDeadDTO().set(postMember,deadDTO);
                 break;
             case Constants.SURVEY_PEOPLE:
-                Constants.mStaticObject.getPeopleDTO().set(question.getName(), answer.getAnswerString());
-//                Constants.mStaticObject.getPeopleDetailDTO().set(question.getName(), answer.getAnswerString());
-                PeopleDAO.getInstance().insert(Constants.mStaticObject.getPeopleDTO());
                 break;
             case Constants.SURVEY_HOUSE:
+                Constants.mStaticObject.setHouseDTO(houseDTO);
                 break;
             case Constants.SURVEY_MEMBER:
+                Constants.mStaticObject.getMemberDTO().set(postMember,memberDTO);
                 break;
             case Constants.SURVEY_FAMILY:
-                Constants.mStaticObject.getFamilyDTO().set(question.getName(), answer.getAnswerString());
-                Constants.mStaticObject.getFamilyDetailDTO().set(question.getName(), answer.getAnswerString());
-                FamilyDAO.getInstance().insert(Constants.mStaticObject.getFamilyDTO());
+                Constants.mStaticObject.setFamilyDetailDTO(familyDetailDTO);
                 break;
             default:
                 break;

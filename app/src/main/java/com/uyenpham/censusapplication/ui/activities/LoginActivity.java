@@ -13,6 +13,7 @@ import com.uyenpham.censusapplication.R;
 import com.uyenpham.censusapplication.models.user.LoginDTO;
 import com.uyenpham.censusapplication.models.user.ResponseLoginDTO;
 import com.uyenpham.censusapplication.service.BaseCallback;
+import com.uyenpham.censusapplication.service.KillAppService;
 import com.uyenpham.censusapplication.service.ServiceBuilder;
 import com.uyenpham.censusapplication.utils.Constants;
 import com.uyenpham.censusapplication.utils.DialogUtils;
@@ -48,7 +49,7 @@ public class LoginActivity extends BaseActivity {
             edUserName.setText("D992001");
         }
 
-//        List<ReligionDTO> list = FileUtils.getListReligion(this);
+        startService(new Intent(getBaseContext(), KillAppService.class));
     }
 
     private void switchToLoginView() {

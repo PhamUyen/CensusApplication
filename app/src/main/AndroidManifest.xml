@@ -34,6 +34,8 @@
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme">
         </activity>
+        <service android:name=".service.KillAppService"
+            android:stopWithTask="false"/>
     </application>
 
 </manifest>
