@@ -10,16 +10,16 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.uyenpham.censusapplication.R;
-import com.uyenpham.censusapplication.models.locality.ReligionDTO;
+import com.uyenpham.censusapplication.models.locality.SpinnerDTO;
 
 import java.util.ArrayList;
 
 public class SpinnerAdapter  extends ArrayAdapter<String>{
 
     private final LayoutInflater mInflater;
-    private final ArrayList<ReligionDTO> items;
+    private final ArrayList<SpinnerDTO> items;
 
-    public SpinnerAdapter(Context context,ArrayList<ReligionDTO> list) {
+    public SpinnerAdapter(Context context,ArrayList<SpinnerDTO> list) {
         super(context,R.layout.item_list_spinner);
         mInflater = LayoutInflater.from(context);
         items = list;
@@ -38,11 +38,15 @@ public class SpinnerAdapter  extends ArrayAdapter<String>{
     private View createItemView(int position, View convertView, ViewGroup parent){
         final View view = mInflater.inflate(R.layout.item_list_spinner, parent, false);
 
-        TextView offTypeTv = (TextView) view.findViewById(R.id.textView);
+        TextView offTypeTv = (TextView) view.findViewById(R.id.text);
 
-        ReligionDTO religionDTO = items.get(position);
+        SpinnerDTO religionDTO = items.get(position);
 
         offTypeTv.setText(religionDTO.getId() + " - " + religionDTO.getName());
         return view;
+    }
+    @Override
+    public int getCount() {
+        return (items.size());
     }
 }

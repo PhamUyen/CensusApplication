@@ -38,6 +38,7 @@ public class FamilyFragment extends BaseFragment implements
 
     @Bind(R.id.rcvFamily)
     RecyclerView rcvFamily;
+    String iddb;
 
     @Override
     public void onAttach(Activity activity) {
@@ -74,7 +75,13 @@ public class FamilyFragment extends BaseFragment implements
 
     @OnClick(R.id.btn_add_family)
     void onAddFamily() {
-
+        Intent intent = new Intent(main, SurveyActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(Constants.KEY_FAMILY,null);
+        bundle.putString(Constants.KEY_IDDB,iddb);
+        bundle.putInt(Constants.KEY_NUM_HO,list.size());
+        intent.putExtra(Constants.KEY_EXTRA_DATA, bundle);
+        startActivity(intent);
     }
 
     private void initNavigationBar() {
@@ -99,7 +106,7 @@ public class FamilyFragment extends BaseFragment implements
     private void initData() {
         Bundle bundle = getArguments();
         if(bundle != null){
-            String iddb = bundle.getString(Constants.KEY_IDDB);
+             iddb = bundle.getString(Constants.KEY_IDDB);
             getListFamily(iddb);
         }
 

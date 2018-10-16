@@ -3,7 +3,6 @@ package com.uyenpham.censusapplication.ui.fragments;
 import android.content.DialogInterface;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
@@ -35,7 +34,6 @@ public class MultiSelectionFragment extends BaseTypeFragment implements IRadioBu
     @Bind(R.id.list_checkbox)
     RecyclerView listCheckbox;
 
-    private QuestionDTO questionDTO;
     ArrayList<OptionDTO> listOption;
     private RadioButtonAdapter adapter;
     private int posMember;
@@ -46,13 +44,12 @@ public class MultiSelectionFragment extends BaseTypeFragment implements IRadioBu
     }
 
     @Override
-    protected void createView(View view) {
+    public void initData() {
         listCheckbox.removeAllViews();
         activity.setiNext(this);
         activity.setiPrevious(this);
         posMember = getPosMember();
 
-        questionDTO = getQuestionDTO();
         loadQuestion(questionDTO);
     }
 
@@ -80,7 +77,7 @@ public class MultiSelectionFragment extends BaseTypeFragment implements IRadioBu
     public boolean loadQuestion(QuestionDTO question) {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         listCheckbox.setLayoutManager(linearLayoutManager);
-        tvQuestion.setText(question.getQuestion());
+        tvQuestion.setText(question.getName() + "." +question.getQuestion());
         listOption = new ArrayList<>();
         if(question.getId().equalsIgnoreCase(Constants.QUESTION_Q9)){
             for(PeopleDetailDTO peopleDetailDTO : Constants.mStaticObject.getPeopleDetailDTO()){
@@ -119,7 +116,6 @@ public class MultiSelectionFragment extends BaseTypeFragment implements IRadioBu
     public void onRadioClick(int pos, boolean isChecked) {
         OptionDTO option = listOption.get(pos);
         option.setSelected(!isChecked);
-        adapter.notifyDataSetChanged();
         if(questionDTO.getId().equalsIgnoreCase(Constants.QUESTION_Q9)){
 
         }else if(questionDTO.getId().equalsIgnoreCase(Constants.QUESTION_Q65)){

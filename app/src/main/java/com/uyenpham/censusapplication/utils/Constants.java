@@ -8,6 +8,7 @@ public class Constants {
     public static final String KEY_EXTRA_DATA = "extra_data";
     public static final String KEY_IDDB = "IDDB";
     public static final String KEY_HOID = "IDHO";
+    public static final String KEY_NUM_HO = "numHo";
     public static final String KEY_FAMILY = "family";
 
     //string

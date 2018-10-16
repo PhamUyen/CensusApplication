@@ -1,8 +1,8 @@
 {
   "questions": [
     {
-      "id": "Q34",
-      "name": "Q34",
+      "id": "C34",
+      "name": "C34",
       "question": "Chị đã sinh con bao giờ chưa?(ĐÃ SINH CON: CHỈ TÍNH TRƯỜNG HỢP CON SINH RA CÓ SỰ SỐNG)",
       "type": 2,
       "options": [
@@ -19,8 +19,8 @@
       "survey":"woman"
     },
     {
-      "id": "Q35",
-      "name": "Q35",
+      "id": "C35",
+      "name": "C35",
       "question": "Số con trai và số con gái do chị sinh ra đang sống cùng hộ với chị?",
       "type": 6,
       "options": [
@@ -37,8 +37,8 @@
       "survey":"woman"
     },
     {
-      "id": "Q36",
-      "name": "Q36",
+      "id": "C36",
+      "name": "C36",
       "question": "Số con trai và số con gái do chị sinh ra đang sống ở nơi khác?",
       "type": 6,
       "options": [
@@ -55,8 +55,8 @@
       "survey":"woman"
     },
     {
-      "id": "Q37",
-      "name": "Q37",
+      "id": "C37",
+      "name": "C37",
       "question": "Có người con nào do chị sinh ra sống nhưng đã chết không?NẾU CÓ, Số con trai, số con gái đã chết?",
       "type": 6,
       "options": [
@@ -73,8 +73,8 @@
       "survey":"woman"
     },
     {
-      "id": "Q38",
-      "name": "Q38",
+      "id": "C38",
+      "name": "C38",
       "question": "Tháng, năm dương lịch của lần sinh gần nhất?",
       "type": 7,
 
@@ -92,8 +92,8 @@
       "survey":"woman"
     },
     {
-      "id": "Q39",
-      "name": "Q39",
+      "id": "C39",
+      "name": "C39",
       "question": "Số con trai, con gái của lần sinh gần nhất?",
       "type": 6,
       "options": [
@@ -110,8 +110,8 @@
       "survey":"woman"
     },
     {
-      "id": "Q40",
-      "name": "Q40",
+      "id": "C40",
+      "name": "C40",
       "question": "Số con trai, số con gái do chị sinh ra từ tháng 8/2017 đến tháng 7/2018?",
       "type": 6,
       "options": [
@@ -128,8 +128,8 @@
       "survey":"woman"
     },
     {
-      "id": "Q41",
-      "name": "Q41",
+      "id": "C41",
+      "name": "C41",
       "question": "Ai đỡ đẻ cho chị trong lần sinh con gần nhất?",
       "type": 4,
       "options": [

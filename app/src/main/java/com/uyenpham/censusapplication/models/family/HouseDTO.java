@@ -416,6 +416,7 @@ public class HouseDTO {
         mC65L = c65L;
     }
     public  boolean set(String fieldName, Object fieldValue) {
+        fieldName = "m"+fieldName;
         Class<?> clazz = this.getClass();
         while (clazz != null) {
             try {

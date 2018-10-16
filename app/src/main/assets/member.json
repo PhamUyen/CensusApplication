@@ -101,7 +101,7 @@
       "id": "C6A",
       "name": "C06",
       "question": "Dân tộc",
-      "type": 9,
+      "type": 11,
       "options": [
         {
           "option": "KINH",
@@ -256,7 +256,7 @@
       "survey": "member"
     },
     {
-      "id": "C13a",
+      "id": "C13A",
       "name": "C13a",
       "question": "khó khăn khi nhìn, ngay cả khi đeo kính?",
       "type": 2,
@@ -282,7 +282,7 @@
       "survey": "member"
     },
     {
-      "id": "C13b",
+      "id": "C13B",
       "name": "C13b",
       "question": "khó khăn khi Nghe, ngay cả khi dùng thiết bị trợ thính?",
       "type": 2,
@@ -308,7 +308,7 @@
       "survey": "member"
     },
     {
-      "id": "C13c",
+      "id": "C13C",
       "name": "C13c",
       "question": "khó khăn khi Đi bộ hay bước lên bậc cầu thang?",
       "type": 2,
@@ -334,7 +334,7 @@
       "survey": "member"
     },
     {
-      "id": "C13d",
+      "id": "C13D",
       "name": "C13d",
       "question": "khó khăn khi Ghi nhớ, hay tập trung chú ý?",
       "type": 2,
@@ -360,7 +360,7 @@
       "survey": "member"
     },
     {
-      "id": "C13e",
+      "id": "C13E",
       "name": "C13e",
       "question": "khó khăn khi Tự chăm sóc bản thân (tự tắm gội hay tự mặc quần áo)?",
       "type": 2,
@@ -386,7 +386,7 @@
       "survey": "member"
     },
     {
-      "id": "C13f",
+      "id": "C13F",
       "name": "C13f",
       "question": "khó khăn khi Giao tiếp  khi sử dụng ngôn ngữ thông thường (hiểu ý người khác hoặc diễn đạt để người khác hiểu ý mình)?",
       "type": 2,

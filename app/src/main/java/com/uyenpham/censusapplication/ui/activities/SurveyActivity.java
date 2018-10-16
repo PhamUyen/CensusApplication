@@ -19,6 +19,7 @@ import com.uyenpham.censusapplication.db.PeopleDetailDAO;
 import com.uyenpham.censusapplication.db.WomanDAO;
 import com.uyenpham.censusapplication.models.DrawerDataFactory;
 import com.uyenpham.censusapplication.models.drawer.GroupDrawer;
+import com.uyenpham.censusapplication.models.family.DeadDTO;
 import com.uyenpham.censusapplication.models.family.FamilyDTO;
 import com.uyenpham.censusapplication.models.family.PeopleDetailDTO;
 import com.uyenpham.censusapplication.models.family.WomanDTO;
@@ -72,6 +73,7 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick,
     private MemberAdapter memberAdapter;
     public boolean isMember;
     public String survey;
+    String iddb;
 
     @Override
     protected int getLayoutId() {
@@ -97,8 +99,18 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick,
 
         Bundle bundle = getIntent().getBundleExtra(Constants.KEY_EXTRA_DATA);
         familyDTO = (FamilyDTO) bundle.getSerializable(Constants.KEY_FAMILY);
-        genListAnser();
+        iddb = bundle.getString(Constants.KEY_IDDB);
+        int num = bundle.getInt(Constants.KEY_NUM_HO);
 
+        if(familyDTO != null){
+            genListAnser();
+        }else {
+            familyDTO = new FamilyDTO();
+            familyDTO.setIDDB(iddb);
+            familyDTO.setLoaiphieu(2);
+            familyDTO.setHOSO(String.valueOf(num));
+            familyDTO.setIDHO(iddb+num);
+        }
         setInfoFamily(familyDTO);
         makeListQuestion();
 
@@ -147,6 +159,10 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick,
         listQuestion = DrawerDataFactory.makeListQuestion("question_people.json");
         listQuestion.addAll(DrawerDataFactory.makeListQuestion("people.json"));
         listQuestion.addAll(DrawerDataFactory.makeListQuestion("house.json"));
+    }
+
+    public ArrayList<QuestionDTO> getListQuestionMain() {
+        return listQuestion;
     }
 
     private void setListDrawer() {
@@ -215,7 +231,7 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick,
     public void setNavigationBar() {
         navigationBar = findViewById(R.id.toolbar);
         navigationBar.reSetAll();
-        navigationBar.setIconLeft(R.drawable.ic_menu_gallery);
+        navigationBar.setIconLeft(R.drawable.ic_menu);
 
         navigationBar.setTitle(getString(R.string.txt_interview_detail));
     }
@@ -243,9 +259,9 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick,
                 Utils.replcaeFragmentByType(listQuestion.get(currentIndex), true, listQuestion, mFragmentManager, -1);
                 toggleDrawer();
             }else {
-                finish();
                 Constants.mStaticObject.updateDB();
                 Constants.mStaticObject.reset();
+                finish();
             }
         }
     }
@@ -315,7 +331,11 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick,
             }
         } else if (survey.equals(Constants.SURVEY_WOMAN)) {
             for (WomanDTO womanDTO : Constants.mStaticObject.getWomanDTO()) {
-                listPeople.add(womanDTO.getIDTV());
+                listPeople.add(womanDTO.getTenTV());
+            }
+        }else if (survey.equals(Constants.SURVEY_DEAD)) {
+            for (DeadDTO womanDTO : Constants.mStaticObject.getDeadDTO()) {
+                listPeople.add(womanDTO.getmC43());
             }
         }
 

@@ -12,7 +12,7 @@
     {
       "id": "Q2",
       "name": "Q2",
-      "question": "Trong những người này có ai là: - Học sinh phổ thông đang trọ học? - Người thuộc biên chế ngành công an, quân đội (không bao gồm những người làm hợp đồng)?- Việt kiều về thăm gia đình?",
+      "question": "Trong những người này có ai là: \n- Học sinh phổ thông đang trọ học? \n- Người thuộc biên chế ngành công an, quân đội (không bao gồm những người làm hợp đồng)?- Việt kiều về thăm gia đình?",
       "type": 9,
       "options": [
         {
@@ -30,7 +30,7 @@
     {
       "id": "Q3",
       "name": "Q3",
-      "question": "Trong những người này có ai là:- Trẻ mới sinh từ ngày 01/8/2018?- Người mới chuyển đến từ ngày 01/8/2018?",
+      "question": "Trong những người này có ai là:\n- Trẻ mới sinh từ ngày 01/8/2018?\n- Người mới chuyển đến từ ngày 01/8/2018?",
       "type": 9,
       "options":[
         {

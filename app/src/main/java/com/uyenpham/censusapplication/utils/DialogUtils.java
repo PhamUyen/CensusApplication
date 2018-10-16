@@ -186,7 +186,7 @@ public class DialogUtils {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(message);
-        builder.setTitle(R.string.title_error);
+        builder.setTitle(R.string.title_alert);
         builder.setPositiveButton(positiveButton, onClickPosi);
         builder.setNegativeButton(nagativeButton, onClickNega);
         builder.setCancelable(false);

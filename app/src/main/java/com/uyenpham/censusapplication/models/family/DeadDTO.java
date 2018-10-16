@@ -14,13 +14,13 @@ public class DeadDTO {
     @SerializedName("C44")
     private Integer mC44;
     @SerializedName("C45N")
-    private String mC45N;
+    private Integer mC45N;
     @SerializedName("C45T")
-    private String mC45T;
+    private Integer mC45T;
     @SerializedName("C46N")
-    private String mC46N;
+    private Integer mC46N;
     @SerializedName("C46T")
-    private String mC46T;
+    private Integer mC46T;
     @SerializedName("C47")
     private Integer mC47;
     @SerializedName("C48")
@@ -48,7 +48,7 @@ public class DeadDTO {
         this.mID = mID;
     }
 
-    public DeadDTO(String mC43, Integer mC44, String mC45N, String mC45T, String mC46N, String
+    public DeadDTO(String mC43, Integer mC44, Integer mC45N, Integer mC45T, Integer mC46N, Integer
             mC46T, Integer mC47, Integer mC48, String mC48K, Integer mC49, String mC49K, String mID,
                    String mIDCHET) {
         this.mC43 = mC43;
@@ -82,35 +82,35 @@ public class DeadDTO {
         this.mC44 = mC44;
     }
 
-    public String getmC45N() {
+    public Integer getmC45N() {
         return mC45N;
     }
 
-    public void setmC45N(String mC45N) {
+    public void setmC45N(Integer mC45N) {
         this.mC45N = mC45N;
     }
 
-    public String getmC45T() {
+    public Integer getmC45T() {
         return mC45T;
     }
 
-    public void setmC45T(String mC45T) {
+    public void setmC45T(Integer mC45T) {
         this.mC45T = mC45T;
     }
 
-    public String getmC46N() {
+    public Integer getmC46N() {
         return mC46N;
     }
 
-    public void setmC46N(String mC46N) {
+    public void setmC46N(Integer mC46N) {
         this.mC46N = mC46N;
     }
 
-    public String getmC46T() {
+    public Integer getmC46T() {
         return mC46T;
     }
 
-    public void setmC46T(String mC46T) {
+    public void setmC46T(Integer mC46T) {
         this.mC46T = mC46T;
     }
 
@@ -171,6 +171,7 @@ public class DeadDTO {
 
     }
     public  boolean set(String fieldName, Object fieldValue) {
+        fieldName = "m"+fieldName;
         Class<?> clazz = this.getClass();
         while (clazz != null) {
             try {

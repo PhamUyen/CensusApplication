@@ -6,7 +6,6 @@ import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
-import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -43,9 +42,7 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
     LinearLayout lnContent;
 
 
-    private QuestionDTO questionDTO;
     private int posMember;
-    //    private MemberDTO memberDTO;
     ArrayList<OptionDTO> listOption = new ArrayList<>();
 
     @Override
@@ -54,18 +51,16 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
     }
 
     @Override
-    protected void createView(View view) {
+    public void initData() {
         activity.setiNext(this);
         activity.setiPrevious(this);
         posMember = getPosMember();
-        memberDTO = Constants.mStaticObject.getMemberDTO().get(posMember);
-        questionDTO = getQuestionDTO();
         loadQuestion(questionDTO);
     }
 
     @Override
     public boolean loadQuestion(QuestionDTO question) {
-        tvQuestion.setText(question.getQuestion());
+        tvQuestion.setText(question.getName() + "." +question.getQuestion());
         listOption = question.getOptions();
         LinearLayout linearLayout = null;
         for (OptionDTO option : listOption) {
@@ -117,7 +112,7 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
             editText.setImeOptions(EditorInfo.IME_ACTION_NEXT);
         }
         if (questionDTO.getId().equals(Constants.QUESTION_C05)) {
-            if (memberDTO.getmC4N() != 9998) {
+            if (memberDTO.getmC4N()!= null &&memberDTO.getmC4N() != 9998) {
                 int age = Calendar.getInstance().get(Calendar.YEAR) - memberDTO.getmC4N();
                 editText.setText(String.valueOf(age));
                 editText.setEnabled(false);
@@ -139,16 +134,13 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 switch (questionDTO.getSurvey()) {
                     case Constants.SURVEY_MEMBER:
-                        Constants.mStaticObject.getMemberDTO().set(posMember, updateMember(option,
-                                charSequence.toString()));
+                        updateMember(option, charSequence.toString());
                         break;
                     case Constants.SURVEY_WOMAN:
-                        Constants.mStaticObject.getWomanDTO().set(posMember, updateWoman(option,
-                                charSequence.toString()));
+                        updateWoman(option, charSequence.toString());
                         break;
                     case Constants.SURVEY_DEAD:
-//                        Constants.mStaticObject.getDeadDTO().set(posMember, updateWoman(option,
-//                                charSequence.toString()));
+                        updateDead(option, charSequence.toString());
                         break;
                     default:
                         break;
@@ -167,10 +159,6 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
         return linearLayout;
     }
 
-//    public void setQuestionDTO(QuestionDTO questionDTO) {
-//        this.questionDTO = questionDTO;
-//    }
-
 
     @Override
     public WarningDTO validateQuaetion(QuestionDTO question, AnswerDTO answer) {
@@ -180,8 +168,8 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
         FamilyDetailDTO family = Constants.mStaticObject.getFamilyDetailDTO();
         switch (question.getId()) {
             case Constants.QUESTION_C04:
-                if (memberDTO.getmC4T() < 0 || (memberDTO.getmC4T() > 12 && memberDTO.getmC4T() != 98) ||
-                        (memberDTO.getmC4N() == Calendar.getInstance().get(Calendar.YEAR) && memberDTO.getmC4T() > Calendar.getInstance().get(Calendar.MONTH)
+                if (memberDTO.getmC4T()!= null && (memberDTO.getmC4T() < 0 || (memberDTO.getmC4T() > 12 && memberDTO.getmC4T() != 98)) ||
+                        (memberDTO.getmC4N()!= null&& (memberDTO.getmC4N() == Calendar.getInstance().get(Calendar.YEAR) && memberDTO.getmC4T() > Calendar.getInstance().get(Calendar.MONTH))
                         )) {
                     return new WarningDTO(getString(R.string.txt_invalid_month, posMember + 1, memberDTO.getmC01(), memberDTO.getmC4T()), Constants.TYPE_NOTI);
                 }
@@ -224,13 +212,13 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
                 break;
 
             case Constants.QUESTION_C24:
-                if (memberDTO.getmC24() < 7) {
+                if (memberDTO.getmC24()!=null && memberDTO.getmC24() < 7) {
                     return new WarningDTO(getString(R.string.txt_age_marriage_too_small, posMember + 1, memberDTO.getmC01(), memberDTO.getmC24()), Constants.TYPE_NOTI);
                 }
-                if (7 <= memberDTO.getmC24() && memberDTO.getmC24() <= 12) {
+                if (memberDTO.getmC24()!=null &&7 <= memberDTO.getmC24() && memberDTO.getmC24() <= 12) {
                     return new WarningDTO(getString(R.string.txt_confirm_age_marriage, posMember + 1, memberDTO.getmC01(), memberDTO.getmC24()), Constants.TYPE_CONFIRM);
                 }
-                if (memberDTO.getmC24() > memberDTO.getmC05()) {
+                if (memberDTO.getmC24()!=null&& memberDTO.getmC24() > memberDTO.getmC05()) {
                     return new WarningDTO(getString(R.string.txt_error_age_marriage_too_large, posMember + 1, memberDTO.getmC01(), memberDTO.getmC24(), memberDTO.getmC05()), Constants.TYPE_NOTI);
                 }
                 break;
@@ -285,20 +273,20 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
                 break;
 
             case Constants.QUESTION_C45:
-                if(1< Integer.parseInt(deadDTO.getmC45T()) && Integer.parseInt(deadDTO.getmC45T()) >12 && Integer.parseInt(deadDTO.getmC45T())!=98){
-                    return   new WarningDTO(getString(R.string.txt_invalid_month_die,posMember+1, deadDTO.getmC43(),Integer.parseInt(deadDTO.getmC45T())),Constants.TYPE_NOTI);
+                if(1< deadDTO.getmC45T() && deadDTO.getmC45T() >12 && deadDTO.getmC45T()!=98){
+                    return   new WarningDTO(getString(R.string.txt_invalid_month_die,posMember+1, deadDTO.getmC43(),deadDTO.getmC45T()),Constants.TYPE_NOTI);
                 }
-                if(Integer.parseInt(deadDTO.getmC45N()) == 2018 && Integer.parseInt(deadDTO.getmC45T()) >7){
-                    return   new WarningDTO(getString(R.string.txt_invalid_time_die,posMember+1, deadDTO.getmC43(),Integer.parseInt(deadDTO.getmC45T())),Constants.TYPE_NOTI);
+                if(deadDTO.getmC45N() == 2018 && deadDTO.getmC45T() >7){
+                    return   new WarningDTO(getString(R.string.txt_invalid_time_die,posMember+1, deadDTO.getmC43(),deadDTO.getmC45T()),Constants.TYPE_NOTI);
                 }
                 break;
 
             case Constants.QUESTION_C46:
-                if(1< Integer.parseInt(deadDTO.getmC45T()) && Integer.parseInt(deadDTO.getmC45T()) >12 && Integer.parseInt(deadDTO.getmC45T())!=98){
-                    return   new WarningDTO(getString(R.string.txt_invalid_month_birth_die,posMember+1, deadDTO.getmC43(),Integer.parseInt(deadDTO.getmC46T())),Constants.TYPE_NOTI);
+                if(1< deadDTO.getmC45T() && deadDTO.getmC45T() >12 && deadDTO.getmC45T()!=98){
+                    return   new WarningDTO(getString(R.string.txt_invalid_month_birth_die,posMember+1, deadDTO.getmC43(),deadDTO.getmC46T()),Constants.TYPE_NOTI);
                 }
-                if(Integer.parseInt(deadDTO.getmC46N()) == 2018 && Integer.parseInt(deadDTO.getmC46T()) >7){
-                    return   new WarningDTO(getString(R.string.txt_invalid_time_die,posMember+1, deadDTO.getmC43(),Integer.parseInt(deadDTO.getmC46T())),Constants.TYPE_NOTI);
+                if(deadDTO.getmC46N() == 2018 && deadDTO.getmC46T() >7){
+                    return   new WarningDTO(getString(R.string.txt_invalid_time_die,posMember+1, deadDTO.getmC43(),deadDTO.getmC46T()),Constants.TYPE_NOTI);
                 }
                 if(Integer.valueOf(deadDTO.getmC45N()) < Integer.valueOf(deadDTO.getmC46N())
                     || (Integer.valueOf(deadDTO.getmC45N()).equals(Integer.valueOf(deadDTO.getmC46N())) &&
@@ -394,6 +382,38 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
         return false;
     }
 
+    private WomanDTO updateDead(String option, String answer) {
+        WomanDTO womanDTO = Constants.mStaticObject.getWomanDTO().get(posMember);
+        switch (questionDTO.getId()) {
+            case Constants.QUESTION_C45:
+                if (option.equals(Constants.MONTH)) {
+                    deadDTO.setmC45T(Integer.parseInt(answer));
+                } else if (option.equals(Constants.YEAR)) {
+                    deadDTO.setmC45N(Integer.parseInt(answer));
+                }else {
+                    deadDTO.setmC45N(9998);
+                    deadDTO.setmC45T(98);
+                }
+                break;
+            case Constants.QUESTION_C46:
+                if (option.equals(Constants.MONTH)) {
+                    deadDTO.setmC46T(Integer.parseInt(answer));
+                } else if (option.equals(Constants.YEAR)) {
+                    deadDTO.setmC46N(Integer.parseInt(answer));
+                }else {
+                    deadDTO.setmC46N(9998);
+                    deadDTO.setmC46T(98);
+                }
+                break;
+            case Constants.QUESTION_C47:
+                deadDTO.setmC47(Integer.parseInt(answer));
+                break;
+            default:
+                break;
+
+        }
+        return womanDTO;
+    }
     private WomanDTO updateWoman(String option, String answer) {
         WomanDTO womanDTO = Constants.mStaticObject.getWomanDTO().get(posMember);
         switch (questionDTO.getId()) {
@@ -402,6 +422,9 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
                     womanDTO.setC38T(Integer.parseInt(answer));
                 } else if (option.equals(Constants.YEAR)) {
                     womanDTO.setC38N(Integer.parseInt(answer));
+                }else {
+                    womanDTO.setC38N(9998);
+                    womanDTO.setC38T(98);
                 }
                 break;
             case Constants.QUESTION_C35:
@@ -417,6 +440,7 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
                 }
                 womanDTO.set(id, Integer.parseInt(answer));
                 break;
+
             default:
                 break;
 
@@ -450,6 +474,9 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
                     Constants.mStaticObject.getWomanDTO().add(new WomanDTO(memberDTO.getmIDTV(),
                             memberDTO.getmC01()));
                 }
+                break;
+            case Constants.QUESTION_C24:
+                memberDTO.setmC24(Integer.parseInt(answer));
                 break;
             case Constants.QUESTION_C05:
                 int age = Integer.parseInt(answer);

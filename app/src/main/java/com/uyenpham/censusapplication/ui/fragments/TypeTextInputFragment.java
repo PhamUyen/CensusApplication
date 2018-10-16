@@ -41,7 +41,7 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
     @Bind(R.id.rcv_text)
     RecyclerView rcvText;
 
-    private QuestionDTO questionDTO;
+//    private QuestionDTO questionDTO;
     private AnswerDTO answerDTO;
     private ArrayList<String> listText;
     private TextAdapter adapter;
@@ -56,7 +56,7 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
     }
 
     @Override
-    protected void createView(View view) {
+    public void initData() {
         activity.setiNext(this);
         activity.setiPrevious(this);
         edAnswer.setSingleLine();
@@ -78,9 +78,13 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     //add answer to list
                     if (questionDTO.getSurvey().equals(Constants.SURVEY_PEOPLE)) {
-                        listText.add(edAnswer.getText().toString());
-                        adapter.notifyDataSetChanged();
-                        setListPeopleDetail(edAnswer.getText().toString());
+                        if(StringUtils.isEmpty(edAnswer.getText().toString())){
+                            DialogUtils.showAlert(activity, R.string.txt_name_empty);
+                        }else {
+                            listText.add(edAnswer.getText().toString());
+                            adapter.notifyDataSetChanged();
+                            setListPeopleDetail(edAnswer.getText().toString());
+                        }
                     }
                     return true;
                 }
@@ -154,7 +158,7 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
             }
         } else if (Constants.SURVEY_MEMBER.equals(question.getSurvey())) {
             if (question.getId().equals(Constants.QUESTION_C01)) {
-                edAnswer.setText(memberDTO.getmC01() == null ? "" : memberDTO.getmC01());
+                edAnswer.setText(StringUtils.isEmpty(memberDTO.getmC01()) ? "" : memberDTO.getmC01());
             }
         } else if (Constants.SURVEY_FAMILY.equals(question.getSurvey())) {
             edAnswer.setText(String.valueOf(Constants.mStaticObject.getFamilyDTO().get(question.getId())));
@@ -197,9 +201,9 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
         return null;
     }
 
-    public void setQuestionDTO(QuestionDTO questionDTO) {
-        this.questionDTO = questionDTO;
-    }
+//    public void setQuestionDTO(QuestionDTO questionDTO) {
+//        this.questionDTO = questionDTO;
+//    }
 
     public void setAnswerDTO(AnswerDTO answerDTO) {
         this.answerDTO = answerDTO;

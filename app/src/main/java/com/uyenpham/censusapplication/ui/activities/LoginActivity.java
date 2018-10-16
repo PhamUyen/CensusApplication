@@ -1,6 +1,7 @@
 package com.uyenpham.censusapplication.ui.activities;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.view.View;
 import android.widget.EditText;
@@ -8,8 +9,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.uyenpham.censusapplication.BuildConfig;
 import com.uyenpham.censusapplication.R;
+import com.uyenpham.censusapplication.models.locality.NationDTO;
 import com.uyenpham.censusapplication.models.user.LoginDTO;
 import com.uyenpham.censusapplication.models.user.ResponseLoginDTO;
 import com.uyenpham.censusapplication.service.BaseCallback;
@@ -17,8 +20,11 @@ import com.uyenpham.censusapplication.service.KillAppService;
 import com.uyenpham.censusapplication.service.ServiceBuilder;
 import com.uyenpham.censusapplication.utils.Constants;
 import com.uyenpham.censusapplication.utils.DialogUtils;
+import com.uyenpham.censusapplication.utils.FileUtils;
 import com.uyenpham.censusapplication.utils.SharedPrefsUtils;
 import com.uyenpham.censusapplication.utils.ValidateUtils;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -48,8 +54,25 @@ public class LoginActivity extends BaseActivity {
             edPass.setText("123456");
             edUserName.setText("D992001");
         }
-
+        getListNation();
         startService(new Intent(getBaseContext(), KillAppService.class));
+    }
+
+    private void getListNation(){
+        new AsyncTask<Void,Void, List<NationDTO>>(){
+
+            @Override
+            protected  List<NationDTO> doInBackground(Void... voids) {
+                List<NationDTO> list =FileUtils.getListNation(LoginActivity.this);
+                return list;
+            }
+
+            @Override
+            protected void onPostExecute(List<NationDTO> nationDTOS) {
+                SharedPrefsUtils.setStringPreference(LoginActivity.this,"nation",new Gson().toJson(nationDTOS));
+                super.onPostExecute(nationDTOS);
+            }
+        }.execute();
     }
 
     private void switchToLoginView() {

@@ -30,7 +30,7 @@ public abstract class BaseTypeFragment extends BaseFragment {
     public DeadDTO deadDTO;
     public HouseDTO houseDTO;
     public FamilyDetailDTO familyDetailDTO;
-    private QuestionDTO questionDTO;
+    public QuestionDTO questionDTO;
     public abstract boolean loadQuestion(QuestionDTO questionDTO);
 
     @Override
@@ -47,7 +47,9 @@ public abstract class BaseTypeFragment extends BaseFragment {
         } else if (Constants.SURVEY_HOUSE.equals(questionDTO.getSurvey())) {
             houseDTO = Constants.mStaticObject.getHouseDTO();
         }
+        initData();
     }
+    public abstract void initData();
 
     private MemberDTO getMemberById(String id){
         for(MemberDTO member : Constants.mStaticObject.getMemberDTO()){
@@ -122,11 +124,11 @@ public abstract class BaseTypeFragment extends BaseFragment {
 
 
     public void nextMember() {
-        posMember++;
-        setPosMember(posMember);
         switch (questionDTO.getSurvey()) {
             case Constants.SURVEY_MEMBER:
-                if (posMember < Constants.mStaticObject.getMemberDTO().size()) {
+                if (posMember < Constants.mStaticObject.getMemberDTO().size()-1) {
+                    posMember++;
+                    setPosMember(posMember);
                     currentIndex = 0;
                     Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true,
                             getListQuestion(), activity.mFragmentManager, getPosMember());
@@ -134,14 +136,18 @@ public abstract class BaseTypeFragment extends BaseFragment {
                             .getPeopleDetailDTO().get(posMember).getQ1());
                 } else {
                     if (!Constants.mStaticObject.getWomanDTO().isEmpty()) {
+                        posMember =0;
+                        setPosMember(posMember);
                         activity.survey = Constants.SURVEY_WOMAN;
                         activity.isMember = true;
                         activity.setListPeople(posMember);
                         activity.getNavigationBar().setTitle("1 - " + Constants.mStaticObject
                                 .getWomanDTO().get(0).getTenTV());
                     } else {
-                        if (Constants.mStaticObject.getDeadDTO().size() > 0) {
+                        if (!Constants.mStaticObject.getDeadDTO().isEmpty()) {
                             activity.survey = Constants.SURVEY_DEAD;
+                            posMember =0;
+                            setPosMember(posMember);
                             activity.isMember = true;
                             activity.setListPeople(posMember);
                             activity.getNavigationBar().setTitle("1 - " + Constants.mStaticObject
@@ -149,16 +155,19 @@ public abstract class BaseTypeFragment extends BaseFragment {
                         } else {
                             if (currentIndex < getListQuestion().size()) {
                                 activity.makeListQuestion();
-                                currentIndex = 22;
-                                Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true,
-                                        getListQuestion(), activity.mFragmentManager, -1);
+                                currentIndex = 25;
+                                activity.getNavigationBar().setTitle("Chi tiết phỏng vấn");
+                                Utils.replcaeFragmentByType(activity.getListQuestionMain().get(currentIndex), true,
+                                        activity.getListQuestionMain(), activity.mFragmentManager, -1);
                             }
                         }
                     }
                 }
                 break;
             case Constants.SURVEY_WOMAN:
-                if (posMember < Constants.mStaticObject.getWomanDTO().size()) {
+                if (posMember < Constants.mStaticObject.getWomanDTO().size()-1) {
+                    posMember++;
+                    setPosMember(posMember);
                     currentIndex = 0;
                     Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true,
                             getListQuestion(), activity.mFragmentManager, getPosMember());
@@ -166,6 +175,8 @@ public abstract class BaseTypeFragment extends BaseFragment {
                             .getWomanDTO().get(posMember).getTenTV());
                 } else {
                     if (Constants.mStaticObject.getDeadDTO().size() > 0) {
+                        posMember =0;
+                        setPosMember(posMember);
                         activity.survey = Constants.SURVEY_DEAD;
                         activity.isMember = true;
                         activity.setListPeople(posMember);
@@ -174,15 +185,18 @@ public abstract class BaseTypeFragment extends BaseFragment {
                     } else {
                         if (currentIndex < getListQuestion().size()) {
                             activity.makeListQuestion();
-                            currentIndex = 22;
-                            Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true,
-                                    getListQuestion(), activity.mFragmentManager, -1);
+                            currentIndex = 25;
+                            activity.getNavigationBar().setTitle("Chi tiết phỏng vấn");
+                            Utils.replcaeFragmentByType(activity.getListQuestionMain().get(currentIndex), true,
+                                    activity.getListQuestionMain(), activity.mFragmentManager, -1);
                         }
                     }
                 }
                 break;
             case Constants.SURVEY_DEAD:
-                if (posMember < Constants.mStaticObject.getDeadDTO().size()) {
+                if (posMember < Constants.mStaticObject.getDeadDTO().size()-1) {
+                    posMember++;
+                    setPosMember(posMember);
                     currentIndex = 0;
                     Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true,
                             getListQuestion(), activity.mFragmentManager, getPosMember());
@@ -190,9 +204,10 @@ public abstract class BaseTypeFragment extends BaseFragment {
                             .getDeadDTO().get(posMember).getmC43());
                 } else {
                     activity.makeListQuestion();
-                    currentIndex = 22;
-                    Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true,
-                            getListQuestion(), activity.mFragmentManager, -1);
+                    currentIndex = 25;
+                    activity.getNavigationBar().setTitle("Chi tiết phỏng vấn");
+                    Utils.replcaeFragmentByType(activity.getListQuestionMain().get(currentIndex), true,
+                            activity.getListQuestionMain(), activity.mFragmentManager, -1);
                 }
                 break;
             default:

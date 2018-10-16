@@ -38,7 +38,7 @@ public class FamilyAdapter extends RecyclerView.Adapter<FamilyAdapter.LocalityVi
     @Override
     public void onBindViewHolder(@NonNull FamilyAdapter.LocalityViewHolder holder, final int position) {
         FamilyDTO family = listFamily.get(position);
-         String info = family.getIDDB()+ " : " + mapState(family.getTINHTRANGHO()) + " - "
+         String info = family.getIDDB()+ " : " + mapState(family.getTINHTRANGHO()==null ? 0 :family.getTINHTRANGHO()) + " - "
                 + mapName(family.getTENCHUHO())+" - "+mapAddress(family.getDIACHI());
         holder.tvFamily.setText(info);
         holder.item.setOnClickListener(new View.OnClickListener() {
