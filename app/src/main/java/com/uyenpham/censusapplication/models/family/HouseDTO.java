@@ -6,6 +6,9 @@ import com.google.gson.annotations.SerializedName;
 import java.lang.reflect.Field;
 
 public class HouseDTO {
+    public static final String ID_HO = "mID";
+    @SerializedName("mID")
+    private String mID;
 
     @SerializedName("C50")
     private Integer mC50;
@@ -401,6 +404,14 @@ public class HouseDTO {
         return mC65L;
     }
 
+    public String getmID() {
+        return mID;
+    }
+
+    public void setmID(String mID) {
+        this.mID = mID;
+    }
+
     public void setC65L(String c65L) {
         mC65L = c65L;
     }
@@ -435,5 +446,9 @@ public class HouseDTO {
             }
         }
         return null;
+    }
+
+    public HouseDTO(String mID) {
+        this.mID = mID;
     }
 }

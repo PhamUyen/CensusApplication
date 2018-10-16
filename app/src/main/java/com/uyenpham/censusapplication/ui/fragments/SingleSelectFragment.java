@@ -76,7 +76,7 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
     private ArrayList<PeopleDetailDTO> listMember;
     private MultiSelectAdapter adapter;
     private ArrayList<PeopleDetailDTO> listSelected;
-    private boolean isYes;
+    private Boolean isYes;
     private ArrayList<OptionDTO> listOption;
     private RadioButtonAdapter radioButtonAdapter;
     private int posMember;
@@ -178,8 +178,8 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
     public WarningDTO validateQuaetion(QuestionDTO question, AnswerDTO answer) {
         switch (question.getSurvey()) {
             case Constants.SURVEY_PEOPLE:
-                if (!isYes || (isYes && listSelected.size() != 0) || (Constants.mStaticObject.getPeopleDTO
-                        ().get(questionDTO.getName()) != null || (isYes && listMember.size() != 0))) {
+                if (isYes == null || (isYes && (listSelected.isEmpty() && listMember.isEmpty())) || (Constants.mStaticObject.getPeopleDTO
+                        ().get(questionDTO.getId()) == null )) {
                     return new WarningDTO(getString(R.string.txt_invalid_info), Constants.TYPE_NOTI);
                 }
                 break;
@@ -838,7 +838,7 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
     }
 
     private void setValue(int pos) {
-        switch (questionDTO.getId()) {
+        switch (questionDTO.getSurvey()) {
             case Constants.SURVEY_PEOPLE:
                 Constants.mStaticObject.getPeopleDTO().set(questionDTO.getId(), pos + 1);
                 break;
@@ -856,7 +856,9 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
                 womanDTO.set(questionDTO.getId(), pos + 1);
                 break;
             case Constants.SURVEY_HOUSE:
-                houseDTO.set(questionDTO.getId(), pos + 1);
+                if(houseDTO != null){
+                    houseDTO.set(questionDTO.getId(), pos + 1);
+                }
                 familyDetailDTO.set(questionDTO.getId(), pos + 1);
                 break;
             default:

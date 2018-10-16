@@ -8,6 +8,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.uyenpham.censusapplication.R;
+import com.uyenpham.censusapplication.models.family.PeopleDetailDTO;
 import com.uyenpham.censusapplication.models.survey.AnswerDTO;
 import com.uyenpham.censusapplication.models.survey.OptionDTO;
 import com.uyenpham.censusapplication.models.survey.QuestionDTO;
@@ -47,8 +48,10 @@ public class MultiSelectionFragment extends BaseTypeFragment implements IRadioBu
     @Override
     protected void createView(View view) {
         listCheckbox.removeAllViews();
-
+        activity.setiNext(this);
+        activity.setiPrevious(this);
         posMember = getPosMember();
+
         questionDTO = getQuestionDTO();
         loadQuestion(questionDTO);
     }
@@ -78,7 +81,14 @@ public class MultiSelectionFragment extends BaseTypeFragment implements IRadioBu
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         listCheckbox.setLayoutManager(linearLayoutManager);
         tvQuestion.setText(question.getQuestion());
-        listOption = question.getOptions();
+        listOption = new ArrayList<>();
+        if(question.getId().equalsIgnoreCase(Constants.QUESTION_Q9)){
+            for(PeopleDetailDTO peopleDetailDTO : Constants.mStaticObject.getPeopleDetailDTO()){
+                listOption.add(new OptionDTO(peopleDetailDTO.getQ1(),Constants.TYPE_NORMAL));
+            }
+        }else {
+            listOption.addAll(question.getOptions());
+        }
         adapter = new RadioButtonAdapter(listOption);
         listCheckbox.setAdapter(adapter);
         adapter.setListener(this);

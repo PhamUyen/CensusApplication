@@ -87,7 +87,7 @@ public class Utils {
             case Constants.TYPE_MULTI_SELECT_INPUT:
                 MultiSelectionFragment multiSelectionFragment = new MultiSelectionFragment();
                 multiSelectionFragment.setQuestionDTO(questionDTO);
-                multiSelectionFragment.setAnswerDTO(null);
+//                multiSelectionFragment.setAnswerDTO(null);
                 replaceAnimation(multiSelectionFragment, isNext,fragmentManager);
                 break;
             default:

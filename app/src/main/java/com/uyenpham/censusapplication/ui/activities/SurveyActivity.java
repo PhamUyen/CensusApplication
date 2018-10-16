@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import com.uyenpham.censusapplication.R;
 import com.uyenpham.censusapplication.db.AnswerDAO;
 import com.uyenpham.censusapplication.db.DeadDAO;
+import com.uyenpham.censusapplication.db.HouseDAO;
 import com.uyenpham.censusapplication.db.MemberDAO;
 import com.uyenpham.censusapplication.db.PeopleDAO;
 import com.uyenpham.censusapplication.db.PeopleDetailDAO;
@@ -136,6 +137,7 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick,
         Constants.mStaticObject.setDeadDTO(DeadDAO.getInstance().findById(family.getIDHO()));
         Constants.mStaticObject.setMemberDTO(MemberDAO.getInstance().findByIdHo(family.getIDHO()));
         Constants.mStaticObject.getFamilyDetailDTO().setIDHO(family.getIDHO());
+        Constants.mStaticObject.setHouseDTO(HouseDAO.getInstance().findById(family.getIDHO()));
     }
 
     public void makeListQuestion() {
@@ -213,7 +215,7 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick,
     public void setNavigationBar() {
         navigationBar = findViewById(R.id.toolbar);
         navigationBar.reSetAll();
-        navigationBar.setIconLeft(R.drawable.ic_menu);
+        navigationBar.setIconLeft(R.drawable.ic_menu_gallery);
 
         navigationBar.setTitle(getString(R.string.txt_interview_detail));
     }
