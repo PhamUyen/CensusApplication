@@ -1,0 +1,108 @@
+{
+  "questions":[
+    {
+      "id": "Q1a",
+      "name": "Q1a",
+      "question": "Xin Ông/Bà cho biết trong hộ ta có những ai thường xuyên ăn, ở tại hộ được 6 tháng trở lên tính đến 0 giờ ngày 01/4/2019 (gồm cả người giúp việc hoặc người khác đến ở cùng) không phân biệt có hay không có hộ khẩu thường trú tại hộ?",
+      "type": 8,
+      "options": [],
+      "placeHolders": "",
+      "survey":"people"
+    },
+    {
+      "id": "Q1b",
+      "name": "Q1b",
+      "question": "Trong những người vừa nêu có ai là :(NẾU CÓ GẠCH TÊN)\n\n - Người thuộc biên chế ngành quân đội, công an (không bao gồm những người làm hợp đồng).\n\n - Học sinh phô thông đến trọ học/ ở nhờ.\n\n - Người đến hộ để chơi/thăm;đến nghỉ hè, nghỉ lễ; đến ở vì mục đích công tác/đào tạo dưới 1 năm.\n\n -Người nước ngoài chưa nhập quốc tịch Việt Nam, Việt kiều về thăm gia đình.",
+      "type": 8,
+      "options": [],
+      "placeHolders": "",
+      "survey":"people"
+    },
+    {
+      "id": "Q2a",
+      "name": "Q2a",
+      "question": "Trong hộ ta có ai mới chuyển đến hộ chưa được 6 tháng tính đến 0 giờ ngày 01/04/2019 hoặc trẻ em mới sinh trước ngày 01/04/2019 không?",
+      "type": 9,
+      "options": [
+        {
+          "option" : "CÓ",
+          "type" : "SHOW"
+        },
+        {
+          "option" : "KHÔNG",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"people"
+    },
+    {
+      "id": "Q2b",
+      "name": "Q2b",
+      "question": "Trong những người vừa nêu có ai là :(NẾU CÓ GẠCH TÊN)\n\n - Người thuộc biên chế ngành quân đội, công an (không bao gồm những người làm hợp đồng).\n\n - Học sinh phô thông đến trọ học/ ở nhờ.\n\n  -Người nước ngoài chưa nhập quốc tịch Việt Nam, Việt kiều về thăm gia đình.\n\n - Người đến với mục đích làm ăn.\n\n-Người không có ý định ăn, ở lâu dài tại hộ (không bao gồm những người không có nơi ăn, ở ổn định nào khác.",
+      "type": 8,
+      "options": [],
+      "placeHolders": "",
+      "survey":"people"
+    },
+    {
+      "id": "Q3a",
+      "name": "Q3",
+      "question": "Trong hộ ta có ai lâu nay vẫn ăn, ở thường xuyên tại hộ nhưng hiện nay đang đi vắng vì những lí do sau đây không? (không tính những người thuộc biên chế ngành công an, quân đội)\n\n - Đi làm ăn xa dưới 6 tháng.\n\n -Đi điều trị nội trú tại cơ sở ý tế.\n\n -Đi chơi/thăm người thân; đi nghỉ hè/nghỉ lễ/du lịch; đi công tác/đào tạo trong nước dưới 1 năm.\n\n -Học sinh phổ thông đi trọ học/đi ở nhờ;người đi buôn chuyến; đi tàu viễn dương; đánh bắt hải sản.\n\n -Đi nước ngoài nhưng trong thời hạn cho phép(không tính những người làm việc tại cơ quan đại diện của Việt Nam ở nước ngoài và những người đi cùng).\n\n -Bị quân đội, công an tạm giữ.",
+      "type": 9,
+      "options":[
+        {
+          "option" : "CÓ",
+          "type" : "SHOW"
+        },
+        {
+          "option" : "KHÔNG",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"people"
+    },
+    {
+      "id": "Q4a",
+      "name": "Q4",
+      "question": "Trong hộ ta có ai vẫn thường xuyên ăn, ở tại hộ nhưng đã chết say 0 giờ ngày 01/04/2019 không?",
+      "type": 9,
+      "options": [
+        {
+          "option" : "CÓ",
+          "type" : "SHOW"
+        },
+        {
+          "option" : "KHÔNG",
+          "type" : "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"people"
+    },
+    {
+      "id": "Q5",
+      "name": "Q5",
+      "question": "Ông/bà cho biết ai là chủ hộ?",
+      "type": 1,
+      "options": [],
+      "placeHolders": "",
+      "survey":"people"
+    },
+    {
+      "id": "Q6",
+      "name": "Q6",
+      "question": "Ông/bà cho biết trong số những người là nhân khẩu thực tế thường trú tại hộ, có bao nhiêu người có hộ khẩu thường trú tại xã/phường/thị trấn này?",
+      "type": 6,
+      "options": [
+        {
+          "option" : "NGƯỜI",
+          "type" : "NUMBER"
+        }
+      ],
+      "placeHolders": "",
+      "survey":"people"
+    }
+  ]
+}

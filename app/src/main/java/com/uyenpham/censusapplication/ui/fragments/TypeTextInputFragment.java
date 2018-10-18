@@ -138,7 +138,7 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
     public boolean loadQuestion(QuestionDTO question) {
         answerDTO = AnswerDAO.getInstance().findById(questionDTO.getId(), Constants.mStaticObject.getIdHo());
         if (question == null) return false;
-        tvQuestion.setText(question.getQuestion());
+        setContentQuestion(tvQuestion);
         if (Constants.SURVEY_PEOPLE.equals(question.getSurvey())) {
             PeopleDTO peopleDTO = Constants.mStaticObject.getPeopleDTO();
             if (question.getId().equals(Constants.QUESTION_Q1)) {

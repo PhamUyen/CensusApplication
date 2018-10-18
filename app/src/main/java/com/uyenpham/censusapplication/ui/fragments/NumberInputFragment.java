@@ -60,7 +60,7 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
 
     @Override
     public boolean loadQuestion(QuestionDTO question) {
-        tvQuestion.setText(question.getName() + "." +question.getQuestion());
+        setContentQuestion(tvQuestion);
         listOption = question.getOptions();
         LinearLayout linearLayout = null;
         for (OptionDTO option : listOption) {

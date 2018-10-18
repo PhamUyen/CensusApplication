@@ -24,7 +24,7 @@
     <dimen name="margin_40">40dp</dimen>
 
     //=====view=====//
-    <dimen name="height_edittext">45dp</dimen>
+    <dimen name="height_edittext">40dp</dimen>
     <dimen name="height_button">45dp</dimen>
     <dimen name="height_toolbar">56dp</dimen>
     <dimen name="height_button_list">25dp</dimen>

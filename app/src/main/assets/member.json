@@ -12,7 +12,7 @@
     {
       "id": "C02",
       "name": "C02",
-      "question": "Quan hệ thế nào với chủ hộ?",
+      "question": "%1$s có mối quan hệ thế nào với chủ hộ?",
       "type": 2,
       "options": [
         {
@@ -46,7 +46,7 @@
     {
       "id": "C03",
       "name": "C03",
-      "question": "Giới tính",
+      "question": "%1$s là nam hay nữ?",
       "type": 2,
       "options": [
         {
@@ -64,7 +64,7 @@
     {
       "id": "C04",
       "name": "C04",
-      "question": "Tháng, năm dương lịch",
+      "question": "%1$s sinh vào tháng, năm dương lịch nào?",
       "type": 7,
       "options": [
         {
@@ -86,7 +86,7 @@
     {
       "id": "C05",
       "name": "C05",
-      "question": "Tuổi",
+      "question": "Hiện nay, %1$s bao nhiêu tuổi theo dương lịch?",
       "type": 6,
       "options": [
         {
@@ -100,7 +100,7 @@
     {
       "id": "C6A",
       "name": "C06",
-      "question": "Dân tộc",
+      "question": "%1$s thuộc dân tộc nào?",
       "type": 11,
       "options": [
         {
@@ -118,7 +118,7 @@
     {
       "id": "C7A",
       "name": "C07",
-      "question": "Tôn giáo",
+      "question": "%1$s có theo tôn giáo nào không?",
       "type": 11,
       "options": [
         {
@@ -136,7 +136,7 @@
     {
       "id": "C08",
       "name": "C08",
-      "question": "Dăng ký khai sinh",
+      "question": "Hiện nay, %1$s đã được đăng ký khai sinh chưa?",
       "type": 2,
       "options": [
         {
@@ -154,7 +154,7 @@
     {
       "id": "C09",
       "name": "C09",
-      "question": "Cách đây 5 năm (vào ngày 01/8/2013),thực tế thường trú ở đâu?",
+      "question": "Cách đây 5 năm (vào ngày 01/04/2014),%1$s tế thường trú ở đâu?",
       "type": 2,
       "options": [
         {
@@ -184,11 +184,11 @@
     {
       "id": "C10A",
       "name": "C10",
-      "question": "Chuyển đến từ tỉnh/thành phố, quận/huyện nào?",
-      "type": 1,
+      "question": "%1$s chuyển đến từ tỉnh/thành phố, quận/huyện nào?",
+      "type": 12,
       "options": [
         {
-          "option": "TÊN TỈNH/THÀNH PHỒ",
+          "option": "TÊN TỈNH/THÀNH PHỐ",
           "type": "NORMAL"
         },
         {
@@ -202,7 +202,7 @@
     {
       "id": "C11",
       "name": "C11",
-      "question": "Cách đây 5 năm, nơi thực tế thường trú nói trên là phường/thị trấn hay xã?",
+      "question": "Cách đây 5 năm, nơi thực tế thường trú nói trên của %1$s là phường/thị trấn hay xã?",
       "type": 2,
       "options": [
         {
@@ -220,7 +220,7 @@
     {
       "id": "C12",
       "name": "C12",
-      "question": "Lý do chính chuyển đến hộ là gì?",
+      "question": "Lý do chính mà %1$s chuyển đến hộ là gì?",
       "type": 4,
       "options": [
         {
@@ -258,7 +258,7 @@
     {
       "id": "C13A",
       "name": "C13a",
-      "question": "khó khăn khi nhìn, ngay cả khi đeo kính?",
+      "question": "%1$s có khó khăn gì khi nhìn, ngay cả khi đeo kính không?",
       "type": 2,
       "options": [
         {
@@ -284,7 +284,7 @@
     {
       "id": "C13B",
       "name": "C13b",
-      "question": "khó khăn khi Nghe, ngay cả khi dùng thiết bị trợ thính?",
+      "question": "%1$s có khó khăn gì khi nghe, ngay cả khi dùng thiết bị trợ thính không?",
       "type": 2,
       "options": [
         {
@@ -310,7 +310,7 @@
     {
       "id": "C13C",
       "name": "C13c",
-      "question": "khó khăn khi Đi bộ hay bước lên bậc cầu thang?",
+      "question": "%1$s có khó khăn gì khi đi bộ hay bước lên bậc cầu thang không?",
       "type": 2,
       "options": [
         {
@@ -336,7 +336,7 @@
     {
       "id": "C13D",
       "name": "C13d",
-      "question": "khó khăn khi Ghi nhớ, hay tập trung chú ý?",
+      "question": "%1$s có khó khăn gì khi ghi nhớ, hay tập trung chú ý không?",
       "type": 2,
       "options": [
         {
@@ -362,7 +362,7 @@
     {
       "id": "C13E",
       "name": "C13e",
-      "question": "khó khăn khi Tự chăm sóc bản thân (tự tắm gội hay tự mặc quần áo)?",
+      "question": "%1$s có khó khăn gì khi tự chăm sóc bản thân (tự tắm gội hay tự mặc quần áo) không?",
       "type": 2,
       "options": [
         {
@@ -388,7 +388,7 @@
     {
       "id": "C13F",
       "name": "C13f",
-      "question": "khó khăn khi Giao tiếp  khi sử dụng ngôn ngữ thông thường (hiểu ý người khác hoặc diễn đạt để người khác hiểu ý mình)?",
+      "question": "%1$s có khó khăn gì khi giao tiếp  khi sử dụng ngôn ngữ thông thường (hiểu ý người khác hoặc diễn đạt để người khác hiểu ý mình) không?",
       "type": 2,
       "options": [
         {
@@ -414,7 +414,7 @@
     {
       "id": "C14",
       "name": "C14",
-      "question": "Hiện nay đang đi học, đã thôi học hay chưa bao giờ đi học?",
+      "question": "Hiện nay %1$s đang đi học, đã thôi học hay chưa bao giờ đi học?",
       "type": 2,
       "options": [
         {
@@ -436,7 +436,7 @@
     {
       "id": "C15",
       "name": "C15",
-      "question": "Cấp học đang học là gì?",
+      "question": "Trình độ giáo dục, đào tạo %1$s đang học là gì?",
       "type": 2,
       "options": [
         {
@@ -490,7 +490,7 @@
     {
       "id": "C16",
       "name": "C16",
-      "question": "Trình độ học vấn cao nhất tốt nghiệp/đạt được là gì?",
+      "question": "Trình độ giáo dục, đào tạo cao nhất %1$s đã tốt nghiệp/đạt được là gì?",
       "type": 2,
       "options": [
         {
@@ -536,15 +536,11 @@
     {
       "id": "C17",
       "name": "C17",
-      "question": "kỹ năng nghề hoặc bằng/chứng chỉ nghề",
-      "type": 2,
+      "question": "Lớp học phổ thông cao nhất mà %1$s đã học xong?",
+      "type": 6,
       "options": [
         {
-          "option": "CÓ",
-          "type": "SHOW"
-        },
-        {
-          "option": "KHÔNG",
+          "option": "LỚP PHỔ THÔNG",
           "type": "NORMAL"
         }
       ],
@@ -554,27 +550,11 @@
     {
       "id": "C18",
       "name": "C18",
-      "question": "Trình độ nghề/kỹ năng nghề cao nhất",
-      "type": 2,
+      "question": "Tổng số năm đã học xong của tất cả các trình độ đào tạo từ sơ cấp trở lên của %1$s (NẾU CÓ)?",
+      "type": 6,
       "options": [
         {
-          "option": "CNKT KHÔNG CÓ BẰNG/CC",
-          "type": "NORMAL"
-        },
-        {
-          "option": "CHỨNG CHỈ NGHỀ",
-          "type": "NORMAL"
-        },
-        {
-          "option": "SƠ CẤP NGHỀ",
-          "type": "NORMAL"
-        },
-        {
-          "option": "TRUNG CẤP NGHỀ",
-          "type": "NORMAL"
-        },
-        {
-          "option": "CAO ĐẲNG NGHỀ",
+          "option": "SỐ NĂM HỌC",
           "type": "NORMAL"
         }
       ],
@@ -584,35 +564,7 @@
     {
       "id": "C19",
       "name": "C19",
-      "question": "Lớp học phổ thông cao nhất đã học xong?",
-      "type": 6,
-      "options": [
-        {
-          "option": "LỚP PHỔ THÔNG",
-          "type": "NORMAL"
-        }
-      ],
-      "placeHolders": "",
-      "survey": "member"
-    },
-    {
-      "id": "C20",
-      "name": "C20",
-      "question": "Tổng số năm đã học xong của tất cả các trình độ đào tạo nghề, chuyên nghiệp, đại học, thạc sỹ và tiến sỹ  đang học hoặc đã học xong (NẾU CÓ)?",
-      "type": 6,
-      "options": [
-        {
-          "option": "SỐ NĂM HỌC",
-          "type": "NORMAL"
-        }
-      ],
-      "placeHolders": "",
-      "survey": "member"
-    },
-    {
-      "id": "C21",
-      "name": "C21",
-      "question": "Khả năng đọc và viết",
+      "question": "Hiện nay,%1$s có khả năng biết đọc và biết viết không?",
       "type": 2,
       "options": [
         {
@@ -628,9 +580,9 @@
       "survey": "member"
     },
     {
-      "id": "C22",
-      "name": "C22",
-      "question": "Tình trạng hôn nhân hiện",
+      "id": "C20",
+      "name": "C20",
+      "question": "Tình trạng hôn nhân hiện nay của %1$s là gì?",
       "type": 2,
       "options": [
         {
@@ -658,9 +610,9 @@
       "survey": "member"
     },
     {
-      "id": "C23",
-      "name": "C23",
-      "question": "Thời gian kết hôn lần đầu",
+      "id": "C21",
+      "name": "C21",
+      "question": "%1$s kết hôn lần đầu vào tháng, năm dương lịch nào?",
       "type": 7,
       "options": [
         {
@@ -680,9 +632,9 @@
       "survey": "member"
     },
     {
-      "id": "C24",
-      "name": "C24",
-      "question": "Tuổi kết hôn lần đầu",
+      "id": "C22",
+      "name": "C22",
+      "question": "Khi kết hôn lần đầu, %1$s bao nhiêu tuổi theo dương lịch?",
       "type": 6,
       "options": [
         {
@@ -694,9 +646,9 @@
       "survey": "member"
     },
     {
-      "id": "C25",
-      "name": "C25",
-      "question": "Trong 7 ngày qua có làm công việc gì từ 1 giờ trở lên để tạo thu nhập cho bản thân hoặc gia đình không?",
+      "id": "C23",
+      "name": "C23",
+      "question": "Trong 7 ngày qua, %1$s có làm công việc gì từ 1 giờ trở lên để tạo thu nhập cho bản thân hoặc gia đình không?",
       "type": 2,
       "options": [
         {
@@ -716,9 +668,9 @@
       "survey": "member"
     },
     {
-      "id": "C26",
-      "name": "C26",
-      "question": "Tuy không làm việc nhưng có được trả lương/trả công hoặc hưởng lợi từ hoạt động sản xuất kinh doanh không ?",
+      "id": "C24",
+      "name": "C24",
+      "question": "Tuy không làm việc nhưng %1$s có được trả lương/trả công hoặc hưởng lợi từ hoạt động sản xuất kinh doanh không ?",
       "type": 2,
       "options": [
         {
@@ -730,13 +682,66 @@
           "type": "NORMAL"
         }
       ],
+      "placeHolders": "",
+      "survey": "member"
+    },
+    {
+      "id": "C25",
+      "name": "C25",
+      "question": "Có phải %1$s đã có một công việc và sẽ trở lại làm công việc đó trong 30 ngày tới không?",
+      "type": 2,
+      "options": [
+        {
+          "option": "CÓ",
+          "type": "NORMAL"
+        },
+        {
+          "option": "KHÔNG",
+          "type": "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey": "member"
+    },
+    {
+      "id": "C26",
+      "name": "C26",
+      "question": "Công việc chính/nhiệm vụ chính, %1$s đã làm trong 7 ngày qua/trước khi tạm nghỉ là gì?",
+      "type": 1,
+      "options": [],
       "placeHolders": "",
       "survey": "member"
     },
     {
       "id": "C27",
       "name": "C27",
-      "question": "Có phải đã có một công việc và sẽ trở lại làm công việc đó trong 30 ngày tới không?",
+      "question": "Tên cơ sowrw và sản phẩm/dịch vụ chính của cơ sở nơi %1$s làm việc trong 7 ngày qua/trước khi tạm nghỉ là gì?",
+      "type": 1,
+      "options": [],
+      "placeHolders": "",
+      "survey": "member"
+    },
+    {
+      "id": "C28",
+      "name": "C28",
+      "question": "%1$s có được đào tạo và cấp chứng chỉ nghề nào không?",
+      "type": 2,
+      "options": [
+        {
+          "option": "CÓ",
+          "type": "NORMAL"
+        },
+        {
+          "option": "KHÔNG",
+          "type": "NORMAL"
+        }
+      ],
+      "placeHolders": "",
+      "survey": "member"
+    },{
+      "id": "C29a",
+      "name": "C29a",
+      "question": "Có phải %1$s đã làm công việc này từ 3 năm trở lên?",
       "type": 2,
       "options": [
         {
@@ -752,27 +757,45 @@
       "survey": "member"
     },
     {
-      "id": "C28",
-      "name": "C28",
-      "question": "Công việc chính/nhiệm vụ chính, đã làm trong 7 ngày qua/trước khi tạm nghỉ là gì?",
-      "type": 1,
-      "options": [],
+      "id": "C29b",
+      "name": "C29b",
+      "question": "Có phải %1$s đã làm công việc này có sử dụng máy móc thiết bị hoặc là nghề thủ công truyền thống?",
+      "type": 2,
+      "options": [
+        {
+          "option": "CÓ",
+          "type": "NORMAL"
+        },
+        {
+          "option": "KHÔNG",
+          "type": "NORMAL"
+        }
+      ],
       "placeHolders": "",
       "survey": "member"
     },
     {
-      "id": "C29",
-      "name": "C29",
-      "question": "Hoạt động hoặc sản phẩm/dịch vụ chính của cơ sở nơi làm việc trong 7 ngày qua/trước khi tạm nghỉ là gì?",
-      "type": 1,
-      "options": [],
+      "id": "C29c",
+      "name": "C29c",
+      "question": "Có phải %1$s đã làm công việc này có thể chuyển đổi sản xuất sản phẩm khác?",
+      "type": 2,
+      "options": [
+        {
+          "option": "CÓ",
+          "type": "NORMAL"
+        },
+        {
+          "option": "KHÔNG",
+          "type": "NORMAL"
+        }
+      ],
       "placeHolders": "",
       "survey": "member"
     },
     {
       "id": "C30",
       "name": "C30",
-      "question": "CHỨC VỤ",
+      "question": "Với công việc trên %1$s là gì?",
       "type": 2,
       "options": [
         {
@@ -802,7 +825,7 @@
     {
       "id": "C31",
       "name": "C31",
-      "question": "Trong 30 ngày qua,  có chủ động tìm kiếm việc làm hoặc chuẩn bị để bắt đầu hoạt động sản xuất kinh doanh không?",
+      "question": "Trong 30 ngày qua,%1$s có chủ động tìm kiếm việc làm hoặc chuẩn bị để bắt đầu hoạt động sản xuất kinh doanh không?",
       "type": 2,
       "options": [
         {
@@ -820,7 +843,7 @@
     {
       "id": "C32A",
       "name": "C32",
-      "question": "Lý do không tìm việc là gì?",
+      "question": "Lý do %1$s không tìm việc là gì?",
       "type": 4,
       "options": [
         {
@@ -870,7 +893,7 @@
     {
       "id": "C33",
       "name": "C33",
-      "question": "Trong 2 tuần tới, nếu có một công việc hoặc một hoạt động sản xuất kinh doanh,có sẵn sàng làm việc ngay không?",
+      "question": "Trong 2 tuần tới, nếu có một công việc hoặc một hoạt động sản xuất kinh doanh, %1$s có sẵn sàng làm việc ngay không?",
       "type": 2,
       "options": [
         {

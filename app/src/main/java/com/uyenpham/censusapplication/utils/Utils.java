@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager;
 import com.uyenpham.censusapplication.models.survey.QuestionDTO;
 import com.uyenpham.censusapplication.ui.fragments.MultiSelectionFragment;
 import com.uyenpham.censusapplication.ui.fragments.NumberInputFragment;
+import com.uyenpham.censusapplication.ui.fragments.ProvinceDistrictFragment;
 import com.uyenpham.censusapplication.ui.fragments.SingleSelectFragment;
 import com.uyenpham.censusapplication.ui.fragments.TypeTextInputFragment;
 
@@ -62,6 +63,13 @@ public class Utils {
                 fragment.setListQuestion(listQuestion);
                 fragment.setPosMember(posMember);
                 replaceAnimation(fragment, isNext,fragmentManager);
+                break;
+            case Constants.TYPE_MULTI_TEXT_INPUT:
+                ProvinceDistrictFragment provinceDistrictFragment = new ProvinceDistrictFragment();
+                provinceDistrictFragment.setQuestionDTO(questionDTO);
+                provinceDistrictFragment.setListQuestion(listQuestion);
+                provinceDistrictFragment.setPosMember(posMember);
+                replaceAnimation(provinceDistrictFragment, isNext,fragmentManager);
                 break;
             case Constants.TYPE_SINGLE_SELECT:
             case Constants.TYPE_SELECT_INPUT:

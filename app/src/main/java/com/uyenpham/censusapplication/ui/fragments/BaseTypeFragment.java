@@ -2,7 +2,9 @@ package com.uyenpham.censusapplication.ui.fragments;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.TextView;
 
+import com.uyenpham.censusapplication.R;
 import com.uyenpham.censusapplication.db.AnswerDAO;
 import com.uyenpham.censusapplication.models.family.DeadDTO;
 import com.uyenpham.censusapplication.models.family.FamilyDetailDTO;
@@ -122,6 +124,20 @@ public abstract class BaseTypeFragment extends BaseFragment {
         return null;
     }
 
+    public void setContentQuestion(TextView tvQuestion){
+        String questionContent = questionDTO.getQuestion();
+        if(questionDTO.getQuestion().contains("%1$s")){
+            switch (questionDTO.getSurvey()){
+                case Constants.SURVEY_MEMBER:
+                    questionContent = String.format(questionContent,memberDTO.getmC01());
+                    break;
+                case Constants.SURVEY_DEAD:
+                    questionContent = String.format(questionContent, deadDTO.getmC43());
+                    break;
+            }
+        }
+        tvQuestion.setText(questionDTO.getName() + "." +questionContent);
+    }
 
     public void nextMember() {
         switch (questionDTO.getSurvey()) {
@@ -156,7 +172,7 @@ public abstract class BaseTypeFragment extends BaseFragment {
                             if (currentIndex < getListQuestion().size()) {
                                 activity.makeListQuestion();
                                 currentIndex = 25;
-                                activity.getNavigationBar().setTitle("Chi tiết phỏng vấn");
+                                activity.getNavigationBar().setTitle(getString(R.string.txt_interview_detail));
                                 Utils.replcaeFragmentByType(activity.getListQuestionMain().get(currentIndex), true,
                                         activity.getListQuestionMain(), activity.mFragmentManager, -1);
                             }
@@ -186,7 +202,7 @@ public abstract class BaseTypeFragment extends BaseFragment {
                         if (currentIndex < getListQuestion().size()) {
                             activity.makeListQuestion();
                             currentIndex = 25;
-                            activity.getNavigationBar().setTitle("Chi tiết phỏng vấn");
+                            activity.getNavigationBar().setTitle(getString(R.string.txt_interview_detail));
                             Utils.replcaeFragmentByType(activity.getListQuestionMain().get(currentIndex), true,
                                     activity.getListQuestionMain(), activity.mFragmentManager, -1);
                         }
@@ -205,7 +221,7 @@ public abstract class BaseTypeFragment extends BaseFragment {
                 } else {
                     activity.makeListQuestion();
                     currentIndex = 25;
-                    activity.getNavigationBar().setTitle("Chi tiết phỏng vấn");
+                    activity.getNavigationBar().setTitle(getString(R.string.txt_interview_detail));
                     Utils.replcaeFragmentByType(activity.getListQuestionMain().get(currentIndex), true,
                             activity.getListQuestionMain(), activity.mFragmentManager, -1);
                 }

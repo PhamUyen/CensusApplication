@@ -26,6 +26,7 @@ public class Constants {
     public static final int TYPE_SINGLE_SELECT_LIST = 9;
     public static final int TYPE_MIX = 10;
     public static final int TYPE_SINGLE_SELECT_AUTO = 11;
+    public static final int TYPE_MULTI_TEXT_INPUT = 12;
 
     //static object
     public static final StaticObject mStaticObject = StaticObject.getInstance();
@@ -219,4 +220,9 @@ public class Constants {
     //type  warning
     public static final int TYPE_CONFIRM = 2;
     public static final int TYPE_NOTI = 1;
+
+    //key sharePreferecnce
+    public static final String KEY_NATION = "nation";
+    public static final String KEY_DISTRICT = "district";
+    public static final String KEY_PROVINCE = "province";
 }

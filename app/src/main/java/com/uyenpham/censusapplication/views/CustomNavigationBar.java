@@ -1,6 +1,7 @@
 package com.uyenpham.censusapplication.views;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
@@ -95,6 +96,8 @@ public class CustomNavigationBar extends RelativeLayout implements View.OnClickL
      */
     public void setIconLeft(int drawable) {
         imgLeft.setImageResource(drawable);
+        final int newColor = this.getResources().getColor(R.color.black);
+        imgLeft.setColorFilter(newColor, PorterDuff.Mode.SRC_ATOP);
     }
 
     /**

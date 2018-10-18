@@ -118,7 +118,7 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
 
     public boolean loadQuestion(final QuestionDTO question) {
         listOption = new ArrayList<>();
-        tvQuestion.setText(question.getName() + "." + question.getQuestion());
+        setContentQuestion(tvQuestion);
         if (question.getId().equals(Constants.QUESTION_C02) && posMember == 0) {
             isYes =true;
             memberDTO.setmC02(1);

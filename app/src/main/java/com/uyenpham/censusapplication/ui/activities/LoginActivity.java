@@ -1,5 +1,6 @@
 package com.uyenpham.censusapplication.ui.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -12,7 +13,9 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.uyenpham.censusapplication.BuildConfig;
 import com.uyenpham.censusapplication.R;
+import com.uyenpham.censusapplication.models.locality.DistrictDTO;
 import com.uyenpham.censusapplication.models.locality.NationDTO;
+import com.uyenpham.censusapplication.models.locality.ProvinceDTO;
 import com.uyenpham.censusapplication.models.user.LoginDTO;
 import com.uyenpham.censusapplication.models.user.ResponseLoginDTO;
 import com.uyenpham.censusapplication.service.BaseCallback;
@@ -55,9 +58,12 @@ public class LoginActivity extends BaseActivity {
             edUserName.setText("D992001");
         }
         getListNation();
+        getListDistrict();
+        getListProvince();
         startService(new Intent(getBaseContext(), KillAppService.class));
     }
 
+    @SuppressLint("StaticFieldLeak")
     private void getListNation(){
         new AsyncTask<Void,Void, List<NationDTO>>(){
 
@@ -69,8 +75,42 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             protected void onPostExecute(List<NationDTO> nationDTOS) {
-                SharedPrefsUtils.setStringPreference(LoginActivity.this,"nation",new Gson().toJson(nationDTOS));
+                SharedPrefsUtils.setStringPreference(LoginActivity.this,Constants.KEY_NATION,new Gson().toJson(nationDTOS));
                 super.onPostExecute(nationDTOS);
+            }
+        }.execute();
+    }
+    @SuppressLint("StaticFieldLeak")
+    private void getListProvince(){
+        new AsyncTask<Void,Void, List<ProvinceDTO>>(){
+
+            @Override
+            protected  List<ProvinceDTO> doInBackground(Void... voids) {
+                List<ProvinceDTO> list =FileUtils.getListProvince(LoginActivity.this);
+                return list;
+            }
+
+            @Override
+            protected void onPostExecute(List<ProvinceDTO> provinceDTOS) {
+                SharedPrefsUtils.setStringPreference(LoginActivity.this,Constants.KEY_PROVINCE,new Gson().toJson(provinceDTOS));
+                super.onPostExecute(provinceDTOS);
+            }
+        }.execute();
+    }
+    @SuppressLint("StaticFieldLeak")
+    private void getListDistrict(){
+        new AsyncTask<Void,Void, List<DistrictDTO>>(){
+
+            @Override
+            protected  List<DistrictDTO> doInBackground(Void... voids) {
+                List<DistrictDTO> list =FileUtils.getListDistrict(LoginActivity.this);
+                return list;
+            }
+
+            @Override
+            protected void onPostExecute(List<DistrictDTO> provinceDTOS) {
+                SharedPrefsUtils.setStringPreference(LoginActivity.this,Constants.KEY_DISTRICT,new Gson().toJson(provinceDTOS));
+                super.onPostExecute(provinceDTOS);
             }
         }.execute();
     }

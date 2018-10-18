@@ -2,7 +2,9 @@ package com.uyenpham.censusapplication.utils;
 
 import android.content.Context;
 
+import com.uyenpham.censusapplication.models.locality.DistrictDTO;
 import com.uyenpham.censusapplication.models.locality.NationDTO;
+import com.uyenpham.censusapplication.models.locality.ProvinceDTO;
 import com.uyenpham.censusapplication.models.locality.ReligionDTO;
 
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
@@ -54,33 +56,6 @@ public class FileUtils {
         ArrayList<NationDTO> listReligion = new ArrayList<>();
         try{
             InputStream  myInput = context.getAssets().open("DMDANTOC.xlsx");
-//            Workbook myWorkBook = WorkbookFactory.create(myInput);
-//
-//            // Get the first sheet from workbook
-//            Sheet mySheet = myWorkBook.getSheetAt(0);
-////            Iterator<Sheet> sheetIterator = workbook.sheetIterator();
-//            /** We now need something to iterate through the cells.**/
-//            Iterator<Row> rowIterator = mySheet.rowIterator();
-//            DataFormatter dataFormatter = new DataFormatter();
-//
-//            while (rowIterator.hasNext()) {
-//                Row row = rowIterator.next();
-//
-//                // Now let's iterate over the columns of the current row
-//                Iterator<Cell> cellIterator = row.cellIterator();
-//                NationDTO religionDTO = new NationDTO();
-//                while (cellIterator.hasNext()) {
-//                    Cell cell = cellIterator.next();
-//                    String cellValue = dataFormatter.formatCellValue(cell);
-//                    if(cell.getColumnIndex() == 0){
-//                        religionDTO.setId(cellValue);
-//                    }else {
-//                        religionDTO.setName(cellValue);
-//                    }
-//                }
-//                listReligion.add(religionDTO);
-//            }
-//            myWorkBook.close();
             try {
                 XSSFWorkbook workbook = new XSSFWorkbook(myInput);
                 XSSFSheet sheet = workbook.getSheetAt(0);
@@ -102,13 +77,83 @@ public class FileUtils {
                     listReligion.add(religionDTO);
                 }
             } catch (Exception e) {
-                /* proper exception handling to be here */
+                Logger.e(e);
+            }
+        }catch (Exception e){
+            Logger.e(e);
+        }
+
+        return listReligion;
+    }
+
+    public static List<ProvinceDTO> getListProvince(Context context){
+        ArrayList<ProvinceDTO> listProvince = new ArrayList<>();
+        try{
+            InputStream  myInput = context.getAssets().open("province.xlsx");
+            try {
+                XSSFWorkbook workbook = new XSSFWorkbook(myInput);
+                XSSFSheet sheet = workbook.getSheetAt(0);
+                int rowsCount = sheet.getPhysicalNumberOfRows();
+                FormulaEvaluator formulaEvaluator = workbook.getCreationHelper().createFormulaEvaluator();
+                for (int r = 0; r<rowsCount; r++) {
+                    Row row = sheet.getRow(r);
+                    ProvinceDTO provinceDTO = new ProvinceDTO();
+                    int cellsCount = row.getPhysicalNumberOfCells();
+                    for (int c = 0; c<cellsCount; c++) {
+                        Cell cell = row.getCell(c);
+                        String value = getCellAsString(cell, formulaEvaluator);
+                        if(cell.getColumnIndex() == 0){
+                            provinceDTO.setId(value);
+                        }else {
+                            provinceDTO.setName(value);
+                        }
+                    }
+                    listProvince.add(provinceDTO);
+                }
+            } catch (Exception e) {
+                Logger.e(e);
             }
         }catch (Exception e){
             e.printStackTrace();
         }
 
-        return listReligion;
+        return listProvince;
+    }
+
+    public static List<DistrictDTO> getListDistrict(Context context){
+        ArrayList<DistrictDTO> listDistrict = new ArrayList<>();
+        try{
+            InputStream  myInput = context.getAssets().open("district.xlsx");
+            try {
+                XSSFWorkbook workbook = new XSSFWorkbook(myInput);
+                XSSFSheet sheet = workbook.getSheetAt(0);
+                int rowsCount = sheet.getPhysicalNumberOfRows();
+                FormulaEvaluator formulaEvaluator = workbook.getCreationHelper().createFormulaEvaluator();
+                for (int r = 0; r<rowsCount; r++) {
+                    Row row = sheet.getRow(r);
+                    DistrictDTO districtDTO = new DistrictDTO();
+                    int cellsCount = row.getPhysicalNumberOfCells();
+                    for (int c = 0; c<cellsCount; c++) {
+                        Cell cell = row.getCell(c);
+                        String value = getCellAsString(cell, formulaEvaluator);
+                        if(cell.getColumnIndex() == 0){
+                            districtDTO.setProvinceCode(value);
+                        }else if(cell.getColumnIndex() == 1){
+                            districtDTO.setDistrictCode(value);
+                        }else {
+                            districtDTO.setName(value);
+                        }
+                    }
+                    listDistrict.add(districtDTO);
+                }
+            } catch (Exception e) {
+                Logger.e(e);
+            }
+        }catch (Exception e){
+            Logger.e(e);
+        }
+
+        return listDistrict;
     }
     protected static String getCellAsString(Cell cell, FormulaEvaluator formulaEvaluator) {
         String value = "";

@@ -77,7 +77,7 @@ public class MultiSelectionFragment extends BaseTypeFragment implements IRadioBu
     public boolean loadQuestion(QuestionDTO question) {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         listCheckbox.setLayoutManager(linearLayoutManager);
-        tvQuestion.setText(question.getName() + "." +question.getQuestion());
+        setContentQuestion(tvQuestion);
         listOption = new ArrayList<>();
         if(question.getId().equalsIgnoreCase(Constants.QUESTION_Q9)){
             for(PeopleDetailDTO peopleDetailDTO : Constants.mStaticObject.getPeopleDetailDTO()){

@@ -231,7 +231,7 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick,
     public void setNavigationBar() {
         navigationBar = findViewById(R.id.toolbar);
         navigationBar.reSetAll();
-        navigationBar.setIconLeft(R.drawable.ic_menu);
+        navigationBar.setIconLeft(R.drawable.ic_menu_left);
 
         navigationBar.setTitle(getString(R.string.txt_interview_detail));
     }
