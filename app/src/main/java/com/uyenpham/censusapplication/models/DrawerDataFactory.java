@@ -30,7 +30,7 @@ public class DrawerDataFactory {
     }
 
     public static GroupDrawer makePeopleGroup() {
-        return new GroupDrawer(App.getInstance().getString(R.string.txt_people), makeListQuestion("people.json"));
+        return new GroupDrawer(App.getInstance().getString(R.string.txt_people), makeListQuestion("people_2.json"));
     }
 
 
@@ -51,7 +51,7 @@ public class DrawerDataFactory {
     public static ArrayList<QuestionDTO> genListMember(){
         ArrayList<QuestionDTO> list = new ArrayList<>();
         for(PeopleDetailDTO peopleDetailDTO : Constants.mStaticObject.getPeopleDetailDTO()){
-            QuestionDTO questionDTO = new QuestionDTO(peopleDetailDTO.getQ1());
+            QuestionDTO questionDTO = new QuestionDTO(peopleDetailDTO.getQ1A());
             list.add(questionDTO);
         }
         return list;

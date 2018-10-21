@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.uyenpham.censusapplication.models.survey.QuestionDTO;
+import com.uyenpham.censusapplication.ui.fragments.DateInputFragment;
 import com.uyenpham.censusapplication.ui.fragments.MultiSelectionFragment;
 import com.uyenpham.censusapplication.ui.fragments.NumberInputFragment;
 import com.uyenpham.censusapplication.ui.fragments.ProvinceDistrictFragment;
@@ -19,6 +20,8 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+
+import static com.uyenpham.censusapplication.utils.Constants.TYPE_SINGLE_SELECT_IN_LIST;
 
 public class Utils {
     public static String readFromAsset(Context context, String fileName) {
@@ -84,18 +87,26 @@ public class Utils {
                 replaceAnimation(singleSelectFragment, isNext,fragmentManager);
                 break;
             case Constants.TYPE_NUMBER_INPUT:
-            case Constants.TYPE_DATE_INPUT:
                 NumberInputFragment numberInputFragment = new NumberInputFragment();
                 numberInputFragment.setQuestionDTO(questionDTO);
                 numberInputFragment.setListQuestion(listQuestion);
                 numberInputFragment.setPosMember(posMember);
                 replaceAnimation(numberInputFragment, isNext,fragmentManager);
                 break;
+            case Constants.TYPE_DATE_INPUT:
+                DateInputFragment dateInputFragment = new DateInputFragment();
+                dateInputFragment.setQuestionDTO(questionDTO);
+                dateInputFragment.setListQuestion(listQuestion);
+                dateInputFragment.setPosMember(posMember);
+                replaceAnimation(dateInputFragment, isNext,fragmentManager);
+                break;
             case Constants.TYPE_MULTI_SELECT:
             case Constants.TYPE_MULTI_SELECT_INPUT:
+            case TYPE_SINGLE_SELECT_IN_LIST:
                 MultiSelectionFragment multiSelectionFragment = new MultiSelectionFragment();
                 multiSelectionFragment.setQuestionDTO(questionDTO);
-//                multiSelectionFragment.setAnswerDTO(null);
+                multiSelectionFragment.setListQuestion(listQuestion);
+                multiSelectionFragment.setPosMember(posMember);
                 replaceAnimation(multiSelectionFragment, isNext,fragmentManager);
                 break;
             default:

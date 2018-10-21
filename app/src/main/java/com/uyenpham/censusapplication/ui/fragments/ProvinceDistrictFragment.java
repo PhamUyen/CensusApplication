@@ -12,9 +12,6 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.uyenpham.censusapplication.R;
-import com.uyenpham.censusapplication.db.MemberDAO;
-import com.uyenpham.censusapplication.models.family.FamilyDetailDTO;
-import com.uyenpham.censusapplication.models.family.MemberDTO;
 import com.uyenpham.censusapplication.models.locality.DistrictDTO;
 import com.uyenpham.censusapplication.models.locality.ProvinceDTO;
 import com.uyenpham.censusapplication.models.locality.SpinnerDTO;
@@ -35,6 +32,7 @@ import java.util.List;
 import butterknife.Bind;
 
 import static com.uyenpham.censusapplication.ui.activities.SurveyActivity.currentIndex;
+import static com.uyenpham.censusapplication.ui.activities.SurveyActivity.previousIndex;
 
 public class ProvinceDistrictFragment extends BaseTypeFragment implements EditText
         .OnEditorActionListener,
@@ -55,6 +53,8 @@ public class ProvinceDistrictFragment extends BaseTypeFragment implements EditTe
     private List<DistrictDTO> listDistrict;
     private List<ProvinceDTO> listProvince;
     private int posMember;
+    SpinnerAdapter adapterDistrict;
+    private ArrayList<SpinnerDTO> listOptionSpinnerDistrict;
 
     @Override
     protected int getLayoutId() {
@@ -66,27 +66,30 @@ public class ProvinceDistrictFragment extends BaseTypeFragment implements EditTe
         activity.setiNext(this);
         activity.setiPrevious(this);
         posMember = getPosMember();
-        String jsonDistrict= SharedPrefsUtils.getStringPreference(activity,Constants.KEY_DISTRICT);
-        listDistrict =new Gson().fromJson(jsonDistrict, new TypeToken<List<DistrictDTO>>(){}.getType());
+        listDistrict = new ArrayList<>();
+
 
         String jsonProvince= SharedPrefsUtils.getStringPreference(activity,Constants.KEY_PROVINCE);
         listProvince =new Gson().fromJson(jsonProvince, new TypeToken<List<ProvinceDTO>>(){}.getType());
 
+        edCodeProvince.setOnEditorActionListener(this);
+        eeCodeDistrict.setOnEditorActionListener(this);
         loadQuestion(questionDTO);
     }
 
     private void setSpinnerDistrict(){
-        final ArrayList<SpinnerDTO> listOptionSpinnerDistrict = new ArrayList<>();
+        listOptionSpinnerDistrict = new ArrayList<>();
         for (int i = 0; i < listDistrict.size(); i++) {
             listOptionSpinnerDistrict.add(new SpinnerDTO(listDistrict.get(i).getDistrictCode(), listDistrict.get(i).getName()));
         }
 
-        SpinnerAdapter adapter = new SpinnerAdapter(activity, listOptionSpinnerDistrict);
-        spinnerDistrict.setAdapter(adapter);
+        adapterDistrict = new SpinnerAdapter(activity, listOptionSpinnerDistrict);
+        spinnerDistrict.setAdapter(adapterDistrict);
         spinnerDistrict.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 eeCodeDistrict.setText(listOptionSpinnerDistrict.get(i).getId());
+                memberDTO.setmC10B(listOptionSpinnerDistrict.get(i).getId());
             }
 
             @Override
@@ -108,6 +111,8 @@ public class ProvinceDistrictFragment extends BaseTypeFragment implements EditTe
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 edCodeProvince.setText(listProvinceSpinner.get(i).getId());
+                memberDTO.setmC10A(listProvinceSpinner.get(i).getId());
+                genListDistrict(listProvinceSpinner.get(i).getId());
             }
 
             @Override
@@ -145,21 +150,57 @@ public class ProvinceDistrictFragment extends BaseTypeFragment implements EditTe
 
     @Override
     public WarningDTO validateQuaetion(QuestionDTO question, AnswerDTO answer) {
-        String idTV = Constants.mStaticObject.getIdHo() + Constants.mStaticObject
-                .getPeopleDetailDTO().get(0).getSTT();
-        MemberDTO chuho = MemberDAO.getInstance().findById(idTV);
-        FamilyDetailDTO family = Constants.mStaticObject.getFamilyDetailDTO();
-        switch (question.getId()) {
-
-        }
         return null;
     }
 
     @Override
     public boolean onEditorAction(TextView editText, int actionId, KeyEvent keyEvent) {
+        switch (editText.getId()){
+            case R.id.edCodeDistrict:
+                if(memberDTO.getmC10A() == null){
+                        DialogUtils.showAlert(activity,"Chọn tỉnh trước");
+                }else {
+                    DistrictDTO districtDTO = getDistrictById(editText.getText().toString());
+                    if(districtDTO != null){
+                        spinnerDistrict.setSelection(listDistrict.indexOf(districtDTO));
+                        memberDTO.setmC10B(districtDTO.getDistrictCode());
+                    }else {
+                        DialogUtils.showAlert(activity,"Mã huyện không hợp lệ!");
+                    }
+                }
+                break;
+            case R.id.edCodeProvince:
+                ProvinceDTO provinceDTO = getProvinceById(editText.getText().toString());
+                if(provinceDTO != null){
+                    spinnerDistrict.setSelection(listProvince.indexOf(provinceDTO));
+                    memberDTO.setmC10A(provinceDTO.getId());
+                    genListDistrict(provinceDTO.getId());
+                }else {
+                    DialogUtils.showAlert(activity,"Mã tỉnh không hợp lệ!");
+                }
+                break;
+        }
         return false;
     }
 
+    private void genListDistrict(String idProvince) {
+        listDistrict.clear();
+        listOptionSpinnerDistrict.clear();
+        String jsonDistrict = SharedPrefsUtils.getStringPreference(activity, Constants.KEY_DISTRICT);
+
+        ArrayList<DistrictDTO>listAllDistrict = new Gson().fromJson(jsonDistrict, new TypeToken<List<DistrictDTO>>() {
+        }.getType());
+        for(DistrictDTO districtDTO : listAllDistrict){
+            if(districtDTO.getProvinceCode().equals(idProvince)){
+                listDistrict.add(districtDTO);
+            }
+        }
+        for (int i = 0; i < listDistrict.size(); i++) {
+            listOptionSpinnerDistrict.add(new SpinnerDTO(listDistrict.get(i).getDistrictCode(), listDistrict.get(i).getName()));
+        }
+        adapterDistrict.notifyDataSetChanged();
+
+    }
     @Override
     public void next() {
         Utils.hideKeyboard(activity, lnContent);
@@ -167,6 +208,7 @@ public class ProvinceDistrictFragment extends BaseTypeFragment implements EditTe
             Constants.mStaticObject.getMemberDTO().set(posMember, memberDTO);
             if (currentIndex < getListQuestion().size() - 1) {
                 saveAnswerToSurvey(questionDTO,posMember);
+                previousIndex =currentIndex;
                 currentIndex++;
                 Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true, getListQuestion(), activity.mFragmentManager, getPosMember());
             }
@@ -180,6 +222,7 @@ public class ProvinceDistrictFragment extends BaseTypeFragment implements EditTe
                                 Constants.mStaticObject.getMemberDTO().set(posMember, memberDTO);
                                 if (currentIndex < getListQuestion().size() - 1) {
                                     saveAnswerToSurvey(questionDTO,posMember);
+                                    previousIndex =currentIndex;
                                     currentIndex++;
                                     Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true, getListQuestion(), activity.mFragmentManager, getPosMember());
                                 }
@@ -199,9 +242,8 @@ public class ProvinceDistrictFragment extends BaseTypeFragment implements EditTe
     @Override
     public void previuos() {
         Utils.hideKeyboard(activity, lnContent);
-        if (currentIndex > 0) {
-            currentIndex--;
-            Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), false, getListQuestion(), activity.mFragmentManager, getPosMember());
+        if (previousIndex != -1) {
+            Utils.replcaeFragmentByType(getListQuestion().get(previousIndex), false, getListQuestion(), activity.mFragmentManager, getPosMember());
         }
     }
 

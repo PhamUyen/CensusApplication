@@ -2,11 +2,9 @@ package com.uyenpham.censusapplication.ui.fragments;
 
 import android.content.DialogInterface;
 import android.text.Editable;
-import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,6 +13,7 @@ import com.uyenpham.censusapplication.R;
 import com.uyenpham.censusapplication.db.MemberDAO;
 import com.uyenpham.censusapplication.models.family.FamilyDetailDTO;
 import com.uyenpham.censusapplication.models.family.MemberDTO;
+import com.uyenpham.censusapplication.models.family.PeopleDTO;
 import com.uyenpham.censusapplication.models.family.WomanDTO;
 import com.uyenpham.censusapplication.models.survey.AnswerDTO;
 import com.uyenpham.censusapplication.models.survey.OptionDTO;
@@ -24,6 +23,7 @@ import com.uyenpham.censusapplication.ui.interfaces.INextQuestion;
 import com.uyenpham.censusapplication.ui.interfaces.IPreviousQuestion;
 import com.uyenpham.censusapplication.utils.Constants;
 import com.uyenpham.censusapplication.utils.DialogUtils;
+import com.uyenpham.censusapplication.utils.StringUtils;
 import com.uyenpham.censusapplication.utils.Utils;
 
 import java.util.ArrayList;
@@ -32,6 +32,7 @@ import java.util.Calendar;
 import butterknife.Bind;
 
 import static com.uyenpham.censusapplication.ui.activities.SurveyActivity.currentIndex;
+import static com.uyenpham.censusapplication.ui.activities.SurveyActivity.previousIndex;
 
 public class NumberInputFragment extends BaseTypeFragment implements EditText
         .OnEditorActionListener,
@@ -73,6 +74,19 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
                 linearLayout = genlayoutInputNumber(option.getOption(), (womanDTO == null ||
                         womanDTO.get(question.getId()) == null) ? "" : String.valueOf(womanDTO
                         .get(question.getId())), listOption.indexOf(option));
+            }else if (question.getSurvey().equals(Constants.SURVEY_PEOPLE)) {
+                PeopleDTO peopleDTO = Constants.mStaticObject.getPeopleDTO();
+                linearLayout = genlayoutInputNumber(option.getOption(), (peopleDTO == null ||
+                        peopleDTO.get(question.getId()) == null) ? "" : String.valueOf(peopleDTO
+                        .get(question.getId())), listOption.indexOf(option));
+            }else if (question.getSurvey().equals(Constants.SURVEY_DEAD)) {
+                linearLayout = genlayoutInputNumber(option.getOption(), (deadDTO == null ||
+                        deadDTO.get(question.getId()) == null) ? "" : String.valueOf(deadDTO
+                        .get(question.getId())), listOption.indexOf(option));
+            }else {
+                    linearLayout = genlayoutInputNumber(option.getOption(), (houseDTO == null ||
+                            houseDTO.get(question.getId()) == null) ? "" : String.valueOf(houseDTO
+                            .get(question.getId())), listOption.indexOf(option));
             }
             if (linearLayout != null) {
                 lnContent.addView(linearLayout);
@@ -81,7 +95,8 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
         return true;
     }
 
-    private LinearLayout genlayoutInputNumber(final String option, String answer, int posOption) {
+
+    private LinearLayout genlayoutInputNumber(final String option, String answer, int isEdit) {
         int margin = mActivity.getResources().getDimensionPixelOffset(R.dimen.margin_small_x);
         int padding = mActivity.getResources().getDimensionPixelOffset(R.dimen.padding_small);
 
@@ -101,26 +116,6 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
         editText.setInputType(InputType.TYPE_CLASS_NUMBER);
         editText.setBackgroundResource(R.drawable.bg_edit_text);
         editText.setTag(option);
-        if (option.equals(Constants.MONTH)) {
-            editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(2)});
-        } else if (option.equals(Constants.YEAR)) {
-            editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
-        }
-        if (posOption == listOption.size() - 1) {
-            editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
-        } else {
-            editText.setImeOptions(EditorInfo.IME_ACTION_NEXT);
-        }
-        if (questionDTO.getId().equals(Constants.QUESTION_C05)) {
-            if (memberDTO.getmC4N()!= null &&memberDTO.getmC4N() != 9998) {
-                int age = Calendar.getInstance().get(Calendar.YEAR) - memberDTO.getmC4N();
-                editText.setText(String.valueOf(age));
-                editText.setEnabled(false);
-            } else {
-                editText.setText(answer);
-                editText.setEnabled(true);
-            }
-        }
         editText.setText(answer);
         editText.setSingleLine();
         editText.setOnEditorActionListener(this);
@@ -134,15 +129,21 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 switch (questionDTO.getSurvey()) {
                     case Constants.SURVEY_MEMBER:
-                        updateMember(option, charSequence.toString());
+                        updateMember(charSequence.toString());
                         break;
                     case Constants.SURVEY_WOMAN:
                         updateWoman(option, charSequence.toString());
                         break;
                     case Constants.SURVEY_DEAD:
-                        updateDead(option, charSequence.toString());
+                        updateDead(charSequence.toString());
+                        break;
+                    case Constants.SURVEY_HOUSE:
+                        updateHouse(charSequence.toString());
                         break;
                     default:
+                        if(!StringUtils.isEmpty(charSequence.toString())){
+                        Constants.mStaticObject.getPeopleDTO().setmQ6(Integer.parseInt(charSequence.toString()));
+                    }
                         break;
                 }
 
@@ -162,9 +163,7 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
 
     @Override
     public WarningDTO validateQuaetion(QuestionDTO question, AnswerDTO answer) {
-        String idTV = Constants.mStaticObject.getIdHo() + Constants.mStaticObject
-                .getPeopleDetailDTO().get(0).getSTT();
-        MemberDTO chuho = MemberDAO.getInstance().findById(idTV);
+        MemberDTO chuho = MemberDAO.getInstance().findChuHo();
         FamilyDetailDTO family = Constants.mStaticObject.getFamilyDetailDTO();
         switch (question.getId()) {
             case Constants.QUESTION_C04:
@@ -192,22 +191,22 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
                 }
                 break;
             case Constants.QUESTION_C23:
-                if (memberDTO.getmC23N() != null && memberDTO.getmC23N() == 2018 && memberDTO.getmC23T() != null && memberDTO.getmC23T() > 7) {
-                    return new WarningDTO(getString(R.string.txt_time_mariage, posMember + 1, memberDTO.getmC01(), memberDTO.getmC23T()), Constants.TYPE_NOTI);
+                if (memberDTO.getmC21N() != null && memberDTO.getmC21N() == 2018 && memberDTO.getmC21T() != null && memberDTO.getmC21T() > 7) {
+                    return new WarningDTO(getString(R.string.txt_time_mariage, posMember + 1, memberDTO.getmC01(), memberDTO.getmC21T()), Constants.TYPE_NOTI);
                 }
-                if (memberDTO.getmC23N() != null && memberDTO.getmC4N() != null && memberDTO.getmC23N() < memberDTO.getmC4N()) {
-                    return new WarningDTO(getString(R.string.txt_marriage_before_born, posMember + 1, memberDTO.getmC01(), memberDTO.getmC23N(), memberDTO.getmC4N()), Constants.TYPE_NOTI);
+                if (memberDTO.getmC21N() != null && memberDTO.getmC4N() != null && memberDTO.getmC21N() < memberDTO.getmC4N()) {
+                    return new WarningDTO(getString(R.string.txt_marriage_before_born, posMember + 1, memberDTO.getmC01(), memberDTO.getmC21N(), memberDTO.getmC4N()), Constants.TYPE_NOTI);
                 }
-                if (memberDTO.getmC23N() != null && memberDTO.getmC4N() != null && (memberDTO.getmC23N() - memberDTO.getmC4N()) < 7) {
-                    return new WarningDTO(getString(R.string.txt_too_small_to_marriage, posMember + 1, memberDTO.getmC01(), memberDTO.getmC23N(), memberDTO.getmC4N(), (memberDTO.getmC23N() - memberDTO.getmC4N())), Constants.TYPE_NOTI);
+                if (memberDTO.getmC21N() != null && memberDTO.getmC4N() != null && (memberDTO.getmC21N() - memberDTO.getmC4N()) < 7) {
+                    return new WarningDTO(getString(R.string.txt_too_small_to_marriage, posMember + 1, memberDTO.getmC01(), memberDTO.getmC21N(), memberDTO.getmC4N(), (memberDTO.getmC21N() - memberDTO.getmC4N())), Constants.TYPE_NOTI);
                 }
                 if (7 <= memberDTO.getmC05() && memberDTO.getmC05() <= 12) {
-                    return new WarningDTO(getString(R.string.txt_confirm_time_to_marriage, posMember + 1, memberDTO.getmC01(), memberDTO.getmC4N(), memberDTO.getmC23N()), Constants.TYPE_CONFIRM);
+                    return new WarningDTO(getString(R.string.txt_confirm_time_to_marriage, posMember + 1, memberDTO.getmC01(), memberDTO.getmC4N(), memberDTO.getmC21N()), Constants.TYPE_CONFIRM);
                 }
-                if (memberDTO.getmC4N() != null && memberDTO.getmC23N() != null && memberDTO.getmC4T() != null && memberDTO.getmC23T() != null
-                        && (!memberDTO.getmC23T().equals(memberDTO.getmC4T()) || !memberDTO.getmC23N().equals(memberDTO.getmC4N()))) {
+                if (memberDTO.getmC4N() != null && memberDTO.getmC21N() != null && memberDTO.getmC4T() != null && memberDTO.getmC21T() != null
+                        && (!memberDTO.getmC21T().equals(memberDTO.getmC4T()) || !memberDTO.getmC21N().equals(memberDTO.getmC4N()))) {
                     return new WarningDTO(getString(R.string.txt_diff_marriage, posMember + 1, memberDTO.getmC01(),
-                            memberDTO.getmC23T(), memberDTO.getmC23N(), memberDTO.getmC4T(), memberDTO.getmC4N()), Constants.TYPE_NOTI);
+                            memberDTO.getmC21T(), memberDTO.getmC21N(), memberDTO.getmC4T(), memberDTO.getmC4N()), Constants.TYPE_NOTI);
                 }
                 break;
 
@@ -382,29 +381,10 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
         return false;
     }
 
-    private WomanDTO updateDead(String option, String answer) {
+    private void updateDead(String answer) {
+        if(StringUtils.isEmpty(answer))return;
         WomanDTO womanDTO = Constants.mStaticObject.getWomanDTO().get(posMember);
         switch (questionDTO.getId()) {
-            case Constants.QUESTION_C45:
-                if (option.equals(Constants.MONTH)) {
-                    deadDTO.setmC45T(Integer.parseInt(answer));
-                } else if (option.equals(Constants.YEAR)) {
-                    deadDTO.setmC45N(Integer.parseInt(answer));
-                }else {
-                    deadDTO.setmC45N(9998);
-                    deadDTO.setmC45T(98);
-                }
-                break;
-            case Constants.QUESTION_C46:
-                if (option.equals(Constants.MONTH)) {
-                    deadDTO.setmC46T(Integer.parseInt(answer));
-                } else if (option.equals(Constants.YEAR)) {
-                    deadDTO.setmC46N(Integer.parseInt(answer));
-                }else {
-                    deadDTO.setmC46N(9998);
-                    deadDTO.setmC46T(98);
-                }
-                break;
             case Constants.QUESTION_C47:
                 deadDTO.setmC47(Integer.parseInt(answer));
                 break;
@@ -412,21 +392,11 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
                 break;
 
         }
-        return womanDTO;
     }
-    private WomanDTO updateWoman(String option, String answer) {
+    private void updateWoman(String option, String answer) {
+        if(StringUtils.isEmpty(answer)) return ;
         WomanDTO womanDTO = Constants.mStaticObject.getWomanDTO().get(posMember);
         switch (questionDTO.getId()) {
-            case Constants.QUESTION_C38:
-                if (option.equals(Constants.MONTH)) {
-                    womanDTO.setC38T(Integer.parseInt(answer));
-                } else if (option.equals(Constants.YEAR)) {
-                    womanDTO.setC38N(Integer.parseInt(answer));
-                }else {
-                    womanDTO.setC38N(9998);
-                    womanDTO.setC38T(98);
-                }
-                break;
             case Constants.QUESTION_C35:
             case Constants.QUESTION_C36:
             case Constants.QUESTION_C39:
@@ -445,36 +415,11 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
                 break;
 
         }
-        return womanDTO;
     }
 
-    private MemberDTO updateMember(String option, String answer) {
+    private void updateMember(String answer) {
+        if(StringUtils.isEmpty(answer)) return;
         switch (questionDTO.getId()) {
-            case Constants.QUESTION_C04:
-                if (option.equals(Constants.MONTH)) {
-                    memberDTO.setmC4T(Integer.parseInt(answer));
-                } else if (option.equals(Constants.YEAR)) {
-                    memberDTO.setmC4N(Integer.parseInt(answer));
-                } else {
-                    memberDTO.setmC4N(9998);
-                    memberDTO.setmC4T(98);
-                }
-                if (isWoman(memberDTO)) {
-                    Constants.mStaticObject.getWomanDTO().add(new WomanDTO(memberDTO.getmIDTV(),
-                            memberDTO.getmC01()));
-                }
-                break;
-            case Constants.QUESTION_C23:
-                if (option.equals(Constants.MONTH)) {
-                    memberDTO.setmC23T(Integer.parseInt(answer));
-                } else if (option.equals(Constants.YEAR)) {
-                    memberDTO.setmC23N(Integer.parseInt(answer));
-                }
-                if (isWoman(memberDTO)) {
-                    Constants.mStaticObject.getWomanDTO().add(new WomanDTO(memberDTO.getmIDTV(),
-                            memberDTO.getmC01()));
-                }
-                break;
             case Constants.QUESTION_C24:
                 memberDTO.setmC24(Integer.parseInt(answer));
                 break;
@@ -489,9 +434,17 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
             default:
                 break;
         }
-        return memberDTO;
     }
 
+    private void updateHouse(String answer) {
+        if(StringUtils.isEmpty(answer)) return ;
+       switch (questionDTO.getId()){
+           case Constants.QUESTION_C54:
+               houseDTO.setC54(Integer.parseInt(answer));
+               familyDetailDTO.setmC54(Integer.parseInt(answer));
+               break;
+       }
+    }
     private boolean isWoman(MemberDTO member) {
         return (member.getmC03() == 3 && (member.getmC4N() < 2008 && member.getmC4T() < Calendar
                 .getInstance().get(Calendar.MONTH)) && (member.getmC4N() > 1969 && member.getmC4T
@@ -502,11 +455,29 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
     public void next() {
         Utils.hideKeyboard(activity, lnContent);
         if (validateQuaetion(questionDTO, null) == null) {
-            Constants.mStaticObject.getMemberDTO().set(posMember, memberDTO);
-            if (currentIndex < getListQuestion().size() - 1) {
-                saveAnswerToSurvey(questionDTO,posMember);
-                currentIndex++;
-                Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true, getListQuestion(), activity.mFragmentManager, getPosMember());
+            if(questionDTO.getId().equals(Constants.QUESTION_Q6)){
+                if (!Constants.mStaticObject.getPeopleDetailDTO().isEmpty()) {
+                        activity.survey = Constants.SURVEY_MEMBER;
+                        activity.isMember = true;
+                        activity.setListPeople(0);
+                        activity.getNavigationBar().setTitle("1 - " + Constants.mStaticObject
+                                .getPeopleDetailDTO().get(0).getQ1A());
+                    } else {
+                    if (currentIndex < getListQuestion().size() - 1) {
+                        saveAnswerToSurvey(questionDTO,posMember);
+                        previousIndex =currentIndex;
+                        currentIndex++;
+                        Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true, getListQuestion(), activity.mFragmentManager, getPosMember());
+                    }
+                    }
+            }else {
+                Constants.mStaticObject.getMemberDTO().set(posMember, memberDTO);
+                if (currentIndex < getListQuestion().size() - 1) {
+                    saveAnswerToSurvey(questionDTO,posMember);
+                    previousIndex =currentIndex;
+                    currentIndex++;
+                    Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true, getListQuestion(), activity.mFragmentManager, getPosMember());
+                }
             }
         } else {
             WarningDTO warning = validateQuaetion(questionDTO, null);
@@ -518,6 +489,7 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
                                 Constants.mStaticObject.getMemberDTO().set(posMember, memberDTO);
                                 if (currentIndex < getListQuestion().size() - 1) {
                                     saveAnswerToSurvey(questionDTO,posMember);
+                                    previousIndex =currentIndex;
                                     currentIndex++;
                                     Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true, getListQuestion(), activity.mFragmentManager, getPosMember());
                                 }
@@ -537,9 +509,8 @@ public class NumberInputFragment extends BaseTypeFragment implements EditText
     @Override
     public void previuos() {
         Utils.hideKeyboard(activity, lnContent);
-        if (currentIndex > 0) {
-            currentIndex--;
-            Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), false, getListQuestion(), activity.mFragmentManager, getPosMember());
+        if (previousIndex !=-1) {
+            Utils.replcaeFragmentByType(getListQuestion().get(previousIndex), false, getListQuestion(), activity.mFragmentManager, getPosMember());
         }
     }
 

@@ -315,4 +315,5 @@
     <string name="txt_other_water">LỖI: Hộ sử dụng Nguồn nước ăn uống khác mà không ghi rõ</string>
     <string name="txt_no_equipment">Cảnh báo: Hộ không có bất kỳ 1 trong các loại thiết bị phục vụ sinh hoạt được hỏi?</string>
     <string name="txt_warning_equipment">Cảnh báo: Hộ có tài sản đắt tiền như tivi, tủ lạnh, điều hòa, ô tô nhưng thắp sáng =%1$d, nấu ăn =%2$d và không có hố xí. Có tiếp tục không?</string>
+    <string name="txt_empty_time">Năm/tháng không được phép để trống</string>
 </resources>

@@ -124,8 +124,8 @@ public class FamilyDTO implements Serializable{
         return mLoaiphieu;
     }
 
-    public void setLoaiphieu(Integer loaiphieu) {
-        mLoaiphieu = loaiphieu;
+    public void setLoaiphieu(String loaiphieu) {
+        mLoaiphieu = Integer.parseInt(loaiphieu);
     }
 
     public String getMADIABAN() {
@@ -238,7 +238,11 @@ public class FamilyDTO implements Serializable{
             try {
                 Field field = clazz.getDeclaredField(fieldName);
                 field.setAccessible(true);
-                field.set(this, fieldValue);
+                if(field.getType().equals(String.class)){
+                    field.set(this, fieldValue);
+                }else {
+                    field.set(this, Integer.parseInt((String)fieldValue));
+                }
                 return true;
             } catch (NoSuchFieldException e) {
                 clazz = clazz.getSuperclass();

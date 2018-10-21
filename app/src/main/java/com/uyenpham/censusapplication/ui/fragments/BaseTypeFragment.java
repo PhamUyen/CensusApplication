@@ -10,6 +10,7 @@ import com.uyenpham.censusapplication.models.family.DeadDTO;
 import com.uyenpham.censusapplication.models.family.FamilyDetailDTO;
 import com.uyenpham.censusapplication.models.family.HouseDTO;
 import com.uyenpham.censusapplication.models.family.MemberDTO;
+import com.uyenpham.censusapplication.models.family.PeopleDetailDTO;
 import com.uyenpham.censusapplication.models.family.WomanDTO;
 import com.uyenpham.censusapplication.models.survey.AnswerDTO;
 import com.uyenpham.censusapplication.models.survey.QuestionDTO;
@@ -21,18 +22,20 @@ import com.uyenpham.censusapplication.utils.Utils;
 import java.util.ArrayList;
 
 import static com.uyenpham.censusapplication.ui.activities.SurveyActivity.currentIndex;
+import static com.uyenpham.censusapplication.ui.activities.SurveyActivity.previousIndex;
 
 public abstract class BaseTypeFragment extends BaseFragment {
     private ArrayList<QuestionDTO> listQuestion;
     public SurveyActivity activity;
     private int contentID;
-    private  int posMember;
+    private int posMember;
     public MemberDTO memberDTO;
     public WomanDTO womanDTO;
     public DeadDTO deadDTO;
     public HouseDTO houseDTO;
     public FamilyDetailDTO familyDetailDTO;
     public QuestionDTO questionDTO;
+
     public abstract boolean loadQuestion(QuestionDTO questionDTO);
 
     @Override
@@ -51,11 +54,12 @@ public abstract class BaseTypeFragment extends BaseFragment {
         }
         initData();
     }
+
     public abstract void initData();
 
-    private MemberDTO getMemberById(String id){
-        for(MemberDTO member : Constants.mStaticObject.getMemberDTO()){
-            if(member.getmIDTV().equalsIgnoreCase(id)){
+    private MemberDTO getMemberById(String id) {
+        for (MemberDTO member : Constants.mStaticObject.getMemberDTO()) {
+            if (member.getmIDTV().equalsIgnoreCase(id)) {
                 return member;
             }
         }
@@ -71,10 +75,10 @@ public abstract class BaseTypeFragment extends BaseFragment {
     }
 
 
-    public  void save(AnswerDTO answerDTO, QuestionDTO questionDTO){
-        if(AnswerDAO.getInstance().checkIsExistDB(answerDTO.getId())){
+    public void save(AnswerDTO answerDTO, QuestionDTO questionDTO) {
+        if (AnswerDAO.getInstance().checkIsExistDB(answerDTO.getId())) {
             AnswerDAO.getInstance().update(answerDTO);
-        }else {
+        } else {
             AnswerDAO.getInstance().insert(answerDTO);
         }
     }
@@ -124,64 +128,84 @@ public abstract class BaseTypeFragment extends BaseFragment {
         return null;
     }
 
-    public void setContentQuestion(TextView tvQuestion){
+    public void setContentQuestion(TextView tvQuestion) {
         String questionContent = questionDTO.getQuestion();
-        if(questionDTO.getQuestion().contains("%1$s")){
-            switch (questionDTO.getSurvey()){
+        if (questionDTO.getQuestion().contains("%1$s")) {
+            switch (questionDTO.getSurvey()) {
                 case Constants.SURVEY_MEMBER:
-                    questionContent = String.format(questionContent,memberDTO.getmC01());
+                    questionContent = String.format(questionContent, memberDTO.getmC01());
                     break;
                 case Constants.SURVEY_DEAD:
                     questionContent = String.format(questionContent, deadDTO.getmC43());
                     break;
             }
         }
-        tvQuestion.setText(questionDTO.getName() + "." +questionContent);
+        tvQuestion.setText(questionDTO.getName() + "." + questionContent);
     }
 
     public void nextMember() {
         switch (questionDTO.getSurvey()) {
             case Constants.SURVEY_MEMBER:
-                if (posMember < Constants.mStaticObject.getMemberDTO().size()-1) {
+                if (posMember < Constants.mStaticObject.getMemberDTO().size() - 1) {
                     posMember++;
                     setPosMember(posMember);
                     currentIndex = 0;
                     Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true,
                             getListQuestion(), activity.mFragmentManager, getPosMember());
                     activity.getNavigationBar().setTitle("1 - " + Constants.mStaticObject
-                            .getPeopleDetailDTO().get(posMember).getQ1());
+                            .getPeopleDetailDTO().get(posMember).getQ1A());
                 } else {
-                    if (!Constants.mStaticObject.getWomanDTO().isEmpty()) {
-                        posMember =0;
-                        setPosMember(posMember);
-                        activity.survey = Constants.SURVEY_WOMAN;
-                        activity.isMember = true;
-                        activity.setListPeople(posMember);
-                        activity.getNavigationBar().setTitle("1 - " + Constants.mStaticObject
-                                .getWomanDTO().get(0).getTenTV());
+                    if (Constants.mStaticObject.getFamilyDTO().getLoaiphieu() == Constants
+                            .SHORT_FORM) {
+                        if (currentIndex < getListQuestion().size()) {
+                            activity.makeListQuestion();
+                            currentIndex = 25;
+                            previousIndex =24;
+                            activity.getNavigationBar().setTitle(getString(R.string
+                                    .txt_interview_detail));
+                            Utils.replcaeFragmentByType(activity.getListQuestionMain().get
+                                            (currentIndex), true,
+                                    activity.getListQuestionMain(), activity.mFragmentManager, -1);
+                        }
                     } else {
-                        if (!Constants.mStaticObject.getDeadDTO().isEmpty()) {
-                            activity.survey = Constants.SURVEY_DEAD;
-                            posMember =0;
+                        if (!Constants.mStaticObject.getWomanDTO().isEmpty()) {
+                            posMember = 0;
                             setPosMember(posMember);
+                            activity.survey = Constants.SURVEY_WOMAN;
                             activity.isMember = true;
                             activity.setListPeople(posMember);
                             activity.getNavigationBar().setTitle("1 - " + Constants.mStaticObject
-                                    .getDeadDTO().get(0).getmC43());
+                                    .getWomanDTO().get(0).getTenTV());
                         } else {
-                            if (currentIndex < getListQuestion().size()) {
-                                activity.makeListQuestion();
-                                currentIndex = 25;
-                                activity.getNavigationBar().setTitle(getString(R.string.txt_interview_detail));
-                                Utils.replcaeFragmentByType(activity.getListQuestionMain().get(currentIndex), true,
-                                        activity.getListQuestionMain(), activity.mFragmentManager, -1);
+                            if (!Constants.mStaticObject.getDeadDTO().isEmpty()) {
+                                activity.survey = Constants.SURVEY_DEAD;
+                                posMember = 0;
+                                setPosMember(posMember);
+                                activity.isMember = true;
+                                activity.setListPeople(posMember);
+                                activity.getNavigationBar().setTitle("1 - " + Constants
+                                        .mStaticObject
+                                        .getDeadDTO().get(0).getmC43());
+                            } else {
+                                if (currentIndex < getListQuestion().size()) {
+                                    activity.makeListQuestion();
+                                    currentIndex = 25;
+                                    previousIndex =24;
+                                    activity.getNavigationBar().setTitle(getString(R.string
+                                            .txt_interview_detail));
+                                    Utils.replcaeFragmentByType(activity.getListQuestionMain()
+                                                    .get(currentIndex), true,
+                                            activity.getListQuestionMain(), activity
+                                                    .mFragmentManager, -1);
+                                }
                             }
                         }
+
                     }
                 }
                 break;
             case Constants.SURVEY_WOMAN:
-                if (posMember < Constants.mStaticObject.getWomanDTO().size()-1) {
+                if (posMember < Constants.mStaticObject.getWomanDTO().size() - 1) {
                     posMember++;
                     setPosMember(posMember);
                     currentIndex = 0;
@@ -191,7 +215,7 @@ public abstract class BaseTypeFragment extends BaseFragment {
                             .getWomanDTO().get(posMember).getTenTV());
                 } else {
                     if (Constants.mStaticObject.getDeadDTO().size() > 0) {
-                        posMember =0;
+                        posMember = 0;
                         setPosMember(posMember);
                         activity.survey = Constants.SURVEY_DEAD;
                         activity.isMember = true;
@@ -202,15 +226,18 @@ public abstract class BaseTypeFragment extends BaseFragment {
                         if (currentIndex < getListQuestion().size()) {
                             activity.makeListQuestion();
                             currentIndex = 25;
-                            activity.getNavigationBar().setTitle(getString(R.string.txt_interview_detail));
-                            Utils.replcaeFragmentByType(activity.getListQuestionMain().get(currentIndex), true,
+                            previousIndex =24;
+                            activity.getNavigationBar().setTitle(getString(R.string
+                                    .txt_interview_detail));
+                            Utils.replcaeFragmentByType(activity.getListQuestionMain().get
+                                            (currentIndex), true,
                                     activity.getListQuestionMain(), activity.mFragmentManager, -1);
                         }
                     }
                 }
                 break;
             case Constants.SURVEY_DEAD:
-                if (posMember < Constants.mStaticObject.getDeadDTO().size()-1) {
+                if (posMember < Constants.mStaticObject.getDeadDTO().size() - 1) {
                     posMember++;
                     setPosMember(posMember);
                     currentIndex = 0;
@@ -222,7 +249,8 @@ public abstract class BaseTypeFragment extends BaseFragment {
                     activity.makeListQuestion();
                     currentIndex = 25;
                     activity.getNavigationBar().setTitle(getString(R.string.txt_interview_detail));
-                    Utils.replcaeFragmentByType(activity.getListQuestionMain().get(currentIndex), true,
+                    Utils.replcaeFragmentByType(activity.getListQuestionMain().get(currentIndex),
+                            true,
                             activity.getListQuestionMain(), activity.mFragmentManager, -1);
                 }
                 break;
@@ -235,10 +263,10 @@ public abstract class BaseTypeFragment extends BaseFragment {
     protected void saveAnswerToSurvey(QuestionDTO question, int postMember) {
         switch (question.getSurvey()) {
             case Constants.SURVEY_WOMAN:
-                Constants.mStaticObject.getWomanDTO().set(postMember,womanDTO);
+                Constants.mStaticObject.getWomanDTO().set(postMember, womanDTO);
                 break;
             case Constants.SURVEY_DEAD:
-                Constants.mStaticObject.getDeadDTO().set(postMember,deadDTO);
+                Constants.mStaticObject.getDeadDTO().set(postMember, deadDTO);
                 break;
             case Constants.SURVEY_PEOPLE:
                 break;
@@ -246,7 +274,7 @@ public abstract class BaseTypeFragment extends BaseFragment {
                 Constants.mStaticObject.setHouseDTO(houseDTO);
                 break;
             case Constants.SURVEY_MEMBER:
-                Constants.mStaticObject.getMemberDTO().set(postMember,memberDTO);
+                Constants.mStaticObject.getMemberDTO().set(postMember, memberDTO);
                 break;
             case Constants.SURVEY_FAMILY:
                 Constants.mStaticObject.setFamilyDetailDTO(familyDetailDTO);
@@ -254,5 +282,23 @@ public abstract class BaseTypeFragment extends BaseFragment {
             default:
                 break;
         }
+    }
+    public PeopleDetailDTO getPeopleByName(String name){
+        for(PeopleDetailDTO peopleDetailDTO : Constants.mStaticObject.getPeopleDetailDTO()){
+            if(peopleDetailDTO.getQ1A().equalsIgnoreCase(name)){
+                return peopleDetailDTO;
+            }
+        }
+        return null;
+    }
+    public int getIndexMemberByName(String name){
+        ArrayList list =Constants.mStaticObject.getMemberDTO();
+        for(int i=0; i< list.size(); i++){
+            MemberDTO member =  Constants.mStaticObject.getMemberDTO().get(i);
+            if(member.getmC01().equalsIgnoreCase(name)){
+                return i;
+            }
+        }
+        return -1;
     }
 }

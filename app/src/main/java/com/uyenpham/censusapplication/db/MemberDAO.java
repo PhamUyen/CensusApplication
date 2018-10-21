@@ -68,8 +68,22 @@ public class MemberDAO {
         );
         return offlineEntities == null ? new ArrayList<MemberDTO>() : offlineEntities;
     }
-
-
+    public MemberDTO findChuHo() {
+        try {
+            ArrayList<MemberDTO> list = mLiteOrm.query(
+                    new QueryBuilder<>(MemberDTO.class)
+                            .whereEquals(MemberDTO.C02, 1)
+            );
+            if(list.size() > 0){
+                return list.get(0);
+            }else {
+                return null;
+            }
+        } catch (Exception e) {
+            Logger.e(TAG, e.getMessage(), e);
+            return null;
+        }
+    }
     public MemberDTO findById(String id) {
         try {
             ArrayList<MemberDTO> list = mLiteOrm.query(
@@ -79,11 +93,11 @@ public class MemberDAO {
             if(list.size() > 0){
                 return list.get(0);
             }else {
-                return new MemberDTO(id);
+                return new MemberDTO();
             }
         } catch (Exception e) {
             Logger.e(TAG, e.getMessage(), e);
-            return new MemberDTO(id);
+            return new MemberDTO();
         }
     }
     public ArrayList<MemberDTO> findByIdHo(String id) {

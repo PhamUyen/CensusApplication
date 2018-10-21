@@ -19,6 +19,7 @@ public class RadioButtonAdapter extends RecyclerView.Adapter<RadioButtonAdapter.
 
     private ArrayList<OptionDTO> listOption;
     private IRadioButtonClick listener;
+    private int lastSelectedPosition = -1;
 
     public RadioButtonAdapter(ArrayList<OptionDTO> listOption){
         this.listOption = listOption;
@@ -36,7 +37,7 @@ public class RadioButtonAdapter extends RecyclerView.Adapter<RadioButtonAdapter.
     @Override
     public void onBindViewHolder(@NonNull final RadioButtonAdapter.LocalityViewHolder holder, final int position) {
         holder.rb.setText(listOption.get(position).getOption());
-        holder.rb.setChecked(listOption.get(position).isSelected());
+        holder.rb.setChecked(lastSelectedPosition == position);
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,6 +68,14 @@ public class RadioButtonAdapter extends RecyclerView.Adapter<RadioButtonAdapter.
             super(itemView);
             rb = itemView.findViewById(R.id.radio_btn);
             item = itemView.findViewById(R.id.item_view);
+            item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    lastSelectedPosition = getAdapterPosition();
+                    notifyDataSetChanged();
+                }
+            });
+//            rb.setClickable(false);
         }
     }
     public void setListener(IRadioButtonClick listener) {

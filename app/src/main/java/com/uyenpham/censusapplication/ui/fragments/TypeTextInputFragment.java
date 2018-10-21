@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import butterknife.Bind;
 
 import static com.uyenpham.censusapplication.ui.activities.SurveyActivity.currentIndex;
+import static com.uyenpham.censusapplication.ui.activities.SurveyActivity.previousIndex;
 
 public class TypeTextInputFragment extends BaseTypeFragment implements INextQuestion,
         IPreviousQuestion, IClearListener {
@@ -93,20 +94,22 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
         });
     }
     private void setListPeopleDetail(String name){
-        int index = listText.indexOf(name);
+        int stt = listText.indexOf(name)+1;
         PeopleDetailDTO peopleDetailDTO = new PeopleDetailDTO();
-        peopleDetailDTO.setIDHO(Constants.mStaticObject.getIdHo());
-        peopleDetailDTO.setHOSO(Constants.mStaticObject.getPeopleDTO().getHOSO());
-        peopleDetailDTO.setQ1(name);
-        peopleDetailDTO.setSTT(index);
-        peopleDetailDTO.setChuho(index == 0 ? 2 : 1);
-        peopleDetailDTO.setID(Constants.mStaticObject.getIdHo() + index);
+        peopleDetailDTO.setmIDHO(Constants.mStaticObject.getIdHo());
+        peopleDetailDTO.setmHOSO(Constants.mStaticObject.getPeopleDTO().getHOSO());
+        peopleDetailDTO.setQ1A(name);
+        peopleDetailDTO.setmQ2A(2);
+        peopleDetailDTO.setQ3B(2);
+        peopleDetailDTO.setQ4B(2);
+        peopleDetailDTO.setSTT(stt);
+        peopleDetailDTO.setmID(Constants.mStaticObject.getIdHo() + stt);
         listNewPeople.add(peopleDetailDTO);
 
         MemberDTO memberDTO1 = new MemberDTO();
         memberDTO1.setmC01(name);
-        memberDTO1.setmIDTV(Constants.mStaticObject.getIdHo() + index);
-        memberDTO1.setmSTTNKTT(index + 1);
+        memberDTO1.setmIDTV(Constants.mStaticObject.getIdHo() + stt);
+        memberDTO1.setmSTTNKTT(stt);
         listNewMem.add(memberDTO1);
         edAnswer.setText(null);
     }
@@ -141,10 +144,10 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
         setContentQuestion(tvQuestion);
         if (Constants.SURVEY_PEOPLE.equals(question.getSurvey())) {
             PeopleDTO peopleDTO = Constants.mStaticObject.getPeopleDTO();
-            if (question.getId().equals(Constants.QUESTION_Q1)) {
+            if (question.getId().equals(Constants.QUESTION_Q1a)) {
                 ArrayList<PeopleDetailDTO> list = Constants.mStaticObject.getPeopleDetailDTO();
                 for (PeopleDetailDTO people : list) {
-                    listText.add(people.getQ1());
+                    listText.add(people.getQ1A());
                     if(adapter != null){
                         adapter.notifyDataSetChanged();
                     }
@@ -170,7 +173,7 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
     @Override
     public WarningDTO validateQuaetion(QuestionDTO question, AnswerDTO answer) {
         switch (question.getId()) {
-            case Constants.QUESTION_Q1:
+            case Constants.QUESTION_Q1a:
                 return listText.size() > 0 ? null : new WarningDTO(getString(R.string.txt_empty), Constants.TYPE_NOTI);
             case Constants.mDIENTHOAI:
                 String regexStr = "^[0-9]*$";
@@ -184,7 +187,13 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
                     return new WarningDTO(getString(R.string.txt_invalid_district, posMember + 1, memberDTO.getmC01(), memberDTO.getmC10B()), Constants.TYPE_NOTI);
                 }
                 break;
-
+            case Constants.QUESTION_C27:
+                if((memberDTO.getmC16()!= null && memberDTO.getmC16()>=1&&memberDTO.getmC16() <=4)
+                        && (memberDTO.getmC23()==1 || memberDTO.getmC24()==1 || memberDTO.getmC25() ==1)){
+                }else {
+                    currentIndex+=2;
+                }
+                break;
             case Constants.QUESTION_C43:
                 if ((edAnswer.getText().toString().matches("^[0-9]*$") && 9 < edAnswer.getText().toString().length() && edAnswer.getText().toString().length() < 12)) {
                     return null;
@@ -227,6 +236,7 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
         Utils.hideKeyboard(activity, edAnswer);
         if (currentIndex < getListQuestion().size() - 1) {
             saveAnswerToSurvey(questionDTO, posMember);
+            previousIndex =currentIndex;
             currentIndex++;
             Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true, getListQuestion(), activity.mFragmentManager, getPosMember());
         }
@@ -234,14 +244,13 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
 
     @Override
     public void previuos() {
-        if (currentIndex > 0) {
-            currentIndex--;
-            Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), false, getListQuestion(), activity.mFragmentManager, getPosMember());
+        if (previousIndex !=-1) {
+            Utils.replcaeFragmentByType(getListQuestion().get(previousIndex), false, getListQuestion(), activity.mFragmentManager, getPosMember());
         }
     }
 
     private void changeQuestion() {
-        if (questionDTO.getId().equals(Constants.QUESTION_Q1)) {
+        if (questionDTO.getId().equals(Constants.QUESTION_Q1a)) {
             if (validateQuaetion(questionDTO, answerDTO) == null) {
                 DialogUtils.showErrorAlert2Option(activity, getString(R.string.txt_another_else), R.string.txt_yes, R.string.txt_no,
                         new DialogInterface.OnClickListener() {

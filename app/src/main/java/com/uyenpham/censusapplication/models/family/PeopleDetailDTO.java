@@ -2,13 +2,30 @@ package com.uyenpham.censusapplication.models.family;
 
 import com.google.gson.annotations.SerializedName;
 
-public class PeopleDetailDTO extends PeopleDTO {
+public class PeopleDetailDTO {
     public static final String ID_HO = "ID";
-
+    @SerializedName("HOSO")
+    private String mHOSO;
+    @SerializedName("ID")
+    private String mID;
+    @SerializedName("IDHO")
+    private String mIDHO;
+    @SerializedName("Q2A")
+    private Integer mQ2A;
     @SerializedName("STT")
     private int STT;
-    @SerializedName("Q1")
-    private String Q1;
+    @SerializedName("Q1A")
+    private String Q1A;
+    @SerializedName("Q1B")
+    private Integer Q1B;
+    @SerializedName("Q2B")
+    private Integer Q2B;
+    @SerializedName("Q3B")
+    private Integer Q3B;
+    @SerializedName("Q4B")
+    private Integer Q4B;
+    @SerializedName("Q5")
+    private String Q5;
     @SerializedName("Chuho")
     private Integer Chuho;
     private boolean isSelected;
@@ -16,10 +33,119 @@ public class PeopleDetailDTO extends PeopleDTO {
     public PeopleDetailDTO() {
     }
 
-    public PeopleDetailDTO(String q1, Integer chuho,int STT) {
-        Q1 = q1;
+    public PeopleDetailDTO(String q1, String q5,int stt, Integer chuho) {
+        Q1A = q1;
+        Q5 = q5;
+        STT = stt;
         Chuho = chuho;
-        STT = STT;
+    }
+
+    public PeopleDetailDTO(String mHOSO, String mID, String mIDHO, Integer mQ2A, int STT, String
+            q1A, Integer q1B, Integer q2B, Integer q3B, Integer q4B, String q5, Integer chuho) {
+        this.mHOSO = mHOSO;
+        this.mID = mID;
+        this.mIDHO = mIDHO;
+        this.mQ2A = mQ2A;
+        this.STT = STT;
+        Q1A = q1A;
+        Q1B = q1B;
+        Q2B = q2B;
+        Q3B = q3B;
+        Q4B = q4B;
+        Q5 = q5;
+        Chuho = chuho;
+    }
+
+    public static String getIdHo() {
+        return ID_HO;
+    }
+
+    public Integer getChuho() {
+        return Chuho;
+    }
+
+    public void setChuho(Integer chuho) {
+        Chuho = chuho;
+    }
+
+    public String getmHOSO() {
+        return mHOSO;
+    }
+
+    public void setmHOSO(String mHOSO) {
+        this.mHOSO = mHOSO;
+    }
+
+    public String getmID() {
+        return mID;
+    }
+
+    public void setmID(String mID) {
+        this.mID = mID;
+    }
+
+    public String getmIDHO() {
+        return mIDHO;
+    }
+
+    public void setmIDHO(String mIDHO) {
+        this.mIDHO = mIDHO;
+    }
+
+    public Integer getmQ2A() {
+        return mQ2A;
+    }
+
+    public void setmQ2A(Integer mQ2A) {
+        this.mQ2A = mQ2A;
+    }
+
+    public String getQ1A() {
+        return Q1A;
+    }
+
+    public void setQ1A(String q1A) {
+        Q1A = q1A;
+    }
+
+    public Integer getQ1B() {
+        return Q1B;
+    }
+
+    public void setQ1B(Integer q1B) {
+        Q1B = q1B;
+    }
+
+    public Integer getQ2B() {
+        return Q2B;
+    }
+
+    public void setQ2B(Integer q2B) {
+        Q2B = q2B;
+    }
+
+    public Integer getQ3B() {
+        return Q3B;
+    }
+
+    public void setQ3B(Integer q3B) {
+        Q3B = q3B;
+    }
+
+    public Integer getQ4B() {
+        return Q4B;
+    }
+
+    public void setQ4B(Integer q4B) {
+        Q4B = q4B;
+    }
+
+    public String getQ5() {
+        return Q5;
+    }
+
+    public void setQ5(String q5) {
+        Q5 = q5;
     }
 
     public boolean isSelected() {
@@ -38,29 +164,4 @@ public class PeopleDetailDTO extends PeopleDTO {
         this.STT = STT;
     }
 
-    public PeopleDetailDTO(String mHOSO, String mID, String mIDHO, Integer mQ2, Integer mQ3,
-                           Integer mQ4, Integer mQ5, Integer mQ61, Integer mQ62, Integer mQ63,
-                           Integer mQ64, Integer mQ65, Integer mQ66, Integer mQ7, Integer mQ8,
-                           Integer mQ9, String q1, Integer chuho) {
-        super(mHOSO, mID, mIDHO, mQ2, mQ3, mQ4, mQ5, mQ61, mQ62, mQ63, mQ64, mQ65, mQ66, mQ7,
-                mQ8, mQ9);
-        Q1 = q1;
-        Chuho = chuho;
-    }
-
-    public String getQ1() {
-        return Q1;
-    }
-
-    public void setQ1(String q1) {
-        Q1 = q1;
-    }
-
-    public Integer getChuho() {
-        return Chuho;
-    }
-
-    public void setChuho(Integer chuho) {
-        Chuho = chuho;
-    }
 }

@@ -38,6 +38,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content">
                 <EditText
+                    android:textAlignment="center"
                     android:imeOptions="actionDone"
                     android:id="@+id/edCodeProvince"
                     android:inputType="number"
@@ -72,6 +73,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content">
                 <EditText
+                    android:textAlignment="center"
                     android:imeOptions="actionDone"
                     android:id="@+id/edCodeDistrict"
                     android:inputType="number"

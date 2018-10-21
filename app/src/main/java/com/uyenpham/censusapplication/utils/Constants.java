@@ -27,18 +27,21 @@ public class Constants {
     public static final int TYPE_MIX = 10;
     public static final int TYPE_SINGLE_SELECT_AUTO = 11;
     public static final int TYPE_MULTI_TEXT_INPUT = 12;
+    public static final int TYPE_SINGLE_SELECT_IN_LIST = 13;
 
     //static object
     public static final StaticObject mStaticObject = StaticObject.getInstance();
 
     //ID question people
     public static final String QUESTION_Q9 = "Q9";
-    public static final String QUESTION_Q1 = "Q1";
-    public static final String QUESTION_Q2 = "Q2";
-    public static final String QUESTION_Q3 = "Q3";
-    public static final String QUESTION_Q4 = "Q4";
+    public static final String QUESTION_Q1a = "Q1a";
+    public static final String QUESTION_Q1b = "Q1b";
+    public static final String QUESTION_Q2a = "Q2a";
+    public static final String QUESTION_Q2b = "Q2b";
+    public static final String QUESTION_Q3a = "Q3a";
+    public static final String QUESTION_Q4a = "Q4a";
     public static final String QUESTION_Q5 = "Q5";
-    public static final String QUESTION_Q61 = "Q61";
+    public static final String QUESTION_Q6 = "Q6";
     public static final String QUESTION_Q62 = "Q62";
     public static final String QUESTION_Q63 = "Q63";
     public static final String QUESTION_Q64 = "Q64";
@@ -76,15 +79,19 @@ public class Constants {
     public static final String QUESTION_C21= "C21";
     public static final String QUESTION_C22=  "C22";
     public static final String QUESTION_C23=  "C23";
-    public static final String QUESTION_C23N=  "C23N";
-    public static final String QUESTION_C23T=  "C23T";
+    public static final String QUESTION_C21N=  "C21N";
+    public static final String QUESTION_C21T=  "C21T";
     public static final String QUESTION_C24=  "C24";
     public static final String QUESTION_C25=  "C25";
-    public static final String QUESTION_C26=  "C26";
+    public static final String QUESTION_C28=  "C28";
     public static final String QUESTION_C27=  "C27";
-    public static final String QUESTION_C28A=  "C28A";
-    public static final String QUESTION_C28B=  "C28B";
-    public static final String QUESTION_C28C=  "C28C";
+    public static final String QUESTION_C29=  "C29";
+    public static final String QUESTION_C26A=  "C26A";
+    public static final String QUESTION_C26B=  "C26B";
+    public static final String QUESTION_C26C=  "C26C";
+    public static final String QUESTION_C27A=  "C27A";
+    public static final String QUESTION_C27B= "C27B";
+    public static final String QUESTION_C27C= "C27C";
     public static final String QUESTION_C29A=  "C29A";
     public static final String QUESTION_C29B= "C29B";
     public static final String QUESTION_C29C= "C29C";
@@ -220,6 +227,7 @@ public class Constants {
     //type  warning
     public static final int TYPE_CONFIRM = 2;
     public static final int TYPE_NOTI = 1;
+    public static final int SHORT_FORM= 2;
 
     //key sharePreferecnce
     public static final String KEY_NATION = "nation";

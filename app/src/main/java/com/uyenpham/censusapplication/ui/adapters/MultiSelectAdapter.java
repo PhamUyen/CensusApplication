@@ -11,18 +11,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.uyenpham.censusapplication.R;
-import com.uyenpham.censusapplication.models.family.PeopleDetailDTO;
+import com.uyenpham.censusapplication.models.family.MemberDTO;
 import com.uyenpham.censusapplication.ui.interfaces.IRecyclerViewListener;
 
 import java.util.ArrayList;
 
 public class MultiSelectAdapter extends RecyclerView.Adapter<MultiSelectAdapter.LocalityViewHolder> {
 
-    private ArrayList<PeopleDetailDTO> listText;
+    private ArrayList<MemberDTO> listText;
     private IRecyclerViewListener listener;
     private boolean isSelect;
 
-    public MultiSelectAdapter(ArrayList<PeopleDetailDTO> listLocality, boolean isSelect) {
+    public MultiSelectAdapter(ArrayList<MemberDTO> listLocality, boolean isSelect) {
         this.listText = listLocality;
         this.isSelect = isSelect;
     }
@@ -38,11 +38,11 @@ public class MultiSelectAdapter extends RecyclerView.Adapter<MultiSelectAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull final MultiSelectAdapter.LocalityViewHolder holder, final int position) {
-        holder.tvText.setText(listText.get(position).getQ1());
+        holder.tvText.setText(listText.get(position).getmC01());
         if(isSelect){
             holder.checkBox.setVisibility(View.VISIBLE);
             holder.imvClose.setVisibility(View.GONE);
-            holder.checkBox.setChecked(listText.get(position).isSelected());
+            holder.checkBox.setChecked(listText.get(position).isSlected());
         }else {
             holder.checkBox.setVisibility(View.GONE);
             holder.imvClose.setVisibility(View.VISIBLE);

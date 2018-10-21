@@ -7,6 +7,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.uyenpham.censusapplication.R;
+import com.uyenpham.censusapplication.models.family.MemberDTO;
 import com.uyenpham.censusapplication.models.family.PeopleDetailDTO;
 import com.uyenpham.censusapplication.models.survey.AnswerDTO;
 import com.uyenpham.censusapplication.models.survey.OptionDTO;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 import butterknife.Bind;
 
 import static com.uyenpham.censusapplication.ui.activities.SurveyActivity.currentIndex;
+import static com.uyenpham.censusapplication.ui.activities.SurveyActivity.previousIndex;
 
 public class MultiSelectionFragment extends BaseTypeFragment implements IRadioButtonClick,
         INextQuestion, IPreviousQuestion {
@@ -79,9 +81,9 @@ public class MultiSelectionFragment extends BaseTypeFragment implements IRadioBu
         listCheckbox.setLayoutManager(linearLayoutManager);
         setContentQuestion(tvQuestion);
         listOption = new ArrayList<>();
-        if(question.getId().equalsIgnoreCase(Constants.QUESTION_Q9)){
-            for(PeopleDetailDTO peopleDetailDTO : Constants.mStaticObject.getPeopleDetailDTO()){
-                listOption.add(new OptionDTO(peopleDetailDTO.getQ1(),Constants.TYPE_NORMAL));
+        if(question.getId().equalsIgnoreCase(Constants.QUESTION_Q5)){
+            for(MemberDTO memberDTO : Constants.mStaticObject.getMemberDTO()){
+                listOption.add(new OptionDTO(memberDTO.getmC01(),Constants.TYPE_NORMAL));
             }
         }else {
             listOption.addAll(question.getOptions());
@@ -91,6 +93,7 @@ public class MultiSelectionFragment extends BaseTypeFragment implements IRadioBu
         adapter.setListener(this);
         return false;
     }
+
 
     @Override
     public WarningDTO validateQuaetion(QuestionDTO question, AnswerDTO answer) {
@@ -115,10 +118,23 @@ public class MultiSelectionFragment extends BaseTypeFragment implements IRadioBu
     @Override
     public void onRadioClick(int pos, boolean isChecked) {
         OptionDTO option = listOption.get(pos);
-        option.setSelected(!isChecked);
-        if(questionDTO.getId().equalsIgnoreCase(Constants.QUESTION_Q9)){
+        if(questionDTO.getId().equalsIgnoreCase(Constants.QUESTION_Q5)){
+            for(OptionDTO optionDTO : listOption){
+                optionDTO.setSelected(false);
+            }
+            option.setSelected(!isChecked);
+            PeopleDetailDTO peopleDetailDTO = getPeopleByName(option.getOption());
+            peopleDetailDTO.setQ5(option.getOption());
+            peopleDetailDTO.setChuho(1);
+            int index = getIndexMemberByName(option.getOption());
+            if(index != -1){
+                MemberDTO memberDTO = Constants.mStaticObject.getMemberDTO().get(index);
+                memberDTO.setmC02(1);
+                Constants.mStaticObject.getMemberDTO().set(index,memberDTO);
+            }
 
         }else if(questionDTO.getId().equalsIgnoreCase(Constants.QUESTION_Q65)){
+            option.setSelected(!isChecked);
             switch (pos) {
                 case 0:
                     houseDTO.setC65A(isChecked ? "A" : null);
@@ -179,17 +195,6 @@ public class MultiSelectionFragment extends BaseTypeFragment implements IRadioBu
     @Override
     public void next() {
         switch (questionDTO.getId()) {
-            case Constants.QUESTION_Q9:
-                    if (!Constants.mStaticObject.getPeopleDetailDTO().isEmpty()) {
-                        activity.survey = Constants.SURVEY_MEMBER;
-                        activity.isMember = true;
-                        activity.setListPeople(0);
-                        activity.getNavigationBar().setTitle("1 - " + Constants.mStaticObject
-                                .getPeopleDetailDTO().get(0).getQ1());
-                    } else {
-                        nextFragment();
-                    }
-                break;
             case Constants.QUESTION_Q65:
                 if(validateQuaetion(questionDTO,null) == null){
                     Constants.mStaticObject.setHouseDTO(houseDTO);
@@ -203,10 +208,7 @@ public class MultiSelectionFragment extends BaseTypeFragment implements IRadioBu
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
                                         Constants.mStaticObject.setHouseDTO(houseDTO);
-                                        if (currentIndex < getListQuestion().size() - 1) {
-                                            currentIndex++;
-                                            Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), true, getListQuestion(), activity.mFragmentManager, getPosMember());
-                                        }
+                                       nextFragment();
                                     }
                                 }, new DialogInterface.OnClickListener() {
                                     @Override
@@ -220,11 +222,13 @@ public class MultiSelectionFragment extends BaseTypeFragment implements IRadioBu
                 }
                 break;
             default:
+                nextFragment();
                 break;
         }
     }
 
     private void nextFragment() {
+        previousIndex =currentIndex;
         currentIndex++;
         if (currentIndex < getListQuestion().size()) {
             saveAnswerToSurvey(questionDTO,posMember);
@@ -235,9 +239,8 @@ public class MultiSelectionFragment extends BaseTypeFragment implements IRadioBu
 
     @Override
     public void previuos() {
-        if (currentIndex > 0) {
-            currentIndex--;
-            Utils.replcaeFragmentByType(getListQuestion().get(currentIndex), false,getListQuestion(),activity.mFragmentManager,getPosMember());
+        if (previousIndex != -1) {
+            Utils.replcaeFragmentByType(getListQuestion().get(previousIndex), false,getListQuestion(),activity.mFragmentManager,getPosMember());
         }
     }
 }

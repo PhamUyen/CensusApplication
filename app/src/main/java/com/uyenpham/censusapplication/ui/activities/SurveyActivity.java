@@ -58,7 +58,7 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick,
     RecyclerView drawerList;
     @Bind(R.id.left_drawer_member)
     RecyclerView listMember;
-    @Bind(R.id.drawer_layout)
+//    @Bind(R.id.drawer_layout)
     DrawerLayout drawer;
     @Bind(R.id.imv_next)
     ImageView imvNext;
@@ -68,6 +68,7 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick,
     private List<GroupDrawer> list;
     private FamilyDTO familyDTO;
     public static int currentIndex = 8;
+    public static int previousIndex =-1;
     private ArrayList<QuestionDTO> listQuestion;
     private ArrayList<String> listPeople;
     private MemberAdapter memberAdapter;
@@ -82,12 +83,14 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick,
 
     @Override
     protected void initLayout() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, null, R.string.navigation_drawer_open, R.string
-                .navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+        drawer = findViewById(R.id.drawer_layout);
+        if (drawer != null) {
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                    this, drawer, null, R.string.navigation_drawer_open, R.string
+                    .navigation_drawer_close);
+            drawer.addDrawerListener(toggle);
+            toggle.syncState();
+        }
 
         LinearLayoutManager manager = new LinearLayoutManager(this);
         drawerList.setLayoutManager(manager);
@@ -107,7 +110,7 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick,
         }else {
             familyDTO = new FamilyDTO();
             familyDTO.setIDDB(iddb);
-            familyDTO.setLoaiphieu(2);
+            familyDTO.setLoaiphieu("2");
             familyDTO.setHOSO(String.valueOf(num));
             familyDTO.setIDHO(iddb+num);
         }
@@ -157,7 +160,7 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick,
         listMember.setVisibility(View.GONE);
         listQuestion.clear();
         listQuestion = DrawerDataFactory.makeListQuestion("question_people.json");
-        listQuestion.addAll(DrawerDataFactory.makeListQuestion("people.json"));
+        listQuestion.addAll(DrawerDataFactory.makeListQuestion("people_2.json"));
         listQuestion.addAll(DrawerDataFactory.makeListQuestion("house.json"));
     }
 
@@ -217,10 +220,12 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick,
     }
 
     public void toggleDrawer() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            closeDrawer();
-        } else {
-            openDrawer();
+        if(drawer != null){
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                closeDrawer();
+            } else {
+                openDrawer();
+            }
         }
     }
 
@@ -231,7 +236,7 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick,
     public void setNavigationBar() {
         navigationBar = findViewById(R.id.toolbar);
         navigationBar.reSetAll();
-        navigationBar.setIconLeft(R.drawable.ic_menu_left);
+        navigationBar.setIconLeft(R.drawable.ic_menu);
 
         navigationBar.setTitle(getString(R.string.txt_interview_detail));
     }
@@ -327,7 +332,7 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick,
         listMember.setVisibility(View.VISIBLE);
         if (survey.equals(Constants.SURVEY_MEMBER)) {
             for (PeopleDetailDTO peopleDetailDTO : Constants.mStaticObject.getPeopleDetailDTO()) {
-                listPeople.add(peopleDetailDTO.getQ1());
+                listPeople.add(peopleDetailDTO.getQ1A());
             }
         } else if (survey.equals(Constants.SURVEY_WOMAN)) {
             for (WomanDTO womanDTO : Constants.mStaticObject.getWomanDTO()) {

@@ -715,7 +715,7 @@
     {
       "id": "C27",
       "name": "C27",
-      "question": "Tên cơ sowrw và sản phẩm/dịch vụ chính của cơ sở nơi %1$s làm việc trong 7 ngày qua/trước khi tạm nghỉ là gì?",
+      "question": "Tên cơ sở và sản phẩm/dịch vụ chính của cơ sở nơi %1$s làm việc trong 7 ngày qua trước khi tạm nghỉ là gì?",
       "type": 1,
       "options": [],
       "placeHolders": "",

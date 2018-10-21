@@ -87,9 +87,9 @@ public class MemberActivity extends SurveyActivity implements IRecyclerViewListe
         navigationBar.setIconLeft(R.drawable.ic_menu_gallery);
 
         if(peopleDetailDTO == null){
-            navigationBar.setTitle(list.get(0).getQ1());
+            navigationBar.setTitle(list.get(0).getQ1A());
         }else {
-            navigationBar.setTitle(peopleDetailDTO.getQ1());
+            navigationBar.setTitle(peopleDetailDTO.getQ1A());
         }
     }
 
