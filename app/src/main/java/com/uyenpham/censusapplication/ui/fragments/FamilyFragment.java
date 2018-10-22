@@ -21,6 +21,7 @@ import com.uyenpham.censusapplication.ui.adapters.FamilyAdapter;
 import com.uyenpham.censusapplication.ui.interfaces.IRecyclerViewListener;
 import com.uyenpham.censusapplication.utils.Constants;
 import com.uyenpham.censusapplication.utils.DialogUtils;
+import com.uyenpham.censusapplication.utils.SharedPrefsUtils;
 import com.uyenpham.censusapplication.views.CustomNavigationBar;
 
 import java.util.ArrayList;
@@ -176,6 +177,8 @@ public class FamilyFragment extends BaseFragment implements
     }
     private void insertDB(){
         for(FamilyDTO family : list){
+            family.setIdInvestigateUser(SharedPrefsUtils.getStringPreference(getContext(),Constants.KEY_INVESTIGATE_USER));
+            family.setNew(false);
             FamilyDAO.getInstance().insert(family);
         }
     }

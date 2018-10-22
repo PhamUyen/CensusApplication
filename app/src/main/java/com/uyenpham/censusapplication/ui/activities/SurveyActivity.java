@@ -34,6 +34,7 @@ import com.uyenpham.censusapplication.ui.interfaces.IPreviousQuestion;
 import com.uyenpham.censusapplication.ui.interfaces.IRecyclerViewListener;
 import com.uyenpham.censusapplication.ui.interfaces.OnBackPressed;
 import com.uyenpham.censusapplication.utils.Constants;
+import com.uyenpham.censusapplication.utils.SharedPrefsUtils;
 import com.uyenpham.censusapplication.utils.Utils;
 import com.uyenpham.censusapplication.views.CustomNavigationBar;
 
@@ -113,6 +114,8 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick,
             familyDTO.setLoaiphieu("2");
             familyDTO.setHOSO(String.valueOf(num));
             familyDTO.setIDHO(iddb+num);
+            familyDTO.setNew(true);
+            familyDTO.setIdInvestigateUser(SharedPrefsUtils.getStringPreference(SurveyActivity.this,Constants.KEY_INVESTIGATE_USER));
         }
         setInfoFamily(familyDTO);
         makeListQuestion();

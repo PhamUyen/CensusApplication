@@ -72,41 +72,6 @@ public class FamilyDAO {
         return offlineEntities == null ? new ArrayList<FamilyDTO>() : offlineEntities;
     }
 
-//    public List<FamilyDTO> getAllCacheByType(String key) {
-//        List<FamilyDTO> areaEntities = mLiteOrm.query(
-//                new QueryBuilder<>(FamilyDTO.class)
-//                        .whereIn(FamilyDTO.COLUMN_TYPE, key)
-//
-//        );
-//        return areaEntities == null ? new ArrayList<FamilyDTO>() : areaEntities;
-//    }
-//    public List<FamilyDTO> getAllCacheByDate(String date) {
-//        List<FamilyDTO> areaEntities = mLiteOrm.query(
-//                new QueryBuilder<>(FamilyDTO.class)
-//                        .whereIn(FamilyDTO.DATE, date)
-//
-//        );
-//        return areaEntities == null ? new ArrayList<FamilyDTO>() : areaEntities;
-//    }
-//    public FamilyDTO getCacheById(String id, String key) {
-//        List<FamilyDTO> areaEntities = mLiteOrm.query(
-//                new QueryBuilder<>(FamilyDTO.class)
-//                        .whereIn(FamilyDTO.ID_CACHE, id)
-//                        .whereAppendAnd()
-//                        .whereIn(FamilyDTO.KEY_CAHCE, key)
-//        );
-//        return (areaEntities == null || areaEntities.size() <=0) ? null : areaEntities.get(0);
-//    }
-
-//    public FamilyDTO getCacheByIdAndDate(String date, String id) {
-//        List<FamilyDTO> areaEntities = mLiteOrm.query(
-//                new QueryBuilder<>(FamilyDTO.class)
-//                        .whereIn(FamilyDTO.ID_CACHE, id)
-//                        .whereAppendAnd()
-//                        .whereIn(FamilyDTO.DATE, date)
-//        );
-//        return (areaEntities == null || areaEntities.size() <=0) ? null : areaEntities.get(0);
-//    }
 
     public FamilyDTO findById(String id) {
         try {
@@ -114,6 +79,44 @@ public class FamilyDAO {
                     new QueryBuilder<>(FamilyDTO.class)
                             .whereEquals(FamilyDTO.ID_FAMILY, id)
             ).get(0);
+        } catch (Exception e) {
+            Logger.e(TAG, e.getMessage(), e);
+            return null;
+        }
+    }
+    public ArrayList<FamilyDTO> findByUserId(String user) {
+        try {
+            return mLiteOrm.query(
+                    new QueryBuilder<>(FamilyDTO.class)
+                            .whereEquals(FamilyDTO.ID_INVESTIGATE, user)
+            );
+        } catch (Exception e) {
+            Logger.e(TAG, e.getMessage(), e);
+            return null;
+        }
+    }
+    public ArrayList<FamilyDTO> findByUserAndLocal(String user, String iddb) {
+        try {
+            return mLiteOrm.query(
+                    new QueryBuilder<>(FamilyDTO.class)
+                            .whereIn(FamilyDTO.ID_INVESTIGATE, user)
+                    .whereAppendAnd()
+                    .whereIn(FamilyDTO.ID_LOCALITY, iddb)
+            );
+        } catch (Exception e) {
+            Logger.e(TAG, e.getMessage(), e);
+            return null;
+        }
+    }
+    public ArrayList<FamilyDTO> findNewFamilyByUser(String user) {
+        try {
+            return mLiteOrm.query(
+                    new QueryBuilder<>(FamilyDTO.class)
+                            .whereIn(FamilyDTO.ID_INVESTIGATE, user)
+                    .whereAppendAnd()
+                    .whereIn(FamilyDTO.IS_NEW,true)
+
+            );
         } catch (Exception e) {
             Logger.e(TAG, e.getMessage(), e);
             return null;

@@ -138,12 +138,30 @@ public class LoginActivity extends BaseActivity {
             login(new LoginDTO(userName, pass));
         }
     }
+    private void loginOffline(String errorMessage){
+        DialogUtils.dismissProgressDialog();
+        if(edUserName.getText().toString().equalsIgnoreCase(SharedPrefsUtils.getStringPreference(this,Constants.KEY_INVESTIGATE_USER))){
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }else {
+            DialogUtils.showAlert(this,errorMessage);
+        }
+    }
 
     private void login(LoginDTO loginDTO) {
         ServiceBuilder.getApiServiceAuthen().login(loginDTO)
                 .enqueue(new BaseCallback<ResponseLoginDTO>() {
+
+                    @Override
+                    public void onNetworkError() {
+                        loginOffline(getString(R.string.msg_network_lost));
+                        super.onNetworkError();
+                    }
+
                     @Override
                     protected void onSuccess(ResponseLoginDTO data) {
+                        SharedPrefsUtils.setStringPreference(LoginActivity.this,Constants.KEY_INVESTIGATE_USER, edUserName.getText().toString());
                         DialogUtils.dismissProgressDialog();
                         SharedPrefsUtils.setStringPreference(LoginActivity.this, Constants.KEY_TOKEN,data.getToken());
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -153,8 +171,7 @@ public class LoginActivity extends BaseActivity {
 
                     @Override
                     protected void onError(String errorCode, String errorMessage) {
-                        DialogUtils.dismissProgressDialog();
-                        Toast.makeText(LoginActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                        loginOffline(errorMessage);
                     }
                 });
     }

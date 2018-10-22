@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AnswerDAO {
-    private static final String TAG = "QuestionDAO";
+    private static final String TAG = "AnswerDAO";
 
     private Context mContext;
     private LiteOrm mLiteOrm;

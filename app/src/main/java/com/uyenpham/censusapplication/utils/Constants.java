@@ -233,4 +233,5 @@ public class Constants {
     public static final String KEY_NATION = "nation";
     public static final String KEY_DISTRICT = "district";
     public static final String KEY_PROVINCE = "province";
+    public static final String KEY_INVESTIGATE_USER = "investigate";
 }

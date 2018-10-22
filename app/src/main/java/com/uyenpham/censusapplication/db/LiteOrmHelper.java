@@ -10,7 +10,7 @@ import com.uyenpham.censusapplication.App;
 
 public class LiteOrmHelper {
     private static final String DB_NAME = "census-app";
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
 
     private static volatile LiteOrm sInstance;
 

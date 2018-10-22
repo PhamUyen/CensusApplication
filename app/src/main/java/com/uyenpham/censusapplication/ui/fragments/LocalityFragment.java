@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.uyenpham.censusapplication.R;
+import com.uyenpham.censusapplication.db.LocalityDAO;
 import com.uyenpham.censusapplication.models.locality.LocalityDTO;
 import com.uyenpham.censusapplication.models.locality.LocalityResponse;
 import com.uyenpham.censusapplication.service.BaseCallback;
@@ -17,12 +18,14 @@ import com.uyenpham.censusapplication.ui.interfaces.IRecyclerViewListener;
 import com.uyenpham.censusapplication.utils.Constants;
 import com.uyenpham.censusapplication.utils.DialogUtils;
 import com.uyenpham.censusapplication.utils.FragmentHelper;
+import com.uyenpham.censusapplication.utils.SharedPrefsUtils;
+import com.uyenpham.censusapplication.utils.Utils;
 import com.uyenpham.censusapplication.views.CustomNavigationBar;
 
 import java.util.ArrayList;
 
 public class LocalityFragment extends BaseFragment implements
-        CustomNavigationBar.INavigationOnClick, IRecyclerViewListener{
+        CustomNavigationBar.INavigationOnClick, IRecyclerViewListener {
     private MainActivity main;
     private CustomNavigationBar navigationBar;
     private RecyclerView rcvLocality;
@@ -34,6 +37,7 @@ public class LocalityFragment extends BaseFragment implements
         super.onAttach(activity);
         this.main = (MainActivity) activity;
     }
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_locality;
@@ -89,7 +93,8 @@ public class LocalityFragment extends BaseFragment implements
         Bundle bundle = new Bundle();
         bundle.putString(Constants.KEY_IDDB, list.get(postion).getIDDB());
         familyFragment.setArguments(bundle);
-        FragmentHelper.replaceFragmentAddToBackStackByTag(familyFragment, main.mFragmentManager, FamilyFragment.class.getSimpleName());
+        FragmentHelper.replaceFragmentAddToBackStackByTag(familyFragment, main.mFragmentManager,
+                FamilyFragment.class.getSimpleName());
     }
 
     @Override
@@ -97,22 +102,41 @@ public class LocalityFragment extends BaseFragment implements
 
     }
 
-    private void getLocalities(){
+    private void getLocalities() {
         DialogUtils.showProgressDialog(main);
-        ServiceBuilder.getApiServiceNormal().getListLocality()
-                .enqueue(new BaseCallback<LocalityResponse>() {
-                    @Override
-                    protected void onError(String errorCode, String errorMessage) {
-                        DialogUtils.dismissProgressDialog();
-                        DialogUtils.showAlert(main, errorMessage);
-                    }
+        if (Utils.isOnline(main)) {
+            ServiceBuilder.getApiServiceNormal().getListLocality()
+                    .enqueue(new BaseCallback<LocalityResponse>() {
+                        @Override
+                        protected void onError(String errorCode, String errorMessage) {
+                            DialogUtils.dismissProgressDialog();
+                            DialogUtils.showAlert(main, errorMessage);
+                        }
 
-                    @Override
-                    protected void onSuccess(LocalityResponse data) {
-                        DialogUtils.dismissProgressDialog();
-                       list.addAll(data.getListLocality());
-                       adapter.notifyDataSetChanged();
-                    }
-                });
+                        @Override
+                        protected void onSuccess(LocalityResponse data) {
+                            DialogUtils.dismissProgressDialog();
+                            list.addAll(data.getListLocality());
+                            insertDB();
+                            adapter.notifyDataSetChanged();
+                        }
+                    });
+        } else {
+            if (LocalityDAO.getInstance().findByUserId(
+                    SharedPrefsUtils.getStringPreference(main, Constants.KEY_INVESTIGATE_USER))
+                    != null) {
+                list.addAll(LocalityDAO.getInstance().findByUserId(SharedPrefsUtils
+                        .getStringPreference(main, Constants.KEY_INVESTIGATE_USER)));
+            }
+            adapter.notifyDataSetChanged();
+            DialogUtils.dismissProgressDialog();
+        }
+
+    }
+    private void insertDB(){
+        for(LocalityDTO family : list){
+            family.setUser(SharedPrefsUtils.getStringPreference(getContext(),Constants.KEY_INVESTIGATE_USER));
+            LocalityDAO.getInstance().insert(family);
+        }
     }
 }

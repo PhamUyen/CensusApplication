@@ -9,6 +9,9 @@ import java.lang.reflect.Field;
 
 public class FamilyDTO implements Serializable{
     public static final String ID_FAMILY = "IDHO";
+    public static final String ID_INVESTIGATE = "idInvestigateUser";
+    public static final String IS_NEW = "isNew";
+    public static final String ID_LOCALITY = "IDDB";
 
     @SerializedName("DIACHI")
     private String mDIACHI;
@@ -53,6 +56,8 @@ public class FamilyDTO implements Serializable{
     @SerializedName("TINHTRANGHO")
     private Integer mTINHTRANGHO;
 
+    private String idInvestigateUser;
+    private boolean isNew;
     public FamilyDTO() {
     }
 
@@ -62,6 +67,22 @@ public class FamilyDTO implements Serializable{
         this.mIDDB = mIDDB;
         this.mTENCHUHO = mTENCHUHO;
         this.mTINHTRANGHO = mTINHTRANGHO;
+    }
+
+    public boolean isNew() {
+        return isNew;
+    }
+
+    public void setNew(boolean aNew) {
+        isNew = aNew;
+    }
+
+    public String getIdInvestigateUser() {
+        return idInvestigateUser;
+    }
+
+    public void setIdInvestigateUser(String idInvestigateUser) {
+        this.idInvestigateUser = idInvestigateUser;
     }
 
     public String getDIACHI() {

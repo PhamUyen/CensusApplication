@@ -1,8 +1,12 @@
 package com.uyenpham.censusapplication.models.locality;
 
 import com.google.gson.annotations.SerializedName;
+import com.litesuits.orm.db.annotation.Table;
 
+@Table("LocalityDTO")
 public class LocalityDTO {
+    public static final String ID_USER= "user";
+    public static final String ID_LOCALITY = "IDDB";
     @SerializedName("CapDuyet")
     private Object mCapDuyet;
     @SerializedName("DIABANDACTHU")
@@ -11,6 +15,7 @@ public class LocalityDTO {
     private Long mDIABANMAU;
     @SerializedName("GHICHU")
     private String mGHICHU;
+//    @PrimaryKey(NotNull)
     @SerializedName("IDDB")
     private String mIDDB;
     @SerializedName("MADIABAN")
@@ -33,6 +38,40 @@ public class LocalityDTO {
     private Long mTTNT;
     @SerializedName("Trangthai")
     private Long mTrangthai;
+    private String user;
+
+    public String getUser() {
+        return user;
+    }
+
+    public LocalityDTO() {
+    }
+
+    public LocalityDTO(Object mCapDuyet, Long mDIABANDACTHU, Long mDIABANMAU, String mGHICHU,
+                       String mIDDB, String mMADIABAN, String mMAHUYEN, String mMATHONHIENTHI,
+                       String mMATINH, String mMAXA, Object mSODIENTHOAI, Long mSOHO, String
+                               mTENDIABAN, Long mTTNT, Long mTrangthai, String user) {
+        this.mCapDuyet = mCapDuyet;
+        this.mDIABANDACTHU = mDIABANDACTHU;
+        this.mDIABANMAU = mDIABANMAU;
+        this.mGHICHU = mGHICHU;
+        this.mIDDB = mIDDB;
+        this.mMADIABAN = mMADIABAN;
+        this.mMAHUYEN = mMAHUYEN;
+        this.mMATHONHIENTHI = mMATHONHIENTHI;
+        this.mMATINH = mMATINH;
+        this.mMAXA = mMAXA;
+        this.mSODIENTHOAI = mSODIENTHOAI;
+        this.mSOHO = mSOHO;
+        this.mTENDIABAN = mTENDIABAN;
+        this.mTTNT = mTTNT;
+        this.mTrangthai = mTrangthai;
+        this.user = user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
 
     public Object getCapDuyet() {
         return mCapDuyet;
