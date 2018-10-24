@@ -1,32 +1,47 @@
 package com.uyenpham.censusapplication.models.family;
 
 import com.google.gson.annotations.SerializedName;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
+@DatabaseTable(tableName = "PeopleDetailDTO")
 public class PeopleDetailDTO {
     public static final String ID_HO = "ID";
     @SerializedName("HOSO")
+    @DatabaseField(columnName = "HOSO")
     private String mHOSO;
     @SerializedName("ID")
+    @DatabaseField(columnName = "ID", id = true)
     private String mID;
     @SerializedName("IDHO")
+    @DatabaseField(columnName = "IDHO")
     private String mIDHO;
     @SerializedName("Q2A")
+    @DatabaseField(columnName = "Q2A")
     private Integer mQ2A;
     @SerializedName("STT")
+    @DatabaseField(columnName = "STT")
     private int STT;
     @SerializedName("Q1A")
+    @DatabaseField(columnName = "Q1A")
     private String Q1A;
     @SerializedName("Q1B")
+    @DatabaseField(columnName = "Q1B")
     private Integer Q1B;
     @SerializedName("Q2B")
+    @DatabaseField(columnName = "Q2B")
     private Integer Q2B;
     @SerializedName("Q3B")
+    @DatabaseField(columnName = "Q3B")
     private Integer Q3B;
     @SerializedName("Q4B")
+    @DatabaseField(columnName = "Q4B")
     private Integer Q4B;
     @SerializedName("Q5")
+    @DatabaseField(columnName = "Q5")
     private String Q5;
     @SerializedName("Chuho")
+    @DatabaseField(columnName = "Chuho")
     private Integer Chuho;
     private boolean isSelected;
 

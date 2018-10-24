@@ -1,120 +1,61 @@
 package com.uyenpham.censusapplication.db;
 
-import android.content.Context;
-
-import com.litesuits.orm.LiteOrm;
-import com.litesuits.orm.db.assit.QueryBuilder;
-import com.litesuits.orm.db.assit.WhereBuilder;
+import com.j256.ormlite.dao.Dao;
 import com.uyenpham.censusapplication.App;
 import com.uyenpham.censusapplication.models.family.WomanDTO;
 import com.uyenpham.censusapplication.utils.Logger;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class WomanDAO {
-    private static final String TAG = "FamilyDAO";
-
-    private Context mContext;
-    private LiteOrm mLiteOrm;
+    private static final String TAG = "WomanDAO";
 
     private static WomanDAO mInstance;
+    private Dao<WomanDTO,?> dao;
 
     public static synchronized WomanDAO getInstance() {
         if (null == mInstance) {
-            mInstance = new WomanDAO(App.getInstance(), LiteOrmHelper.getInstance());
+            mInstance = new WomanDAO(new DBHelper(App.getInstance()));
         }
         return mInstance;
     }
 
-    public WomanDAO(Context context, LiteOrm orm) {
-        mContext = context;
-        mLiteOrm = orm;
-    }
-
-    public long insertAllOffline(List<WomanDTO> offlineEntities) {
-        if (null == offlineEntities) return -1;
-
-        deleteAllOffline();
-
-        long result = mLiteOrm.save(offlineEntities);
-
-        return result;
-    }
-
-    public long insert(WomanDTO womanDTO) {
-        if(checkIsExistDB(womanDTO.getID())){
-            return update(womanDTO);
-        }else {
-            return mLiteOrm.insert(womanDTO);
+    public WomanDAO(DBHelper helper) {
+        try {
+            dao = helper.getDao(WomanDTO.class);
+        } catch (SQLException e) {
+            Logger.e(e);
         }
     }
 
-    public int update(WomanDTO cacheEntity) {
-        int result = mLiteOrm.update(cacheEntity);
-        return result;
-    }
 
-    public int delete(WomanDTO cacheEntity) {
-        int result = mLiteOrm.delete(cacheEntity);
-        return result;
-    }
-
-    private void deleteAllOffline() {
-        mLiteOrm.delete(WhereBuilder
-                .create(WomanDTO.class));
-    }
-
-    public List<WomanDTO> getAllArea() {
-        List<WomanDTO> offlineEntities = mLiteOrm.query(
-                new QueryBuilder<>(WomanDTO.class)
-        );
-        return offlineEntities == null ? new ArrayList<WomanDTO>() : offlineEntities;
+    public void insert(WomanDTO womanDTO) {
+        try {
+            dao.createOrUpdate(womanDTO);
+        } catch (SQLException e) {
+            Logger.e(e);
+        }
     }
 
 
-    public ArrayList<WomanDTO> findById(String id) {
-          try {  return mLiteOrm.query(
-                    new QueryBuilder<>(WomanDTO.class)
-                            .whereEquals(WomanDTO.ID_HO, id)
-            );
-        } catch (Exception e) {
-            Logger.e(TAG, e.getMessage(), e);
+    public void delete(WomanDTO cacheEntity) {
+        try {
+            dao.delete(cacheEntity);
+        } catch (SQLException e) {
+            Logger.e(e);
+        }
+    }
+
+
+
+    public List<WomanDTO> findById(String id) {
+          try {
+              return dao.queryForEq(WomanDTO.ID_HO, id);
+        } catch (SQLException e) {
+            Logger.e(e);
             return new ArrayList<>();
         }
-    }
-
-    public int deleteByid(String key) {
-        try {
-            return mLiteOrm.delete(new WhereBuilder(WomanDTO.class)
-                    .where(WomanDTO.ID_HO, key)
-            );
-        } catch (Exception e) {
-            Logger.e(TAG, e.getMessage(), e);
-            return -1;
-        }
-    }
-
-    public void deleteByKey(List<WomanDTO> list) {
-        try {
-            for (int i = 0; i < list.size(); i++) {
-                mLiteOrm.delete(list.get(i));
-            }
-        } catch (Exception e) {
-            Logger.e(TAG, e.getMessage(), e);
-        }
-    }
-
-    public void deleteAll() {
-        mLiteOrm.deleteAll(WomanDTO.class);
-    }
-
-
-    public boolean checkIsExistDB(String id) {
-        List<WomanDTO> areaEntities = mLiteOrm.query(
-                new QueryBuilder<>(WomanDTO.class)
-                        .whereIn(WomanDTO.ID_HO, id)
-        );
-        return areaEntities != null && areaEntities.size() > 0;
     }
 }

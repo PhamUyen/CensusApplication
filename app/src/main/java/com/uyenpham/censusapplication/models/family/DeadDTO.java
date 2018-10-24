@@ -2,38 +2,54 @@
 package com.uyenpham.censusapplication.models.family;
 
 import com.google.gson.annotations.SerializedName;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
 import java.lang.reflect.Field;
 
 @SuppressWarnings("unused")
+@DatabaseTable(tableName = "DeadDTO")
 public class DeadDTO {
     public static final String ID_HO = "ID";
-    public static final String ID_DEAD = "IDTV";
+    public static final String ID_DEAD = "IDCHET";
     @SerializedName("C43")
+    @DatabaseField(columnName = "C43")
     private String mC43;
     @SerializedName("C44")
+    @DatabaseField(columnName = "C44")
     private Integer mC44;
     @SerializedName("C45N")
+    @DatabaseField(columnName = "C45N")
     private Integer mC45N;
     @SerializedName("C45T")
+    @DatabaseField(columnName = "C45T")
     private Integer mC45T;
     @SerializedName("C46N")
+    @DatabaseField(columnName = "C46N")
     private Integer mC46N;
     @SerializedName("C46T")
+    @DatabaseField(columnName = "C46T")
     private Integer mC46T;
     @SerializedName("C47")
+    @DatabaseField(columnName = "C47")
     private Integer mC47;
     @SerializedName("C48")
+    @DatabaseField(columnName = "C48")
     private Integer mC48;
     @SerializedName("C48K")
+    @DatabaseField(columnName = "C48K")
     private String mC48K;
     @SerializedName("C49")
+    @DatabaseField(columnName = "C49")
     private Integer mC49;
     @SerializedName("C49K")
+    @DatabaseField(columnName = "C49K")
     private String mC49K;
     @SerializedName("ID")
+    @DatabaseField(columnName = "ID")
     private String mID;
     @SerializedName("IDCHET")
+    @DatabaseField(columnName = "IDCHET", id = true)
     private String mIDCHET;
 
     public DeadDTO() {

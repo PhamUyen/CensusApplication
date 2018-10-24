@@ -2,6 +2,7 @@ package com.uyenpham.censusapplication.db;
 
 import android.content.Context;
 
+import com.j256.ormlite.dao.Dao;
 import com.litesuits.orm.LiteOrm;
 import com.litesuits.orm.db.assit.QueryBuilder;
 import com.litesuits.orm.db.assit.WhereBuilder;
@@ -9,6 +10,7 @@ import com.uyenpham.censusapplication.App;
 import com.uyenpham.censusapplication.models.family.MemberDTO;
 import com.uyenpham.censusapplication.utils.Logger;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,50 +19,41 @@ public class MemberDAO {
 
     private Context mContext;
     private LiteOrm mLiteOrm;
+    private Dao<MemberDTO,?>dao;
 
     private static MemberDAO mInstance;
 
     public static synchronized MemberDAO getInstance() {
         if (null == mInstance) {
-            mInstance = new MemberDAO(App.getInstance(), LiteOrmHelper.getInstance());
+            mInstance = new MemberDAO(new DBHelper(App.getInstance()));
         }
         return mInstance;
     }
 
-    public MemberDAO(Context context, LiteOrm orm) {
-        mContext = context;
-        mLiteOrm = orm;
+    private MemberDAO(DBHelper helper) {
+        try {
+            dao = helper.getDao(MemberDTO.class);
+        } catch (SQLException e) {
+            Logger.e(e);
+        }
     }
 
-    public long insertAllOffline(List<MemberDTO> offlineEntities) {
-        if (null == offlineEntities) return -1;
-
-        deleteAllOffline();
-
-        long result = mLiteOrm.save(offlineEntities);
-
-        return result;
+    public void insert(MemberDTO cacheEntity) {
+        try {
+            dao.createOrUpdate(cacheEntity);
+        } catch (SQLException e) {
+            Logger.e(e);
+        }
     }
 
-    public long insert(MemberDTO cacheEntity) {
-        long result = mLiteOrm.insert(cacheEntity);
-        return result;
+    public void delete(MemberDTO cacheEntity) {
+        try {
+            dao.delete(cacheEntity);
+        } catch (SQLException e) {
+            Logger.e(e);
+        }
     }
 
-    public int update(MemberDTO cacheEntity) {
-        int result = mLiteOrm.update(cacheEntity);
-        return result;
-    }
-
-    public int delete(MemberDTO cacheEntity) {
-        int result = mLiteOrm.delete(cacheEntity);
-        return result;
-    }
-
-    private void deleteAllOffline() {
-        mLiteOrm.delete(WhereBuilder
-                .create(MemberDTO.class));
-    }
 
     public List<MemberDTO> getAllArea() {
         List<MemberDTO> offlineEntities = mLiteOrm.query(
@@ -70,44 +63,35 @@ public class MemberDAO {
     }
     public MemberDTO findChuHo() {
         try {
-            ArrayList<MemberDTO> list = mLiteOrm.query(
-                    new QueryBuilder<>(MemberDTO.class)
-                            .whereEquals(MemberDTO.C02, 1)
-            );
-            if(list.size() > 0){
+            List<MemberDTO> list = dao.queryForEq(MemberDTO.C02, 1);
+            if(!list.isEmpty()){
                 return list.get(0);
             }else {
                 return null;
             }
         } catch (Exception e) {
-            Logger.e(TAG, e.getMessage(), e);
+            Logger.e(e);
             return null;
         }
     }
     public MemberDTO findById(String id) {
         try {
-            ArrayList<MemberDTO> list = mLiteOrm.query(
-                    new QueryBuilder<>(MemberDTO.class)
-                            .whereEquals(MemberDTO.ID_MEMBER, id)
-            );
-            if(list.size() > 0){
+            List<MemberDTO> list = dao.queryForEq(MemberDTO.ID_MEMBER, id);
+            if(!list.isEmpty()){
                 return list.get(0);
             }else {
                 return new MemberDTO();
             }
         } catch (Exception e) {
-            Logger.e(TAG, e.getMessage(), e);
+            Logger.e(e);
             return new MemberDTO();
         }
     }
-    public ArrayList<MemberDTO> findByIdHo(String id) {
+    public List<MemberDTO> findByIdHo(String id) {
         try {
-            return mLiteOrm.query(
-                    new QueryBuilder<>(MemberDTO.class)
-                            .whereEquals(MemberDTO.ID_HO, id)
-            );
-        } catch (Exception e) {
-            Logger.e(TAG, e.getMessage(), e);
+            return dao.queryForEq(MemberDTO.ID_HO, id);
+        } catch (SQLException e) {
+            Logger.e(e);
             return new ArrayList<>();
         }
     }

@@ -167,7 +167,7 @@ public class SingleSelectFragment extends BaseTypeFragment implements IRecyclerV
     private void setupListSelected() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rcvSelect.setLayoutManager(linearLayoutManager);
-        ArrayList<MemberDTO> list = Constants.mStaticObject.getMemberDTO();
+        List<MemberDTO> list = Constants.mStaticObject.getMemberDTO();
         if(questionDTO.getId().equals(Constants.QUESTION_Q2b)){
             for(MemberDTO memberDTO : list){
                 PeopleDetailDTO p = getPeopleByName(memberDTO.getmC01());

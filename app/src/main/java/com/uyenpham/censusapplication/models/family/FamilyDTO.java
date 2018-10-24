@@ -2,62 +2,91 @@
 package com.uyenpham.censusapplication.models.family;
 
 import com.google.gson.annotations.SerializedName;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 import com.uyenpham.censusapplication.utils.Logger;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
 
+@DatabaseTable(tableName = "FamilyDTO")
 public class FamilyDTO implements Serializable{
     public static final String ID_FAMILY = "IDHO";
     public static final String ID_INVESTIGATE = "idInvestigateUser";
     public static final String IS_NEW = "isNew";
     public static final String ID_LOCALITY = "IDDB";
+    public static final String ID_CREATE = "isCreate";
 
     @SerializedName("DIACHI")
+    @DatabaseField(columnName = "DIACHI")
     private String mDIACHI;
     @SerializedName("DIENTHOAI")
+    @DatabaseField(columnName = "DIENTHOAI")
     private String mDIENTHOAI;
     @SerializedName("EMAIL")
+    @DatabaseField(columnName = "EMAIL")
     private String mEMAIL;
     @SerializedName("GHICHU")
+    @DatabaseField(columnName = "GHICHU")
     private String mGHICHU;
     @SerializedName("HOSO")
+    @DatabaseField(columnName = "HOSO")
     private String mHOSO;
     @SerializedName("IDDB")
+    @DatabaseField(columnName = "IDDB")
     private String mIDDB;
     @SerializedName("IDHO")
+    @DatabaseField(columnName = "IDHO", id = true)
     private String mIDHO;
     @SerializedName("Loaiphieu")
+    @DatabaseField(columnName = "Loaiphieu")
     private Integer mLoaiphieu;
     @SerializedName("MADIABAN")
+    @DatabaseField(columnName = "MADIABAN")
     private String mMADIABAN;
     @SerializedName("MAHUYEN")
+    @DatabaseField(columnName = "MAHUYEN")
     private String mMAHUYEN;
     @SerializedName("MATHON")
+    @DatabaseField(columnName = "MATHON")
     private String mMATHON;
     @SerializedName("MATINH")
+    @DatabaseField(columnName = "MATINH")
     private String mMATINH;
     @SerializedName("MAXA")
+    @DatabaseField(columnName = "MAXA")
     private String mMAXA;
     @SerializedName("SONHANKHAU_DIEUTRA")
+    @DatabaseField(columnName = "SONHANKHAU_DIEUTRA")
     private Integer mSONHANKHAUDIEUTRA;
     @SerializedName("SONHANKHAU_HIEUCHINH")
+    @DatabaseField(columnName = "SONHANKHAU_HIEUCHINH")
     private Integer mSONHANKHAUHIEUCHINH;
     @SerializedName("SONHANKHAU_LAPBK")
+    @DatabaseField(columnName = "SONHANKHAU_LAPBK")
     private Integer mSONHANKHAULAPBK;
     @SerializedName("SONU_DIEUTRA")
+    @DatabaseField(columnName = "SONU_DIEUTRA")
     private Integer mSONUDIEUTRA;
     @SerializedName("SONU_HIEUCHINH")
+    @DatabaseField(columnName = "SONU_HIEUCHINH")
     private Integer mSONUHIEUCHINH;
     @SerializedName("SONU_LAPBK")
+    @DatabaseField(columnName = "SONU_LAPBK")
     private Integer mSONULAPBK;
     @SerializedName("TENCHUHO")
+    @DatabaseField(columnName = "TENCHUHO")
     private String mTENCHUHO;
     @SerializedName("TINHTRANGHO")
+    @DatabaseField(columnName = "TINHTRANGHO")
     private Integer mTINHTRANGHO;
 
+    @DatabaseField(columnName = "idInvestigateUser")
     private String idInvestigateUser;
+    @DatabaseField(columnName = "isNew")
     private boolean isNew;
+    @DatabaseField(columnName = "isCreate")
+    private boolean isCreate;
     public FamilyDTO() {
     }
 
@@ -67,6 +96,43 @@ public class FamilyDTO implements Serializable{
         this.mIDDB = mIDDB;
         this.mTENCHUHO = mTENCHUHO;
         this.mTINHTRANGHO = mTINHTRANGHO;
+    }
+
+    public FamilyDTO(String mDIACHI, String mDIENTHOAI, String mEMAIL, String mGHICHU, String mHOSO, String mIDDB
+            , String mIDHO, Integer mLoaiphieu, String mMADIABAN, String mMAHUYEN, String mMATHON, String mMATINH
+            , String mMAXA, Integer mSONHANKHAUDIEUTRA, Integer mSONHANKHAUHIEUCHINH, Integer mSONHANKHAULAPBK
+            , Integer mSONUDIEUTRA, Integer mSONUHIEUCHINH, Integer mSONULAPBK, String mTENCHUHO, Integer mTINHTRANGHO, String idInvestigateUser, boolean isNew) {
+        this.mDIACHI = mDIACHI;
+        this.mDIENTHOAI = mDIENTHOAI;
+        this.mEMAIL = mEMAIL;
+        this.mGHICHU = mGHICHU;
+        this.mHOSO = mHOSO;
+        this.mIDDB = mIDDB;
+        this.mIDHO = mIDHO;
+        this.mLoaiphieu = mLoaiphieu;
+        this.mMADIABAN = mMADIABAN;
+        this.mMAHUYEN = mMAHUYEN;
+        this.mMATHON = mMATHON;
+        this.mMATINH = mMATINH;
+        this.mMAXA = mMAXA;
+        this.mSONHANKHAUDIEUTRA = mSONHANKHAUDIEUTRA;
+        this.mSONHANKHAUHIEUCHINH = mSONHANKHAUHIEUCHINH;
+        this.mSONHANKHAULAPBK = mSONHANKHAULAPBK;
+        this.mSONUDIEUTRA = mSONUDIEUTRA;
+        this.mSONUHIEUCHINH = mSONUHIEUCHINH;
+        this.mSONULAPBK = mSONULAPBK;
+        this.mTENCHUHO = mTENCHUHO;
+        this.mTINHTRANGHO = mTINHTRANGHO;
+        this.idInvestigateUser = idInvestigateUser;
+        this.isNew = isNew;
+    }
+
+    public boolean isCreate() {
+        return isCreate;
+    }
+
+    public void setCreate(boolean create) {
+        isCreate = create;
     }
 
     public boolean isNew() {

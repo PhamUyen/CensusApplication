@@ -2,24 +2,34 @@
 package com.uyenpham.censusapplication.models.family;
 
 import com.google.gson.annotations.SerializedName;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
 import java.lang.reflect.Field;
 
+@DatabaseTable(tableName = "PeopleDTO")
 public class PeopleDTO {
     public static final String ID_HO = "IDHO";
     @SerializedName("HOSO")
+    @DatabaseField(columnName = "HOSO")
     private String mHOSO;
     @SerializedName("ID")
+    @DatabaseField(columnName = "ID")
     private String mID;
     @SerializedName("IDHO")
+    @DatabaseField(columnName = "IDHO",id = true)
     private String mIDHO;
     @SerializedName("Q2A")
+    @DatabaseField(columnName = "Q2A")
     private Integer mQ2A;
     @SerializedName("Q3A")
+    @DatabaseField(columnName = "Q3A")
     private Integer mQ3A;
     @SerializedName("Q4A")
+    @DatabaseField(columnName = "Q4A")
     private Integer mQ4A;
     @SerializedName("Q6")
+    @DatabaseField(columnName = "Q6")
     private Integer mQ6;
     public PeopleDTO() {
     }

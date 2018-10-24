@@ -1,43 +1,58 @@
 package com.uyenpham.censusapplication.models.locality;
 
 import com.google.gson.annotations.SerializedName;
-import com.litesuits.orm.db.annotation.Table;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
-@Table("LocalityDTO")
+@DatabaseTable(tableName = "LocalityDTO")
 public class LocalityDTO {
     public static final String ID_USER= "user";
     public static final String ID_LOCALITY = "IDDB";
     @SerializedName("CapDuyet")
-    private Object mCapDuyet;
+    @DatabaseField(columnName = "mCapDuyet")
+    private String mCapDuyet;
     @SerializedName("DIABANDACTHU")
+    @DatabaseField (columnName = "mDIABANDACTHU")
     private Long mDIABANDACTHU;
     @SerializedName("DIABANMAU")
+    @DatabaseField (columnName = "mDIABANMAU")
     private Long mDIABANMAU;
     @SerializedName("GHICHU")
+    @DatabaseField (columnName = "mGHICHU")
     private String mGHICHU;
-//    @PrimaryKey(NotNull)
     @SerializedName("IDDB")
+    @DatabaseField (columnName = "IDDB",id = true)
     private String mIDDB;
     @SerializedName("MADIABAN")
     private String mMADIABAN;
+    @DatabaseField (columnName = "MAHUYEN")
     @SerializedName("MAHUYEN")
     private String mMAHUYEN;
     @SerializedName("MATHON_HIENTHI")
+    @DatabaseField (columnName = "MATHON_HIENTHI")
     private String mMATHONHIENTHI;
     @SerializedName("MATINH")
+    @DatabaseField (columnName = "MATINH")
     private String mMATINH;
     @SerializedName("MAXA")
+    @DatabaseField (columnName = "MAXA")
     private String mMAXA;
     @SerializedName("SODIENTHOAI")
-    private Object mSODIENTHOAI;
+    @DatabaseField (columnName = "SODIENTHOAI")
+    private String mSODIENTHOAI;
     @SerializedName("SOHO")
+    @DatabaseField (columnName = "SOHO")
     private Long mSOHO;
     @SerializedName("TENDIABAN")
+    @DatabaseField (columnName = "TENDIABAN")
     private String mTENDIABAN;
     @SerializedName("TTNT")
+    @DatabaseField (columnName = "TTNT")
     private Long mTTNT;
     @SerializedName("Trangthai")
+    @DatabaseField (columnName = "Trangthai")
     private Long mTrangthai;
+    @DatabaseField (columnName = "user")
     private String user;
 
     public String getUser() {
@@ -47,9 +62,9 @@ public class LocalityDTO {
     public LocalityDTO() {
     }
 
-    public LocalityDTO(Object mCapDuyet, Long mDIABANDACTHU, Long mDIABANMAU, String mGHICHU,
+    public LocalityDTO(String mCapDuyet, Long mDIABANDACTHU, Long mDIABANMAU, String mGHICHU,
                        String mIDDB, String mMADIABAN, String mMAHUYEN, String mMATHONHIENTHI,
-                       String mMATINH, String mMAXA, Object mSODIENTHOAI, Long mSOHO, String
+                       String mMATINH, String mMAXA, String mSODIENTHOAI, Long mSOHO, String
                                mTENDIABAN, Long mTTNT, Long mTrangthai, String user) {
         this.mCapDuyet = mCapDuyet;
         this.mDIABANDACTHU = mDIABANDACTHU;
@@ -77,7 +92,7 @@ public class LocalityDTO {
         return mCapDuyet;
     }
 
-    public void setCapDuyet(Object capDuyet) {
+    public void setCapDuyet(String capDuyet) {
         mCapDuyet = capDuyet;
     }
 
@@ -157,7 +172,7 @@ public class LocalityDTO {
         return mSODIENTHOAI;
     }
 
-    public void setSODIENTHOAI(Object sODIENTHOAI) {
+    public void setSODIENTHOAI(String sODIENTHOAI) {
         mSODIENTHOAI = sODIENTHOAI;
     }
 

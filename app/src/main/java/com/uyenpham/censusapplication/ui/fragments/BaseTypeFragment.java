@@ -20,6 +20,7 @@ import com.uyenpham.censusapplication.utils.Constants;
 import com.uyenpham.censusapplication.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.uyenpham.censusapplication.ui.activities.SurveyActivity.currentIndex;
 import static com.uyenpham.censusapplication.ui.activities.SurveyActivity.previousIndex;
@@ -292,7 +293,7 @@ public abstract class BaseTypeFragment extends BaseFragment {
         return null;
     }
     public int getIndexMemberByName(String name){
-        ArrayList list =Constants.mStaticObject.getMemberDTO();
+        List<MemberDTO> list =Constants.mStaticObject.getMemberDTO();
         for(int i=0; i< list.size(); i++){
             MemberDTO member =  Constants.mStaticObject.getMemberDTO().get(i);
             if(member.getmC01().equalsIgnoreCase(name)){

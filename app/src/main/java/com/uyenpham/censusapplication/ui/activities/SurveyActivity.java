@@ -115,6 +115,7 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick,
             familyDTO.setHOSO(String.valueOf(num));
             familyDTO.setIDHO(iddb+num);
             familyDTO.setNew(true);
+            familyDTO.setCreate(true);
             familyDTO.setIdInvestigateUser(SharedPrefsUtils.getStringPreference(SurveyActivity.this,Constants.KEY_INVESTIGATE_USER));
         }
         setInfoFamily(familyDTO);
@@ -239,7 +240,7 @@ public class SurveyActivity extends BaseActivity implements IChildDrawerClick,
     public void setNavigationBar() {
         navigationBar = findViewById(R.id.toolbar);
         navigationBar.reSetAll();
-        navigationBar.setIconLeft(R.drawable.ic_menu);
+        navigationBar.setIconLeft(R.drawable.ic_menu_left);
 
         navigationBar.setTitle(getString(R.string.txt_interview_detail));
     }

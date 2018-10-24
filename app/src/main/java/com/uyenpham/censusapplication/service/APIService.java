@@ -8,9 +8,12 @@ import com.uyenpham.censusapplication.models.user.LoginDTO;
 import com.uyenpham.censusapplication.models.user.ResponseLoginDTO;
 
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface APIService {
@@ -36,5 +39,11 @@ public interface APIService {
     @POST("/dieutra")
     Call<SingleFamilyResponse> syncNew(
             @Body SyncDTO syncDTO
+    );
+
+    //delete family
+    @PUT("/delete/bangkeho/{id}")
+    Call<Response> deleteFamily(
+            @Path("idho")String idHo
     );
 }

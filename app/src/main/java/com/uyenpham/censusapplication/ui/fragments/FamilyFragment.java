@@ -22,12 +22,14 @@ import com.uyenpham.censusapplication.ui.interfaces.IRecyclerViewListener;
 import com.uyenpham.censusapplication.utils.Constants;
 import com.uyenpham.censusapplication.utils.DialogUtils;
 import com.uyenpham.censusapplication.utils.SharedPrefsUtils;
+import com.uyenpham.censusapplication.utils.Utils;
 import com.uyenpham.censusapplication.views.CustomNavigationBar;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import retrofit2.Response;
 
 public class FamilyFragment extends BaseFragment implements
         CustomNavigationBar.INavigationOnClick, IRecyclerViewListener, FamilyAdapter.IFamilyClick {
@@ -144,41 +146,69 @@ public class FamilyFragment extends BaseFragment implements
 
     @Override
     public void onDeleteClick(int position) {
-        FamilyDTO family = list.get(position);
-        String message = String.format(getString(R.string.txt_del_family),family.getIDHO(), family.getTENCHUHO());
-        DialogUtils.showAlertAction(main, message,
-                new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                //delete family
-                Toast.makeText(main, "đã xóa!", Toast.LENGTH_SHORT).show();
-            }
-        });
+        final FamilyDTO family = list.get(position);
+        if(family.isCreate()){
+            String message = String.format(getString(R.string.txt_del_family),family.getIDHO(), family.getTENCHUHO());
+            DialogUtils.showAlertAction(main, message,
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            ServiceBuilder.getApiServiceNormal().deleteFamily(family.getIDHO()).enqueue(new BaseCallback<Response>() {
+                                @Override
+                                protected void onError(String errorCode, String errorMessage) {
+                                    Toast.makeText(main, errorMessage, Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                protected void onSuccess(Response data) {
+                                    FamilyDAO.getInstance().delete(family);
+                                    Toast.makeText(main, "đã xóa!", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
+        }else {
+            DialogUtils.showAlert(main, "Bạn không có quyền xóa hộ này");
+        }
+
     }
 
     private void getListFamily(final String id){
         DialogUtils.showProgressDialog(main);
-        ServiceBuilder.getApiServiceNormal().getListFamily(1,100,id)
-                .enqueue(new BaseCallback<FamilyResponse>() {
-                    @Override
-                    protected void onError(String errorCode, String errorMessage) {
-                        DialogUtils.dismissProgressDialog();
-                        DialogUtils.showAlert(main, errorMessage);
-                    }
+        if(Utils.isOnline(main)){
+            ServiceBuilder.getApiServiceNormal().getListFamily(1,100,id)
+                    .enqueue(new BaseCallback<FamilyResponse>() {
+                        @Override
+                        protected void onError(String errorCode, String errorMessage) {
+                            DialogUtils.dismissProgressDialog();
+                            DialogUtils.showAlert(main, errorMessage);
+                        }
 
-                    @Override
-                    protected void onSuccess(FamilyResponse data) {
-                        DialogUtils.dismissProgressDialog();
-                        list.addAll(data.getListLocality());
-                        adapter.notifyDataSetChanged();
-                        insertDB();
-                    }
-                });
+                        @Override
+                        protected void onSuccess(FamilyResponse data) {
+                            DialogUtils.dismissProgressDialog();
+                            list.addAll(data.getListLocality());
+                            adapter.notifyDataSetChanged();
+                            insertDB();
+                        }
+                    });
+        }else {
+            if (FamilyDAO.getInstance().findByUserAndLocal(
+                    SharedPrefsUtils.getStringPreference(main, Constants.KEY_INVESTIGATE_USER),id)
+                    != null) {
+                list.addAll(FamilyDAO.getInstance().findByUserAndLocal(
+                        SharedPrefsUtils.getStringPreference(main, Constants.KEY_INVESTIGATE_USER),id));
+            }
+            adapter.notifyDataSetChanged();
+            DialogUtils.dismissProgressDialog();
+        }
+
     }
     private void insertDB(){
         for(FamilyDTO family : list){
             family.setIdInvestigateUser(SharedPrefsUtils.getStringPreference(getContext(),Constants.KEY_INVESTIGATE_USER));
-            family.setNew(false);
+            family.setNew(true);
+            family.setCreate(false);
             FamilyDAO.getInstance().insert(family);
         }
     }

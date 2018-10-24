@@ -8,15 +8,16 @@ import com.uyenpham.censusapplication.models.family.PeopleDetailDTO;
 import com.uyenpham.censusapplication.models.family.WomanDTO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SyncDTO {
     String IDHO;
     FamilyDetailDTO THONGTINHO;
-    ArrayList<PeopleDTO> THONGTINNHANKHAUHO;
-    ArrayList<WomanDTO> THONGTINPHUNU;
-    ArrayList<DeadDTO> THONGTINCHET;
-    ArrayList<MemberDTO>THONGTINTHANHVIEN;
-    ArrayList<PeopleDetailDTO>THONGTINNHANKHAU;
+    List<PeopleDTO> THONGTINNHANKHAUHO;
+    List<WomanDTO> THONGTINPHUNU;
+    List<DeadDTO> THONGTINCHET;
+    List<MemberDTO>THONGTINTHANHVIEN;
+    List<PeopleDetailDTO>THONGTINNHANKHAU;
 
     public SyncDTO() {
     }
@@ -50,43 +51,43 @@ public class SyncDTO {
         this.THONGTINHO = THONGTINHO;
     }
 
-    public ArrayList<PeopleDTO> getTHONGTINNHANKHAUHO() {
+    public List<PeopleDTO> getTHONGTINNHANKHAUHO() {
         return THONGTINNHANKHAUHO;
     }
 
-    public void setTHONGTINNHANKHAUHO(ArrayList<PeopleDTO> THONGTINNHANKHAUHO) {
+    public void setTHONGTINNHANKHAUHO(List<PeopleDTO> THONGTINNHANKHAUHO) {
         this.THONGTINNHANKHAUHO = THONGTINNHANKHAUHO;
     }
 
-    public ArrayList<WomanDTO> getTHONGTINPHUNU() {
+    public List<WomanDTO> getTHONGTINPHUNU() {
         return THONGTINPHUNU;
     }
 
-    public void setTHONGTINPHUNU(ArrayList<WomanDTO> THONGTINPHUNU) {
+    public void setTHONGTINPHUNU(List<WomanDTO> THONGTINPHUNU) {
         this.THONGTINPHUNU = THONGTINPHUNU;
     }
 
-    public ArrayList<DeadDTO> getTHONGTINCHET() {
+    public List<DeadDTO> getTHONGTINCHET() {
         return THONGTINCHET;
     }
 
-    public void setTHONGTINCHET(ArrayList<DeadDTO> THONGTINCHET) {
+    public void setTHONGTINCHET(List<DeadDTO> THONGTINCHET) {
         this.THONGTINCHET = THONGTINCHET;
     }
 
-    public ArrayList<MemberDTO> getTHONGTINTHANHVIEN() {
+    public List<MemberDTO> getTHONGTINTHANHVIEN() {
         return THONGTINTHANHVIEN;
     }
 
-    public void setTHONGTINTHANHVIEN(ArrayList<MemberDTO> THONGTINTHANHVIEN) {
+    public void setTHONGTINTHANHVIEN(List<MemberDTO> THONGTINTHANHVIEN) {
         this.THONGTINTHANHVIEN = THONGTINTHANHVIEN;
     }
 
-    public ArrayList<PeopleDetailDTO> getTHONGTINNHANKHAU() {
+    public List<PeopleDetailDTO> getTHONGTINNHANKHAU() {
         return THONGTINNHANKHAU;
     }
 
-    public void setTHONGTINNHANKHAU(ArrayList<PeopleDetailDTO> THONGTINNHANKHAU) {
+    public void setTHONGTINNHANKHAU(List<PeopleDetailDTO> THONGTINNHANKHAU) {
         this.THONGTINNHANKHAU = THONGTINNHANKHAU;
     }
 }

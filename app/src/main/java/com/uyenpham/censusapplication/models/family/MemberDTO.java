@@ -2,127 +2,186 @@
 package com.uyenpham.censusapplication.models.family;
 
 import com.google.gson.annotations.SerializedName;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 import com.uyenpham.censusapplication.utils.Logger;
 
 import java.lang.reflect.Field;
 
 @SuppressWarnings("unused")
+@DatabaseTable(tableName = "MemberDTO")
 public class MemberDTO {
     public static final String ID_HO = "ID";
     public static final String ID_MEMBER = "IDTV";
     public static final String C02 = "C02";
 
     @SerializedName("C01")
+    @DatabaseField(columnName = "C01")
     private String mC01;
     @SerializedName("C02")
+    @DatabaseField(columnName = "C02")
     private Integer mC02;
     @SerializedName("C03")
+    @DatabaseField(columnName = "C03")
     private Integer mC03;
     @SerializedName("C05")
+    @DatabaseField(columnName = "C05")
     private Integer mC05;
     @SerializedName("C08")
+    @DatabaseField(columnName = "C08")
     private Integer mC08;
     @SerializedName("C09")
+    @DatabaseField(columnName = "C09")
     private Integer mC09;
     @SerializedName("C10A")
+    @DatabaseField(columnName = "C10A")
     private String mC10A;
     @SerializedName("C10B")
+    @DatabaseField(columnName = "C10B")
     private String mC10B;
     @SerializedName("C11")
+    @DatabaseField(columnName = "C11")
     private Integer mC11;
     @SerializedName("C12")
+    @DatabaseField(columnName = "C12")
     private Integer mC12;
     @SerializedName("C12K")
+    @DatabaseField(columnName = "C12K")
     private String mC12K;
     @SerializedName("C13A")
+    @DatabaseField(columnName = "C13A")
     private Integer mC13A;
     @SerializedName("C13B")
+    @DatabaseField(columnName = "C13B")
     private Integer mC13B;
     @SerializedName("C13C")
+    @DatabaseField(columnName = "C13C")
     private Integer mC13C;
     @SerializedName("C13D")
+    @DatabaseField(columnName = "C13D")
     private Integer mC13D;
     @SerializedName("C13E")
+    @DatabaseField(columnName = "C13E")
     private Integer mC13E;
     @SerializedName("C13F")
+    @DatabaseField(columnName = "C13F")
     private Integer mC13F;
     @SerializedName("C14")
+    @DatabaseField(columnName = "C14")
     private Integer mC14;
     @SerializedName("C15")
+    @DatabaseField(columnName = "C15")
     private Integer mC15;
     @SerializedName("C16")
+    @DatabaseField(columnName = "C16")
     private Integer mC16;
     @SerializedName("C17")
+    @DatabaseField(columnName = "C17")
     private Integer mC17;
     @SerializedName("C18")
+    @DatabaseField(columnName = "C18")
     private Integer mC18;
     @SerializedName("C19")
+    @DatabaseField(columnName = "C19")
     private Integer mC19;
     @SerializedName("C20")
+    @DatabaseField(columnName = "C20")
     private Integer mC20;
     @SerializedName("C21")
+    @DatabaseField(columnName = "C21")
     private Integer mC23;
     @SerializedName("C22")
+    @DatabaseField(columnName = "C22")
     private Integer mC22;
     @SerializedName("C21N")
+    @DatabaseField(columnName = "C21N")
     private Integer mC21N;
     @SerializedName("C21T")
+    @DatabaseField(columnName = "C21T")
     private Integer mC21T;
     @SerializedName("C24")
+    @DatabaseField(columnName = "C24")
     private Integer mC24;
     @SerializedName("C25")
+    @DatabaseField(columnName = "C25")
     private Integer mC25;
     @SerializedName("C28")
+    @DatabaseField(columnName = "C28")
     private Integer mC28;
     @SerializedName("C27A")
+    @DatabaseField(columnName = "C27A")
     private String mC27A;
     @SerializedName("C27B")
+    @DatabaseField(columnName = "C27B")
     private String mC27B;
     @SerializedName("C27C")
+    @DatabaseField(columnName = "C27C")
     private Integer mC27C;
     @SerializedName("C26A")
+    @DatabaseField(columnName = "C26A")
     private String mC26A;
     @SerializedName("C26B")
+    @DatabaseField(columnName = "C26B")
     private String mC26B;
     @SerializedName("C26C")
+    @DatabaseField(columnName = "C26C")
     private Integer mC26C;
     @SerializedName("C29A")
+    @DatabaseField(columnName = "C29A")
     private Integer mC29A;
     @SerializedName("C29B")
+    @DatabaseField(columnName = "C29B")
     private Integer mC29B;
     @SerializedName("C29C")
+    @DatabaseField(columnName = "C29C")
     private Integer mC29C;
     @SerializedName("C30")
+    @DatabaseField(columnName = "C30")
     private Integer mC30;
     @SerializedName("C31")
+    @DatabaseField(columnName = "C31")
     private Integer mC31;
     @SerializedName("C32A")
+    @DatabaseField(columnName = "C32A")
     private Integer mC32A;
     @SerializedName("C32B")
+    @DatabaseField(columnName = "C32B")
     private String mC32B;
     @SerializedName("C33")
+    @DatabaseField(columnName = "C33")
     private Integer mC33;
     @SerializedName("C4N")
+    @DatabaseField(columnName = "C4N")
     private Integer mC4N;
     @SerializedName("C4T")
+    @DatabaseField(columnName = "C4T")
     private Integer mC4T;
     @SerializedName("C6A")
+    @DatabaseField(columnName = "C6A")
     private Integer mC6A;
     @SerializedName("C6B")
+    @DatabaseField(columnName = "C6B")
     private String mC6B;
     @SerializedName("C6C")
+    @DatabaseField(columnName = "C6C")
     private String mC6C;
     @SerializedName("C7A")
+    @DatabaseField(columnName = "C7A")
     private Integer mC7A;
     @SerializedName("C7B")
+    @DatabaseField(columnName = "C7B")
     private String mC7B;
     @SerializedName("C7C")
+    @DatabaseField(columnName = "C7C")
     private String mC7C;
     @SerializedName("ID")
+    @DatabaseField(columnName = "ID")
     private String mID;
     @SerializedName("IDTV")
+    @DatabaseField(columnName = "IDTV",id = true)
     private String mIDTV;
     @SerializedName("STT_NKTT")
+    @DatabaseField(columnName = "STT_NKTT")
     private Integer mSTTNKTT;
 
     private boolean isSlected;

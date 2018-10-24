@@ -27,6 +27,7 @@ import com.uyenpham.censusapplication.utils.StringUtils;
 import com.uyenpham.censusapplication.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 
@@ -145,7 +146,7 @@ public class TypeTextInputFragment extends BaseTypeFragment implements INextQues
         if (Constants.SURVEY_PEOPLE.equals(question.getSurvey())) {
             PeopleDTO peopleDTO = Constants.mStaticObject.getPeopleDTO();
             if (question.getId().equals(Constants.QUESTION_Q1a)) {
-                ArrayList<PeopleDetailDTO> list = Constants.mStaticObject.getPeopleDetailDTO();
+                List<PeopleDetailDTO> list = Constants.mStaticObject.getPeopleDetailDTO();
                 for (PeopleDetailDTO people : list) {
                     listText.add(people.getQ1A());
                     if(adapter != null){

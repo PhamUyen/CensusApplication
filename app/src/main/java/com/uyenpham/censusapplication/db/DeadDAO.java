@@ -2,6 +2,7 @@ package com.uyenpham.censusapplication.db;
 
 import android.content.Context;
 
+import com.j256.ormlite.dao.Dao;
 import com.litesuits.orm.LiteOrm;
 import com.litesuits.orm.db.assit.QueryBuilder;
 import com.litesuits.orm.db.assit.WhereBuilder;
@@ -9,6 +10,7 @@ import com.uyenpham.censusapplication.App;
 import com.uyenpham.censusapplication.models.family.DeadDTO;
 import com.uyenpham.censusapplication.utils.Logger;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,19 +19,23 @@ public class DeadDAO {
 
     private Context mContext;
     private LiteOrm mLiteOrm;
+    private Dao<DeadDTO, ?> dao;
 
     private static DeadDAO mInstance;
 
     public static synchronized DeadDAO getInstance() {
         if (null == mInstance) {
-            mInstance = new DeadDAO(App.getInstance(), LiteOrmHelper.getInstance());
+            mInstance = new DeadDAO(new DBHelper(App.getInstance()));
         }
         return mInstance;
     }
 
-    public DeadDAO(Context context, LiteOrm orm) {
-        mContext = context;
-        mLiteOrm = orm;
+    public DeadDAO(DBHelper helper) {
+        try {
+            dao = helper.getDao(DeadDTO.class);
+        } catch (SQLException e) {
+            Logger.e(e);
+        }
     }
 
     public long insertAllOffline(List<DeadDTO> offlineEntities) {
@@ -42,22 +48,21 @@ public class DeadDAO {
         return result;
     }
 
-    public long insert(DeadDTO deadDTO) {
-        if(checkIsExistDB(deadDTO.getmID())){
-            return update(deadDTO);
-        }else {
-            return mLiteOrm.insert(deadDTO);
+    public void insert(DeadDTO deadDTO) {
+        try {
+            dao.createOrUpdate(deadDTO);
+        } catch (SQLException e) {
+            Logger.e(e);
         }
     }
 
-    public int update(DeadDTO cacheEntity) {
-        int result = mLiteOrm.update(cacheEntity);
-        return result;
-    }
 
-    public int delete(DeadDTO cacheEntity) {
-        int result = mLiteOrm.delete(cacheEntity);
-        return result;
+    public void delete(DeadDTO cacheEntity) {
+        try {
+            dao.delete(cacheEntity);
+        } catch (SQLException e) {
+            Logger.e(e);
+        }
     }
 
     private void deleteAllOffline() {
@@ -73,14 +78,11 @@ public class DeadDAO {
     }
 
 
-    public ArrayList<DeadDTO> findById(String id) {
+    public List<DeadDTO> findById(String id) {
         try {
-            return mLiteOrm.query(
-                    new QueryBuilder<>(DeadDTO.class)
-                            .whereEquals(DeadDTO.ID_HO, id)
-            );
+            return dao.queryForEq(DeadDTO.ID_HO, id);
         } catch (Exception e) {
-            Logger.e(TAG, e.getMessage(), e);
+            Logger.e(e);
             return  new ArrayList<>();
         }
     }

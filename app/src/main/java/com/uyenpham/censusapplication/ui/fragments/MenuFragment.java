@@ -26,6 +26,7 @@ import com.uyenpham.censusapplication.utils.SharedPrefsUtils;
 import com.uyenpham.censusapplication.views.CustomNavigationBar;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.OnClick;
 
@@ -69,7 +70,7 @@ public class MenuFragment extends BaseFragment {
     }
     private void syncNewFamily(){
         String idUser = SharedPrefsUtils.getStringPreference(getContext(),Constants.KEY_INVESTIGATE_USER);
-        ArrayList<FamilyDTO> listNewFamily = FamilyDAO.getInstance().findNewFamilyByUser(idUser);
+        List<FamilyDTO> listNewFamily = FamilyDAO.getInstance().findNewFamilyByUser(idUser);
         if(!listNewFamily.isEmpty()){
             for(FamilyDTO familyDTO : listNewFamily){
                 SyncDTO syncDTO = genSycnNewFamily(familyDTO);

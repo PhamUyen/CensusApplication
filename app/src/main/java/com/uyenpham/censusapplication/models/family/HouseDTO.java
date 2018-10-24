@@ -2,83 +2,122 @@
 package com.uyenpham.censusapplication.models.family;
 
 import com.google.gson.annotations.SerializedName;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
 import java.lang.reflect.Field;
 
+@DatabaseTable(tableName = "HouseDTO")
 public class HouseDTO {
     public static final String ID_HO = "mID";
     @SerializedName("mID")
+    @DatabaseField(columnName = "mID", id = true)
     private String mID;
 
     @SerializedName("C50")
+    @DatabaseField(columnName = "C50")
     private Integer mC50;
     @SerializedName("C51")
+    @DatabaseField(columnName = "C51")
     private Integer mC51;
     @SerializedName("C52A")
+    @DatabaseField(columnName = "C52A")
     private Integer mC52A;
     @SerializedName("C52B")
+    @DatabaseField(columnName = "C52B")
     private String mC52B;
     @SerializedName("C52C")
+    @DatabaseField(columnName = "C52C")
     private String mC52C;
     @SerializedName("C53A")
+    @DatabaseField(columnName = "C53A")
     private Integer mC53A;
     @SerializedName("C53B")
+    @DatabaseField(columnName = "C53B")
     private Integer mC53B;
     @SerializedName("C54")
+    @DatabaseField(columnName = "C54")
     private Integer mC54;
     @SerializedName("C55")
+    @DatabaseField(columnName = "C55")
     private Integer mC55;
     @SerializedName("C56")
+    @DatabaseField(columnName = "C56")
     private Integer mC56;
     @SerializedName("C57")
+    @DatabaseField(columnName = "C57")
     private Integer mC57;
     @SerializedName("C58A")
+    @DatabaseField(columnName = "C58A")
     private Integer mC58A;
     @SerializedName("C58B")
+    @DatabaseField(columnName = "C58B")
     private String mC58B;
     @SerializedName("C59")
+    @DatabaseField(columnName = "C59")
     private Integer mC59;
     @SerializedName("C60")
+    @DatabaseField(columnName = "C60")
     private Integer mC60;
     @SerializedName("C60A")
+    @DatabaseField(columnName = "C60A")
     private String mC60A;
     @SerializedName("C61")
+    @DatabaseField(columnName = "C61")
     private Integer mC61;
     @SerializedName("C61A")
+    @DatabaseField(columnName = "C61A")
     private String mC61A;
     @SerializedName("C62")
+    @DatabaseField(columnName = "C62")
     private Integer mC62;
     @SerializedName("C62A")
+    @DatabaseField(columnName = "C62A")
     private String mC62A;
     @SerializedName("C63")
+    @DatabaseField(columnName = "C63")
     private Integer mC63;
     @SerializedName("C63A")
+    @DatabaseField(columnName = "C63A")
     private String mC63A;
     @SerializedName("C64")
+    @DatabaseField(columnName = "C64")
     private Integer mC64;
     @SerializedName("C65A")
+    @DatabaseField(columnName = "C65A")
     private String mC65A;
     @SerializedName("C65B")
+    @DatabaseField(columnName = "C65B")
     private String mC65B;
     @SerializedName("C65C")
+    @DatabaseField(columnName = "C65C")
     private String mC65C;
     @SerializedName("C65D")
+    @DatabaseField(columnName = "C65D")
     private String mC65D;
     @SerializedName("C65E")
+    @DatabaseField(columnName = "C65E")
     private String mC65E;
     @SerializedName("C65F")
+    @DatabaseField(columnName = "C65F")
     private String mC65F;
     @SerializedName("C65G")
+    @DatabaseField(columnName = "C65G")
     private String mC65G;
     @SerializedName("C65H")
+    @DatabaseField(columnName = "C65H")
     private String mC65H;
     @SerializedName("C65I")
+    @DatabaseField(columnName = "C65I")
     private String mC65I;
     @SerializedName("C65J")
+    @DatabaseField(columnName = "C65J")
     private String mC65J;
     @SerializedName("C65K")
+    @DatabaseField(columnName = "C65K")
     private String mC65K;
     @SerializedName("C65L")
+    @DatabaseField(columnName = "C65L")
     private String mC65L;
 
     public HouseDTO() {

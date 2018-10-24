@@ -2,6 +2,7 @@ package com.uyenpham.censusapplication.db;
 
 import android.content.Context;
 
+import com.j256.ormlite.dao.Dao;
 import com.litesuits.orm.LiteOrm;
 import com.litesuits.orm.db.assit.QueryBuilder;
 import com.litesuits.orm.db.assit.WhereBuilder;
@@ -9,6 +10,7 @@ import com.uyenpham.censusapplication.App;
 import com.uyenpham.censusapplication.models.family.HouseDTO;
 import com.uyenpham.censusapplication.utils.Logger;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,17 +21,21 @@ public class HouseDAO {
     private LiteOrm mLiteOrm;
 
     private static HouseDAO mInstance;
+    private Dao<HouseDTO, ?> dao;
 
     public static synchronized HouseDAO getInstance() {
         if (null == mInstance) {
-            mInstance = new HouseDAO(App.getInstance(), LiteOrmHelper.getInstance());
+            mInstance = new HouseDAO(new DBHelper(App.getInstance()));
         }
         return mInstance;
     }
 
-    public HouseDAO(Context context, LiteOrm orm) {
-        mContext = context;
-        mLiteOrm = orm;
+    public HouseDAO(DBHelper helper) {
+        try {
+            dao = helper.getDao(HouseDTO.class);
+        } catch (SQLException e) {
+            Logger.e(e);
+        }
     }
 
     public long insertAllOffline(List<HouseDTO> offlineEntities) {
@@ -42,22 +48,21 @@ public class HouseDAO {
         return result;
     }
 
-    public long insert(HouseDTO deadDTO) {
-        if(checkIsExistDB(deadDTO.getmID())){
-            return update(deadDTO);
-        }else {
-            return mLiteOrm.insert(deadDTO);
+    public void insert(HouseDTO deadDTO) {
+        try {
+            dao.createOrUpdate(deadDTO);
+        } catch (SQLException e) {
+            Logger.e(e);
         }
     }
 
-    public int update(HouseDTO cacheEntity) {
-        int result = mLiteOrm.update(cacheEntity);
-        return result;
-    }
 
-    public int delete(HouseDTO cacheEntity) {
-        int result = mLiteOrm.delete(cacheEntity);
-        return result;
+    public void delete(HouseDTO cacheEntity) {
+        try {
+            dao.delete(cacheEntity);
+        } catch (SQLException e) {
+            Logger.e(e);
+        }
     }
 
     private void deleteAllOffline() {
@@ -75,10 +80,7 @@ public class HouseDAO {
 
     public HouseDTO findById(String id) {
         try {
-            ArrayList<HouseDTO> list = mLiteOrm.query(
-                    new QueryBuilder<>(HouseDTO.class)
-                            .whereEquals(HouseDTO.ID_HO, id)
-            );
+            List<HouseDTO> list =dao.queryForEq(HouseDTO.ID_HO, id);
             if(list.isEmpty()){
                 return new HouseDTO(id);
             }else {

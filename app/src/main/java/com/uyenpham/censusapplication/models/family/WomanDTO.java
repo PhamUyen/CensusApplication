@@ -2,49 +2,70 @@
 package com.uyenpham.censusapplication.models.family;
 
 import com.google.gson.annotations.SerializedName;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
 import java.lang.reflect.Field;
 
 @SuppressWarnings("unused")
+@DatabaseTable(tableName = "WomanDTO")
 public class WomanDTO {
     public static final String ID_HO = "ID";
     public static final String ID_WOMAN = "IDTV";
 
     @SerializedName("C34")
+    @DatabaseField(columnName = "C34")
     private Integer mC34;
     @SerializedName("C35A")
+    @DatabaseField(columnName = "C35A")
     private Integer mC35A;
     @SerializedName("C35B")
+    @DatabaseField(columnName = "C35B")
     private Integer mC35B;
     @SerializedName("C36A")
+    @DatabaseField(columnName = "C36A")
     private Integer mC36A;
     @SerializedName("C36B")
+    @DatabaseField(columnName = "C36B")
     private Integer mC36B;
     @SerializedName("C37A")
+    @DatabaseField(columnName = "C37A")
     private Integer mC37A;
     @SerializedName("C37B")
+    @DatabaseField(columnName = "C37B")
     private Integer mC37B;
     @SerializedName("C38N")
+    @DatabaseField(columnName = "C38N")
     private Integer mC38N;
     @SerializedName("C38T")
+    @DatabaseField(columnName = "C38T")
     private Integer mC38T;
     @SerializedName("C39A")
+    @DatabaseField(columnName = "C39A")
     private Integer mC39A;
     @SerializedName("C39B")
+    @DatabaseField(columnName = "C39B")
     private Integer mC39B;
     @SerializedName("C40A")
+    @DatabaseField(columnName = "C40A")
     private Integer mC40A;
     @SerializedName("C40B")
+    @DatabaseField(columnName = "C40B")
     private Integer mC40B;
     @SerializedName("C41")
+    @DatabaseField(columnName = "C41")
     private Integer mC41;
     @SerializedName("C41K")
+    @DatabaseField(columnName = "C41K")
     private String mC41K;
     @SerializedName("ID")
+    @DatabaseField(columnName = "ID")
     private String mID;
     @SerializedName("IDTV")
+    @DatabaseField(columnName = "IDTV", id = true)
     private String mIDTV;
     @SerializedName("TenTV")
+    @DatabaseField(columnName = "TenTV")
     private String mTenTV;
 
     public WomanDTO() {

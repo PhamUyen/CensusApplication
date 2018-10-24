@@ -17,16 +17,17 @@ import com.uyenpham.censusapplication.models.family.PeopleDetailDTO;
 import com.uyenpham.censusapplication.models.family.WomanDTO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class StaticObject {
     private FamilyDTO familyDTO;
     private FamilyDetailDTO familyDetailDTO;
-    private  ArrayList<WomanDTO> womanDTOs;
-    private ArrayList<MemberDTO> memberDTOs;
+    private  List<WomanDTO> womanDTOs;
+    private List<MemberDTO> memberDTOs;
     private PeopleDTO peopleDTO;
     private HouseDTO houseDTO;
-    private  ArrayList<DeadDTO>  deadDTOs;
-    private ArrayList<PeopleDetailDTO> peopleDetailDTOs;
+    private  List<DeadDTO>  deadDTOs;
+    private List<PeopleDetailDTO> peopleDetailDTOs;
     private String idHo;
 
     private static StaticObject instance;
@@ -61,11 +62,11 @@ public class StaticObject {
         this.idHo = idHo;
     }
 
-    public ArrayList<PeopleDetailDTO>  getPeopleDetailDTO() {
+    public List<PeopleDetailDTO>  getPeopleDetailDTO() {
         return peopleDetailDTOs;
     }
 
-    public void setPeopleDetailDTO(ArrayList<PeopleDetailDTO>  peopleDetailDTO) {
+    public void setPeopleDetailDTO(List<PeopleDetailDTO>  peopleDetailDTO) {
         this.peopleDetailDTOs = peopleDetailDTO;
     }
 
@@ -85,19 +86,19 @@ public class StaticObject {
         this.familyDetailDTO = familyDetailDTO;
     }
 
-    public  ArrayList<WomanDTO> getWomanDTO() {
+    public  List<WomanDTO> getWomanDTO() {
         return womanDTOs;
     }
 
-    public void setWomanDTO( ArrayList<WomanDTO> womanDTO) {
+    public void setWomanDTO( List<WomanDTO> womanDTO) {
         this.womanDTOs = womanDTO;
     }
 
-    public ArrayList<MemberDTO> getMemberDTO() {
+    public List<MemberDTO> getMemberDTO() {
         return memberDTOs;
     }
 
-    public void setMemberDTO(ArrayList<MemberDTO> memberDTO) {
+    public void setMemberDTO(List<MemberDTO> memberDTO) {
         this.memberDTOs = memberDTO;
     }
 
@@ -117,11 +118,11 @@ public class StaticObject {
         this.houseDTO = houseDTO;
     }
 
-    public ArrayList<DeadDTO> getDeadDTO() {
+    public List<DeadDTO> getDeadDTO() {
         return deadDTOs;
     }
 
-    public void setDeadDTO(ArrayList<DeadDTO> deadDTO) {
+    public void setDeadDTO(List<DeadDTO> deadDTO) {
         this.deadDTOs = deadDTO;
     }
     public void updateDB(){
